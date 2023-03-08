@@ -1,14 +1,31 @@
 <template lang="">
   <b-navbar toggleable="lg" type="dark" class="header">
     <div class="container">
-      <b-navbar-brand href="#">NavBar</b-navbar-brand>
+      <b-navbar-brand href="#">HỆ THỐNG BÁO CÁO LAO ĐỘNG</b-navbar-brand>
 
-      <a-button>user: 边缘对齐</a-button>
+      <div class="textName text-base flex">
+        user : <span class="ml-1"> TrungQuang</span>
+        <div
+          class="bg-neutral-200 rounded-lg px-1 ml-2 text-slate-700 text-xs flex items-center cursor-pointer"
+          @click="logout"
+        >
+          logout
+        </div>
+      </div>
     </div>
   </b-navbar>
 </template>
 <script>
-export default {};
+export default {
+  data() {
+    return {};
+  },
+  methods: {
+    logout() {
+      this.$router.push("/");
+    },
+  },
+};
 </script>
 <style scoped>
 .header {
@@ -18,5 +35,8 @@ export default {};
   padding: 2px 5px;
   background: whitesmoke;
   /* display: none; */
+}
+.textName {
+  color: #ffff;
 }
 </style>

@@ -1,7 +1,7 @@
 <template>
   <div class="">
     <b-form @submit="onSubmit" @reset="onReset" v-if="show">
-      <b-form-group id="input-group-2" label="Your user:" label-for="input-2">
+      <b-form-group id="input-group-2" label="User:" label-for="input-2">
         <b-form-input
           id="input-2"
           v-model="form.user"

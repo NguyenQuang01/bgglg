@@ -1,15 +1,15 @@
 <template>
-  <div><index /></div>
+  <div>hello</div>
 </template>
 
 <script>
-import index from "./login/index.vue";
+// import index from "./login/index.vue";
 export default {
   name: "IndexPage",
-  computed: {
-    index,
-  },
-  layout: "",
+  // computed: {
+  //   index,
+  // },
+  // layout: "",
 };
 </script>
 
