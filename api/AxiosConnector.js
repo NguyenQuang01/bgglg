@@ -1,6 +1,6 @@
 import axios from "axios";
-import { HOST } from "../components/host/host";
-import { ACCESS_TOKEN, JWT } from "../components/host/key";
+import { HOST } from "../constants/host/host";
+import { ACCESS_TOKEN, JWT } from "../constants/host/key";
 let cancelAxios = axios.CancelToken.source();
 axios.defaults.baseURL = HOST;
 axios.defaults.responseType = "json";
@@ -16,11 +16,19 @@ axios.defaults.responseType = "json";
 //         err?.response?.status === 403 ||
 //         err?.response?.data?.message?.includes("403")
 //       ) {
+<<<<<<< HEAD
+//         console.error("Please login!");
+//         // setTimeout(() => {
+//         //   localStorage.clear();
+//         //   window.location.href = "/sign-in";
+//         // }, 3000);
+=======
 //         toast.error("Please login!");
 //         setTimeout(() => {
 //           localStorage.clear();
 //           window.location.href = "/sign-in";
 //         }, 3000);
+>>>>>>> 8b12c32800cf3355ea45c5ddb5ec24b342ce030b
 //       }
 //     }
 //     return Promise.reject(err);
