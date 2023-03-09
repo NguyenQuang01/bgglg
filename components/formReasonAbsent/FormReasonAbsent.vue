@@ -1,39 +1,33 @@
 <template>
-  <div class="">
+  <div>
     <b-form @submit="onSubmit" @reset="onReset">
-      <b-form-group label="Nhập tên :" label-for="input-2">
-        <b-form-input
-          id="input-2"
-          v-model="form.user"
-          placeholder="họ và tên"
-          required
-        ></b-form-input>
-      </b-form-group>
-      <b-form-group label="Nhập mã số lao động :" label-for="input-2">
-        <b-form-input
-          id="input-2"
-          v-model="form.id"
-          placeholder="mã số lao động"
-          required
-        ></b-form-input>
-      </b-form-group>
-      <b-form-group label="Chọn ly do :" label-for="input-2">
-        <b-form-select
-          label="Nhập mã số ly do :"
-          v-model="selected"
-          :options="options"
-          required
-        ></b-form-select>
-      </b-form-group>
-      <b-form-group label="Thêm ly do :" label-for="input-2">
-        <b-form-textarea
-          id="textarea"
-          v-model="text"
-          placeholder="ly do"
-          rows="3"
-          max-rows="6"
-        ></b-form-textarea>
-      </b-form-group>
+      <div v-for="(item, index) in arrForms" :key="index">
+        <div class="font-extrabold text-lg">người thứ : {{ index + 1 }}</div>
+        <b-form-group label="Nhập tên :" label-for="input-2">
+          <b-form-input
+            id="input-2"
+            v-model="item.user"
+            placeholder="họ và tên"
+            required
+          ></b-form-input>
+        </b-form-group>
+        <b-form-group label="Nhập mã số lao động :" label-for="input-2">
+          <b-form-input
+            id="input-2"
+            v-model="item.id"
+            placeholder="mã số lao động"
+            required
+          ></b-form-input>
+        </b-form-group>
+        <b-form-group label="Chọn ly do :" label-for="input-2">
+          <b-form-select
+            label="Nhập mã số ly do :"
+            v-model="item.reason"
+            :options="options"
+            required
+          ></b-form-select>
+        </b-form-group>
+      </div>
 
       <b-button type="submit" variant="primary" class="text-blue-700"
         >xác nhận</b-button
@@ -49,8 +43,10 @@ export default {
       form: {
         user: "",
         id: "",
+        reason: "",
       },
-
+      arrForms: [],
+      valueTextarea: "",
       selected: null,
       options: [
         { value: null, text: "chọn lý do" },
@@ -68,6 +64,12 @@ export default {
       ],
       valueSubmit: {},
     };
+  },
+  fetch() {
+    const amount = 5;
+    for (let i = 0; i < amount; i++) {
+      this.arrForms.push(this.form);
+    }
   },
   methods: {
     onSubmit(event) {
