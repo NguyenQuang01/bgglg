@@ -1,7 +1,7 @@
 <template lang="">
   <div class="container">
     <div class="text-center mt-10 text-3xl font-bold title">Welcome back!</div>
-    <div class="text-center mt-2 font-semibold">
+    <div class="text-center mt-2 font-semibold mb-16">
       Please log in to your account
     </div>
     <div class="max-w-2xl m-auto m-0">
