@@ -56,7 +56,8 @@ export default {
   methods: {
     onSubmit(event) {
       event.preventDefault();
-      alert(JSON.stringify(this.form));
+      this.$router.push("/laborreport");
+      // this.$router.push("/");
     },
     onReset(event) {
       event.preventDefault();
