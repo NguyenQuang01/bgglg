@@ -13,9 +13,4 @@ export default {
 };
 </script>
 
-<style scoped>
-.base-menu-container {
-  position: relative;
-  top: 0;
-}
-</style>
+<style scoped></style>

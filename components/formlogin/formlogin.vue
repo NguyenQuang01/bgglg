@@ -57,9 +57,14 @@ export default {
   methods: {
     async onSubmit(event) {
       event.preventDefault();
+<<<<<<< HEAD
       const res = await signInAPI(this.form);
       console.log(res);
       // alert(JSON.stringify(this.form));
+=======
+      this.$router.push("/laborreport");
+      // this.$router.push("/");
+>>>>>>> 8b12c32800cf3355ea45c5ddb5ec24b342ce030b
     },
     onReset(event) {
       event.preventDefault();
