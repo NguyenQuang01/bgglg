@@ -1,31 +1,31 @@
 import axios from "axios";
-import { HOST } from "../components/host/host";
-import { ACCESS_TOKEN, JWT } from "../components/host/key";
+import { HOST } from "../constants/host/host";
+import { ACCESS_TOKEN, JWT } from "../constants/host/key";
 let cancelAxios = axios.CancelToken.source();
 axios.defaults.baseURL = HOST;
 axios.defaults.responseType = "json";
-axios.interceptors.response.use(
-  (res) => {
-    return res;
-  },
-  async (err) => {
-    const originalConfig = err.config;
-    if (originalConfig.url !== "/signin" && err.response) {
-      // Access Token was expired
-      if (
-        err?.response?.status === 403 ||
-        err?.response?.data?.message?.includes("403")
-      ) {
-        toast.error("Please login!");
-        setTimeout(() => {
-          localStorage.clear();
-          window.location.href = "/sign-in";
-        }, 3000);
-      }
-    }
-    return Promise.reject(err);
-  }
-);
+// axios.interceptors.response.use(
+//   (res) => {
+//     return res;
+//   },
+//   async (err) => {
+//     const originalConfig = err.config;
+//     if (originalConfig.url !== "/signin" && err.response) {
+//       // Access Token was expired
+//       if (
+//         err?.response?.status === 403 ||
+//         err?.response?.data?.message?.includes("403")
+//       ) {
+//         console.error("Please login!");
+//         // setTimeout(() => {
+//         //   localStorage.clear();
+//         //   window.location.href = "/sign-in";
+//         // }, 3000);
+//       }
+//     }
+//     return Promise.reject(err);
+//   }
+// );
 const getAccessToken = () => {
   let accessToken = localStorage.getItem(JWT);
   if (!accessToken) {

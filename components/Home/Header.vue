@@ -4,12 +4,12 @@
       <b-navbar-brand href="#">HỆ THỐNG BÁO CÁO LAO ĐỘNG</b-navbar-brand>
 
       <div class="textName text-base flex">
-        user : <span class="ml-1"> TrungQuang</span>
+        Tài khoản : <span class="ml-1"> TrungQuang</span>
         <div
           class="bg-neutral-200 rounded-lg px-1 ml-2 text-slate-700 text-xs flex items-center cursor-pointer"
           @click="logout"
         >
-          logout
+          Đăng xuất
         </div>
       </div>
     </div>
