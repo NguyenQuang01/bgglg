@@ -31,8 +31,8 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
-    babel: {
-      compact: true,
+    extend(config) {
+      config.resolve.alias["node-fetch-native"] = require.resolve("node-fetch");
     },
   },
 };
