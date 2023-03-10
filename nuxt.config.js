@@ -30,5 +30,9 @@ export default {
   modules: ["bootstrap-vue/nuxt", "@nuxtjs/tailwindcss", "@nuxtjs/axios"],
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
-  build: {},
+  build: {
+    babel: {
+      compact: true,
+    },
+  },
 };
