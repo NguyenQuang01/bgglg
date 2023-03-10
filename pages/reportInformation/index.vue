@@ -15,7 +15,6 @@
 import TableInformation from "@/components/tableInformation/TableInformation.vue";
 
 export default {
-  layout: "Home",
   components: {
     TableInformation,
   },

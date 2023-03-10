@@ -17,7 +17,6 @@
 <script>
 import Input from "@/components/input/Input.vue";
 export default {
-  layout: "Home",
   components: {
     Input,
   },
