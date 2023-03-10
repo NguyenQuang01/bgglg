@@ -3,7 +3,9 @@
     <div class="text-center mt-10 mb-5 text-3xl font-bold title">
       THÔNG TIN BÁO CÁO
     </div>
-
+    <div class="font-semibold mb-2">
+      <b-icon icon="house-fill"></b-icon> Nhà máy : Quang
+    </div>
     <div class="max-w-2xl m-auto m-0">
       <div class="flex justify-center">
         <TableInformation />

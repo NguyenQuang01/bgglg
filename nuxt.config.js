@@ -27,7 +27,10 @@ export default {
   buildModules: [],
 
   // Modules: https://go.nuxtjs.dev/config-modules
-  modules: ["bootstrap-vue/nuxt", "@nuxtjs/tailwindcss", "@nuxtjs/axios"],
+  modules: ["@nuxtjs/tailwindcss", "@nuxtjs/axios", "bootstrap-vue/nuxt"],
+  bootstrapVue: {
+    icons: true,
+  },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
