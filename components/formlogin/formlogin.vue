@@ -70,9 +70,10 @@ export default {
       this.SET_STATE_ISUSER(true);
       console.log(this.form.user);
       this.SET_STATE_USERNAME(this.form.user);
+
       this.show
         ? this.$router.push("/laborreport")
-        : this.$router.push("/reportInformation");
+        : this.$router.push("/listFactory");
 
       // this.$router.push("/");
     },

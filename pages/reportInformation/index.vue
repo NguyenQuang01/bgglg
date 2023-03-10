@@ -4,7 +4,7 @@
       THÔNG TIN BÁO CÁO
     </div>
     <div class="font-semibold mb-2">
-      <b-icon icon="house-fill"></b-icon> Nhà máy : Quang
+      <b-icon icon="house-fill"></b-icon> Nhà máy : Xưởng 1
     </div>
     <div class="max-w-2xl m-auto m-0">
       <div class="flex justify-center">
