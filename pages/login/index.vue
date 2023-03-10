@@ -12,7 +12,6 @@
 <script>
 import formlogin from "@/components/formlogin/formlogin.vue";
 export default {
-  layout: "Home",
   components: {
     formlogin,
   },

@@ -11,7 +11,6 @@ import TitleScreen from "@/components/titleScreen/TitleScreen.vue";
 import FormReasonAbsent from "@/components/formReasonAbsent/FormReasonAbsent.vue";
 
 export default {
-  layout: "Home",
   components: {
     Input,
     TitleScreen,
