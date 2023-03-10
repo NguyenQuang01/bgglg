@@ -42,6 +42,7 @@
 </template>
 
 <script>
+import { mapMutations, mapGetters } from "vuex";
 // import { signInAPI } from "~/api/AuthenConnector.js";
 export default {
   data() {
@@ -54,9 +55,21 @@ export default {
       show: false,
     };
   },
+  // created: {
+  //   ...mapGetters({
+
+  //   })
+  // },
   methods: {
+    ...mapMutations({
+      SET_STATE_ISUSER: "SET_STATE_ISUSER",
+      SET_STATE_USERNAME: "SET_STATE_USERNAME",
+    }),
     async onSubmit(event) {
       event.preventDefault();
+      this.SET_STATE_ISUSER(true);
+      console.log(this.form.user);
+      this.SET_STATE_USERNAME(this.form.user);
       this.show
         ? this.$router.push("/laborreport")
         : this.$router.push("/reportInformation");
