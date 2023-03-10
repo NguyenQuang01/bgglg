@@ -1,16 +1,13 @@
 <template>
-  <div>hello</div>
+  <div><index /></div>
 </template>
 
 <script>
-// import index from "./login/index.vue";
+import index from "./login/index.vue";
 export default {
   name: "IndexPage",
-  // computed: {
-  //   index,
-  // },
-  // layout: "",
+  components: {
+    index,
+  },
 };
 </script>
-
-<style scoped></style>

@@ -11,7 +11,9 @@
         ></b-form-input>
       </b-form-group>
 
-      <button-submit />
+      <b-button variant="primary" class="text-blue-700" @click="onSubmit"
+        >xác nhận
+      </b-button>
     </b-form>
     <!-- <b-card class="mt-3" header="Form Data Result">
       <pre class="m-0">{{ quantityPeople }}</pre>
@@ -20,9 +22,7 @@
 </template>
 
 <script>
-import ButtonSubmit from "../buttonSubmit/ButtonSubmit.vue";
 export default {
-  components: { ButtonSubmit },
   props: {
     label: {
       type: Object,
@@ -36,8 +36,7 @@ export default {
   },
   methods: {
     onSubmit(event) {
-      event.preventDefault();
-      alert(JSON.stringify(this.quantityPeople));
+      this.$router.push("/reasonAbsent");
     },
   },
 };

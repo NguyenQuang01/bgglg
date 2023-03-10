@@ -1,5 +1,7 @@
 <template lang="">
-  <div>hôm nay: {{ day }}/{{ month }}/{{ year }}</div>
+  <div class="bg-white left-0 flex justify-content-end">
+    hôm nay: {{ day }}/{{ month }}/{{ year }}
+  </div>
 </template>
 <script>
 export default {

@@ -2,7 +2,7 @@
   <div>
     <Header />
     <Nuxt />
-    <Foodter class="fixed bottom-0 right-0 mr-2 mb-2" />
+    <Foodter class="fixed bottom-0 right-0 mr-2 py-1" />
   </div>
 </template>
 <script>

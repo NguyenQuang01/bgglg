@@ -1,6 +1,6 @@
 <template>
   <div class="">
-    <b-form @submit="onSubmit" @reset="onReset" v-if="show">
+    <b-form @submit="onSubmit" @reset="onReset">
       <b-form-group id="input-group-2" label="Tài khoản:" label-for="input-2">
         <b-form-input
           id="input-2"
@@ -42,7 +42,7 @@
 </template>
 
 <script>
-import { signInAPI } from "~/api/AuthenConnector.js";
+// import { signInAPI } from "~/api/AuthenConnector.js";
 export default {
   data() {
     return {
@@ -51,20 +51,17 @@ export default {
         pass: "",
       },
 
-      show: true,
+      show: false,
     };
   },
   methods: {
     async onSubmit(event) {
       event.preventDefault();
-<<<<<<< HEAD
-      const res = await signInAPI(this.form);
-      console.log(res);
-      // alert(JSON.stringify(this.form));
-=======
-      this.$router.push("/laborreport");
+      this.show
+        ? this.$router.push("/laborreport")
+        : this.$router.push("/reportInformation");
+
       // this.$router.push("/");
->>>>>>> 8b12c32800cf3355ea45c5ddb5ec24b342ce030b
     },
     onReset(event) {
       event.preventDefault();
