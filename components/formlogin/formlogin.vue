@@ -73,7 +73,7 @@ export default {
 
       this.show
         ? this.$router.push("/laborreport")
-        : this.$router.push("/listFactory");
+        : this.$router.push("/leaderMenu");
 
       // this.$router.push("/");
     },

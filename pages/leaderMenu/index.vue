@@ -7,7 +7,7 @@
     <div class="max-w-2xl m-auto m-0">
       <a-collapse v-model:activeKey="activeKey">
         <a-collapse-panel key="2" header="Menu" :disabled="false" class="">
-          <a-button type="primary">{{ text1 }}</a-button
+          <a-button type="primary" @click="pagetoBoad">{{ text1 }}</a-button
           ><br />
           <a-button type="primary" class="my-3">{{ text2 }}</a-button
           ><br />
@@ -27,7 +27,11 @@ export default {
       text3: `Xem lại báo cáo`,
     };
   },
-
+  methods: {
+    pagetoBoad() {
+      this.$router.push("/leaderBoard");
+    },
+  },
   // created() {
   //   setInterval(() => {
   //     this.currentTime = new Date().toLocaleString();
