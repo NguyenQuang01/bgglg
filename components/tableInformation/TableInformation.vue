@@ -3,7 +3,7 @@
     <tr>
       <th>Tên</th>
       <th>SL</th>
-      <th>thông tin</th>
+      <th>Thông tin</th>
     </tr>
     <tr>
       <td class="bg-sky-400 text-slate-50">ĐỊNH BIÊN</td>
