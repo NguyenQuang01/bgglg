@@ -43,7 +43,8 @@
 
 <script>
 import { mapMutations, mapGetters } from "vuex";
-// import { signInAPI } from "~/api/AuthenConnector.js";
+import { signInAPI } from "@/api/AuthenConnector.js";
+import { message } from "ant-design-vue";
 export default {
   data() {
     return {
@@ -51,8 +52,6 @@ export default {
         user: "",
         pass: "",
       },
-
-      show: false,
     };
   },
   // created: {
@@ -67,13 +66,26 @@ export default {
     }),
     async onSubmit(event) {
       event.preventDefault();
-      this.SET_STATE_ISUSER(true);
-      console.log(this.form.user);
-      this.SET_STATE_USERNAME(this.form.user);
+      const res = await signInAPI(this.form);
+      console.log(res);
+      if (res && res.status === 200) {
+        this.SET_STATE_ISUSER(true);
+        this.SET_STATE_USERNAME(this.form.user);
+        localStorage.setItem("JWT", res.data.token);
+        localStorage.setItem("userLogin", res.data.userLogin);
+        this.form.user === "admin"
+          ? this.$router.push("/leaderMenu")
+          : this.$router.push("/laborreport");
+      } else {
+        message.error("sai tài khoản, mật khẩu");
+      }
+      // this.SET_STATE_ISUSER(true);
+      // console.log(this.form.user);
+      // this.SET_STATE_USERNAME(this.form.user);
 
-      this.show
-        ? this.$router.push("/laborreport")
-        : this.$router.push("/leaderMenu");
+      // this.show
+      //   ? this.$router.push("/laborreport")
+      //   : this.$router.push("/leaderMenu");
 
       // this.$router.push("/");
     },
@@ -82,12 +94,6 @@ export default {
       // Reset our form values
       this.form.pass = "";
       this.form.user = "";
-
-      // Trick to reset/clear native browser form validation state
-      this.show = false;
-      this.$nextTick(() => {
-        this.show = true;
-      });
     },
   },
 };

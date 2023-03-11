@@ -4,7 +4,7 @@
       Bảng báo cáo
     </div>
 
-    <div class="m-auto m-0">
+    <div class="m-auto m-0 overflow-auto">
       <table>
         <tr>
           <th>Bộ phận</th>

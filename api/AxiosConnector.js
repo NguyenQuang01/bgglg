@@ -64,6 +64,7 @@ const multipartConfig = () => {
 };
 const request = {
   get: (url) => axios.get(url, createConfig()),
+  postLogin: (url, data) => axios.post(url, data),
   post: (url, data) => axios.post(url, data, createConfig()),
   // file: (url, data) => axios.post(url, data, createConfig()),
   put: (url, data) => axios.put(url, data, createConfig()),

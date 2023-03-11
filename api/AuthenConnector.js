@@ -1,10 +1,10 @@
 import { HOST } from "../constants/host/host";
 import request from "./AxiosConnector";
-export const signInAPI = async (username, password) => {
+export const signInAPI = async (param) => {
   try {
-    const response = await request.post(`${HOST}/auth/api/v1/users/sign-in`, {
-      username,
-      password,
+    const response = await request.postLogin(`${HOST}/api/login`, {
+      userLogin: param.user,
+      password: param.pass,
     });
     return response.data;
   } catch (error) {

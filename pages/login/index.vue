@@ -11,6 +11,7 @@
 </template>
 <script>
 import formlogin from "@/components/formlogin/formlogin.vue";
+
 export default {
   components: {
     formlogin,
