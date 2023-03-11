@@ -6,7 +6,7 @@
 
     <div class="max-w-2xl m-auto m-0">
       <a-collapse v-model:activeKey="activeKey">
-        <a-collapse-panel key="2" header="Menu" :disabled="false" class="">
+        <a-collapse-panel key="1" header="Menu" :disabled="false" class="">
           <a-button type="primary" @click="pagetoBoad">{{ text1 }}</a-button
           ><br />
           <a-button type="primary" class="my-3">{{ text2 }}</a-button
@@ -25,6 +25,7 @@ export default {
       text1: `Báo cáo tổng`,
       text2: `Báo cáo chi tiết`,
       text3: `Xem lại báo cáo`,
+      activeKey: 1,
     };
   },
   methods: {

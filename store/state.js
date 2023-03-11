@@ -1,4 +1,4 @@
 export default () => ({
   isUser: false,
-  UserName: "",
+  UserName: process.server ? "" : !!localStorage.getItem("userLogin"),
 });
