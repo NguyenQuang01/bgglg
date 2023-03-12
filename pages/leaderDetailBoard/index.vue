@@ -1,7 +1,7 @@
 <template lang="">
   <div class="container">
     <div class="text-center mt-16 text-3xl font-bold title mb-16">
-      Bảng báo cáo
+      Bảng báo cáo chi tiết
     </div>
     <div class="mb-2" @click="$router.back()">
       <a href="#"
@@ -9,23 +9,23 @@
       >
     </div>
     <div class="mb-2 flex">
-      <a-button class="btnDay">Ngày trước</a-button>
       <a-date-picker v-model="valueDay" class="mx-2" placeholder="Chọn ngày" />
-      <a-button class="btnDay">ngày sau</a-button>
+      <a-button class="btnDay">Lọc</a-button>
+      <a-button class="btnDay">Xuất excel</a-button>
     </div>
     <div class="m-auto m-0 overflow-auto">
-      <TableBoardVue />
+      <TableDetail />
     </div>
-    <div class="float-right mt-2">
-      <a-button class="btnDay" @click="btnPageToDetail">Xem chi tiết</a-button>
+    <div class="float-right mt-2 mb-10">
+      <div class="mb-16">text</div>
     </div>
   </div>
 </template>
 <script>
-import TableBoardVue from "../../components/tableBoard/TableBoard.vue";
+import TableDetail from "../../components/tableDetaileBoard/TableDetail.vue";
 export default {
   components: {
-    TableBoardVue,
+    TableDetail,
   },
   data() {
     return {
@@ -38,11 +38,9 @@ export default {
   created() {
     this.valueDay = `${this.day}/${this.month}/${this.year}` || "";
   },
-  methods: {
-    btnPageToDetail() {
-      this.$router.push("/leaderDetailBoard");
-    },
-  },
+  // methods: {
+  //   btnBack() {},
+  // },
   // watch: {
   //   valueDay: {
   //     deep: true,
