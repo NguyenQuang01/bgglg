@@ -2,7 +2,14 @@
   <div class="container">
     <TitleScreen />
 
-    <div class="max-w-2xl m-auto m-0"><FormReasonAbsent /></div>
+    <div class="max-w-2xl m-auto m-0">
+      <div class="mb-2" @click="$router.back()">
+        <a href="#"
+          ><b-icon icon="arrow-bar-left" aria-hidden="true"></b-icon>trở lại</a
+        >
+      </div>
+      <FormReasonAbsent />
+    </div>
   </div>
 </template>
 <script>

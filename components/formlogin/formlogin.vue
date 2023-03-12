@@ -52,7 +52,7 @@ export default {
         user: "",
         pass: "",
       },
-      show: false,
+      show: true,
     };
   },
   // created: {
@@ -70,20 +70,20 @@ export default {
       // const res = await signInAPI(this.form);
       // console.log(res);
       // if (res && res.status === 200) {
-      this.SET_STATE_ISUSER(true);
-      this.SET_STATE_USERNAME(this.form.user);
+      //   this.SET_STATE_ISUSER(true);
+      //   this.SET_STATE_USERNAME(this.form.user);
       //   localStorage.setItem("isUser", true);
       //   localStorage.setItem("JWT", res.data.token);
       //   localStorage.setItem("userLogin", res.data.userLogin);
       //   this.form.user === "admin"
-      //     ? this.$router.push("/leaderMenu")
+      //     ? this.$router.push("/laborreport")
       //     : this.$router.push("/laborreport");
       // } else {
       //   message.error("sai tài khoản, mật khẩu");
       // }
-      // this.SET_STATE_ISUSER(true);
-      // console.log(this.form.user);
-      // this.SET_STATE_USERNAME(this.form.user);
+      this.SET_STATE_ISUSER(true);
+      console.log(this.form.user);
+      this.SET_STATE_USERNAME(this.form.user);
 
       this.show
         ? this.$router.push("/laborreport")

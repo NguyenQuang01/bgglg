@@ -1,11 +1,10 @@
 <template>
   <div>
-    <b-form @submit="onSubmit" @reset="onReset">
+    <b-form @submit="onSubmit">
       <div v-for="(item, index) in arrForms" :key="index">
         <div class="font-extrabold text-lg">người thứ : {{ index + 1 }}</div>
         <b-form-group label="Nhập tên :" label-for="input-2">
           <b-form-input
-            id="input-2"
             v-model="item.user"
             placeholder="họ và tên"
             required
@@ -13,7 +12,6 @@
         </b-form-group>
         <b-form-group label="Nhập mã số lao động :" label-for="input-2">
           <b-form-input
-            id="input-2"
             v-model="item.id"
             placeholder="mã số lao động"
             required
@@ -28,7 +26,9 @@
           ></b-form-select>
         </b-form-group>
       </div>
-
+      <b-button variant="primary" class="text-blue-700" @click="addQuantity"
+        >Thêm</b-button
+      >
       <b-button type="submit" variant="primary" class="text-blue-700"
         >xác nhận</b-button
       >
@@ -40,6 +40,7 @@
 export default {
   data() {
     return {
+      amount: 1,
       form: {
         user: "",
         id: "",
@@ -66,29 +67,25 @@ export default {
     };
   },
   fetch() {
-    const amount = 5;
-    for (let i = 0; i < amount; i++) {
-      this.arrForms.push(this.form);
-    }
+    this.arrForms.push(this.form);
   },
   methods: {
     onSubmit(event) {
       event.preventDefault();
-      alert("first");
-      //       this.$router.push("/laborreport");
+      console.log(this.arrForms);
+      this.$router.push("/newPartTimeEndWorker");
       // this.$router.push("/");
     },
-    onReset(event) {
-      event.preventDefault();
-      // Reset our form values
-      this.form.pass = "";
-      this.form.user = "";
 
-      // Trick to reset/clear native browser form validation state
-      this.show = false;
-      this.$nextTick(() => {
-        this.show = true;
-      });
+    addQuantity() {
+      this.amoun = this.amoun + 1;
+      for (let i = 0; i < this.amount; i++) {
+        this.arrForms.push({
+          user: "",
+          id: "",
+          reason: "",
+        });
+      }
     },
   },
 };

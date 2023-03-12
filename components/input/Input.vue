@@ -7,7 +7,6 @@
           type="number"
           v-model="quantityPeople"
           :placeholder="label.placeholder"
-          required
         ></b-form-input>
       </b-form-group>
 

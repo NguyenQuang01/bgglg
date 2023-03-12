@@ -5,6 +5,11 @@
     </div>
 
     <div class="max-w-2xl m-auto m-0">
+      <div class="mb-2">
+        <a href="#" @click="$router.back()"
+          ><b-icon icon="arrow-bar-left" aria-hidden="true"></b-icon>trở lại</a
+        >
+      </div>
       <Input :label="label" />
     </div>
   </div>

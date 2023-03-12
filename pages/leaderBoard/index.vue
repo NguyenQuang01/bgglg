@@ -3,8 +3,8 @@
     <div class="text-center mt-16 text-3xl font-bold title mb-16">
       Bảng báo cáo
     </div>
-    <div class="mb-2" @click="$router.back()">
-      <a href="#"
+    <div class="mb-2">
+      <a href="#" @click="$router.back()"
         ><b-icon icon="arrow-bar-left" aria-hidden="true"></b-icon>trở lại</a
       >
     </div>
