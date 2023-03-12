@@ -70,8 +70,8 @@ export default {
       // const res = await signInAPI(this.form);
       // console.log(res);
       // if (res && res.status === 200) {
-      //   this.SET_STATE_ISUSER(true);
-      //   this.SET_STATE_USERNAME(this.form.user);
+      this.SET_STATE_ISUSER(true);
+      this.SET_STATE_USERNAME(this.form.user);
       //   localStorage.setItem("isUser", true);
       //   localStorage.setItem("JWT", res.data.token);
       //   localStorage.setItem("userLogin", res.data.userLogin);
