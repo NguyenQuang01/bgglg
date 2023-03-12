@@ -5,8 +5,8 @@
     </div>
 
     <div class="max-w-2xl m-auto m-0">
-      <div class="mb-2" @click="$router.back()">
-        <a href="#" @click="$router.back()"
+      <div class="mb-2 p-2" @click="$router.back()">
+        <a href="#"
           ><b-icon icon="arrow-bar-left" aria-hidden="true"></b-icon>trở lại</a
         >
       </div>
