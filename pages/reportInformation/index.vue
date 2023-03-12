@@ -3,12 +3,13 @@
     <div class="text-center mt-10 mb-5 text-3xl font-bold title">
       THÔNG TIN BÁO CÁO
     </div>
-    <div class="mb-2 p-2" @click="$router.back()">
-      <a href="#"
-        ><b-icon icon="arrow-bar-left" aria-hidden="true"></b-icon>trở lại</a
-      >
-    </div>
+
     <div class="font-semibold mb-2 text-lg">
+      <div class="mb-2 p-2" @click="$router.back()">
+        <a href="#"
+          ><b-icon icon="arrow-bar-left" aria-hidden="true"></b-icon>trở lại</a
+        >
+      </div>
       <b-icon icon="house-fill"></b-icon> Nhà máy : Xưởng 1
     </div>
     <div class="max-w-2xl m-auto m-0">
