@@ -3,11 +3,9 @@
     <TitleScreen />
 
     <div class="max-w-2xl m-auto m-0">
-      <div class="mb-2 p-2" @click="$router.back()">
-        <a href="#"
+      <b-button   @click="$router.back()"  class="text-blue-500 border-none"
           ><b-icon icon="arrow-bar-left" aria-hidden="true"></b-icon>trở lại</a
-        >
-      </div>
+        ></b-button>
       <FormReasonAbsent />
     </div>
   </div>

@@ -6,10 +6,9 @@
 
     <div class="max-w-2xl m-auto m-0">
     
-      <b-button   @click="$router.back()"  class="text-blue-700 mb-24"
+      <b-button   @click="$router.back()"  class="text-blue-500 border-none"
           ><b-icon icon="arrow-bar-left" aria-hidden="true"></b-icon>trở lại</a
-        ></b-button
-        >
+        ></b-button>
      
       <b-form @submit="onSubmit">
         <b-form-group
@@ -59,39 +58,39 @@
 </template>
 <script>
 export default {
-  data() {
-    return {
-      form: {
-        transfer: { number: "", group: "" },
-        support: { number: "", group: "" },
-      },
-      options: [
-        { value: null, text: "chọn lý do" },
-        { value: "b", text: "Thai sản" },
-        { value: "b", text: "Không lương" },
-        { value: "b", text: "ốm" },
-        { value: "b", text: "con ốm" },
-        { value: "b", text: "việc riêng" },
-        { value: "b", text: "học" },
-        { value: "b", text: "nghỉ phép" },
-        { value: "b", text: "việc khác" },
-        { value: "b", text: "tự do" },
-        { value: "b", text: "nghỉ t7+CN" },
-        { value: "b", text: "nghỉ chấm dứt hợp đồng lao động" },
-      ],
-    };
-  },
-  methods: {
-    onSubmit(event) {
-      event.preventDefault();
-      console.log(this.form);
-      this.$router.push("/reportmeal");
+    data() {
+        return {
+            form: {
+                transfer: { number: "", group: "" },
+                support: { number: "", group: "" },
+            },
+            options: [
+                { value: null, text: "chọn lý do" },
+                { value: "b", text: "Thai sản" },
+                { value: "b", text: "Không lương" },
+                { value: "b", text: "ốm" },
+                { value: "b", text: "con ốm" },
+                { value: "b", text: "việc riêng" },
+                { value: "b", text: "học" },
+                { value: "b", text: "nghỉ phép" },
+                { value: "b", text: "việc khác" },
+                { value: "b", text: "tự do" },
+                { value: "b", text: "nghỉ t7+CN" },
+                { value: "b", text: "nghỉ chấm dứt hợp đồng lao động" },
+            ],
+        };
     },
-  },
+    methods: {
+        onSubmit(event) {
+            event.preventDefault();
+            console.log(this.form);
+            this.$router.push("/reportmeal");
+        },
+    },
 };
 </script>
 <style scoped>
 .title {
-  color: #0daeff;
+    color: #0daeff;
 }
 </style>

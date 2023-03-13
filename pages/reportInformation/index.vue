@@ -5,11 +5,9 @@
     </div>
 
     <div class="font-semibold mb-2 text-lg">
-      <div class="mb-2 p-2" @click="$router.back()">
-        <a href="#"
+      <b-button   @click="$router.back()"  class="text-blue-500 border-none"
           ><b-icon icon="arrow-bar-left" aria-hidden="true"></b-icon>trở lại</a
-        >
-      </div>
+        ></b-button>
       <b-icon icon="house-fill"></b-icon> Nhà máy : Xưởng 1
     </div>
     <div class="max-w-2xl m-auto m-0">
