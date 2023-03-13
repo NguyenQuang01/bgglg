@@ -10,7 +10,7 @@
           ><b-icon icon="arrow-bar-left" aria-hidden="true"></b-icon>trở lại</a
         >
       </div>
-      <b-form @submit="onSubmit">
+      <b-form @submit="onSubmit" class="mb-10">
         <b-form-group
           id="input-group-2"
           label="SỐ THỜI VỤ:"

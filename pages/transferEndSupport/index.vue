@@ -5,11 +5,16 @@
     </div>
 
     <div class="max-w-2xl m-auto m-0">
-      <div class="mb-2 p-2" @click="$router.back()">
+      <b-button
+        variant="outline-primary"
+        class="mb-2 border-none"
+        @click="$router.back()"
+      >
         <a href="#"
           ><b-icon icon="arrow-bar-left" aria-hidden="true"></b-icon>trở lại</a
-        >
-      </div>
+        ></b-button
+      >
+      <div></div>
       <b-form @submit="onSubmit">
         <b-form-group
           id="input-group-2"
@@ -49,7 +54,7 @@
             :options="options"
           ></b-form-select>
         </b-form-group>
-        <b-button type="submit" variant="primary" class="text-blue-700"
+        <b-button type="submit" variant="primary" class="text-blue-700 mb-24"
           >Xác nhận</b-button
         >
       </b-form>
