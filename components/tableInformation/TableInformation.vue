@@ -62,6 +62,8 @@
 </template>
 <script>
 import { mapGetters } from "vuex";
+import { saveDetail } from "@/api/AuthenConnector.js";
+
 export default {
   data() {
     return {};
@@ -117,8 +119,59 @@ export default {
     },
   },
   methods: {
-    submit() {
+    async submit(event) {
+      event.preventDefault();
       console.log(this.getDataInformationReport);
+      const test = {
+        userGroupId: "1",
+        totalProductivity: "56",
+        demarcation: "50",
+        createBy: "ssdf",
+        orderDate: "2023-03-14",
+        reportDtlRequest: {
+          reportId: "3",
+          empNum: "4",
+          riceNumber: "5",
+          numEmp: "2",
+          groupId: "3",
+          partTimeNum: "4",
+          restNumber: "2",
+          studentNum: "3",
+        },
+        restRequests: [
+          {
+            name: "ducanh",
+            reasonId: "1",
+          },
+          {
+            name: "dai oc cho",
+            reasonId: "1",
+          },
+        ],
+        transferRequests: [
+          {
+            transferNum: "6",
+            userGroupId: "1",
+            transferType: "1",
+          },
+          {
+            transferNum: "8",
+            userGroupId: "1",
+            transferType: "0",
+          },
+        ],
+      };
+      //   totalProductivity: this.getDataInformationReport.numberProductivity,
+      //   demarcation: this.getDataInformationReport.numberProductivity,
+      //   createBy: "ssdf",
+      //   totalProductivity: this.getDataInformationReport.numberProductivity,
+      //   totalProductivity: this.getDataInformationReport.numberProductivity,
+      //   totalProductivity: this.getDataInformationReport.numberProductivity,
+      // };
+      const res = await saveDetail(test);
+
+      console.log(res);
+      this.$router.push("/sussInformation");
     },
   },
 };

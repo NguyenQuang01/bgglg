@@ -20,17 +20,17 @@
             v-model="form.transfer.number"
             placeholder="Nhập "
           ></b-form-input>
-          <b-form-group
-            label="Chọn tổ điều chuyển đến"
-            label-for="input-2"
-            class="mt-1"
-          >
-            <b-form-select
-              label="Nhập"
-              v-model="form.transfer.group"
-              :options="options"
-            ></b-form-select>
-          </b-form-group>
+              <b-form-group
+          id="input-group-2"
+          label="Chọn tổ điều chuyển đến:"
+          label-for="input-2"
+        >
+          <b-form-input
+             v-model="form.transfer.group"
+            placeholder="Nhập "
+          ></b-form-input>
+        </b-form-group>
+        
         </b-form-group>
         <b-form-group
           id="input-group-2"
@@ -42,13 +42,17 @@
             placeholder="Nhập "
           ></b-form-input>
         </b-form-group>
-        <b-form-group label="Chọn tổ điều chuyển đến:" label-for="input-2" class="mt-1">
-          <b-form-select
-            label="Nhập:"
-            v-model="form.support.group"
-            :options="options"
-          ></b-form-select>
+         <b-form-group
+          id="input-group-2"
+          label="Chọn tổ điều chuyển đến:"
+          label-for="input-2"
+        >
+          <b-form-input
+             v-model="form.support.group"
+            placeholder="Nhập "
+          ></b-form-input>
         </b-form-group>
+      
         <b-button type="submit" variant="primary" class="text-blue-700 mb-24"
           >Xác nhận</b-button
         >
