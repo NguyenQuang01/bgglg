@@ -45,6 +45,7 @@
 import { mapMutations, mapGetters } from "vuex";
 import { signInAPI } from "@/api/AuthenConnector.js";
 import { message } from "ant-design-vue";
+import { HOST } from "@/constants/host/host.js";
 export default {
   data() {
     return {
@@ -67,6 +68,7 @@ export default {
     }),
     async onSubmit(event) {
       event.preventDefault();
+      console.log(HOST, 45455);
       // const res = await signInAPI(this.form);
       // console.log(res);
       // if (res && res.status === 200) {

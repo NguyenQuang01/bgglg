@@ -38,4 +38,7 @@ export default {
       config.resolve.alias["node-fetch-native"] = require.resolve("node-fetch");
     },
   },
+  env: {
+    BASE_URL: process.env.BASE_URL,
+  },
 };
