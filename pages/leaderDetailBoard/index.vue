@@ -3,7 +3,7 @@
     <div class="text-center mt-16 text-3xl font-bold title mb-16">
       Bảng báo cáo chi tiết
     </div>
-    <b-button   @click="$router.back()"  class="text-blue-500 border-none"
+    <b-button   @click="$router.back()"  class="text-blue-500 border-none p-0"
           ><b-icon icon="arrow-bar-left" aria-hidden="true"></b-icon>trở lại</a
         ></b-button>
     <div class="mb-2 flex">

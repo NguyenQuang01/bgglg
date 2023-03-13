@@ -6,7 +6,7 @@
 
     <div class="max-w-2xl m-auto m-0">
     
-      <b-button   @click="$router.back()"  class="text-blue-500 border-none"
+      <b-button   @click="$router.back()"  class="text-blue-500 border-none p-0"
           ><b-icon icon="arrow-bar-left" aria-hidden="true"></b-icon>trở lại</a
         ></b-button>
      
