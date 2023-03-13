@@ -68,7 +68,6 @@ export default {
     }),
     async onSubmit(event) {
       event.preventDefault();
-      console.log(HOST, 45455);
       const res = await signInAPI(this.form);
       console.log(res);
       if (res && res.status === 200) {
@@ -85,12 +84,12 @@ export default {
       } else {
         message.error("sai tài khoản, mật khẩu");
       }
-      this.SET_STATE_ISUSER(true);
-      this.SET_STATE_USERNAME(this.form.user);
+      // this.SET_STATE_ISUSER(true);
+      // this.SET_STATE_USERNAME(this.form.user);
 
-      this.show
-        ? this.$router.push("/laborreport")
-        : this.$router.push("/leaderMenu");
+      // this.show
+      //   ? this.$router.push("/laborreport")
+      //   : this.$router.push("/leaderMenu");
 
       // this.$router.push("/");
     },
