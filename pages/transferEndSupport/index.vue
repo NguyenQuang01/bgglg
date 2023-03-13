@@ -5,16 +5,12 @@
     </div>
 
     <div class="max-w-2xl m-auto m-0">
-      <b-button
-        variant="outline-primary"
-        class="mb-2 border-none"
-        @click="$router.back()"
-      >
-        <a href="#"
+    
+      <b-button   @click="$router.back()"  class="text-blue-700 mb-24"
           ><b-icon icon="arrow-bar-left" aria-hidden="true"></b-icon>trở lại</a
         ></b-button
-      >
-      <div></div>
+        >
+     
       <b-form @submit="onSubmit">
         <b-form-group
           id="input-group-2"
