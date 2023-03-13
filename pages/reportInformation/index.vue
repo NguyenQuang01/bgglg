@@ -5,7 +5,7 @@
     </div>
 
     <div class="font-semibold mb-2 text-lg">
-      <b-button   @click="$router.back()"  class="text-blue-500 border-none p-0"
+      <b-button   @click="$router.back()"  class="text-blue-500 border-none"
           ><b-icon icon="arrow-bar-left" aria-hidden="true"></b-icon>trở lại</a
         ></b-button>
       <b-icon icon="house-fill"></b-icon> Nhà máy : Xưởng 1
@@ -15,6 +15,7 @@
         <TableInformation />
       </div>
     </div>
+   
   </div>
 </template>
 <script>

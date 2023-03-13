@@ -19,8 +19,8 @@
     </b-card> -->
   </div>
 </template>
-
 <script>
+import { mapMutations } from "vuex";
 export default {
   props: {
     label: {
@@ -33,8 +33,14 @@ export default {
       quantityPeople: "",
     };
   },
+
   methods: {
+    ...mapMutations({
+      SET_STATE_LABOR: "SET_STATE_LABOR",
+    }),
     onSubmit(event) {
+      event.preventDefault();
+      this.SET_STATE_LABOR(this.quantityPeople);
       this.$router.push("/reasonAbsent");
     },
   },

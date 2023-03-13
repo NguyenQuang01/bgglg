@@ -13,7 +13,7 @@
       <b-form @submit="onSubmit">
         <b-form-group
           id="input-group-2"
-          label="SỐ THỜI VỤ:"
+          label="SỐ điều chuyển:"
           label-for="input-2"
         >
           <b-form-input
@@ -21,7 +21,7 @@
             placeholder="Nhập "
           ></b-form-input>
           <b-form-group
-            label="SỐ ĐIỀU CHUYỂN:"
+            label="Chọn tổ điều chuyển đến"
             label-for="input-2"
             class="mt-1"
           >
@@ -34,7 +34,7 @@
         </b-form-group>
         <b-form-group
           id="input-group-2"
-          label="SỐ HỌC SINH:"
+          label="SỐ đi hỗ trợ:"
           label-for="input-2"
         >
           <b-form-input
@@ -42,7 +42,7 @@
             placeholder="Nhập "
           ></b-form-input>
         </b-form-group>
-        <b-form-group label="SỐ ĐI HỖ TRỢ :" label-for="input-2" class="mt-1">
+        <b-form-group label="Chọn tổ điều chuyển đến:" label-for="input-2" class="mt-1">
           <b-form-select
             label="Nhập:"
             v-model="form.support.group"
@@ -57,6 +57,7 @@
   </div>
 </template>
 <script>
+import { mapMutations } from 'vuex';
 export default {
     data() {
         return {
@@ -80,10 +81,12 @@ export default {
             ],
         };
     },
-    methods: {
+  methods: {
+      ...mapMutations({SET_STATE_TRANSFER:'SET_STATE_TRANSFER',SET_STATE_SUPPORT:'SET_STATE_SUPPORT'}),
         onSubmit(event) {
             event.preventDefault();
-            console.log(this.form);
+            this.SET_STATE_TRANSFER(this.form.transfer.number)
+            this.SET_STATE_SUPPORT(this.form.support.number)
             this.$router.push("/reportmeal");
         },
     },

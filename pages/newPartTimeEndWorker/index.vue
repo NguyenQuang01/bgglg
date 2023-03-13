@@ -5,9 +5,10 @@
     </div>
 
     <div class="max-w-2xl m-auto m-0">
-      <b-button   @click="$router.back()"  class="text-blue-500 border-none p-0"
-          ><b-icon icon="arrow-bar-left" aria-hidden="true"></b-icon>trở lại</a
-        ></b-button>
+      <b-button @click="$router.back()" class="text-blue-500 border-none p-0"
+        ><b-icon icon="arrow-bar-left" aria-hidden="true"></b-icon>trở
+        lại</b-button
+      >
       <b-form @submit="onSubmit" class="mb-10">
         <b-form-group
           id="input-group-2"
@@ -38,6 +39,7 @@
   </div>
 </template>
 <script>
+import { mapMutations } from "vuex";
 export default {
   data() {
     return {
@@ -48,8 +50,14 @@ export default {
     };
   },
   methods: {
+    ...mapMutations({
+      SET_STATE_SEASONAL: "SET_STATE_SEASONAL",
+      SET_STATE_STUDENT: "SET_STATE_STUDENT",
+    }),
     onSubmit(event) {
       event.preventDefault();
+      this.SET_STATE_SEASONAL(this.form.partTime);
+      this.SET_STATE_STUDENT(this.form.worker);
       this.$router.push("/transferEndSupport");
     },
   },
