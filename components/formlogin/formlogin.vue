@@ -72,7 +72,9 @@ export default {
       // if (res && res.status === 200) {
       //   this.SET_STATE_ISUSER(true);
       //   this.SET_STATE_USERNAME(this.form.user);
-      //   localStorage.setItem("isUser", true);
+      localStorage.setItem("isUser", true);
+      localStorage.setItem("userLogin", this.form.user);
+
       //   localStorage.setItem("JWT", res.data.token);
       //   localStorage.setItem("userLogin", res.data.userLogin);
       //   this.form.user === "admin"
@@ -82,7 +84,6 @@ export default {
       //   message.error("sai tài khoản, mật khẩu");
       // }
       this.SET_STATE_ISUSER(true);
-      console.log(this.form.user);
       this.SET_STATE_USERNAME(this.form.user);
 
       this.show
