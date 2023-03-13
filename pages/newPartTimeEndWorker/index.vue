@@ -1,6 +1,6 @@
 <template lang="">
   <div class="container">
-    <div class="text-center mt-10 mb-20 text-3xl font-bold title">
+    <div class="text-center mt-10 mb-16 text-3xl font-bold title">
       BÁO CÁO SỐ THỜI VỤ & CÔNG NHÂN MỚI
     </div>
 

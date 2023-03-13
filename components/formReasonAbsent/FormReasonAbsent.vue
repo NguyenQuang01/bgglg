@@ -26,10 +26,13 @@
           ></b-form-select>
         </b-form-group>
       </div>
-      <b-button variant="primary" class="text-blue-700" @click="addQuantity"
+      <b-button
+        variant="primary"
+        class="text-blue-700 mb-24"
+        @click="addQuantity"
         >Thêm</b-button
       >
-      <b-button type="submit" variant="primary" class="text-blue-700"
+      <b-button type="submit" variant="primary" class="text-blue-700 mb-24"
         >xác nhận</b-button
       >
     </b-form>

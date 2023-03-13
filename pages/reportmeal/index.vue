@@ -1,6 +1,6 @@
 <template lang="">
   <div class="container">
-    <div class="text-center mt-10 mb-20 text-3xl font-bold title">BÁO CƠM</div>
+    <div class="text-center mt-10 mb-16 text-3xl font-bold title">BÁO CƠM</div>
 
     <div class="max-w-2xl m-auto m-0">
       <b-button   @click="$router.back()"  class="text-blue-500 border-none p-0"
