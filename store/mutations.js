@@ -29,4 +29,7 @@ export default {
   SET_STATE_PRODUCTIVITY(state, data) {
     state.dataInformationReport.productivity = data;
   },
+  SET_STATE_ARRLABOR(state, data) {
+    state.dataInformationReport.arrLabor = data;
+  },
 };

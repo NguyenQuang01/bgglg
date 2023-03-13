@@ -10,5 +10,6 @@ export default () => ({
     meal: "",
     labor: "",
     productivity: "",
+    arrLabor: [],
   },
 });

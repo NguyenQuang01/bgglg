@@ -42,7 +42,7 @@
         <td>{{ numberReasons.quantity }}</td>
         <td>
           <div v-for="(item, index) in numberReasons.arrReasons" :key="index">
-            {{ item.name }}-{{ item.report }}
+            {{ item }}
           </div>
         </td>
       </tr>
@@ -73,11 +73,7 @@ export default {
     numberReasons() {
       return {
         quantity: this.getDataInformationReport?.labor,
-        arrReasons: [
-          { name: "trungquang", report: "om" },
-          { name: "trungquang", report: "om" },
-          { name: "trungquang", report: "om" },
-        ],
+        arrReasons: this.getDataInformationReport?.arrLabor,
       };
     },
     demarcation() {
