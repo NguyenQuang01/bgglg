@@ -3,11 +3,9 @@
     <div class="text-center mt-16 text-3xl font-bold title mb-16">
       Bảng báo cáo
     </div>
-    <div class="mb-2 p-2" @click="$router.back()">
-      <a href="#"
-        ><b-icon icon="arrow-bar-left" aria-hidden="true"></b-icon>trở lại</a
-      >
-    </div>
+    <b-button   @click="$router.back()"  class="text-blue-500 border-none"
+          ><b-icon icon="arrow-bar-left" aria-hidden="true"></b-icon>trở lại</a
+        ></b-button>
     <div class="mb-2 flex">
       <a-button class="btnDay">Ngày trước</a-button>
       <a-date-picker v-model="valueDay" class="mx-2" placeholder="Chọn ngày" />
