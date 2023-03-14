@@ -53,7 +53,7 @@ export default {
         user: "",
         pass: "",
       },
-      show: true,
+      show: false,
     };
   },
   // created: {
@@ -68,28 +68,28 @@ export default {
     }),
     async onSubmit(event) {
       event.preventDefault();
-      const res = await signInAPI(this.form);
-      console.log(res);
-      if (res && res.status === 200) {
-        this.SET_STATE_ISUSER(true);
-        this.SET_STATE_USERNAME(this.form.user);
-        localStorage.setItem("isUser", true);
-        localStorage.setItem("userLogin", this.form.user);
+      // const res = await signInAPI(this.form);
+      // console.log(res);
+      // if (res && res.status === 200) {
+      //   this.SET_STATE_ISUSER(true);
+      //   this.SET_STATE_USERNAME(this.form.user);
+      //   localStorage.setItem("isUser", true);
+      //   localStorage.setItem("userLogin", this.form.user);
 
-        localStorage.setItem("JWT", res.data.token);
-        // localStorage.setItem("userLogin", res.data.userLogin);
-        this.form.user === "admin"
-          ? this.$router.push("/laborreport")
-          : this.$router.push("/laborreport");
-      } else {
-        message.error("sai tài khoản, mật khẩu");
-      }
-      // this.SET_STATE_ISUSER(true);
-      // this.SET_STATE_USERNAME(this.form.user);
+      //   localStorage.setItem("JWT", res.data.token);
+      //   // localStorage.setItem("userLogin", res.data.userLogin);
+      //   this.form.user === "admin"
+      //     ? this.$router.push("/laborreport")
+      //     : this.$router.push("/laborreport");
+      // } else {
+      //   message.error("sai tài khoản, mật khẩu");
+      // }
+      this.SET_STATE_ISUSER(true);
+      this.SET_STATE_USERNAME(this.form.user);
 
-      // this.show
-      //   ? this.$router.push("/laborreport")
-      //   : this.$router.push("/leaderMenu");
+      this.show
+        ? this.$router.push("/sussInformation")
+        : this.$router.push("/leaderMenu");
 
       // this.$router.push("/");
     },

@@ -12,37 +12,37 @@
       </tr>
       <tr>
         <td class="font-bold backgroundBlue">văn phòng</td>
-        <td>191 <span class="text-emerald-700">(+3)</span></td>
+        <td>191 <span class="text-emerald-700"></span></td>
         <td></td>
-        <td>191<span class="text-emerald-700">(+3)</span></td>
-        <td>191<span class="text-emerald-700">(+3)</span></td>
-        <td>11.39 <span class="text-rose-700">(-4)</span></td>
+        <td>191<span class="text-emerald-700"></span></td>
+        <td>191<span class="text-emerald-700"></span></td>
+        <td>11.39 <span class="text-rose-700"></span></td>
         <td rowspan="3" class="font-bold">
-          1682.0<span class="text-emerald-700">(+x)</span>
+          1682.0<span class="text-emerald-700"></span>
         </td>
       </tr>
       <tr>
         <td class="font-bold backgroundBlue">Tổ may + thời vụ</td>
         <td></td>
-        <td>1197.5 <span class="text-emerald-700"> (+x)</span></td>
-        <td>191<span class="text-emerald-700">(+3)</span></td>
-        <td>1197.5<span class="text-emerald-700">(+x)</span></td>
-        <td>71.10<span class="text-emerald-700">(+x)</span></td>
+        <td>1197.5 <span class="text-emerald-700"></span></td>
+        <td>191<span class="text-emerald-700"></span></td>
+        <td>1197.5<span class="text-emerald-700"></span></td>
+        <td>71.10<span class="text-emerald-700"></span></td>
       </tr>
       <tr>
         <td class="font-bold backgroundBlue">Đơn vị lẻ</td>
         <td></td>
-        <td>293.5<span class="text-emerald-700">(+x)</span></td>
-        <td>191<span class="text-emerald-700">(+3)</span></td>
-        <td>293.5 <span class="text-emerald-700">(+x)</span></td>
-        <td><span class="text-emerald-700">17.51(+x)</span></td>
+        <td>293.5<span class="text-emerald-700"></span></td>
+        <td>191<span class="text-emerald-700"></span></td>
+        <td>293.5 <span class="text-emerald-700"></span></td>
+        <td><span class="text-emerald-700">17.51</span></td>
       </tr>
 
       <tr>
         <td class="font-bold backgroundBlue">Tổng thực tế làm việc</td>
-        <td class="font-bold">191<span class="text-rose-700">(-x)</span></td>
-        <td class="font-bold">191 <span class="text-rose-700">(-x)</span></td>
-        <td colspan="2" class="font-bold">1501.0(-x)</td>
+        <td class="font-bold">191<span class="text-rose-700"></span></td>
+        <td class="font-bold">191 <span class="text-rose-700"></span></td>
+        <td colspan="2" class="font-bold">1501.0</td>
         <td class="font-bold">100</td>
         <td></td>
       </tr>
