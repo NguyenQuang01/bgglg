@@ -56,7 +56,7 @@
       variant="primary"
       class="text-blue-700 float-right mb-10"
       @click="submit"
-      >Xác nhận</b-button
+      >{{ btn }}</b-button
     >
   </div>
 </template>
@@ -66,7 +66,9 @@ import { saveDetail } from "@/api/AuthenConnector.js";
 
 export default {
   data() {
-    return {};
+    return {
+      btn: "xác nhận",
+    };
   },
   computed: {
     ...mapGetters({
@@ -121,46 +123,48 @@ export default {
   methods: {
     async submit(event) {
       event.preventDefault();
-      console.log(this.getDataInformationReport);
-      const test = {
-        userGroupId: "1",
-        totalProductivity: "56",
-        demarcation: "50",
-        createBy: "ssdf",
-        orderDate: "2023-03-14",
-        reportDtlRequest: {
-          reportId: "3",
-          empNum: "4",
-          riceNumber: "5",
-          numEmp: "2",
-          groupId: "3",
-          partTimeNum: "4",
-          restNumber: "2",
-          studentNum: "3",
-        },
-        restRequests: [
-          {
-            name: "ducanh",
-            reasonId: "1",
-          },
-          {
-            name: "dai oc cho",
-            reasonId: "1",
-          },
-        ],
-        transferRequests: [
-          {
-            transferNum: "6",
-            userGroupId: "1",
-            transferType: "1",
-          },
-          {
-            transferNum: "8",
-            userGroupId: "1",
-            transferType: "0",
-          },
-        ],
-      };
+      this.btn = "quay lại";
+      alert("xác nhận thành công");
+      // console.log(this.getDataInformationReport);
+      // const test = {
+      //   userGroupId: "1",
+      //   totalProductivity: "56",
+      //   demarcation: "50",
+      //   createBy: "ssdf",
+      //   orderDate: "2023-03-14",
+      //   reportDtlRequest: {
+      //     reportId: "3",
+      //     empNum: "4",
+      //     riceNumber: "5",
+      //     numEmp: "2",
+      //     groupId: "3",
+      //     partTimeNum: "4",
+      //     restNumber: "2",
+      //     studentNum: "3",
+      //   },
+      //   restRequests: [
+      //     {
+      //       name: "ducanh",
+      //       reasonId: "1",
+      //     },
+      //     {
+      //       name: "dai oc cho",
+      //       reasonId: "1",
+      //     },
+      //   ],
+      //   transferRequests: [
+      //     {
+      //       transferNum: "6",
+      //       userGroupId: "1",
+      //       transferType: "1",
+      //     },
+      //     {
+      //       transferNum: "8",
+      //       userGroupId: "1",
+      //       transferType: "0",
+      //     },
+      //   ],
+      // };
       //   totalProductivity: this.getDataInformationReport.numberProductivity,
       //   demarcation: this.getDataInformationReport.numberProductivity,
       //   createBy: "ssdf",
@@ -168,9 +172,9 @@ export default {
       //   totalProductivity: this.getDataInformationReport.numberProductivity,
       //   totalProductivity: this.getDataInformationReport.numberProductivity,
       // };
-      const res = await saveDetail(test);
+      // const res = await saveDetail(test);
 
-      console.log(res);
+      // console.log(res);
       this.$router.push("/sussInformation");
     },
   },
