@@ -53,7 +53,7 @@ export default {
         user: "",
         pass: "",
       },
-      show: false,
+      show: true,
     };
   },
   // created: {
@@ -88,7 +88,7 @@ export default {
       this.SET_STATE_USERNAME(this.form.user);
 
       this.show
-        ? this.$router.push("/sussInformation")
+        ? this.$router.push("/laborreport")
         : this.$router.push("/leaderMenu");
 
       // this.$router.push("/");

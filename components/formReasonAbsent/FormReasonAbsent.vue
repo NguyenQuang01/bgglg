@@ -26,22 +26,30 @@
           ></b-form-select>
         </b-form-group>
       </div>
-      <b-button
-        variant="primary"
-        class="text-blue-700 mb-24"
-        @click="addQuantity"
-        >Thêm</b-button
-      >
-      <b-button type="submit" variant="primary" class="text-blue-700 mb-24"
-        >xác nhận</b-button
-      >
+      <div class="flex mb-24">
+        <b-button
+          variant="primary"
+          class="text-blue-700 mb-24"
+          @click="addQuantity"
+          >Thêm</b-button
+        >
+        <b-button
+          type="submit"
+          variant="primary"
+          class="text-blue-700 mb-24 ml-2"
+          >xác nhận</b-button
+        >
+        <button-skip />
+      </div>
     </b-form>
   </div>
 </template>
 
 <script>
 import { mapMutations } from "vuex";
+import ButtonSkip from "../buttonSkip";
 export default {
+  components: { ButtonSkip },
   data() {
     return {
       amount: 1,

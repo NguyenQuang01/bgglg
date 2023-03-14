@@ -3,16 +3,18 @@
     <b-form @submit="onSubmit">
       <b-form-group id="input-group-2" :label="label.name" label-for="input-2">
         <b-form-input
-          id="input-2"
+          required
           type="number"
           v-model="quantityPeople"
           :placeholder="label.placeholder"
         ></b-form-input>
       </b-form-group>
-
-      <b-button variant="primary" class="text-blue-700" @click="onSubmit"
-        >xác nhận
-      </b-button>
+      <div class="flex">
+        <b-button variant="primary" class="text-blue-700" @click="onSubmit"
+          >xác nhận
+        </b-button>
+        <BtnSkip :skip="skip" />
+      </div>
     </b-form>
     <!-- <b-card class="mt-3" header="Form Data Result">
       <pre class="m-0">{{ quantityPeople }}</pre>
@@ -21,7 +23,12 @@
 </template>
 <script>
 import { mapMutations } from "vuex";
+import BtnSkip from "@/components/buttonSkip";
+
 export default {
+  components: {
+    BtnSkip,
+  },
   props: {
     label: {
       type: Object,
@@ -31,6 +38,7 @@ export default {
   data() {
     return {
       quantityPeople: "",
+      skip: "/reasonAbsent",
     };
   },
 

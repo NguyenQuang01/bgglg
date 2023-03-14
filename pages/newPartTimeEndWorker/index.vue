@@ -18,6 +18,7 @@
           <b-form-input
             v-model="form.partTime"
             placeholder="Nhập "
+            required
           ></b-form-input>
         </b-form-group>
         <b-form-group
@@ -28,6 +29,7 @@
           <b-form-input
             v-model="form.worker"
             placeholder="Nhập "
+            required
           ></b-form-input>
         </b-form-group>
 
