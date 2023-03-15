@@ -10,7 +10,7 @@
         ></b-form-input>
       </b-form-group>
       <div class="flex">
-        <b-button variant="primary" class="text-blue-700" @click="onSubmit"
+        <b-button type="submit" variant="primary" class="text-blue-700"
           >xác nhận
         </b-button>
         <BtnSkip :skip="skip" />

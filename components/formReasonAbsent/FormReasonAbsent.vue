@@ -39,7 +39,7 @@
           class="text-blue-700 mb-24 ml-2"
           >xác nhận</b-button
         >
-        <button-skip />
+        <button-skip :skip="skip" />
       </div>
     </b-form>
   </div>
@@ -52,6 +52,7 @@ export default {
   components: { ButtonSkip },
   data() {
     return {
+      skip: "/newPartTimeEndWorker",
       amount: 1,
       form: {
         user: "",

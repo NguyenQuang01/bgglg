@@ -32,19 +32,24 @@
             required
           ></b-form-input>
         </b-form-group>
-
-        <b-button type="submit" variant="primary" class="text-blue-700"
-          >Xác nhận</b-button
-        >
+        <div class="flex">
+          <b-button type="submit" variant="primary" class="text-blue-700"
+            >Xác nhận</b-button
+          >
+          <button-skip :skip="skip" />
+        </div>
       </b-form>
     </div>
   </div>
 </template>
 <script>
 import { mapMutations } from "vuex";
+import ButtonSkip from "@/components/buttonSkip";
 export default {
+  components: { ButtonSkip },
   data() {
     return {
+      skip: "/transferEndSupport",
       form: {
         partTime: "",
         worker: "",
