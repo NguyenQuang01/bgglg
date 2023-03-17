@@ -7,7 +7,11 @@ export default () => ({
     student: "",
     transfer: "",
     support: "",
-    meal: "",
+    meal: {
+      staff: "",
+      guest: "",
+      guestVip: "",
+    },
     labor: "",
     productivity: "",
     arrLabor: [],

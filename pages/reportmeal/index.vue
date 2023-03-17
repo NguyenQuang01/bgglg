@@ -10,11 +10,33 @@
       <b-form @submit="onSubmit">
         <b-form-group
           id="input-group-2"
-          label="Nhập số lao động ăn cơm trưa:"
+          label="Nhập số lao động ăn cơm trưa :"
           label-for="input-2"
         >
           <b-form-input
-            v-model="numberMeal"
+            v-model="numberMeal.staff"
+            placeholder="Nhập "
+            type="number"
+          ></b-form-input>
+        </b-form-group>
+        <b-form-group
+          id="input-group-2"
+          label="Nhập số khách ăn cơm trưa:"
+          label-for="input-2"
+        >
+          <b-form-input
+            v-model="numberMeal.guest"
+            placeholder="Nhập "
+            type="number"
+          ></b-form-input>
+        </b-form-group>
+        <b-form-group
+          id="input-group-2"
+          label="Nhập số khách VIP ăn cơm trưa:"
+          label-for="input-2"
+        >
+          <b-form-input
+            v-model="numberMeal.guestVip"
             placeholder="Nhập "
             type="number"
           ></b-form-input>
@@ -38,7 +60,11 @@ export default {
   data() {
     return {
       skip: "/reportInformation",
-      numberMeal: "",
+      numberMeal: {
+        staff: "",
+        guest: "",
+        guestVip: "",
+      },
     };
   },
   computed: {

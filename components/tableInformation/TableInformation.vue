@@ -24,16 +24,32 @@
       <tr>
         <td class="bg-sky-400 text-slate-50">ĐIỀU CHUYỂN</td>
         <td>{{ numberTransfer.quantity }}</td>
-        <td>{{ numberTransfer.information }}</td>
+        <td v-if="numberTransfer.information" class="text-lime-800">
+          xác nhận
+        </td>
+        <td v-else class="text-rose-800">chưa xác nhận</td>
       </tr>
       <tr>
         <td class="bg-sky-400 text-slate-50">HỖ TRỢ</td>
         <td>{{ numberSupport.quantity }}</td>
-        <td>{{ numberSupport.information }}</td>
+        <td v-if="numberSupport.information" class="text-lime-800">xác nhận</td>
+        <td v-else class="text-rose-800">chưa xác nhận</td>
       </tr>
       <tr>
         <td class="bg-sky-400 text-slate-50">BÁO CƠM</td>
-        <td>{{ numberEatRice.quantity }}</td>
+        <td>
+          <div class="whitespace-nowrap">
+            Nhân viên: {{ numberEatRice.staffQuantity }}
+          </div>
+
+          <div class="whitespace-nowrap">
+            Khách: {{ numberEatRice.guestQuantity }}
+          </div>
+
+          <div class="whitespace-nowrap">
+            Khách Vip: {{ numberEatRice.guestVipQuantity }}
+          </div>
+        </td>
         <td>{{ numberEatRice.information }}</td>
       </tr>
 
@@ -41,7 +57,11 @@
         <td class="bg-sky-400 text-slate-50">SỐ NGHỈ</td>
         <td>{{ numberReasons.quantity }}</td>
         <td>
-          <div v-for="(item, index) in numberReasons.arrReasons" :key="index">
+          <div
+            v-for="(item, index) in numberReasons.arrReasons"
+            :key="index"
+            class=""
+          >
             {{ item }}
           </div>
         </td>
@@ -100,18 +120,23 @@ export default {
     },
     numberTransfer() {
       return {
-        information: "",
+        information: true,
         quantity: this.getDataInformationReport?.transfer,
       };
     },
     numberSupport() {
       return {
-        information: "",
+        information: false,
         quantity: this.getDataInformationReport?.support,
       };
     },
     numberEatRice() {
-      return { information: "", quantity: this.getDataInformationReport?.meal };
+      return {
+        information: "",
+        staffQuantity: this.getDataInformationReport?.meal.staff,
+        guestQuantity: this.getDataInformationReport?.meal.guest,
+        guestVipQuantity: this.getDataInformationReport?.meal.guestVip,
+      };
     },
     numberProductivity() {
       return {

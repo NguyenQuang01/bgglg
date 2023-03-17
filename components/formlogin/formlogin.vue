@@ -53,7 +53,7 @@ export default {
         user: "",
         pass: "",
       },
-      show: true,
+      show: false,
     };
   },
   // created: {
