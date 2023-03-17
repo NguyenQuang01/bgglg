@@ -7,7 +7,7 @@
         <th>XÍ nghiệp</th>
         <th>Lao động báo năng suất</th>
         <th>Số lao động nghỉ</th>
-        <th>Tỉ lệ %</th>
+        <th colspan="2">Tỉ lệ %</th>
         <th>Tổng lao động báo năng suất</th>
         <th>Báo cơm</th>
       </tr>
@@ -18,7 +18,9 @@
         <td>191</td>
         <td>3</td>
         <td>11.39</td>
-        <td rowspan="3" class="font-bold">1682.0</td>
+        <td rowspan="2">afds</td>
+
+        <td rowspan="6" class="font-bold">1682.0</td>
         <td>190 2 khách 2 khách VIP</td>
       </tr>
       <tr>
@@ -36,7 +38,7 @@
         <td>1197.5</td>
         <td>1197.5</td>
         <td>71.10</td>
-        <td>71.10</td>
+        <td colspan="2">71.10</td>
         <td></td>
       </tr>
       <tr>
@@ -45,14 +47,35 @@
         <td>1197.5</td>
         <td>1197.5</td>
         <td>71.10</td>
+        <td colspan="2"></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td class="font-bold backgroundBlue">Thời vụ tổ may</td>
+        <td></td>
+        <td>1197.5</td>
+        <td>1197.5</td>
         <td>71.10</td>
+        <td colspan="2">71.10</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td class="font-bold backgroundBlue">Thời vụ đơn vị lẻ</td>
+        <td></td>
+        <td>1197.5</td>
+        <td>1197.5</td>
+        <td>71.10</td>
+        <td colspan="2">71.10</td>
         <td></td>
       </tr>
       <tr>
         <td class="font-bold backgroundBlue">Tổng thực tế làm việc</td>
         <td class="font-bold">191</td>
-        <td colspan="2" class="font-bold">1501.0</td>
-        <td class="font-bold">100</td>
+        <td class="font-bold">1501.0</td>
+        <td></td>
+        <td></td>
+        <td colspan="2" class="font-bold">100</td>
+        <td></td>
         <td></td>
       </tr>
     </table>
