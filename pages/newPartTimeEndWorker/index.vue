@@ -16,6 +16,7 @@
           label-for="input-2"
         >
           <b-form-input
+            type="number"
             v-model="form.partTime"
             placeholder="Nhập "
             required
@@ -27,6 +28,7 @@
           label-for="input-2"
         >
           <b-form-input
+            type="number"
             v-model="form.worker"
             placeholder="Nhập "
             required

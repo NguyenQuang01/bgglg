@@ -13,7 +13,11 @@
           label="Nhập số lao động ăn cơm trưa:"
           label-for="input-2"
         >
-          <b-form-input v-model="numberMeal" placeholder="Nhập "></b-form-input>
+          <b-form-input
+            v-model="numberMeal"
+            placeholder="Nhập "
+            type="number"
+          ></b-form-input>
         </b-form-group>
         <div class="flex">
           <b-button type="submit" variant="primary" class="text-blue-700"

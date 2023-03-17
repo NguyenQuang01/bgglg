@@ -44,7 +44,6 @@
     </b-form>
   </div>
 </template>
-
 <script>
 import { mapMutations } from "vuex";
 import ButtonSkip from "../buttonSkip";

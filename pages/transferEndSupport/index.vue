@@ -20,6 +20,7 @@
             v-model="form.transfer.number"
             placeholder="Nhập "
             required
+            type="number"
           ></b-form-input>
           <b-form-group
             id="input-group-2"
@@ -42,6 +43,7 @@
             v-model="form.support.number"
             placeholder="Nhập "
             required
+            type="number"
           ></b-form-input>
         </b-form-group>
         <b-form-group
