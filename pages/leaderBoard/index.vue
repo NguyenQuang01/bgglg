@@ -38,7 +38,7 @@ export default {
     };
   },
   created() {
-    this.valueDay = `${this.year}-${this.month}-${this.day}`;
+    this.valueDay = `${this.year}/${this.month}/${this.day}`;
   },
   methods: {
     btnPageToDetail() {
@@ -47,20 +47,20 @@ export default {
     btnPlus() {
       if (this.day31.includes(this.month) && this.day < 31) {
         this.day = this.day + 1;
-        this.valueDay = `${this.year}-${this.month}-${this.day}`;
+        this.valueDay = `${this.year}/${this.month}/${this.day}`;
         console.log(this.day);
       } else if (this.day30.includes(this.month) && this.day < 30) {
         this.day = this.day + 1;
-        this.valueDay = `${this.year}-${this.month}-${this.day}`;
+        this.valueDay = `${this.year}/${this.month}/${this.day}`;
       } else if (this.day28.includes(this.month) && this.day < 28) {
         this.day = this.day + 1;
-        this.valueDay = `${this.year}-${this.month}-${this.day}`;
+        this.valueDay = `${this.year}/${this.month}/${this.day}`;
       }
     },
     btnMinus() {
       if (this.day > 1) {
         this.day = this.day - 1;
-        this.valueDay = `${this.year}-${this.month}-${this.day}`;
+        this.valueDay = `${this.year}/${this.month}/${this.day}`;
       }
     },
   },
