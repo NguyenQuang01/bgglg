@@ -15,7 +15,7 @@
     <div class="m-auto m-0 overflow-auto">
       <TableBoardVue />
     </div>
-    <div class="float-right mt-2">
+    <div class="float-right mt-2 mb-10">
       <a-button class="btnDay" @click="btnPageToDetail">Xem chi tiết</a-button>
     </div>
   </div>
