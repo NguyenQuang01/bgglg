@@ -2,341 +2,132 @@
   <div>
     <table>
       <tr>
-        <td colspan="2">Đơn vị</td>
-        <td>SỐ LĐ ĐỊNH BIÊN (mặc định)</td>
-        <td>SỐ LAO ĐỘNG ĐI LÀM ĐỊNH BIÊN + LĐ THỜI VỤ</td>
-        <td class="bg-amber-400 text-red-500">SỐ LĐ TÍNH NĂNG SUẤT</td>
-        <td colspan="4">Tỉ lệ của cắt - hoàn thiện</td>
-        <td colspan="13" class="bg-amber-400 text-red-500 text-center">NGHỈ</td>
-        <td class="yellow">Thời vụ</td>
-        <td>Học Sinh (Chưa bqáo năng xuất)</td>
-        <td>Số lao động báo tăng</td>
-        <td>Tổng số LĐ tăng tính từ đầu tháng</td>
-        <td>Ghi chú</td>
-        <td>Báo cơm</td>
-      </tr>
-      <tr>
-        <th colspan="2">Đơn vị</th>
-        <th>SỐ LĐ ĐỊNH BIÊN (mặc định)</th>
-        <th>SỐ LAO ĐỘNG ĐI LÀM ĐỊNH BIÊN + LĐ THỜI VỤ</th>
-        <th class="bg-orange-300 text-red-600">SỐ LĐ TÍNH NĂNG SUẤT</th>
-        <th class="bg-amber-100 text-fuchsia-600">
-          Tỷ lệ LĐ đi làm thực tế trong ngày của cắt,HT so với LĐ đi làm tổ may
-        </th>
-        <th class="bg-amber-100 text-fuchsia-600">
-          Tỷ lệ định biên chuẩn áp dụng đối với cắt,HT
-        </th>
-        <th class="bg-violet-200 text-fuchsia-600">
-          LĐ đi làm theo đúng tỷ lệ
-        </th>
-        <th class="bg-amber-100 text-fuchsia-600">
-          Chênh lệch giữa thực tế đi làm so với tỷ lệ chuẩn
-        </th>
-        <th class="bg-orange-200">Thai sản</th>
-        <th class="bg-orange-200">KL</th>
-        <th class="bg-orange-200">Ốm</th>
-        <th class="bg-orange-200">Con ốm</th>
-        <th class="bg-orange-200">Việc riêng</th>
-        <th class="bg-orange-200">Học</th>
-        <th class="bg-orange-200">Phép</th>
-        <th class="bg-orange-200">Viêc khác</th>
-        <th class="bg-orange-200">Tự do</th>
-        <th class="bg-lime-400">Chấm dứt HĐLĐ trong ngày làm báo cáo</th>
-        <th class="yellow">
-          Chấm dứt HĐLĐ lũy kế (tính từ đầu tháng đến ngày làm báo cáo)
-        </th>
-        <th class="yellow">Nghỉ thứ 7, CN</th>
-        <th class="yellow">TỔNG SỐ LAO ĐỘNG NGHỈ</th>
-        <th class="yellow">Thời vụ</th>
-        <th>Học Sinh (Chưa bqáo năng xuất)</th>
-        <th>Số lao động báo tăng</th>
-        <th>Tổng số LĐ tăng tính từ đầu tháng</th>
-        <th>Ghi chú</th>
+        <th colspan="2">Bộ phận</th>
+        <th>Văn phòng</th>
+        <th>XÍ nghiệp</th>
+        <th>Lao động báo năng suất</th>
+        <th>Số lao động nghỉ</th>
+        <th colspan="2">Tỉ lệ %</th>
+        <th>Tổng lao động báo năng suất</th>
         <th>Báo cơm</th>
       </tr>
       <tr>
-        <td>Văn phòng</td>
-        <td></td>
-        <td colspan="26" class="font-bold"></td>
+        <td colspan="2" class="font-bold backgroundBlue" @click="test">
+          {{ dataTable.Vp.name }}
+        </td>
+        <td>{{ dataTable.Vp.vp }}</td>
+        <td>{{ dataTable.Vp.xn }}</td>
+        <td>{{ dataTable.Vp.ldnx }}</td>
+        <td>{{ dataTable.Vp.ndn }}</td>
+        <td>{{ dataTable.Vp.tl }}</td>
+        <td rowspan="2">afds</td>
+
+        <td rowspan="6" class="font-bold">1682.0</td>
+        <td>190 2 khách 2 khách VIP</td>
       </tr>
-      <tr>
+
+      <tr v-if="dataTable.Vp.child && isVp" v-for="item in dataTable.Vp.child">
         <td></td>
-        <td>Phòng tổ chức hành chính</td>
-        <td>10(+0)</td>
-        <td>11(+1)</td>
-        <td>11(+1)</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td>1(+1)</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td>1(+1)</td>
-        <td>2(+2)</td>
-        <td></td>
-        <td>2</td>
-        <td>2</td>
-        <td>Mai nghỉ ốm</td>
-        <td></td>
+        <td>{{ item.name }}</td>
+        <td>{{ item.vp }}</td>
+        <td>{{ item.xn }}</td>
+        <td>{{ item.ldnx }}</td>
+        <td>{{ item.ndn }}</td>
+        <td>{{ item.tl }}</td>
       </tr>
+
       <tr>
-        <td></td>
-        <td>Phòng kĩ thuật</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
+        <td colspan="2" class="font-bold backgroundBlue">
+          {{ dataTable.Dvl.name }}
+        </td>
+        <td>{{ dataTable.Dvl.vp }}</td>
+        <td>{{ dataTable.Dvl.xn }}</td>
+        <td>{{ dataTable.Dvl.ldnx }}</td>
+        <td>{{ dataTable.Dvl.ndn }}</td>
+        <td>{{ dataTable.Dvl.tl }}</td>
       </tr>
-      <tr>
-        <td>Tổ may</td>
+      <tr v-if="dataTable.Vp.child && isVp" v-for="item in dataTable.Vp.child">
         <td></td>
-        <td colspan="26" class="font-bold"></td>
+        <td>{{ item.name }}</td>
+        <td>{{ item.vp }}</td>
+        <td>{{ item.xn }}</td>
+        <td>{{ item.ldnx }}</td>
+        <td>{{ item.ndn }}</td>
+        <td>{{ item.tl }}</td>
       </tr>
+
       <tr>
-        <td>Xí nghiệp 1</td>
-        <td>Tổ 1</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td></td>
-        <td>Tổ 2</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td>Xí nghiệp 2</td>
-        <td>Tổ 21</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td>Đơn vị lẻ</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td></td>
-        <td>cơ điện vòng ngoài</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td></td>
-        <td>tổ vệ sinh</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td colspan="2">Tổng toàn công ty</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
+        <td colspan="2" class="font-bold backgroundBlue">
+          {{ dataTable.Tm.name }}
+        </td>
+        <td>{{ dataTable.Tm.vp }}</td>
+        <td>{{ dataTable.Tm.xn }}</td>
+        <td>{{ dataTable.Tm.ldnx }}</td>
+        <td>{{ dataTable.Tm.ndn }}</td>
+        <td colspan="2">{{ dataTable.Tm.tl }}</td>
       </tr>
     </table>
   </div>
 </template>
-<script></script>
+<script>
+export default {
+  data() {
+    return {
+      dataTable: {
+        Vp: {
+          name: "Văn phòng",
+          vp: 191,
+          xn: 0,
+          ldnx: 191.0,
+          ndn: 10,
+          tl: 11.39,
+          child: [
+            {
+              name: "Lãnh đạo",
+              vp: 191,
+              xn: 0,
+              ldnx: 191.0,
+              ndn: 10,
+              tl: 11.39,
+            },
+            {
+              name: "Phòng TCHC",
+              vp: 191,
+              xn: 0,
+              ldnx: 191.0,
+              ndn: 10,
+              tl: 11.39,
+            },
+          ],
+        },
+        Dvl: {
+          name: "Đơn vị lẻ",
+          vp: 0,
+          xn: 293.5,
+          ldnx: 293.5,
+          ndn: 0,
+          tl: 17.51,
+        },
+        Tm: {
+          name: "Tổ may",
+          vp: 0,
+          xn: 1197.5,
+          ldnx: 1197.5,
+          ndn: 0,
+          tl: 71.1,
+        },
+      },
+      isVp: true,
+    };
+  },
+  methods: {
+    test() {
+      console.log(4544);
+      this.isVp = !this.isVp;
+    },
+  },
+};
+</script>
 <style scoped>
 table {
   font-family: arial, sans-serif;
@@ -350,10 +141,10 @@ th {
   text-align: left;
   padding: 8px;
 }
-/* th {
-    background-color: #0daeff;
-    color: #ffffff;
-} */
+th {
+  background-color: #0daeff;
+  color: #ffffff;
+}
 .backgroundBlue {
   background-color: #0daeff;
   color: #ffffff;

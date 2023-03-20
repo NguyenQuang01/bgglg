@@ -8,7 +8,7 @@
       lại</b-button
     >
     <div class="mb-2 flex">
-      <a-button class="btnDay">Ngày trước</a-button>
+      <a-button class="btnDay" @click="btnMinus">Ngày trước</a-button>
       <a-date-picker v-model="valueDay" class="mx-2" placeholder="Chọn ngày" />
       <a-button class="btnDay" @click="btnPlus">ngày sau</a-button>
     </div>
@@ -54,6 +54,12 @@ export default {
         this.valueDay = `${this.year}-${this.month}-${this.day}`;
       } else if (this.day28.includes(this.month) && this.day < 28) {
         this.day = this.day + 1;
+        this.valueDay = `${this.year}-${this.month}-${this.day}`;
+      }
+    },
+    btnMinus() {
+      if (this.day > 1) {
+        this.day = this.day - 1;
         this.valueDay = `${this.year}-${this.month}-${this.day}`;
       }
     },
