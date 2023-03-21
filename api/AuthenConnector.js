@@ -7,9 +7,7 @@ export const signInAPI = async (param) => {
       password: param.pass,
     });
     return response.data;
-  } catch (error) {
-    console.log(error, 44444);
-  }
+  } catch (error) {}
 };
 export const signUpAPI = async (username, email, password) => {
   const response = await request.post(`${HOST}/v1/auth/sign-up`, {
@@ -26,7 +24,7 @@ export const getDetail = async (param) => {
   return response.data;
 };
 export const updateDetail = async (param) => {
-  const response = await request.post(`${HOST}/report/update?groupId=3`, param);
+  const response = await request.post(`${HOST}/report/update?groupId=2`, param);
   return response.data;
 };
 export const saveDetail = async (param) => {

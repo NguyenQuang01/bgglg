@@ -24,7 +24,6 @@ export default {
     state.dataInformationReport.transferRequests[1].transferNum = data;
   },
   SET_STATE_MEAL(state, data) {
-    console.log(data);
     state.dataInformationReport.riceRequests.riceEmp = data.staff;
     state.dataInformationReport.riceRequests.riceCus = data.guest;
     state.dataInformationReport.riceRequests.riceVip = data.guestVip;

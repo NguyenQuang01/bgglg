@@ -69,7 +69,6 @@ export default {
     async onSubmit(event) {
       event.preventDefault();
       const res = await signInAPI(this.form);
-      console.log(res);
       if (res && res.status === 200) {
         this.SET_STATE_ISUSER(true);
         this.SET_STATE_USERNAME(this.form.user);
@@ -78,7 +77,7 @@ export default {
         localStorage.setItem("groupId", res.data.groupId);
         localStorage.setItem("JWT", res.data.token);
         // localStorage.setItem("userLogin", res.data.userLogin);
-        res.data.isEdit === false
+        res.data.isEdit === true
           ? this.$router.push("/sussInformation")
           : this.$router.push("/laborreport");
       } else {
