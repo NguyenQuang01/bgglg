@@ -8,47 +8,147 @@
       </tr>
       <tr>
         <td class="bg-sky-400 text-slate-50">ĐỊNH BIÊN</td>
-        <td>{{ demarcation }}</td>
+        <td>
+          <input type="text" v-model="demarcation" class="w-20" v-if="isEdit" />
+          <div v-else>{{ demarcation }}</div>
+        </td>
         <td></td>
       </tr>
       <tr>
         <td class="bg-sky-400 text-slate-50">SỐ THỜI VỤ</td>
-        <td>{{ numberSeasonal }}</td>
+        <td>
+          <input
+            type="text"
+            v-model="numberSeasonal"
+            class="w-20"
+            v-if="isEdit"
+          />
+          <div v-else>{{ numberSeasonal }}</div>
+        </td>
+
         <td></td>
       </tr>
       <tr>
         <td class="bg-sky-400 text-slate-50">SỐ H.SINH</td>
-        <td>{{ numberStudent }}</td>
+
+        <td>
+          <input
+            type="text"
+            v-model="numberStudent"
+            class="w-20"
+            v-if="isEdit"
+          />
+          <div v-else>{{ numberStudent }}</div>
+        </td>
         <td></td>
       </tr>
       <tr>
         <td class="bg-sky-400 text-slate-50">ĐIỀU CHUYỂN</td>
-        <td>{{ numberTransfer }}</td>
+
+        <td>
+          <input
+            type="text"
+            v-model="numberTransfer"
+            class="w-20"
+            v-if="isEdit"
+          />
+          <div v-else>{{ numberTransfer }}</div>
+        </td>
         <td></td>
       </tr>
       <tr>
         <td class="bg-sky-400 text-slate-50">HỖ TRỢ</td>
-        <td>{{ numberSupport }}</td>
+
+        <td>
+          <input
+            type="text"
+            v-model="numberSupport"
+            class="w-20"
+            v-if="isEdit"
+          />
+          <div v-else>{{ numberSupport }}</div>
+        </td>
         <td></td>
       </tr>
       <tr>
         <td class="bg-sky-400 text-slate-50">BÁO CƠM</td>
-        <td>{{ numberEatRice }}</td>
-        <td></td>
+        <td>
+          <input type="text" v-model="totalRice" class="w-20" v-if="isEdit" />
+          <div v-else>{{ totalRice }}</div>
+        </td>
+
+        <td>
+          <div class="whitespace-nowrap">
+            Nhân viên:
+            <input
+              type="text"
+              v-model="numberEatRice.riceEmp"
+              class="w-20"
+              v-if="isEdit"
+            />
+            <div v-else>{{ numberEatRice.riceEmp }}</div>
+          </div>
+
+          <div class="whitespace-nowrap">
+            Khách:
+            <input
+              type="text"
+              v-model="numberEatRice.riceCus"
+              class="w-20"
+              v-if="isEdit"
+            />
+            <div v-else>{{ numberEatRice.riceCus }}</div>
+          </div>
+
+          <div class="whitespace-nowrap">
+            Khách Vip:
+            <input
+              type="text"
+              v-model="numberEatRice.riceVip"
+              class="w-20"
+              v-if="isEdit"
+            />
+            <div v-else>{{ numberEatRice.riceVip }}</div>
+          </div>
+        </td>
       </tr>
 
       <tr>
         <td class="bg-sky-400 text-slate-50">SỐ NGHỈ</td>
-        <td>{{ numberReasons }}</td>
+
+        <td>
+          <input
+            type="text"
+            v-model="numberReasons"
+            class="w-20"
+            v-if="isEdit"
+          />
+          <div v-else>{{ numberReasons }}</div>
+        </td>
         <td>
           <div v-for="(item, index) in arrReasons" :key="index">
-            {{ item.ten }}-{{ item.lydo }}
+            <input
+              type="text"
+              :v-model="item.restName - item.reasonName"
+              class="w-20"
+              v-if="isEdit"
+            />
+            <div>{{ item.restName }}-{{ item.reasonName }}</div>
           </div>
         </td>
       </tr>
       <tr>
         <td class="bg-orange-400 text-slate-50">SỐ LĐ TÍNH NĂNG SUẤT</td>
-        <td>{{ numberProductivity }}</td>
+
+        <td>
+          <input
+            type="text"
+            v-model="numberProductivity"
+            class="w-20"
+            v-if="isEdit"
+          />
+          <div v-else>{{ numberProductivity }}</div>
+        </td>
         <td></td>
       </tr>
     </table>
@@ -56,49 +156,115 @@
       variant="primary"
       class="text-blue-700 float-right mb-10"
       @click="submit"
-      >quay lại</b-button
+    >
+      gửi</b-button
+    >
+    <b-button
+      variant="primary"
+      class="text-blue-700 float-right mb-10"
+      @click="edit"
+      >sửa</b-button
     >
   </div>
 </template>
 <script>
 import { mapGetters } from "vuex";
-import { getDetail } from "@/api/AuthenConnector.js";
+import { getDetail, updateDetail } from "@/api/AuthenConnector.js";
 export default {
   data() {
     return {
+      isEdit: false,
       numberStudent: 0,
       numberReasons: 0,
       demarcation: 0,
       numberSeasonal: 0,
       numberTransfer: 0,
       numberSupport: 0,
+      totalRice: 0,
       numberEatRice: 0,
       numberProductivity: 0,
       arrReasons: [],
+      restRequests: [],
+      riceId: 0,
+      day: new Date().getDate(),
+      month: new Date().getMonth() + 1,
+      year: new Date().getFullYear(),
     };
   },
 
   fetch() {
     this.getDetails();
+    console.log(this.arrReasons, 444);
   },
 
   methods: {
+    edit() {
+      this.isEdit = !this.isEdit;
+    },
     submit() {
-      alert("thanh cong tuyet voi");
+      const test = {
+        id: 4,
+        demarcation: Number(this.demarcation),
+        laborProductivity: Number(this.numberProductivity),
+        restNum: Number(this.numberReasons),
+        partTimeNum: Number(this.numberSeasonal),
+        studentNum: Number(this.numberStudent),
+        riceRequests: {
+          riceId: 8,
+          riceEmp: Number(this.numberEatRice.riceEmp),
+          riceCus: Number(this.numberEatRice.riceCus),
+          riceVip: Number(this.numberEatRice.riceVip),
+        },
+        restRequests: [
+          {
+            restId: 19,
+            reasonId: 2,
+            restName: "quang",
+          },
+          {
+            restId: 20,
+            reasonId: 3,
+            restName: "dai",
+          },
+          {
+            restId: 21,
+            reasonId: 2,
+            restName: "tung",
+          },
+        ],
+        transferRequests: [
+          {
+            transferId: 21,
+            transferNum: Number(this.numberTransfer),
+            type: 1,
+          },
+          {
+            transferId: 22,
+            transferNum: Number(this.numberSupport),
+            type: 2,
+          },
+        ],
+      };
+      const res = updateDetail(test);
+      console.log(res);
     },
     async getDetails() {
-      const res = await getDetail();
+      const day = `${this.year}-${this.month}-${this.day}`;
+      const groupId = localStorage.getItem("groupId");
+      const res = await getDetail({ day, groupId });
       console.log(res);
       if (res) {
-        this.numberStudent = res.hocSinh;
-        this.numberReasons = res.restList.length;
-        this.demarcation = res.dinhBien;
-        this.numberSeasonal = res.thoiVu;
-        this.numberTransfer = res.transferList[0].numTranfer;
-        this.numberSupport = res.transferList[1].numTranfer;
-        this.numberEatRice = res.soCom;
-        this.numberProductivity = res.laoDongNangSuat;
-        this.arrReasons = res.restList;
+        this.numberStudent = res.studentNum;
+        this.numberReasons = res.restNum;
+        this.demarcation = res.demarcation;
+        this.numberSeasonal = res.partTimeNum;
+        this.numberTransfer = res.transferNum;
+        this.numberSupport = res.supportNum;
+        this.numberEatRice = res.rice;
+        this.totalRice = res.totalRice;
+        this.numberProductivity = res.laborProductivity;
+        this.arrReasons = res.rests;
+        this.riceId = res.rice.riceId;
       }
     },
   },

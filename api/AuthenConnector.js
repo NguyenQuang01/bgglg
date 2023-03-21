@@ -19,13 +19,17 @@ export const signUpAPI = async (username, email, password) => {
   });
   return response.data;
 };
-export const getDetail = async () => {
+export const getDetail = async (param) => {
   const response = await request.get(
-    `${HOST}/report/detail?userGroupId=1&orderDate=2023-03-13`
+    `${HOST}/report?reportDate=${param.day}&groupId=${param.groupId}`
   );
   return response.data;
 };
+export const updateDetail = async (param) => {
+  const response = await request.post(`${HOST}/report/update?groupId=3`, param);
+  return response.data;
+};
 export const saveDetail = async (param) => {
-  const response = await request.post(`${HOST}/report/save`, param);
+  const response = await request.post(`${HOST}/report/save?groupId=3`, param);
   return response.data;
 };

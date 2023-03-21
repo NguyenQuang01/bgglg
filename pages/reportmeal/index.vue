@@ -88,17 +88,17 @@ export default {
     getDemarcation() {
       const demarcation =
         5 +
-        Number(this.getDataInformationReport.student) +
-        Number(this.getDataInformationReport.seasonal);
+        Number(this.getDataInformationReport.studentNum) +
+        Number(this.getDataInformationReport.partTimeNum);
       this.SET_STATE_DEMARCATION(demarcation);
     },
     getProductivity() {
       const productivity =
         Number(this.getDataInformationReport.demarcation) -
-        Number(this.getDataInformationReport.labor) -
-        Number(this.getDataInformationReport.student) -
-        Number(this.getDataInformationReport.transfer) -
-        Number(this.getDataInformationReport.support);
+        Number(this.getDataInformationReport.restNum) -
+        Number(this.getDataInformationReport.studentNum) -
+        Number(this.getDataInformationReport.transferRequests[0].transferNum) -
+        Number(this.getDataInformationReport.transferRequests[1].transferNum);
       this.SET_STATE_PRODUCTIVITY(productivity);
     },
   },

@@ -38,6 +38,13 @@
       <tr>
         <td class="bg-sky-400 text-slate-50">BÁO CƠM</td>
         <td>
+          {{
+            Number(numberEatRice.staffQuantity) +
+            Number(numberEatRice.staffQuantity) +
+            Number(numberEatRice.guestVipQuantity)
+          }}
+        </td>
+        <td>
           <div class="whitespace-nowrap">
             Nhân viên: {{ numberEatRice.staffQuantity }}
           </div>
@@ -50,7 +57,6 @@
             Khách Vip: {{ numberEatRice.guestVipQuantity }}
           </div>
         </td>
-        <td>{{ numberEatRice.information }}</td>
       </tr>
 
       <tr>
@@ -96,8 +102,8 @@ export default {
     }),
     numberReasons() {
       return {
-        quantity: this.getDataInformationReport?.labor,
-        arrReasons: this.getDataInformationReport?.arrLabor,
+        quantity: this.getDataInformationReport?.restNum,
+        arrReasons: this.getDataInformationReport?.restRequests,
       };
     },
     demarcation() {
@@ -109,39 +115,41 @@ export default {
     numberSeasonal() {
       return {
         information: "",
-        quantity: this.getDataInformationReport?.seasonal,
+        quantity: this.getDataInformationReport?.partTimeNum,
       };
     },
     numberStudent() {
       return {
         information: "",
-        quantity: this.getDataInformationReport?.student,
+        quantity: this.getDataInformationReport?.studentNum,
       };
     },
     numberTransfer() {
       return {
         information: true,
-        quantity: this.getDataInformationReport?.transfer,
+        quantity:
+          this.getDataInformationReport?.transferRequests[0].transferNum,
       };
     },
     numberSupport() {
       return {
         information: false,
-        quantity: this.getDataInformationReport?.support,
+        quantity:
+          this.getDataInformationReport?.transferRequests[1].transferNum,
       };
     },
     numberEatRice() {
       return {
         information: "",
-        staffQuantity: this.getDataInformationReport?.meal.staff,
-        guestQuantity: this.getDataInformationReport?.meal.guest,
-        guestVipQuantity: this.getDataInformationReport?.meal.guestVip,
+        staffQuantity: this.getDataInformationReport?.riceRequests.riceEmp,
+        guestQuantity: this.getDataInformationReport?.riceRequests.riceCus,
+        guestVipQuantity: this.getDataInformationReport?.riceRequests.riceVip,
       };
     },
     numberProductivity() {
       return {
         information: "",
-        quantity: this.getDataInformationReport?.productivity,
+        quantity: this.getDataInformationReport?.laborProductivity,
       };
     },
   },
@@ -150,7 +158,7 @@ export default {
       event.preventDefault();
       this.btn = "quay lại";
       alert("xác nhận thành công");
-      // console.log(this.getDataInformationReport);
+      console.log(this.getDataInformationReport);
       // const test = {
       //   userGroupId: "1",
       //   totalProductivity: "56",
@@ -190,17 +198,50 @@ export default {
       //     },
       //   ],
       // };
-      //   totalProductivity: this.getDataInformationReport.numberProductivity,
-      //   demarcation: this.getDataInformationReport.numberProductivity,
-      //   createBy: "ssdf",
-      //   totalProductivity: this.getDataInformationReport.numberProductivity,
-      //   totalProductivity: this.getDataInformationReport.numberProductivity,
-      //   totalProductivity: this.getDataInformationReport.numberProductivity,
-      // };
-      // const res = await saveDetail(test);
 
-      // console.log(res);
-      this.$router.push("/sussInformation");
+      // };
+      // const test = {
+      //   demarcation: this.demarcation.quantity,
+      //   laborProductivity: this.numberProductivity.quantity,
+      //   restNum: this.numberReasons.quantity,
+      //   partTimeNum: this.numberSeasonal.quantity,
+      //   studentNum: this.numberStudent.quantity,
+      //   riceRequests: {
+      //     riceEmp: this.numberEatRice.staffQuantity,
+      //     riceCus: this.numberEatRice.guestQuantity,
+      //     riceVip: this.numberEatRice.guestVipQuantity,
+      //   },
+      //   restRequests: [
+      //     {
+      //       reasonId: "2",
+      //       restName: "quang",
+      //     },
+      //     {
+      //       reasonId: 3,
+      //       restName: "dai",
+      //     },
+      //     {
+      //       reasonId: 1,
+      //       restName: "tung",
+      //     },
+      //   ],
+      //   transferRequests: [
+      //     {
+      //       transferNum: 6,
+      //       type: 1,
+      //     },
+      //     {
+      //       transferNum: 9,
+      //       type: 2,
+      //     },
+      //   ],
+      // };
+      const res = await saveDetail(this.getDataInformationReport);
+
+      console.log(res);
+      if (res.status === 2000) {
+        this.$router.push("/sussInformation");
+      }
     },
   },
 };
