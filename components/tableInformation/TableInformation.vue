@@ -68,7 +68,7 @@
             :key="index"
             class=""
           >
-            {{ item }}
+            {{ item.restName }}- {{ item.reasonId }}
           </div>
         </td>
       </tr>
@@ -84,6 +84,12 @@
       @click="submit"
       >{{ btn }}</b-button
     >
+    <a-modal v-model="visible" title="thông báo" @ok="handleOk">
+      <p>
+        Xin chào (tên tài khoản) - bạn đã báo cáo lao động cho ngày hôm nay, xin
+        cảm ơn
+      </p>
+    </a-modal>
   </div>
 </template>
 <script>
@@ -94,6 +100,7 @@ export default {
   data() {
     return {
       btn: "xác nhận",
+      visible: false,
     };
   },
   computed: {
@@ -154,92 +161,21 @@ export default {
     },
   },
   methods: {
+    showModal() {
+      this.visible = true;
+    },
+    handleOk() {
+      this.visible = false;
+    },
     async submit(event) {
       event.preventDefault();
       this.btn = "quay lại";
-      alert("xác nhận thành công");
-      // console.log(this.getDataInformationReport);
-      // const test = {
-      //   userGroupId: "1",
-      //   totalProductivity: "56",
-      //   demarcation: "50",
-      //   createBy: "ssdf",
-      //   orderDate: "2023-03-14",
-      //   reportDtlRequest: {
-      //     reportId: "3",
-      //     empNum: "4",
-      //     riceNumber: "5",
-      //     numEmp: "2",
-      //     groupId: "3",
-      //     partTimeNum: "4",
-      //     restNumber: "2",
-      //     studentNum: "3",
-      //   },
-      //   restRequests: [
-      //     {
-      //       name: "ducanh",
-      //       reasonId: "1",
-      //     },
-      //     {
-      //       name: "dai oc cho",
-      //       reasonId: "1",
-      //     },
-      //   ],
-      //   transferRequests: [
-      //     {
-      //       transferNum: "6",
-      //       userGroupId: "1",
-      //       transferType: "1",
-      //     },
-      //     {
-      //       transferNum: "8",
-      //       userGroupId: "1",
-      //       transferType: "0",
-      //     },
-      //   ],
-      // };
 
-      // };
-      // const test = {
-      //   demarcation: this.demarcation.quantity,
-      //   laborProductivity: this.numberProductivity.quantity,
-      //   restNum: this.numberReasons.quantity,
-      //   partTimeNum: this.numberSeasonal.quantity,
-      //   studentNum: this.numberStudent.quantity,
-      //   riceRequests: {
-      //     riceEmp: this.numberEatRice.staffQuantity,
-      //     riceCus: this.numberEatRice.guestQuantity,
-      //     riceVip: this.numberEatRice.guestVipQuantity,
-      //   },
-      //   restRequests: [
-      //     {
-      //       reasonId: "2",
-      //       restName: "quang",
-      //     },
-      //     {
-      //       reasonId: 3,
-      //       restName: "dai",
-      //     },
-      //     {
-      //       reasonId: 1,
-      //       restName: "tung",
-      //     },
-      //   ],
-      //   transferRequests: [
-      //     {
-      //       transferNum: 6,
-      //       type: 1,
-      //     },
-      //     {
-      //       transferNum: 9,
-      //       type: 2,
-      //     },
-      //   ],
-      // };
       const res = await saveDetail(this.getDataInformationReport);
-
-      if (res.status === 2000) {
+      if (res.status === 200) {
         this.$router.push("/sussInformation");
+      } else {
+        this.showModal();
       }
     },
   },

@@ -28,6 +28,11 @@ export const updateDetail = async (param) => {
   return response.data;
 };
 export const saveDetail = async (param) => {
-  const response = await request.post(`${HOST}/report/save?groupId=3`, param);
-  return response.data;
+  try {
+    const response = await request.post(`${HOST}/report/save?groupId=3`, param);
+
+    return response.data;
+  } catch (error) {
+    return { status: "500", name: "user dose not exits" };
+  }
 };
