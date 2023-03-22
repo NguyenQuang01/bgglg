@@ -33,6 +33,11 @@ export const saveDetail = async (param) => {
 
     return response.data;
   } catch (error) {
-    return { status: "500", name: "user dose not exits" };
+    return { status: "500", name: "err" };
   }
+};
+
+export const addAccount = async (param) => {
+  const response = await request.post(`${HOST}/api/save`, param);
+  return response.data;
 };

@@ -62,6 +62,10 @@ export default {
     async onSubmit(event) {
       event.preventDefault();
       const res = await signInAPI(this.form);
+      // if (res && res.status === 502) {
+      //   message.error("sai tài khoản, mật khẩu");
+      // }
+
       if (res && res.status === 200) {
         this.SET_STATE_ISUSER(true);
         this.SET_STATE_USERNAME(this.form.user);
@@ -69,11 +73,32 @@ export default {
         localStorage.setItem("userLogin", this.form.user);
         localStorage.setItem("groupId", res.data.groupId);
         localStorage.setItem("JWT", res.data.token);
-        res.data.isEdit === false
-          ? this.$router.push("/sussInformation")
-          : this.$router.push("/laborreport");
-      } else {
-        message.error("sai tài khoản, mật khẩu");
+        switch (true) {
+          case res.data.isEdit:
+            this.$router.push("/sussInformation");
+            break;
+          case res.data.isReport:
+            this.$router.push("/laborreport");
+            break;
+          case res.data.isAdmin:
+            this.$router.push("/createMoreAccounts");
+
+            break;
+          case res.data.isView:
+            this.$router.push("/leaderMenu");
+            break;
+          default:
+        }
+
+        //   res.data.isEdit === true ? : "";
+        //   res.data.isAdmin === true
+        //     ?
+        //     : "";
+        //   res.data.isReport === true ?  : "";
+        //   res.data.isView === true ? : "";
+        // } else {
+        //   message.error("sai tài khoản, mật khẩu");
+        // }
       }
     },
     onReset(event) {
