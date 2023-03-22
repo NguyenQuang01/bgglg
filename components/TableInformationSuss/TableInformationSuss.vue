@@ -194,7 +194,6 @@ export default {
 
   fetch() {
     this.getDetails();
-    console.log(this.arrReasons, 444);
   },
 
   methods: {
@@ -202,6 +201,7 @@ export default {
       this.isEdit = !this.isEdit;
     },
     submit() {
+      console.log(this.arrReasons, 444544);
       const test = {
         id: 4,
         demarcation: Number(this.demarcation),
@@ -215,23 +215,19 @@ export default {
           riceCus: Number(this.numberEatRice.riceCus),
           riceVip: Number(this.numberEatRice.riceVip),
         },
-        restRequests: [
-          {
-            restId: 19,
-            reasonId: 2,
-            restName: "quang",
-          },
-          {
-            restId: 20,
-            reasonId: 3,
-            restName: "dai",
-          },
-          {
-            restId: 21,
-            reasonId: 2,
-            restName: "tung",
-          },
-        ],
+        restRequests: this.arrReasons,
+        // restRequests: [
+        //   {
+        //     restId: 19,
+        //     reasonId: 2,
+        //     restName: "quang",
+        //   },
+        //   {
+        //     restId: 20,
+        //     reasonId: 3,
+        //     restName: "dai",
+        //   },
+        // ],
         transferRequests: [
           {
             transferId: 21,
@@ -246,13 +242,11 @@ export default {
         ],
       };
       const res = updateDetail(test);
-      console.log(res);
     },
     async getDetails() {
       const day = `${this.year}-${this.month}-${this.day}`;
       const groupId = localStorage.getItem("groupId");
       const res = await getDetail({ day, groupId });
-      console.log(res);
       if (res) {
         this.numberStudent = res.studentNum;
         this.numberReasons = res.restNum;

@@ -48,7 +48,6 @@ export default {
       if (this.day31.includes(this.month) && this.day < 31) {
         this.day = this.day + 1;
         this.valueDay = `${this.year}/${this.month}/${this.day}`;
-        console.log(this.day);
       } else if (this.day30.includes(this.month) && this.day < 30) {
         this.day = this.day + 1;
         this.valueDay = `${this.year}/${this.month}/${this.day}`;

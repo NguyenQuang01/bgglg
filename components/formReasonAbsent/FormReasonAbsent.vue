@@ -88,7 +88,6 @@ export default {
     ...mapMutations({ SET_STATE_ARRLABOR: "SET_STATE_ARRLABOR" }),
     onSubmit(event) {
       event.preventDefault();
-      console.log(this.arrForms);
       const arrLabor = this.arrForms.map(
         (item) => `${item.user}-${item.reason}`
       );

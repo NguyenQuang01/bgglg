@@ -158,7 +158,7 @@ export default {
       event.preventDefault();
       this.btn = "quay lại";
       alert("xác nhận thành công");
-      console.log(this.getDataInformationReport);
+      // console.log(this.getDataInformationReport);
       // const test = {
       //   userGroupId: "1",
       //   totalProductivity: "56",
@@ -238,7 +238,6 @@ export default {
       // };
       const res = await saveDetail(this.getDataInformationReport);
 
-      console.log(res);
       if (res.status === 2000) {
         this.$router.push("/sussInformation");
       }

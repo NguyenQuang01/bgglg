@@ -122,7 +122,6 @@ export default {
   },
   methods: {
     test() {
-      console.log(4544);
       this.isVp = !this.isVp;
     },
   },
