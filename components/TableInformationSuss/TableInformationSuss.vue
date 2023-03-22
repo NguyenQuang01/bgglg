@@ -119,21 +119,20 @@
         <td>
           <input
             type="text"
-            v-model="numberReasons"
+            v-model="arrReasons.length"
             class="w-20"
             v-if="isEdit"
           />
-          <div v-else>{{ numberReasons }}</div>
+          <div v-else>{{ arrReasons.length }}</div>
         </td>
         <td>
           <div v-for="(item, index) in arrReasons" :key="index">
-            <input
-              type="text"
-              :v-model="item.restName - item.reasonName"
-              class="w-20"
-              v-if="isEdit"
-            />
-            <div>{{ item.restName }}-{{ item.reasonName }}</div>
+            <div v-if="isEdit">
+              <input type="text" v-model="item.restName" class="w-10" />-
+              <input type="text" v-model="item.reasonName" class="w-10" />
+            </div>
+
+            <div v-else>{{ item.restName }}-{{ item.reasonName }}</div>
           </div>
         </td>
       </tr>
@@ -186,6 +185,9 @@ export default {
       arrReasons: [],
       restRequests: [],
       riceId: 0,
+      id: 0,
+      transferIdTran: 0,
+      transferIdSupport: 0,
       day: new Date().getDate(),
       month: new Date().getMonth() + 1,
       year: new Date().getFullYear(),
@@ -201,47 +203,34 @@ export default {
       this.isEdit = !this.isEdit;
     },
     submit() {
-      console.log(this.arrReasons, 444544);
-      const test = {
-        id: 4,
+      const payload = {
+        id: this.id,
         demarcation: Number(this.demarcation),
         laborProductivity: Number(this.numberProductivity),
         restNum: Number(this.numberReasons),
         partTimeNum: Number(this.numberSeasonal),
         studentNum: Number(this.numberStudent),
         riceRequests: {
-          riceId: 8,
+          riceId: Number(this.riceId),
           riceEmp: Number(this.numberEatRice.riceEmp),
           riceCus: Number(this.numberEatRice.riceCus),
           riceVip: Number(this.numberEatRice.riceVip),
         },
         restRequests: this.arrReasons,
-        // restRequests: [
-        //   {
-        //     restId: 19,
-        //     reasonId: 2,
-        //     restName: "quang",
-        //   },
-        //   {
-        //     restId: 20,
-        //     reasonId: 3,
-        //     restName: "dai",
-        //   },
-        // ],
         transferRequests: [
           {
-            transferId: 21,
+            transferId: Number(this.transferIdTran),
             transferNum: Number(this.numberTransfer),
             type: 1,
           },
           {
-            transferId: 22,
+            transferId: Number(this.transferIdSupport),
             transferNum: Number(this.numberSupport),
             type: 2,
           },
         ],
       };
-      const res = updateDetail(test);
+      const res = updateDetail(payload);
     },
     async getDetails() {
       const day = `${this.year}-${this.month}-${this.day}`;
@@ -259,6 +248,9 @@ export default {
         this.numberProductivity = res.laborProductivity;
         this.arrReasons = res.rests;
         this.riceId = res.rice.riceId;
+        this.transferIdTran = res.transfers[0].transferId;
+        this.transferIdSupport = res.transfers[1].transferId;
+        this.id = res.id;
       }
     },
   },
