@@ -134,6 +134,7 @@ export default {
       this.visible = true;
     },
     handleOk() {
+      alert("ok");
       this.visible = false;
     },
     onSubmit(event) {
