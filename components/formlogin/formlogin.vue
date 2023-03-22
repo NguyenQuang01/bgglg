@@ -35,9 +35,6 @@
         >Reset</b-button
       >
     </b-form>
-    <!-- <b-card class="mt-3" header="Form Data Result">
-      <pre class="m-0">{{ form }}</pre>
-    </b-card> -->
   </div>
 </template>
 
@@ -56,11 +53,7 @@ export default {
       show: false,
     };
   },
-  // created: {
-  //   ...mapGetters({
 
-  //   })
-  // },
   methods: {
     ...mapMutations({
       SET_STATE_ISUSER: "SET_STATE_ISUSER",
@@ -76,25 +69,15 @@ export default {
         localStorage.setItem("userLogin", this.form.user);
         localStorage.setItem("groupId", res.data.groupId);
         localStorage.setItem("JWT", res.data.token);
-        // localStorage.setItem("userLogin", res.data.userLogin);
-        res.data.isEdit === true
+        res.data.isEdit === false
           ? this.$router.push("/sussInformation")
           : this.$router.push("/laborreport");
       } else {
         message.error("sai tài khoản, mật khẩu");
       }
-      // this.SET_STATE_ISUSER(true);
-      // this.SET_STATE_USERNAME(this.form.user);
-
-      // this.show
-      //   ? this.$router.push("/laborreport")
-      //   : this.$router.push("/leaderMenu");
-
-      // this.$router.push("/");
     },
     onReset(event) {
       event.preventDefault();
-      // Reset our form values
       this.form.pass = "";
       this.form.user = "";
     },

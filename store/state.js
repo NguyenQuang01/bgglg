@@ -5,9 +5,10 @@ export default () => ({
     demarcation: "",
     partTimeNum: "",
     studentNum: "",
-    // transfer: "",
-    // support: "",
-    transferRequests: [{ transferNum: "" }, { transferNum: "" }],
+    transferRequests: [
+      { transferNum: "", type: 1 },
+      { transferNum: "", type: 2 },
+    ],
     riceRequests: {
       riceEmp: "",
       riceCus: "",
@@ -15,7 +16,12 @@ export default () => ({
     },
     restNum: "",
     laborProductivity: "",
-    restRequests: [],
+    restRequests: [
+      // {
+      //   reasonId: "",
+      //   restName: "",
+      // },
+    ],
     // restNum:,
   },
 });

@@ -32,6 +32,6 @@ export default {
     state.dataInformationReport.laborProductivity = data;
   },
   SET_STATE_ARRLABOR(state, data) {
-    state.dataInformationReport.arrLabor = data;
+    state.dataInformationReport.restRequests = data;
   },
 };
