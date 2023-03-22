@@ -86,8 +86,8 @@
     >
     <a-modal v-model="visible" title="thông báo" @ok="handleOk">
       <p>
-        Xin chào (tên tài khoản) - bạn đã báo cáo lao động cho ngày hôm nay, xin
-        cảm ơn
+        Xin chào <span class="font-extrabold">{{ user }}</span> - bạn đã báo cáo
+        lao động cho ngày hôm nay, xin cảm ơn
       </p>
     </a-modal>
   </div>
@@ -101,7 +101,11 @@ export default {
     return {
       btn: "xác nhận",
       visible: false,
+      user: "",
     };
+  },
+  fetch() {
+    this.getValue();
   },
   computed: {
     ...mapGetters({
@@ -161,6 +165,9 @@ export default {
     },
   },
   methods: {
+    getValue() {
+      this.user = localStorage.getItem("userLogin");
+    },
     showModal() {
       this.visible = true;
     },

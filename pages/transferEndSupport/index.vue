@@ -62,9 +62,37 @@
             >Xác nhận</b-button
           >
           <button-skip :skip="skip" />
+          <b-button
+            variant="primary"
+            class="text-blue-700 mb-24 mx-2"
+            @click="showModal"
+            >Người chuyển đến</b-button
+          >
         </div>
       </b-form>
     </div>
+    <a-modal
+      v-model:visible="visible"
+      title="Thông báo"
+      @ok="handleOk"
+      cancelText="Hủy"
+      okText="Xác nhận"
+    >
+      <table>
+        <tr>
+          <th>Bạn được hỗ trợ:</th>
+          <th>Từ đơn vị:</th>
+        </tr>
+        <tr>
+          <td>Peter</td>
+          <td>Griffin</td>
+        </tr>
+        <tr>
+          <td>Lois</td>
+          <td>Griffin</td>
+        </tr>
+      </table>
+    </a-modal>
   </div>
 </template>
 <script>
@@ -75,6 +103,7 @@ export default {
   components: { ButtonSkip },
   data() {
     return {
+      visible: false,
       skip: "/reportmeal",
       form: {
         transfer: { number: "", group: "" },
@@ -101,6 +130,12 @@ export default {
       SET_STATE_TRANSFER: "SET_STATE_TRANSFER",
       SET_STATE_SUPPORT: "SET_STATE_SUPPORT",
     }),
+    showModal() {
+      this.visible = true;
+    },
+    handleOk() {
+      this.visible = false;
+    },
     onSubmit(event) {
       event.preventDefault();
       this.SET_STATE_TRANSFER(this.form.transfer.number);
