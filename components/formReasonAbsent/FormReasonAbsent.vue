@@ -103,7 +103,9 @@ export default {
     },
     async getReason() {
       const res = await reason();
-      this.options = res;
+      if (res) {
+        this.options = res.map((item) => ({ value: item.id, text: item.name }));
+      }
     },
 
     addQuantity() {
