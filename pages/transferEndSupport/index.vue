@@ -62,16 +62,16 @@
             >Xác nhận</b-button
           >
           <button-skip :skip="skip" />
-          <b-button
+          <!-- <b-button
             variant="primary"
             class="text-blue-700 mb-24 mx-2"
             @click="showModal"
             >Người chuyển đến</b-button
-          >
+          > -->
         </div>
       </b-form>
     </div>
-    <a-modal
+    <!-- <a-modal
       v-model:visible="visible"
       title="Thông báo"
       @ok="handleOk"
@@ -88,21 +88,19 @@
           <td>{{ item.groupId }}</td>
         </tr>
       </table>
-    </a-modal>
+    </a-modal> -->
   </div>
 </template>
 <script>
 import { mapMutations } from "vuex";
 import ButtonSkip from "@/components/buttonSkip";
-import { getTransfer, accuracy } from "@/api/AuthenConnector.js";
 
 export default {
   components: { ButtonSkip },
   data() {
     return {
-      transfer: [],
       visible: false,
-      skip: "/reportmeal",
+      skip: "/move-inPerson",
       form: {
         transfer: { number: "", group: "" },
         support: { number: "", group: "" },
@@ -123,34 +121,33 @@ export default {
       ],
     };
   },
-  fetch() {
-    this.getTransferState();
-  },
+
   methods: {
     ...mapMutations({
       SET_STATE_TRANSFER: "SET_STATE_TRANSFER",
       SET_STATE_SUPPORT: "SET_STATE_SUPPORT",
     }),
-    async getTransferState() {
-      const res = await getTransfer();
-      if (res) {
-        this.transfer = res;
-      }
-    },
+
     // accuracy() {},
-    showModal() {
-      this.visible = true;
-    },
-    async handleOk() {
-      const res = await accuracy();
-      console.log(res);
-      this.visible = false;
-    },
+    // showModal() {
+    //   this.visible = true;
+    // },
+    // async handleOk() {
+    //   // const res = await accuracy();
+    //   // console.log(res);
+    //   this.visible = false;
+    // },
     onSubmit(event) {
       event.preventDefault();
-      this.SET_STATE_TRANSFER(this.form.transfer.number);
-      this.SET_STATE_SUPPORT(this.form.support.number);
-      this.$router.push("/reportmeal");
+      this.SET_STATE_TRANSFER({
+        transferNum: this.form.transfer.number,
+        groupId: this.form.transfer.group,
+      });
+      this.SET_STATE_SUPPORT({
+        transferNum: this.form.support.number,
+        groupId: this.form.support.group,
+      });
+      this.$router.push("/move-inPerson");
     },
   },
 };
