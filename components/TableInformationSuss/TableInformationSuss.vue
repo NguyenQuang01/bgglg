@@ -160,7 +160,7 @@
     >
     <b-button
       variant="primary"
-      class="text-blue-700 float-right mb-10"
+      class="text-blue-700 float-right mx-2 mb-10"
       @click="edit"
       >sửa</b-button
     >

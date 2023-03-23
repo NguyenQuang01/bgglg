@@ -24,12 +24,21 @@ export const getDetail = async (param) => {
   return response.data;
 };
 export const updateDetail = async (param) => {
-  const response = await request.post(`${HOST}/report/update?groupId=2`, param);
+  const groupId = localStorage.getItem("groupId");
+  const response = await request.post(
+    `${HOST}/report/update?groupId=${groupId}`,
+    param
+  );
   return response.data;
 };
 export const saveDetail = async (param) => {
+  const groupId = localStorage.getItem("groupId");
+
   try {
-    const response = await request.post(`${HOST}/report/save?groupId=3`, param);
+    const response = await request.post(
+      `${HOST}/report/save?groupId=${groupId}`,
+      param
+    );
 
     return response.data;
   } catch (error) {
@@ -39,5 +48,33 @@ export const saveDetail = async (param) => {
 
 export const addAccount = async (param) => {
   const response = await request.post(`${HOST}/api/save`, param);
+  return response.data;
+};
+export const getTransfer = async (param) => {
+  const response = await request.get(
+    `${HOST}/transfer/now-date?groupId=5`,
+    param
+  );
+  return response.data;
+};
+export const accuracy = async () => {
+  const groupId = localStorage.getItem("groupId");
+  const response = await request.get(
+    `${HOST}/transfer/accept?groupId=${groupId}`
+  );
+  return response.data;
+};
+export const reason = async () => {
+  const response = await request.get(`${HOST}/reason`);
+  return response.data;
+};
+export const groupRoleRoot = async () => {
+  const response = await request.get(`${HOST}/groupRoleRoot`);
+  return response.data;
+};
+export const groupRoleDetails = async (param) => {
+  const response = await request.get(
+    `${HOST}/groupRoleDetails?parentId=${param}`
+  );
   return response.data;
 };

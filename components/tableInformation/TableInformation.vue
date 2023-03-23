@@ -179,10 +179,8 @@ export default {
       this.btn = "quay lại";
 
       const res = await saveDetail(this.getDataInformationReport);
-      if (res.status === 200) {
+      if (res) {
         this.$router.push("/sussInformation");
-      } else {
-        this.showModal();
       }
     },
   },

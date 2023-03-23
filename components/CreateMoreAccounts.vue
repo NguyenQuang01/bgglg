@@ -58,7 +58,7 @@
         <b-form-select
           id="input-3"
           v-model="form.groupName"
-          :options="parts"
+          :options="parts2"
           placeholder="nhập "
           required
         ></b-form-select>
@@ -71,6 +71,7 @@
 </template>
 <script>
 import { addAccount } from "@/api/AuthenConnector.js";
+import { groupRoleRoot, groupRoleDetails } from "@/api/AuthenConnector.js";
 
 export default {
   data() {
@@ -87,20 +88,42 @@ export default {
       },
       list: [],
       part: "",
-      parts: [
-        { text: "", value: null },
-        { text: "Văn Phòng", value: 1 },
-        { text: "Đơn vị lẻ", value: 2 },
-        { text: "Tổ may", value: 3 },
-      ],
+      parts: [],
+      parts2: [],
       show: true,
     };
+  },
+  fetch() {
+    this.groupRoleRoot();
+  },
+  watch: {
+    "form.parentId": {
+      handler: function (value) {
+        console.log(value);
+        this.groupRoleDetails(value);
+      },
+      deep: true,
+    },
   },
   methods: {
     async onSubmit(event) {
       event.preventDefault();
       const res = await addAccount(this.form);
       console.log(res);
+    },
+    async groupRoleRoot() {
+      const res = await groupRoleRoot();
+      this.parts = res.map((item) => ({
+        text: item.groupName,
+        value: item.id,
+      }));
+    },
+    async groupRoleDetails(param) {
+      const res = await groupRoleDetails(param);
+      this.parts2 = res.map((item) => ({
+        text: item.groupName,
+        value: item.id,
+      }));
     },
   },
 };

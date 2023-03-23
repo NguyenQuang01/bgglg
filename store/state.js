@@ -2,20 +2,20 @@ export default () => ({
   isUser: false,
   UserName: "",
   dataInformationReport: {
-    demarcation: "",
-    partTimeNum: "",
-    studentNum: "",
+    demarcation: 0,
+    partTimeNum: 0,
+    studentNum: 0,
     transferRequests: [
-      { transferNum: "", type: 1 },
-      { transferNum: "", type: 2 },
+      { transferNum: 0, type: 1 },
+      { transferNum: 0, type: 2 },
     ],
     riceRequests: {
-      riceEmp: "",
-      riceCus: "",
-      riceVip: "",
+      riceEmp: 0,
+      riceCus: 0,
+      riceVip: 0,
     },
-    restNum: "",
-    laborProductivity: "",
+    restNum: 0,
+    laborProductivity: 0,
     restRequests: [
       // {
       //   reasonId: "",

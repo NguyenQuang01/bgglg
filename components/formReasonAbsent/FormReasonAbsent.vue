@@ -47,6 +47,8 @@
 <script>
 import { mapMutations } from "vuex";
 import ButtonSkip from "../buttonSkip";
+import { reason } from "@/api/AuthenConnector.js";
+
 export default {
   components: { ButtonSkip },
   data() {
@@ -62,27 +64,29 @@ export default {
       valueTextarea: "",
       selected: null,
       options: [
-        { value: null, text: "chọn lý do" },
-        { value: 1, text: "Thai sản" },
-        { value: 2, text: "Không lương" },
-        { value: 3, text: "ốm" },
-        { value: 4, text: "con ốm" },
-        { value: 5, text: "việc riêng" },
-        { value: 6, text: "học" },
-        { value: 7, text: "nghỉ phép" },
-        { value: 8, text: "việc khác" },
-        { value: 9, text: "tự do" },
-        { value: 10, text: "nghỉ t7+CN" },
-        {
-          value: 11,
-          text: "nghỉ chấm dứt hợp đồng lao động",
-        },
+        // { value: null, text: "chọn lý do" },
+        // { value: 1, text: "Thai sản" },
+        // { value: 2, text: "Không lương" },
+        // { value: 3, text: "ốm" },
+        // { value: 4, text: "con ốm" },
+        // { value: 5, text: "việc riêng" },
+        // { value: 6, text: "học" },
+        // { value: 7, text: "nghỉ phép" },
+        // { value: 8, text: "việc khác" },
+        // { value: 9, text: "tự do" },
+        // { value: 10, text: "nghỉ t7+CN" },
+        // {
+        //   value: 11,
+        //   text: "nghỉ chấm dứt hợp đồng lao động",
+        // },
       ],
+      options2: [],
       valueSubmit: {},
     };
   },
   fetch() {
     this.arrForms.push(this.form);
+    this.getReason();
   },
   methods: {
     ...mapMutations({ SET_STATE_ARRLABOR: "SET_STATE_ARRLABOR" }),
@@ -96,6 +100,10 @@ export default {
       this.SET_STATE_ARRLABOR(arrLabor);
       this.$router.push("/newPartTimeEndWorker");
       // this.$router.push("/");
+    },
+    async getReason() {
+      const res = await reason();
+      this.options = res;
     },
 
     addQuantity() {

@@ -83,13 +83,9 @@
           <th>Bạn được hỗ trợ:</th>
           <th>Từ đơn vị:</th>
         </tr>
-        <tr>
-          <td>Peter</td>
-          <td>Griffin</td>
-        </tr>
-        <tr>
-          <td>Lois</td>
-          <td>Griffin</td>
+        <tr v-for="item in transfer">
+          <td>{{ item.transferNum }}</td>
+          <td>{{ item.groupId }}</td>
         </tr>
       </table>
     </a-modal>
@@ -98,11 +94,13 @@
 <script>
 import { mapMutations } from "vuex";
 import ButtonSkip from "@/components/buttonSkip";
+import { getTransfer, accuracy } from "@/api/AuthenConnector.js";
 
 export default {
   components: { ButtonSkip },
   data() {
     return {
+      transfer: [],
       visible: false,
       skip: "/reportmeal",
       form: {
@@ -125,16 +123,27 @@ export default {
       ],
     };
   },
+  fetch() {
+    this.getTransferState();
+  },
   methods: {
     ...mapMutations({
       SET_STATE_TRANSFER: "SET_STATE_TRANSFER",
       SET_STATE_SUPPORT: "SET_STATE_SUPPORT",
     }),
+    async getTransferState() {
+      const res = await getTransfer();
+      if (res) {
+        this.transfer = res;
+      }
+    },
+    // accuracy() {},
     showModal() {
       this.visible = true;
     },
-    handleOk() {
-      alert("ok");
+    async handleOk() {
+      const res = await accuracy();
+      console.log(res);
       this.visible = false;
     },
     onSubmit(event) {
