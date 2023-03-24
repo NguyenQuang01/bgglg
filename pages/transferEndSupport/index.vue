@@ -22,7 +22,37 @@
             required
             type="number"
           ></b-form-input>
-          <b-form-group
+          <div class="flex justify-between">
+            <b-form-group
+              id="input-group-3"
+              label="Chọn bộ phận:"
+              label-for="input-3"
+              class="w-5/12"
+            >
+              <b-form-select
+                id="input-3"
+                v-model="form.parentId"
+                :options="parts"
+                placeholder="nhập "
+                required
+              ></b-form-select>
+            </b-form-group>
+            <b-form-group
+              id="input-group-3"
+              label="Chọn tổ:"
+              label-for="input-3"
+              class="w-5/12"
+            >
+              <b-form-select
+                id="input-3"
+                v-model="form.transfer.group"
+                :options="parts2"
+                placeholder="nhập "
+                required
+              ></b-form-select>
+            </b-form-group>
+          </div>
+          <!-- <b-form-group
             id="input-group-2"
             label="Chọn tổ điều chuyển đến:"
             label-for="input-2"
@@ -32,7 +62,7 @@
               placeholder="Nhập "
               required
             ></b-form-input>
-          </b-form-group>
+          </b-form-group> -->
         </b-form-group>
         <b-form-group
           id="input-group-2"
@@ -46,7 +76,37 @@
             type="number"
           ></b-form-input>
         </b-form-group>
-        <b-form-group
+        <div class="flex justify-between">
+          <b-form-group
+            id="input-group-3"
+            label="Chọn bộ phận:"
+            label-for="input-3"
+            class="w-5/12"
+          >
+            <b-form-select
+              id="input-3"
+              v-model="form.parentIdSupport"
+              :options="parts"
+              placeholder="nhập "
+              required
+            ></b-form-select>
+          </b-form-group>
+          <b-form-group
+            id="input-group-3"
+            label="Chọn tổ:"
+            label-for="input-3"
+            class="w-5/12"
+          >
+            <b-form-select
+              id="input-3"
+              v-model="form.support.group"
+              :options="parts2"
+              placeholder="nhập "
+              required
+            ></b-form-select>
+          </b-form-group>
+        </div>
+        <!-- <b-form-group
           id="input-group-2"
           label="Chọn tổ điều chuyển đến:"
           label-for="input-2"
@@ -56,7 +116,7 @@
             placeholder="Nhập "
             required
           ></b-form-input>
-        </b-form-group>
+        </b-form-group> -->
         <div class="flex">
           <b-button type="submit" variant="primary" class="text-blue-700 mb-24"
             >Xác nhận</b-button
@@ -94,40 +154,75 @@
 <script>
 import { mapMutations } from "vuex";
 import ButtonSkip from "@/components/buttonSkip";
-
+import { groupRoleRoot, groupRoleDetails } from "@/api/AuthenConnector.js";
 export default {
   components: { ButtonSkip },
   data() {
     return {
+      parts: [],
+      parts2: [],
       visible: false,
       skip: "/move-inPerson",
       form: {
+        parentId: "",
+        parentIdSupport: "",
         transfer: { number: "", group: "" },
         support: { number: "", group: "" },
       },
-      options: [
-        { value: null, text: "chọn lý do" },
-        { value: "b", text: "Thai sản" },
-        { value: "b", text: "Không lương" },
-        { value: "b", text: "ốm" },
-        { value: "b", text: "con ốm" },
-        { value: "b", text: "việc riêng" },
-        { value: "b", text: "học" },
-        { value: "b", text: "nghỉ phép" },
-        { value: "b", text: "việc khác" },
-        { value: "b", text: "tự do" },
-        { value: "b", text: "nghỉ t7+CN" },
-        { value: "b", text: "nghỉ chấm dứt hợp đồng lao động" },
-      ],
+      // options: [
+      //   { value: null, text: "chọn lý do" },
+      //   { value: "b", text: "Thai sản" },
+      //   { value: "b", text: "Không lương" },
+      //   { value: "b", text: "ốm" },
+      //   { value: "b", text: "con ốm" },
+      //   { value: "b", text: "việc riêng" },
+      //   { value: "b", text: "học" },
+      //   { value: "b", text: "nghỉ phép" },
+      //   { value: "b", text: "việc khác" },
+      //   { value: "b", text: "tự do" },
+      //   { value: "b", text: "nghỉ t7+CN" },
+      //   { value: "b", text: "nghỉ chấm dứt hợp đồng lao động" },
+      // ],
     };
   },
-
+  fetch() {
+    this.groupRoleRoot();
+  },
+  watch: {
+    "form.parentId": {
+      handler: function (value) {
+        console.log(value);
+        this.groupRoleDetails(value);
+      },
+      deep: true,
+    },
+    "form.parentIdSupport": {
+      handler: function (value) {
+        console.log(value);
+        this.groupRoleDetails(value);
+      },
+      deep: true,
+    },
+  },
   methods: {
     ...mapMutations({
       SET_STATE_TRANSFER: "SET_STATE_TRANSFER",
       SET_STATE_SUPPORT: "SET_STATE_SUPPORT",
     }),
-
+    async groupRoleRoot() {
+      const res = await groupRoleRoot();
+      this.parts = res.map((item) => ({
+        text: item.groupName,
+        value: item.id,
+      }));
+    },
+    async groupRoleDetails(param) {
+      const res = await groupRoleDetails(param);
+      this.parts2 = res.map((item) => ({
+        text: item.groupName,
+        value: item.id,
+      }));
+    },
     // accuracy() {},
     // showModal() {
     //   this.visible = true;

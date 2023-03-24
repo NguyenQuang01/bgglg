@@ -92,8 +92,12 @@ export const addLeave = async (param) => {
 };
 export const editLeave = async (param, id) => {
   console.log(param);
-  const response = await request.post(`${HOST}/reason/edit?id=${id}`, {
+  const response = await request.put(`${HOST}/reason/edit?id=${id}`, {
     name: param,
   });
+  return response.data;
+};
+export const getleaveId = async (param) => {
+  const response = await request.get(`${HOST}/reason/details?id=${param}`);
   return response.data;
 };

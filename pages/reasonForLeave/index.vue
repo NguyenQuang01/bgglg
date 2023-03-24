@@ -77,7 +77,9 @@ export default defineComponent({
         dataIndex: "name",
       },
     ]);
-    const data = reactive({ value: [] });
+    const data = reactive({
+      value: [],
+    });
     const state = reactive({
       selectedRowKeys: [],
       // Check here to configure the default column
@@ -93,8 +95,9 @@ export default defineComponent({
     };
     const getvalue = async () => {
       const res = await reason();
-      data.value = res.map((item) => ({ key: item.id, name: item.name }));
+      data.value = res.data.map((item) => ({ key: item.id, name: item.name }));
     };
+    getvalue();
     const deletes = async () => {
       const res = await deleteLeave(idItem.value);
       console.log(res);

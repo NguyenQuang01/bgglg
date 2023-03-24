@@ -28,7 +28,7 @@
   </div>
 </template>
 <script>
-import { editLeave } from "@/api/AuthenConnector.js";
+import { editLeave, getleaveId } from "@/api/AuthenConnector.js";
 
 export default {
   data() {
@@ -40,7 +40,7 @@ export default {
     };
   },
 
-  created() {
+  fetch() {
     this.getValueEdit();
   },
   methods: {
@@ -49,8 +49,13 @@ export default {
       const res = await editLeave(this.form.name, this.paramId.id);
       console.log(res);
     },
-    getValueEdit() {
-      console.log(this.paramId.id);
+    async getValueEdit() {
+      const res = await getleaveId(this.paramId.id);
+      if (res) {
+        this.form.name = res.data[0].name;
+
+        console.log(res);
+      }
     },
   },
 };

@@ -24,16 +24,18 @@
       <tr>
         <td class="bg-sky-400 text-slate-50">ĐIỀU CHUYỂN</td>
         <td>{{ numberTransfer.quantity }}</td>
-        <td v-if="numberTransfer.information" class="text-lime-800">
+        <!-- <td v-if="numberTransfer.information" class="text-lime-800">
           xác nhận
         </td>
-        <td v-else class="text-rose-800">chưa xác nhận</td>
+        <td v-else class="text-rose-800">chưa xác nhận</td> -->
+        <td></td>
       </tr>
       <tr>
         <td class="bg-sky-400 text-slate-50">HỖ TRỢ</td>
         <td>{{ numberSupport.quantity }}</td>
-        <td v-if="numberSupport.information" class="text-lime-800">xác nhận</td>
-        <td v-else class="text-rose-800">chưa xác nhận</td>
+        <!-- <td v-if="numberSupport.information" class="text-lime-800">xác nhận</td>
+        <td v-else class="text-rose-800">chưa xác nhận</td> -->
+        <td></td>
       </tr>
       <tr>
         <td class="bg-sky-400 text-slate-50">BÁO CƠM</td>
@@ -120,7 +122,7 @@ export default {
     },
     demarcation() {
       return {
-        information: "abc",
+        information: " ",
         quantity: this.getDataInformationReport?.demarcation,
       };
     },
