@@ -62,16 +62,16 @@
             >Xác nhận</b-button
           >
           <button-skip :skip="skip" />
-          <b-button
+          <!-- <b-button
             variant="primary"
             class="text-blue-700 mb-24 mx-2"
             @click="showModal"
             >Người chuyển đến</b-button
-          >
+          > -->
         </div>
       </b-form>
     </div>
-    <a-modal
+    <!-- <a-modal
       v-model:visible="visible"
       title="Thông báo"
       @ok="handleOk"
@@ -83,16 +83,12 @@
           <th>Bạn được hỗ trợ:</th>
           <th>Từ đơn vị:</th>
         </tr>
-        <tr>
-          <td>Peter</td>
-          <td>Griffin</td>
-        </tr>
-        <tr>
-          <td>Lois</td>
-          <td>Griffin</td>
+        <tr v-for="item in transfer">
+          <td>{{ item.transferNum }}</td>
+          <td>{{ item.groupId }}</td>
         </tr>
       </table>
-    </a-modal>
+    </a-modal> -->
   </div>
 </template>
 <script>
@@ -104,7 +100,7 @@ export default {
   data() {
     return {
       visible: false,
-      skip: "/reportmeal",
+      skip: "/move-inPerson",
       form: {
         transfer: { number: "", group: "" },
         support: { number: "", group: "" },
@@ -125,23 +121,33 @@ export default {
       ],
     };
   },
+
   methods: {
     ...mapMutations({
       SET_STATE_TRANSFER: "SET_STATE_TRANSFER",
       SET_STATE_SUPPORT: "SET_STATE_SUPPORT",
     }),
-    showModal() {
-      this.visible = true;
-    },
-    handleOk() {
-      alert("ok");
-      this.visible = false;
-    },
+
+    // accuracy() {},
+    // showModal() {
+    //   this.visible = true;
+    // },
+    // async handleOk() {
+    //   // const res = await accuracy();
+    //   // console.log(res);
+    //   this.visible = false;
+    // },
     onSubmit(event) {
       event.preventDefault();
-      this.SET_STATE_TRANSFER(this.form.transfer.number);
-      this.SET_STATE_SUPPORT(this.form.support.number);
-      this.$router.push("/reportmeal");
+      this.SET_STATE_TRANSFER({
+        transferNum: this.form.transfer.number,
+        groupId: this.form.transfer.group,
+      });
+      this.SET_STATE_SUPPORT({
+        transferNum: this.form.support.number,
+        groupId: this.form.support.group,
+      });
+      this.$router.push("/move-inPerson");
     },
   },
 };

@@ -78,10 +78,15 @@ export default {
             this.$router.push("/sussInformation");
             break;
           case res.data.isReport:
-            this.$router.push("/laborreport");
+            if (res.data.checkReport) {
+              this.$router.push("/sussInformation");
+            } else {
+              this.$router.push("/laborreport");
+            }
+
             break;
           case res.data.isAdmin:
-            this.$router.push("/createMoreAccounts");
+            this.$router.push("/listMenuAdmin");
 
             break;
           case res.data.isView:

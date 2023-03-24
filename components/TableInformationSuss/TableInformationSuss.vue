@@ -54,7 +54,8 @@
           />
           <div v-else>{{ numberTransfer }}</div>
         </td>
-        <td></td>
+        <td v-if="isAcctoved" class="text-lime-800">xác nhận</td>
+        <td v-else class="text-rose-800">chưa xác nhận</td>
       </tr>
       <tr>
         <td class="bg-sky-400 text-slate-50">HỖ TRỢ</td>
@@ -160,7 +161,7 @@
     >
     <b-button
       variant="primary"
-      class="text-blue-700 float-right mb-10"
+      class="text-blue-700 float-right mx-2 mb-10"
       @click="edit"
       >sửa</b-button
     >
@@ -172,6 +173,7 @@ import { getDetail, updateDetail } from "@/api/AuthenConnector.js";
 export default {
   data() {
     return {
+      isAcctoved: false,
       isEdit: false,
       numberStudent: 0,
       numberReasons: 0,
@@ -251,6 +253,7 @@ export default {
         this.transferIdTran = res.transfers[0].transferId;
         this.transferIdSupport = res.transfers[1].transferId;
         this.id = res.id;
+        this.isAcctoved = res.transfers[0].access;
       }
     },
   },
