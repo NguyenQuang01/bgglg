@@ -180,7 +180,7 @@ export default {
     async submit(event) {
       event.preventDefault();
       this.btn = "quay lại";
-      if (this.hours < 18) {
+      if (this.hours > 18) {
         const res = await saveDetail(this.getDataInformationReport);
         if (res) {
           this.$router.push("/sussInformation");

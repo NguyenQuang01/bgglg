@@ -57,7 +57,7 @@
       >
         <b-form-select
           id="input-3"
-          v-model="form.groupName"
+          v-model="form.groupId"
           :options="parts2"
           placeholder="nhập "
           required
@@ -80,7 +80,7 @@ export default {
         userLogin: "",
         password: "",
         parentId: "",
-        groupName: "",
+        groupId: "",
         edit: false,
         eiew: false,
         report: false,

@@ -43,11 +43,11 @@ export default {
     };
   },
   methods: {
-    async onSubmit(event) {
-      event.preventDefault();
-      const res = await addAccount(this.form);
-      console.log(res);
-    },
+    // async onSubmit(event) {
+    //   event.preventDefault();
+    //   const res = await addAccount(this.form);
+    //   console.log(res);
+    // },
   },
 };
 </script>

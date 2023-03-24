@@ -104,7 +104,10 @@ export default {
     async getReason() {
       const res = await reason();
       if (res) {
-        this.options = res.map((item) => ({ value: item.id, text: item.name }));
+        this.options = res.data.map((item) => ({
+          value: item.id,
+          text: item.name,
+        }));
       }
     },
 

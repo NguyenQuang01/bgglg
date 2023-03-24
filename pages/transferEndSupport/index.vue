@@ -27,7 +27,7 @@
               id="input-group-3"
               label="Chọn bộ phận:"
               label-for="input-3"
-              class="w-5/12"
+              class="width48"
             >
               <b-form-select
                 id="input-3"
@@ -41,7 +41,7 @@
               id="input-group-3"
               label="Chọn tổ:"
               label-for="input-3"
-              class="w-5/12"
+              class="width48"
             >
               <b-form-select
                 id="input-3"
@@ -81,7 +81,7 @@
             id="input-group-3"
             label="Chọn bộ phận:"
             label-for="input-3"
-            class="w-5/12"
+            class="width48"
           >
             <b-form-select
               id="input-3"
@@ -95,12 +95,12 @@
             id="input-group-3"
             label="Chọn tổ:"
             label-for="input-3"
-            class="w-5/12"
+            class="width48"
           >
             <b-form-select
               id="input-3"
               v-model="form.support.group"
-              :options="parts2"
+              :options="parts3"
               placeholder="nhập "
               required
             ></b-form-select>
@@ -161,6 +161,7 @@ export default {
     return {
       parts: [],
       parts2: [],
+      parts3: [],
       visible: false,
       skip: "/move-inPerson",
       form: {
@@ -199,7 +200,7 @@ export default {
     "form.parentIdSupport": {
       handler: function (value) {
         console.log(value);
-        this.groupRoleDetails(value);
+        this.groupRoleDetails2(value);
       },
       deep: true,
     },
@@ -219,6 +220,13 @@ export default {
     async groupRoleDetails(param) {
       const res = await groupRoleDetails(param);
       this.parts2 = res.map((item) => ({
+        text: item.groupName,
+        value: item.id,
+      }));
+    },
+    async groupRoleDetails2(param) {
+      const res = await groupRoleDetails(param);
+      this.parts3 = res.map((item) => ({
         text: item.groupName,
         value: item.id,
       }));
@@ -250,5 +258,8 @@ export default {
 <style scoped>
 .title {
   color: #0daeff;
+}
+.width48 {
+  width: 48%;
 }
 </style>
