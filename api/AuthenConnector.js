@@ -51,8 +51,9 @@ export const addAccount = async (param) => {
   return response.data;
 };
 export const getTransfer = async (param) => {
+  const groupId = localStorage.getItem("groupId");
   const response = await request.get(
-    `${HOST}/transfer/now-date?groupId=5`,
+    `${HOST}/transfer/now-date?groupId=${groupId}`,
     param
   );
   return response.data;
@@ -76,5 +77,24 @@ export const groupRoleDetails = async (param) => {
   const response = await request.get(
     `${HOST}/groupRoleDetails?parentId=${param}`
   );
+  return response.data;
+};
+export const getForLeave = async () => {
+  const response = await request.get(`${HOST}/reason/save`);
+  return response.data;
+};
+export const deleteLeave = async (param) => {
+  const response = await request.delete(`${HOST}/reason/delete?id=${param}`);
+  return response.data;
+};
+export const addLeave = async (param) => {
+  const response = await request.post(`${HOST}/reason/save`, param);
+  return response.data;
+};
+export const editLeave = async (param, id) => {
+  console.log(param);
+  const response = await request.post(`${HOST}/reason/edit?id=${id}`, {
+    name: param,
+  });
   return response.data;
 };
