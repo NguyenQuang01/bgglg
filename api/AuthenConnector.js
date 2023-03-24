@@ -28,8 +28,12 @@ export const updateDetail = async (param) => {
   return response.data;
 };
 export const saveDetail = async (param) => {
+  const groupId = localStorage.getItem("groupId");
   try {
-    const response = await request.post(`${HOST}/report/save?groupId=3`, param);
+    const response = await request.post(
+      `${HOST}/report/save?groupId=${groupId}`,
+      param
+    );
 
     return response.data;
   } catch (error) {

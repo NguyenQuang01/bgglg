@@ -16,12 +16,6 @@ export default () => ({
     },
     restNum: "",
     laborProductivity: "",
-    restRequests: [
-      // {
-      //   reasonId: "",
-      //   restName: "",
-      // },
-    ],
-    // restNum:,
+    restRequests: [],
   },
 });
