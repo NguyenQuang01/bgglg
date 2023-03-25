@@ -81,7 +81,23 @@
     </table>
   </div>
 </template>
-<script></script>
+<script>
+import { getView } from "@/api/AuthenConnector.js";
+export default {
+  data() {
+    return {};
+  },
+  created() {
+    this.getDataTable();
+  },
+  methods: {
+    async getDataTable() {
+      const res = await getView();
+      console.log(res);
+    },
+  },
+};
+</script>
 <style scoped>
 table {
   font-family: arial, sans-serif;

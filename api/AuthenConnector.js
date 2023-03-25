@@ -105,3 +105,7 @@ export const getleaveId = async (param) => {
   const response = await request.get(`${HOST}/reason/details?id=${param}`);
   return response.data;
 };
+export const getView = async (param) => {
+  const response = await request.get(`${HOST}/view/all?date=2023-03-25`);
+  return response.data;
+};

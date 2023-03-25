@@ -74,8 +74,8 @@
       <tr>
         <td class="bg-sky-400 text-slate-50">BÁO CƠM</td>
         <td>
-          <input type="text" v-model="totalRice" class="w-20" v-if="isEdit" />
-          <div v-else>{{ totalRice }}</div>
+          <!-- <input type="text" v-model="totalRice" class="w-20" v-if="isEdit" /> -->
+          <div>{{ totalRice }}</div>
         </td>
 
         <td>
@@ -141,13 +141,13 @@
         <td class="bg-orange-400 text-slate-50">SỐ LĐ TÍNH NĂNG SUẤT</td>
 
         <td>
-          <input
+          <!-- <input
             type="text"
             v-model="numberProductivity"
             class="w-20"
             v-if="isEdit"
-          />
-          <div v-else>{{ numberProductivity }}</div>
+          /> -->
+          <div>{{ numberProductivity }}</div>
         </td>
         <td></td>
       </tr>
@@ -187,7 +187,6 @@ export default {
       numberSupport: 0,
       totalRice: 0,
       numberEatRice: 0,
-      numberProductivity: 0,
       arrReasons: [],
       restRequests: [],
       riceId: 0,
@@ -196,6 +195,7 @@ export default {
       transferIdSupport: 0,
       groupIdTran: 0,
       groupIdSp: 0,
+      numberProductivity: 0,
       day: new Date().getDate(),
       month: new Date().getMonth() + 1,
       year: new Date().getFullYear(),
@@ -249,6 +249,10 @@ export default {
         ],
       };
       const res = updateDetail(payload);
+      if (res) {
+        message.success("sửa thành công");
+        setTimeout(() => this.getDetails(), 1000);
+      }
     },
     async getDetails() {
       const day = dayjs(this.valueDay).format("YYYY/MM/DD");
@@ -284,7 +288,7 @@ export default {
         this.numberSupport = res.supportNum;
         this.numberEatRice = res.rice;
         this.totalRice = res.totalRice;
-        this.numberProductivity = res.laborProductivity;
+
         this.arrReasons = res.rests;
         this.riceId = res.rice.riceId;
         this.transferIdTran = res.transfers[0].transferId;
@@ -293,6 +297,12 @@ export default {
         this.groupIdSp = res.transfers[1].groupId;
         this.id = res.id;
         this.isAcctoved = res.transfers[0].access;
+        this.numberProductivity =
+          this.demarcation -
+          Number(this.arrReasons.length) -
+          this.numberStudent -
+          this.numberTransfer -
+          this.numberSupport;
       }
     },
   },
