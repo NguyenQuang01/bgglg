@@ -62,10 +62,9 @@ export default {
     async onSubmit(event) {
       event.preventDefault();
       const res = await signInAPI(this.form);
-      // if (res && res.status === 502) {
-      //   message.error("sai tài khoản, mật khẩu");
-      // }
-
+      if (res.status === 500) {
+        message.error("sai tài khoản hoặc mật khẩu");
+      }
       if (res && res.status === 200) {
         this.SET_STATE_ISUSER(true);
         this.SET_STATE_USERNAME(this.form.user);
@@ -94,16 +93,6 @@ export default {
             break;
           default:
         }
-
-        //   res.data.isEdit === true ? : "";
-        //   res.data.isAdmin === true
-        //     ?
-        //     : "";
-        //   res.data.isReport === true ?  : "";
-        //   res.data.isView === true ? : "";
-        // } else {
-        //   message.error("sai tài khoản, mật khẩu");
-        // }
       }
     },
     onReset(event) {

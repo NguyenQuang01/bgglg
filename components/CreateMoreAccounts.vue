@@ -72,6 +72,7 @@
 <script>
 import { addAccount } from "@/api/AuthenConnector.js";
 import { groupRoleRoot, groupRoleDetails } from "@/api/AuthenConnector.js";
+import { message } from "ant-design-vue";
 
 export default {
   data() {
@@ -109,7 +110,22 @@ export default {
     async onSubmit(event) {
       event.preventDefault();
       const res = await addAccount(this.form);
-      console.log(res);
+      if (!res) {
+        message.success("đã có tài khoản");
+      }
+      if (res && res.status === 201) {
+        message.success("đăng kí thành công");
+        this.form = {
+          userLogin: "",
+          password: "",
+          parentId: "",
+          groupId: "",
+          edit: false,
+          eiew: false,
+          report: false,
+          admin: false,
+        };
+      }
     },
     async groupRoleRoot() {
       const res = await groupRoleRoot();

@@ -170,7 +170,11 @@
 <script>
 import { mapGetters } from "vuex";
 import { getDetail, updateDetail } from "@/api/AuthenConnector.js";
+import dayjs from "dayjs";
+import { message } from "ant-design-vue";
+
 export default {
+  props: ["valueDay"],
   data() {
     return {
       isAcctoved: false,
@@ -190,6 +194,8 @@ export default {
       id: 0,
       transferIdTran: 0,
       transferIdSupport: 0,
+      groupIdTran: 0,
+      groupIdSp: 0,
       day: new Date().getDate(),
       month: new Date().getMonth() + 1,
       year: new Date().getFullYear(),
@@ -199,7 +205,15 @@ export default {
   fetch() {
     this.getDetails();
   },
-
+  watch: {
+    valueDay: {
+      handler: function (value) {
+        console.log(value, 888);
+        this.getDetails();
+      },
+      deep: true,
+    },
+  },
   methods: {
     edit() {
       this.isEdit = !this.isEdit;
@@ -223,11 +237,13 @@ export default {
           {
             transferId: Number(this.transferIdTran),
             transferNum: Number(this.numberTransfer),
+            groupId: Number(this.groupIdTran),
             type: 1,
           },
           {
             transferId: Number(this.transferIdSupport),
             transferNum: Number(this.numberSupport),
+            groupId: Number(this.groupIdSp),
             type: 2,
           },
         ],
@@ -235,9 +251,30 @@ export default {
       const res = updateDetail(payload);
     },
     async getDetails() {
-      const day = `${this.year}-${this.month}-${this.day}`;
+      const day = dayjs(this.valueDay).format("YYYY/MM/DD");
       const groupId = localStorage.getItem("groupId");
       const res = await getDetail({ day, groupId });
+      console.log(res, 4444);
+      if (res === undefined) {
+        message.warning("ngày không có dữ liệu");
+        this.numberStudent = "";
+        this.numberReasons = "";
+        this.demarcation = "";
+        this.numberSeasonal = "";
+        this.numberTransfer = "";
+        this.numberSupport = "";
+        this.numberEatRice = "";
+        this.totalRice = "";
+        this.numberProductivity = "";
+        this.arrReasons = "";
+        this.riceId = "";
+        this.transferIdTran = "";
+        this.groupIdTran = "";
+        this.transferIdSupport = "";
+        this.groupIdSp = "";
+        this.id = "";
+        this.isAcctoved = "";
+      }
       if (res) {
         this.numberStudent = res.studentNum;
         this.numberReasons = res.restNum;
@@ -251,7 +288,9 @@ export default {
         this.arrReasons = res.rests;
         this.riceId = res.rice.riceId;
         this.transferIdTran = res.transfers[0].transferId;
+        this.groupIdTran = res.transfers[0].groupId;
         this.transferIdSupport = res.transfers[1].transferId;
+        this.groupIdSp = res.transfers[1].groupId;
         this.id = res.id;
         this.isAcctoved = res.transfers[0].access;
       }

@@ -16,9 +16,10 @@
         <a-date-picker
           v-model="valueDay"
           class="my-2"
+          :format="dateFormat"
           placeholder="Chọn ngày"
         />
-        <TableInformationSuss />
+        <TableInformationSuss :valueDay="valueDay" />
       </div>
     </div>
   </div>
@@ -32,6 +33,7 @@ export default {
   },
   data() {
     return {
+      dateFormat: "YYYY/MM/DD",
       day: new Date().getDate(),
       month: new Date().getMonth() + 1,
       year: new Date().getFullYear(),

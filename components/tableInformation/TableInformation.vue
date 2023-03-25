@@ -97,6 +97,7 @@
 <script>
 import { mapGetters } from "vuex";
 import { saveDetail } from "@/api/AuthenConnector.js";
+import { message } from "ant-design-vue";
 
 export default {
   data() {
@@ -180,10 +181,18 @@ export default {
     async submit(event) {
       event.preventDefault();
       this.btn = "quay lại";
-      if (this.hours > 18) {
+      if (this.hours < 18) {
         const res = await saveDetail(this.getDataInformationReport);
-        if (res) {
-          this.$router.push("/sussInformation");
+        console.log(res);
+
+        if (res && res.status === 201) {
+          message.success("thành công");
+          setTimeout(() => {
+            this.$router.push("/sussInformation");
+          }, "1000");
+        }
+        if (res && res.status === 400) {
+          message.warning("lỗi điều chuyển vào tổ của mình");
         }
       } else {
         alert("đã qua 18 giờ");

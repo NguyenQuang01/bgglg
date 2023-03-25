@@ -7,7 +7,9 @@ export const signInAPI = async (param) => {
       password: param.pass,
     });
     return response.data;
-  } catch (error) {}
+  } catch (error) {
+    return { status: 500 };
+  }
 };
 export const signUpAPI = async (username, email, password) => {
   const response = await request.post(`${HOST}/v1/auth/sign-up`, {
@@ -18,10 +20,12 @@ export const signUpAPI = async (username, email, password) => {
   return response.data;
 };
 export const getDetail = async (param) => {
-  const response = await request.get(
-    `${HOST}/report?reportDate=${param.day}&groupId=${param.groupId}`
-  );
-  return response.data;
+  try {
+    const response = await request.get(
+      `${HOST}/report?reportDate=${param.day}&groupId=${param.groupId}`
+    );
+    return response.data;
+  } catch (error) {}
 };
 export const updateDetail = async (param) => {
   const groupId = localStorage.getItem("groupId");

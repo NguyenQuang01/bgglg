@@ -29,7 +29,7 @@
 </template>
 <script>
 import { editLeave, getleaveId } from "@/api/AuthenConnector.js";
-
+import { message } from "ant-design-vue";
 export default {
   data() {
     return {
@@ -55,6 +55,12 @@ export default {
         this.form.name = res.data[0].name;
 
         console.log(res);
+        if (res && res.code === 200) {
+          message.success("sửa thành công");
+          setTimeout(() => {
+            window.location.href = `/reasonForLeave`;
+          }, "1000");
+        }
       }
     },
   },

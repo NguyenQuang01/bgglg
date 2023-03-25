@@ -22,13 +22,19 @@
           </b-form-group>
 
           <div class="mb-2 flex">
-            <b-button type="submit" variant="primary text-black "
+            <b-button type="submit" variant="primary text-blue-700 "
               >thêm</b-button
             >
-            <b-button variant="danger" class="text-black mx-2" @click="deletes"
+            <b-button
+              variant="danger"
+              class="text-rose-700 mx-2"
+              @click="deletes"
               >xóa</b-button
             >
-            <b-button variant="danger" class="text-black mx-2" @click="edit"
+            <b-button
+              variant="warning"
+              class="text-yellow-700 mx-2"
+              @click="edit"
               >sửa</b-button
             >
           </div>
@@ -60,6 +66,7 @@ import {
   toRefs,
 } from "vue";
 // const columns = ;
+import { message } from "ant-design-vue";
 
 export default defineComponent({
   setup() {
@@ -100,12 +107,19 @@ export default defineComponent({
     getvalue();
     const deletes = async () => {
       const res = await deleteLeave(idItem.value);
-      console.log(res);
+      if (res && res.code === 200) {
+        message.success("xóa thành công");
+        window.location.reload();
+      }
     };
     const onSubmit = async (event) => {
       event.preventDefault();
       const res = await addLeave([{ name: form.name }]);
       console.log(res);
+      if (res && res.code === 201) {
+        message.success("thêm thành công");
+        window.location.reload();
+      }
     };
     const edit = () => {
       window.location.href = `/reasonForLeave/${idItem.value}`;
