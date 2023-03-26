@@ -95,7 +95,6 @@ export const addLeave = async (param) => {
   return response.data;
 };
 export const editLeave = async (param, id) => {
-  console.log(param);
   const response = await request.put(`${HOST}/reason/edit?id=${id}`, {
     name: param,
   });

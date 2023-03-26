@@ -115,7 +115,6 @@ export default defineComponent({
     const onSubmit = async (event) => {
       event.preventDefault();
       const res = await addLeave([{ name: form.name }]);
-      console.log(res);
       if (res && res.code === 201) {
         message.success("thêm thành công");
         window.location.reload();

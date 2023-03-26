@@ -53,7 +53,6 @@ export default {
     },
     async handleOk() {
       const res = await accuracy();
-      console.log(res);
       this.$router.push("/reportmeal");
     },
   },

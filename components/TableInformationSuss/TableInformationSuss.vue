@@ -208,7 +208,6 @@ export default {
   watch: {
     valueDay: {
       handler: function (value) {
-        console.log(value, 888);
         this.getDetails();
       },
       deep: true,
@@ -258,7 +257,6 @@ export default {
       const day = dayjs(this.valueDay).format("YYYY/MM/DD");
       const groupId = localStorage.getItem("groupId");
       const res = await getDetail({ day, groupId });
-      console.log(res, 4444);
       if (res === undefined) {
         message.warning("ngày không có dữ liệu");
         this.numberStudent = "";

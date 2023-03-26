@@ -96,7 +96,6 @@ export default {
         restName: item.user,
         reasonId: item.reason,
       }));
-      console.log(arrLabor);
       this.SET_STATE_ARRLABOR(arrLabor);
       this.$router.push("/newPartTimeEndWorker");
       // this.$router.push("/");

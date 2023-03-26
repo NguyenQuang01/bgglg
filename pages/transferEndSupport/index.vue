@@ -192,14 +192,12 @@ export default {
   watch: {
     "form.parentId": {
       handler: function (value) {
-        console.log(value);
         this.groupRoleDetails(value);
       },
       deep: true,
     },
     "form.parentIdSupport": {
       handler: function (value) {
-        console.log(value);
         this.groupRoleDetails2(value);
       },
       deep: true,
@@ -237,7 +235,6 @@ export default {
     // },
     // async handleOk() {
     //   // const res = await accuracy();
-    //   // console.log(res);
     //   this.visible = false;
     // },
     onSubmit(event) {

@@ -47,14 +47,12 @@ export default {
     async onSubmit(event) {
       event.preventDefault();
       const res = await editLeave(this.form.name, this.paramId.id);
-      console.log(res);
     },
     async getValueEdit() {
       const res = await getleaveId(this.paramId.id);
       if (res) {
         this.form.name = res.data[0].name;
 
-        console.log(res);
         if (res && res.code === 200) {
           message.success("sửa thành công");
           setTimeout(() => {

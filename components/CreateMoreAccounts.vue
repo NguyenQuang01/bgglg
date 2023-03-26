@@ -107,7 +107,6 @@ export default {
   watch: {
     "form.parentId": {
       handler: function (value) {
-        console.log(value);
         this.groupRoleDetails(value);
       },
       deep: true,

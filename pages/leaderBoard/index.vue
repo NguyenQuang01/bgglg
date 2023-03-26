@@ -9,11 +9,16 @@
     >
     <div class="mb-2 flex">
       <a-button class="btnDay" @click="btnMinus">Ngày trước</a-button>
-      <a-date-picker v-model="valueDay" class="mx-2" placeholder="Chọn ngày" />
+      <a-date-picker
+        v-model="valueDay"
+        class="mx-2"
+        placeholder="Chọn ngày"
+        :format="dateFormat"
+      />
       <a-button class="btnDay" @click="btnPlus">ngày sau</a-button>
     </div>
     <div class="m-auto m-0 overflow-auto">
-      <TableBoardVue />
+      <TableBoardVue :valueDay="valueDay" />
     </div>
     <div class="float-right mt-2 mb-10">
       <a-button class="btnDay" @click="btnPageToDetail">Xem chi tiết</a-button>
@@ -28,6 +33,7 @@ export default {
   },
   data() {
     return {
+      dateFormat: "YYYY/MM/DD",
       day: new Date().getDate(),
       month: new Date().getMonth() + 1,
       year: new Date().getFullYear(),
@@ -67,7 +73,6 @@ export default {
   //   valueDay: {
   //     deep: true,
   //     handler() {
-  //       console.log(this.valueDay, 55555);
   //     },
   //   },
   // },

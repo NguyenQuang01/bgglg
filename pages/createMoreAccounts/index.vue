@@ -46,7 +46,6 @@ export default {
     // async onSubmit(event) {
     //   event.preventDefault();
     //   const res = await addAccount(this.form);
-    //   console.log(res);
     // },
   },
 };

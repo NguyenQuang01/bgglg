@@ -183,7 +183,6 @@ export default {
       this.btn = "quay lại";
       if (this.hours > 18) {
         const res = await saveDetail(this.getDataInformationReport);
-        console.log(res);
 
         if (res && res.status === 201) {
           message.success("thành công");
