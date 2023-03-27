@@ -11,17 +11,19 @@
         <th>Tổng lao động báo năng suất</th>
         <th>Báo cơm</th>
       </tr>
-      <tr v-for="item in valueTable">
+      <tr v-for="(item, index) in valueTable">
         <td class="font-bold backgroundBlue">{{ item.department }}</td>
         <td>{{ item.totalEmp }}</td>
         <td>{{ item.totalEmp }}</td>
-        <td></td>
+        <td>{{ item.laborProductivityTeam }}</td>
         <td>{{ item.restEmp }}</td>
         <td>{{ item.ratio }}</td>
         <!-- <td rowspan="2">afds</td> -->
         <!-- rowspan="6"  -->
         <!-- <td class="font-bold">1682.0</td> -->
-        <td>{{ item.laborProductivityTeam }}</td>
+        <td v-if="index === 0" :rowspan="valueTable.length" class="font-bold">
+          {{ laborProductivity }}
+        </td>
         <td></td>
 
         <!-- </tr>
@@ -79,7 +81,7 @@
         <td class="font-bold"></td>
         <td class="font-bold">{{ totalRest }}</td>
         <td class="font-bold">{{ totalratio }}</td>
-        <td class="font-bold">{{ laborProductivity }}</td>
+        <td class="font-bold"></td>
         <td>
           <div>Nhân viên:{{ riceCus }}</div>
           <div>khách:{{ riceEmp }}</div>

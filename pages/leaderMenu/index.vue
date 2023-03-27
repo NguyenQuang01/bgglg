@@ -11,7 +11,11 @@
           ><br />
           <a-button type="primary" class="my-3">{{ text2 }}</a-button
           ><br />
-          <a-button type="primary">{{ text3 }}</a-button>
+          <a-button type="primary" class="mb-3">{{ text3 }}</a-button
+          ><br />
+          <a-button type="primary" @click="pageDemarcation">{{
+            text4
+          }}</a-button>
         </a-collapse-panel>
       </a-collapse>
     </div>
@@ -25,12 +29,17 @@ export default {
       text1: `Báo cáo tổng`,
       text2: `Báo cáo chi tiết`,
       text3: `Xem lại báo cáo`,
+      text4: `Nhập định biên`,
       activeKey: 1,
     };
   },
   methods: {
     pagetoBoad() {
       this.$router.push("/leaderBoard");
+    },
+    pageDemarcation() {
+      console.log("object");
+      this.$router.push("/demarcation");
     },
   },
   // created() {
