@@ -75,7 +75,7 @@ export default {
     return {
       dataTable: {
         Vp: {
-          name: "Văn phòng",
+          name: "Văn phòn",
           vp: 191,
           xn: 0,
           ldnx: 191.0,
