@@ -78,7 +78,7 @@ export default {
             break;
           case res.data.isReport:
             if (res.data.checkReport) {
-              this.$router.push("/sussInformation");
+              this.$router.push("/reported");
             } else {
               this.$router.push("/laborreport");
             }

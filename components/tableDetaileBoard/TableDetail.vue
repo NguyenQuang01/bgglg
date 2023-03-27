@@ -99,7 +99,7 @@ const data = [
     NumberRice: 11,
     children: [
       {
-        key: 11,
+        key: 131,
         name: "XN1",
         office: 42,
         enterprise: "99",
@@ -110,7 +110,7 @@ const data = [
         NumberRice: 11,
         children: [
           {
-            key: 11,
+            key: 111,
             name: "Vệ Sinh 1",
             office: 42,
             enterprise: "99",
@@ -123,7 +123,7 @@ const data = [
         ],
       },
       {
-        key: 12,
+        key: 1222,
         name: "XN2",
         office: 42,
         enterprise: "99",
@@ -136,7 +136,7 @@ const data = [
     ],
   },
   {
-    key: 2,
+    key: 2212,
     name: "Tổ May	",
     office: 32,
     enterprise: "77",
