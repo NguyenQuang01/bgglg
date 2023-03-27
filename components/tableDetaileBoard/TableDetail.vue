@@ -1,163 +1,150 @@
-<template lang="">
-  <div>
-    <table>
-      <tr>
-        <th colspan="2">Bộ phận</th>
-        <th>Văn phòng</th>
-        <th>XÍ nghiệp</th>
-        <th>Lao động báo năng suất</th>
-        <th>Số lao động nghỉ</th>
-        <th colspan="2">Tỉ lệ %</th>
-        <th>Tổng lao động báo năng suất</th>
-        <th>Báo cơm</th>
-      </tr>
-      <tr>
-        <td colspan="2" class="font-bold backgroundBlue" @click="test">
-          {{ dataTable.Vp.name }}
-        </td>
-        <td>{{ dataTable.Vp.vp }}</td>
-        <td>{{ dataTable.Vp.xn }}</td>
-        <td>{{ dataTable.Vp.ldnx }}</td>
-        <td>{{ dataTable.Vp.ndn }}</td>
-        <td>{{ dataTable.Vp.tl }}</td>
-        <td rowspan="2">afds</td>
-
-        <td rowspan="6" class="font-bold">1682.0</td>
-        <td>190 2 khách 2 khách VIP</td>
-      </tr>
-
-      <tr v-if="dataTable.Vp.child && isVp" v-for="item in dataTable.Vp.child">
-        <td></td>
-        <td>{{ item.name }}</td>
-        <td>{{ item.vp }}</td>
-        <td>{{ item.xn }}</td>
-        <td>{{ item.ldnx }}</td>
-        <td>{{ item.ndn }}</td>
-        <td>{{ item.tl }}</td>
-      </tr>
-
-      <tr>
-        <td colspan="2" class="font-bold backgroundBlue">
-          {{ dataTable.Dvl.name }}
-        </td>
-        <td>{{ dataTable.Dvl.vp }}</td>
-        <td>{{ dataTable.Dvl.xn }}</td>
-        <td>{{ dataTable.Dvl.ldnx }}</td>
-        <td>{{ dataTable.Dvl.ndn }}</td>
-        <td>{{ dataTable.Dvl.tl }}</td>
-      </tr>
-      <tr v-if="dataTable.Vp.child && isVp" v-for="item in dataTable.Vp.child">
-        <td></td>
-        <td>{{ item.name }}</td>
-        <td>{{ item.vp }}</td>
-        <td>{{ item.xn }}</td>
-        <td>{{ item.ldnx }}</td>
-        <td>{{ item.ndn }}</td>
-        <td>{{ item.tl }}</td>
-      </tr>
-
-      <tr>
-        <td colspan="2" class="font-bold backgroundBlue">
-          {{ dataTable.Tm.name }}
-        </td>
-        <td>{{ dataTable.Tm.vp }}</td>
-        <td>{{ dataTable.Tm.xn }}</td>
-        <td>{{ dataTable.Tm.ldnx }}</td>
-        <td>{{ dataTable.Tm.ndn }}</td>
-        <td colspan="2">{{ dataTable.Tm.tl }}</td>
-      </tr>
-    </table>
-  </div>
+<template>
+  <a-table :columns="columns" :data-source="data" bordered />
 </template>
 <script>
-export default {
-  data() {
-    return {
-      dataTable: {
-        Vp: {
-          name: "Văn phòng",
-          vp: 191,
-          xn: 0,
-          ldnx: 191.0,
-          ndn: 10,
-          tl: 11.39,
-          child: [
-            {
-              name: "Lãnh đạo",
-              vp: 191,
-              xn: 0,
-              ldnx: 191.0,
-              ndn: 10,
-              tl: 11.39,
-            },
-            {
-              name: "Phòng TCHC",
-              vp: 191,
-              xn: 0,
-              ldnx: 191.0,
-              ndn: 10,
-              tl: 11.39,
-            },
-          ],
-        },
-        Dvl: {
-          name: "Đơn vị lẻ",
-          vp: 0,
-          xn: 293.5,
-          ldnx: 293.5,
-          ndn: 0,
-          tl: 17.51,
-        },
-        Tm: {
-          name: "Tổ may",
-          vp: 0,
-          xn: 1197.5,
-          ldnx: 1197.5,
-          ndn: 0,
-          tl: 71.1,
-        },
+import { defineComponent } from "vue";
+const columns = [
+  {
+    title: "Bộ phận",
+    dataIndex: "name",
+    key: "name",
+  },
+
+  {
+    title: "Văn phòng",
+    dataIndex: "age",
+    key: "age",
+    // width: "12%",
+  },
+  {
+    title: "Xí nghiệp",
+    dataIndex: "address",
+    // width: "30%",
+    key: "address",
+  },
+  {
+    title: "Lao động báo năng suất",
+    dataIndex: "address",
+    // width: "30%",
+    key: "address",
+  },
+  {
+    title: "Số lao động nghỉ",
+    dataIndex: "address",
+    // width: "30%",
+    key: "address",
+  },
+  {
+    title: "Tỉ lệ %",
+    dataIndex: "address",
+    // width: "30%",
+    key: "address",
+  },
+  {
+    title: "Tổng lao động báo năng suất",
+    dataIndex: "address",
+    // width: "30%",
+    key: "address",
+  },
+  {
+    title: "Báo cơm",
+    dataIndex: "address",
+    // width: "30%",
+    key: "address",
+  },
+];
+const data = [
+  {
+    key: 1,
+    name: "văn phòng",
+    age: 60,
+    address: "New York No. 1 Lake Park",
+    children: [
+      {
+        key: 11,
+        name: "Lãnh đạo",
+        age: 42,
+        address: "New York No. 2 Lake Park",
       },
-      isVp: true,
+      {
+        key: 12,
+        name: "Phòng TCHC",
+        age: 30,
+        address: "New York No. 3 Lake Park",
+      },
+      {
+        key: 13,
+        name: "Kế Toán",
+        age: 72,
+        address: "London No. 1 Lake Park",
+      },
+    ],
+  },
+  {
+    key: 2,
+    name: "Đơn vị lẻ",
+    age: 32,
+    address: "Sidney No. 1 Lake Park",
+    children: [
+      {
+        key: 11,
+        name: "XN1",
+        age: 42,
+        address: "New York No. 2 Lake Park",
+        children: [
+          {
+            key: 11,
+            name: "Vệ Sinh 1",
+            age: 42,
+            address: "New York No. 2 Lake Park",
+          },
+        ],
+      },
+      {
+        key: 12,
+        name: "XN2",
+        age: 42,
+        address: "New York No. 2 Lake Park",
+      },
+    ],
+  },
+  {
+    key: 2,
+    name: "Tổ May	",
+    age: 32,
+    address: "Sidney No. 1 Lake Park",
+  },
+];
+const rowSelection = {};
+export default defineComponent({
+  setup() {
+    return {
+      data,
+      columns,
+      rowSelection,
     };
   },
-  methods: {
-    test() {
-      this.isVp = !this.isVp;
-    },
-  },
-};
+});
 </script>
-<style scoped>
-table {
-  font-family: arial, sans-serif;
-  border-collapse: collapse;
-  width: 100%;
+<style>
+.ant-table-thead > tr > th {
+  background-color: #0daeff;
+  color: #ffff;
+}
+/* .ant-table-tbody > tr > td {
+  background-color: tomato;
+} */
+.red {
+  color: red;
+}
+.ant-table-tbody > tr > td:first-child {
+  background-color: #0daeff;
+  color: #ffff;
+  white-space: nowrap;
 }
 
-td,
-th {
-  border: 1px solid #dddddd;
-  text-align: left;
-  padding: 8px;
-}
-th {
-  background-color: #0daeff;
-  color: #ffffff;
-}
-.backgroundBlue {
-  background-color: #0daeff;
-  color: #ffffff;
-}
-.yellow {
-  background-color: yellow;
-}
-.btnDay {
-  background-color: #0daeff;
-  color: #ffffff;
-}
-@media only screen and (max-width: 600px) {
-  table {
-    width: 200% !important;
-  }
+.ant-table-tbody > tr.ant-table-row:hover > td {
+  /* background: none !important; */
+  color: rgba(0, 0, 0, 0.65);
 }
 </style>

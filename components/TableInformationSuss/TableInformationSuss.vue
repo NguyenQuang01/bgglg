@@ -141,12 +141,6 @@
         <td class="bg-orange-400 text-slate-50">SỐ LĐ TÍNH NĂNG SUẤT</td>
 
         <td>
-          <!-- <input
-            type="text"
-            v-model="numberProductivity"
-            class="w-20"
-            v-if="isEdit"
-          /> -->
           <div>{{ numberProductivity }}</div>
         </td>
         <td></td>
