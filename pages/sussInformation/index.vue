@@ -3,10 +3,7 @@
     <div class="text-center mt-10 mb-5 text-3xl font-bold title">
       THÔNG TIN LỊCH SỬ BÁO CÁO
     </div>
-    <b-button @click="$router.back()" class="text-blue-500 border-none px-2"
-      ><b-icon icon="arrow-bar-left" aria-hidden="true"></b-icon>trở
-      lại</b-button
-    >
+    <BtnBack />
     <div></div>
     <div class="font-semibold mb-2 text-lg">
       <b-icon icon="house-fill"></b-icon> Nhà máy : Xưởng 1
@@ -26,10 +23,11 @@
 </template>
 <script>
 import TableInformationSuss from "@/components/TableInformationSuss/TableInformationSuss.vue";
-
+import BtnBack from "@/components/BtnBack.vue";
 export default {
   components: {
     TableInformationSuss,
+    BtnBack,
   },
   data() {
     return {

@@ -5,9 +5,8 @@
     </div>
 
     <div class="font-semibold mb-2 text-lg">
-      <b-button   @click="$router.back()"  class="text-blue-500 border-none"
-          ><b-icon icon="arrow-bar-left" aria-hidden="true"></b-icon>trở lại</a
-        ></b-button>
+      <BtnBack />
+
       <b-icon icon="house-fill"></b-icon> Nhà máy : Xưởng 1
     </div>
     <div class="max-w-2xl m-auto m-0">
@@ -15,14 +14,16 @@
         <TableInformation />
       </div>
     </div>
-   
   </div>
 </template>
 <script>
 import TableInformation from "@/components/tableInformation/TableInformation.vue";
+import BtnBack from "@/components/BtnBack.vue";
+
 export default {
   components: {
     TableInformation,
+    BtnBack,
   },
   data() {
     return {
@@ -31,9 +32,7 @@ export default {
         placeholder: "số lao động nghỉ",
       },
     };
-   
   },
-  
 };
 </script>
 <style scoped>

@@ -3,10 +3,7 @@
     <div class="text-center mt-16 text-3xl font-bold title mb-16">
       Bảng báo cáo
     </div>
-    <b-button @click="$router.back()" class="text-blue-500 border-none p-0"
-      ><b-icon icon="arrow-bar-left" aria-hidden="true"></b-icon>trở
-      lại</b-button
-    >
+    <BtnBack />
     <div class="mb-2 flex">
       <a-button class="btnDay" @click="btnMinus">Ngày trước</a-button>
       <a-date-picker
@@ -27,9 +24,12 @@
 </template>
 <script>
 import TableBoardVue from "../../components/tableBoard/TableBoard.vue";
+import BtnBack from "@/components/BtnBack.vue";
+
 export default {
   components: {
     TableBoardVue,
+    BtnBack,
   },
   data() {
     return {

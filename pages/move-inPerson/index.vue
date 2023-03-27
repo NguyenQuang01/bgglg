@@ -7,9 +7,7 @@
     <div class="text-center mt-2 font-semibold mb-10"></div>
 
     <div class="max-w-2xl m-auto m-0">
-      <b-button @click="$router.back()" class="text-blue-500 border-none p-0"
-        ><b-icon icon="arrow-bar-left" aria-hidden="true"></b-icon>trở lại
-      </b-button>
+      <BtnBack />
       <MoveInPerson :transfer="transfer" />
       <div class="flex pt-2">
         <b-button
@@ -32,10 +30,12 @@
 <script>
 import MoveInPerson from "@/components/Move-inPerson.vue";
 import { getTransfer, accuracy } from "@/api/AuthenConnector.js";
+import BtnBack from "@/components/BtnBack.vue";
 
 export default {
   components: {
     MoveInPerson,
+    BtnBack,
   },
   data() {
     return { skip: "/reportmeal", transfer: [] };

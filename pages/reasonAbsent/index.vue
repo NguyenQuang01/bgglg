@@ -3,9 +3,7 @@
     <TitleScreen />
 
     <div class="max-w-2xl m-auto m-0">
-      <b-button   @click="$router.back()"  class="text-blue-500 border-none"
-          ><b-icon icon="arrow-bar-left" aria-hidden="true"></b-icon>trở lại</a
-        ></b-button>
+      <BtnBack />
       <FormReasonAbsent />
     </div>
   </div>
@@ -14,12 +12,14 @@
 import Input from "@/components/input/Input.vue";
 import TitleScreen from "@/components/titleScreen/TitleScreen.vue";
 import FormReasonAbsent from "@/components/formReasonAbsent/FormReasonAbsent.vue";
+import BtnBack from "@/components/BtnBack.vue";
 
 export default {
   components: {
     Input,
     TitleScreen,
     FormReasonAbsent,
+    BtnBack,
   },
   data() {
     return {
