@@ -177,6 +177,7 @@ export default {
   props: ["valueDay"],
   data() {
     return {
+      hours: new Date().getHours(),
       isAcctoved: false,
       isEdit: false,
       numberStudent: 0,
@@ -215,6 +216,10 @@ export default {
   },
   methods: {
     edit() {
+      if (this.hours >= 18) {
+        message.warning("đã qua 18giờ không được sửa");
+        return;
+      }
       this.isEdit = !this.isEdit;
     },
     submit() {
