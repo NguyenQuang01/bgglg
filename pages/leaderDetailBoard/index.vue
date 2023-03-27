@@ -3,9 +3,7 @@
     <div class="text-center mt-16 text-3xl font-bold title mb-16">
       Bảng báo cáo chi tiết
     </div>
-    <b-button   @click="$router.back()"  class="text-blue-500 border-none p-0"
-          ><b-icon icon="arrow-bar-left" aria-hidden="true"></b-icon>trở lại</a
-        ></b-button>
+    <BtnBack />
     <div class="mb-2 flex">
       <a-date-picker v-model="valueDay" class="mx-2" placeholder="Chọn ngày" />
       <a-button class="btnDay">Lọc</a-button>
@@ -21,9 +19,12 @@
 </template>
 <script>
 import TableDetail from "../../components/tableDetaileBoard/TableDetail.vue";
+import BtnBack from "@/components/BtnBack.vue";
+
 export default {
   components: {
     TableDetail,
+    BtnBack,
   },
   data() {
     return {
@@ -43,7 +44,6 @@ export default {
   //   valueDay: {
   //     deep: true,
   //     handler() {
-  //       console.log(this.valueDay, 55555);
   //     },
   //   },
   // },

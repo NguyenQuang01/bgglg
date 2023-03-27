@@ -3,10 +3,7 @@
     <div class="text-center mt-10 mb-16 text-3xl font-bold title">BÁO CƠM</div>
 
     <div class="max-w-2xl m-auto m-0">
-      <b-button @click="$router.back()" class="text-blue-500 border-none p-0"
-        ><b-icon icon="arrow-bar-left" aria-hidden="true"></b-icon>trở
-        lại</b-button
-      >
+      <BtnBack />
       <b-form @submit="onSubmit">
         <b-form-group
           id="input-group-2"
@@ -54,9 +51,10 @@
 <script>
 import { mapMutations, mapGetters } from "vuex";
 import ButtonSkip from "@/components/buttonSkip";
+import BtnBack from "@/components/BtnBack.vue";
 
 export default {
-  components: { ButtonSkip },
+  components: { ButtonSkip, BtnBack },
   data() {
     return {
       skip: "/reportInformation",
@@ -75,32 +73,32 @@ export default {
   methods: {
     ...mapMutations({
       SET_STATE_MEAL: "SET_STATE_MEAL",
-      SET_STATE_DEMARCATION: "SET_STATE_DEMARCATION",
-      SET_STATE_PRODUCTIVITY: "SET_STATE_PRODUCTIVITY",
+      // SET_STATE_DEMARCATION: "SET_STATE_DEMARCATION",
+      // SET_STATE_PRODUCTIVITY: "SET_STATE_PRODUCTIVITY",
     }),
     onSubmit(event) {
       event.preventDefault();
       this.SET_STATE_MEAL(this.numberMeal);
-      this.getDemarcation();
-      this.getProductivity();
+      // this.getDemarcation();
+      // this.getProductivity();
       this.$router.push("/reportInformation");
     },
-    getDemarcation() {
-      const demarcation =
-        5 +
-        Number(this.getDataInformationReport.student) +
-        Number(this.getDataInformationReport.seasonal);
-      this.SET_STATE_DEMARCATION(demarcation);
-    },
-    getProductivity() {
-      const productivity =
-        Number(this.getDataInformationReport.demarcation) -
-        Number(this.getDataInformationReport.labor) -
-        Number(this.getDataInformationReport.student) -
-        Number(this.getDataInformationReport.transfer) -
-        Number(this.getDataInformationReport.support);
-      this.SET_STATE_PRODUCTIVITY(productivity);
-    },
+    // getDemarcation() {
+    //   const demarcation =
+    //     5 +
+    //     Number(this.getDataInformationReport.studentNum) +
+    //     Number(this.getDataInformationReport.partTimeNum);
+    //   this.SET_STATE_DEMARCATION(demarcation);
+    // },
+    // getProductivity() {
+    //   const productivity =
+    //     Number(this.getDataInformationReport.demarcation) -
+    //     Number(this.getDataInformationReport.restNum) -
+    //     Number(this.getDataInformationReport.studentNum) -
+    //     Number(this.getDataInformationReport.transferRequests[0].transferNum) -
+    //     Number(this.getDataInformationReport.transferRequests[1].transferNum);
+    //   this.SET_STATE_PRODUCTIVITY(productivity);
+    // },
   },
 };
 </script>

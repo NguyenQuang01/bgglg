@@ -5,10 +5,8 @@
     </div>
 
     <div class="max-w-2xl m-auto m-0">
-      <b-button @click="$router.back()" class="text-blue-500 border-none p-0"
-        ><b-icon icon="arrow-bar-left" aria-hidden="true"></b-icon>trở
-        lại</b-button
-      >
+      <BtnBack />
+
       <b-form @submit="onSubmit" class="mb-10">
         <b-form-group
           id="input-group-2"
@@ -47,8 +45,10 @@
 <script>
 import { mapMutations } from "vuex";
 import ButtonSkip from "@/components/buttonSkip";
+import BtnBack from "@/components/BtnBack.vue";
+
 export default {
-  components: { ButtonSkip },
+  components: { ButtonSkip, BtnBack },
   data() {
     return {
       skip: "/transferEndSupport",

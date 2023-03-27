@@ -35,9 +35,6 @@
         >Reset</b-button
       >
     </b-form>
-    <!-- <b-card class="mt-3" header="Form Data Result">
-      <pre class="m-0">{{ form }}</pre>
-    </b-card> -->
   </div>
 </template>
 
@@ -56,11 +53,7 @@ export default {
       show: false,
     };
   },
-  // created: {
-  //   ...mapGetters({
 
-  //   })
-  // },
   methods: {
     ...mapMutations({
       SET_STATE_ISUSER: "SET_STATE_ISUSER",
@@ -68,34 +61,42 @@ export default {
     }),
     async onSubmit(event) {
       event.preventDefault();
-      // const res = await signInAPI(this.form);
-      // console.log(res);
-      // if (res && res.status === 200) {
-      //   this.SET_STATE_ISUSER(true);
-      //   this.SET_STATE_USERNAME(this.form.user);
-      //   localStorage.setItem("isUser", true);
-      //   localStorage.setItem("userLogin", this.form.user);
+      const res = await signInAPI(this.form);
+      if (res.status === 500) {
+        message.error("sai tài khoản hoặc mật khẩu");
+      }
+      if (res && res.status === 200) {
+        this.SET_STATE_ISUSER(true);
+        this.SET_STATE_USERNAME(this.form.user);
+        localStorage.setItem("isUser", true);
+        localStorage.setItem("userLogin", this.form.user);
+        localStorage.setItem("groupId", res.data.groupId);
+        localStorage.setItem("JWT", res.data.token);
+        switch (true) {
+          case res.data.isEdit:
+            this.$router.push("/sussInformation");
+            break;
+          case res.data.isReport:
+            if (res.data.checkReport) {
+              this.$router.push("/sussInformation");
+            } else {
+              this.$router.push("/laborreport");
+            }
 
-      //   localStorage.setItem("JWT", res.data.token);
-      //   // localStorage.setItem("userLogin", res.data.userLogin);
-      //   this.form.user === "admin"
-      //     ? this.$router.push("/laborreport")
-      //     : this.$router.push("/laborreport");
-      // } else {
-      //   message.error("sai tài khoản, mật khẩu");
-      // }
-      this.SET_STATE_ISUSER(true);
-      this.SET_STATE_USERNAME(this.form.user);
+            break;
+          case res.data.isAdmin:
+            this.$router.push("/listMenuAdmin");
 
-      this.show
-        ? this.$router.push("/laborreport")
-        : this.$router.push("/leaderMenu");
-
-      // this.$router.push("/");
+            break;
+          case res.data.isView:
+            this.$router.push("/leaderMenu");
+            break;
+          default:
+        }
+      }
     },
     onReset(event) {
       event.preventDefault();
-      // Reset our form values
       this.form.pass = "";
       this.form.user = "";
     },

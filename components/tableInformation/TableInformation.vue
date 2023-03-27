@@ -24,19 +24,28 @@
       <tr>
         <td class="bg-sky-400 text-slate-50">ĐIỀU CHUYỂN</td>
         <td>{{ numberTransfer.quantity }}</td>
-        <td v-if="numberTransfer.information" class="text-lime-800">
+        <!-- <td v-if="numberTransfer.information" class="text-lime-800">
           xác nhận
         </td>
-        <td v-else class="text-rose-800">chưa xác nhận</td>
+        <td v-else class="text-rose-800">chưa xác nhận</td> -->
+        <td></td>
       </tr>
       <tr>
         <td class="bg-sky-400 text-slate-50">HỖ TRỢ</td>
         <td>{{ numberSupport.quantity }}</td>
-        <td v-if="numberSupport.information" class="text-lime-800">xác nhận</td>
-        <td v-else class="text-rose-800">chưa xác nhận</td>
+        <!-- <td v-if="numberSupport.information" class="text-lime-800">xác nhận</td>
+        <td v-else class="text-rose-800">chưa xác nhận</td> -->
+        <td></td>
       </tr>
       <tr>
         <td class="bg-sky-400 text-slate-50">BÁO CƠM</td>
+        <td>
+          {{
+            Number(numberEatRice.staffQuantity) +
+            Number(numberEatRice.staffQuantity) +
+            Number(numberEatRice.guestVipQuantity)
+          }}
+        </td>
         <td>
           <div class="whitespace-nowrap">
             Nhân viên: {{ numberEatRice.staffQuantity }}
@@ -50,7 +59,6 @@
             Khách Vip: {{ numberEatRice.guestVipQuantity }}
           </div>
         </td>
-        <td>{{ numberEatRice.information }}</td>
       </tr>
 
       <tr>
@@ -62,7 +70,7 @@
             :key="index"
             class=""
           >
-            {{ item }}
+            {{ item.restName }}- {{ item.reasonId }}
           </div>
         </td>
       </tr>
@@ -78,17 +86,30 @@
       @click="submit"
       >{{ btn }}</b-button
     >
+    <a-modal v-model="visible" title="thông báo" @ok="handleOk">
+      <p>
+        Xin chào <span class="font-extrabold">{{ user }}</span> - bạn đã báo cáo
+        lao động cho ngày hôm nay, xin cảm ơn
+      </p>
+    </a-modal>
   </div>
 </template>
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapMutations } from "vuex";
 import { saveDetail } from "@/api/AuthenConnector.js";
+import { message } from "ant-design-vue";
 
 export default {
   data() {
     return {
       btn: "xác nhận",
+      visible: false,
+      user: "",
+      hours: new Date().getHours(),
     };
+  },
+  fetch() {
+    this.getValue();
   },
   computed: {
     ...mapGetters({
@@ -96,111 +117,109 @@ export default {
     }),
     numberReasons() {
       return {
-        quantity: this.getDataInformationReport?.labor,
-        arrReasons: this.getDataInformationReport?.arrLabor,
+        quantity: this.getDataInformationReport?.restNum,
+        arrReasons: this.getDataInformationReport?.restRequests,
       };
     },
     demarcation() {
       return {
-        information: "abc",
+        information: " ",
         quantity: this.getDataInformationReport?.demarcation,
       };
     },
     numberSeasonal() {
       return {
         information: "",
-        quantity: this.getDataInformationReport?.seasonal,
+        quantity: this.getDataInformationReport?.partTimeNum,
       };
     },
     numberStudent() {
       return {
         information: "",
-        quantity: this.getDataInformationReport?.student,
+        quantity: this.getDataInformationReport?.studentNum,
       };
     },
     numberTransfer() {
       return {
         information: true,
-        quantity: this.getDataInformationReport?.transfer,
+        quantity:
+          this.getDataInformationReport?.transferRequests[0].transferNum,
       };
     },
     numberSupport() {
       return {
         information: false,
-        quantity: this.getDataInformationReport?.support,
+        quantity:
+          this.getDataInformationReport?.transferRequests[1].transferNum,
       };
     },
     numberEatRice() {
       return {
         information: "",
-        staffQuantity: this.getDataInformationReport?.meal.staff,
-        guestQuantity: this.getDataInformationReport?.meal.guest,
-        guestVipQuantity: this.getDataInformationReport?.meal.guestVip,
+        staffQuantity: this.getDataInformationReport?.riceRequests.riceEmp,
+        guestQuantity: this.getDataInformationReport?.riceRequests.riceCus,
+        guestVipQuantity: this.getDataInformationReport?.riceRequests.riceVip,
       };
     },
     numberProductivity() {
       return {
         information: "",
-        quantity: this.getDataInformationReport?.productivity,
+        quantity: this.getDataInformationReport?.laborProductivity,
       };
     },
   },
+  created() {
+    this.getDemarcation();
+    this.getProductivity();
+  },
   methods: {
+    ...mapMutations({
+      SET_STATE_DEMARCATION: "SET_STATE_DEMARCATION",
+      SET_STATE_PRODUCTIVITY: "SET_STATE_PRODUCTIVITY",
+    }),
+    getDemarcation() {
+      const demarcation =
+        5 +
+        Number(this.getDataInformationReport.studentNum) +
+        Number(this.getDataInformationReport.partTimeNum);
+      this.SET_STATE_DEMARCATION(demarcation);
+    },
+    getProductivity() {
+      const productivity =
+        Number(this.getDataInformationReport.demarcation) -
+        Number(this.getDataInformationReport.restNum) -
+        Number(this.getDataInformationReport.studentNum) -
+        Number(this.getDataInformationReport.transferRequests[0].transferNum) -
+        Number(this.getDataInformationReport.transferRequests[1].transferNum);
+      this.SET_STATE_PRODUCTIVITY(productivity);
+    },
+    getValue() {
+      this.user = localStorage.getItem("userLogin");
+    },
+    showModal() {
+      this.visible = true;
+    },
+    handleOk() {
+      this.visible = false;
+    },
     async submit(event) {
       event.preventDefault();
       this.btn = "quay lại";
-      alert("xác nhận thành công");
-      // console.log(this.getDataInformationReport);
-      // const test = {
-      //   userGroupId: "1",
-      //   totalProductivity: "56",
-      //   demarcation: "50",
-      //   createBy: "ssdf",
-      //   orderDate: "2023-03-14",
-      //   reportDtlRequest: {
-      //     reportId: "3",
-      //     empNum: "4",
-      //     riceNumber: "5",
-      //     numEmp: "2",
-      //     groupId: "3",
-      //     partTimeNum: "4",
-      //     restNumber: "2",
-      //     studentNum: "3",
-      //   },
-      //   restRequests: [
-      //     {
-      //       name: "ducanh",
-      //       reasonId: "1",
-      //     },
-      //     {
-      //       name: "dai oc cho",
-      //       reasonId: "1",
-      //     },
-      //   ],
-      //   transferRequests: [
-      //     {
-      //       transferNum: "6",
-      //       userGroupId: "1",
-      //       transferType: "1",
-      //     },
-      //     {
-      //       transferNum: "8",
-      //       userGroupId: "1",
-      //       transferType: "0",
-      //     },
-      //   ],
-      // };
-      //   totalProductivity: this.getDataInformationReport.numberProductivity,
-      //   demarcation: this.getDataInformationReport.numberProductivity,
-      //   createBy: "ssdf",
-      //   totalProductivity: this.getDataInformationReport.numberProductivity,
-      //   totalProductivity: this.getDataInformationReport.numberProductivity,
-      //   totalProductivity: this.getDataInformationReport.numberProductivity,
-      // };
-      // const res = await saveDetail(test);
+      if (this.hours < 18) {
+        const res = await saveDetail(this.getDataInformationReport);
 
-      // console.log(res);
-      this.$router.push("/sussInformation");
+        if (res && res.status === 201) {
+          message.success("thành công");
+          setTimeout(() => {
+            this.$router.push("/sussInformation");
+          }, "1000");
+        }
+        if (res && res.status === 400) {
+          message.warning("lỗi điều chuyển vào tổ của mình");
+        }
+      } else {
+        alert("đã qua 18 giờ");
+      }
     },
   },
 };

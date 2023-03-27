@@ -2,18 +2,26 @@ export default () => ({
   isUser: false,
   UserName: "",
   dataInformationReport: {
-    demarcation: "",
-    seasonal: "",
-    student: "",
-    transfer: "",
-    support: "",
-    meal: {
-      staff: "",
-      guest: "",
-      guestVip: "",
+    demarcation: 0,
+    partTimeNum: 0,
+    studentNum: 0,
+    transferRequests: [
+      { transferNum: 0, type: 1, groupId: 0 },
+      { transferNum: 0, type: 2, groupId: 0 },
+    ],
+    riceRequests: {
+      riceEmp: 0,
+      riceCus: 0,
+      riceVip: 0,
     },
-    labor: "",
-    productivity: "",
-    arrLabor: [],
+    restNum: 0,
+    laborProductivity: 0,
+    restRequests: [
+      // {
+      //   reasonId: "",
+      //   restName: "",
+      // },
+    ],
+    // restNum:,
   },
 });

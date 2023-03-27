@@ -7,81 +7,118 @@
         <th>XÍ nghiệp</th>
         <th>Lao động báo năng suất</th>
         <th>Số lao động nghỉ</th>
-        <th colspan="2">Tỉ lệ %</th>
+        <th>Tỉ lệ %</th>
         <th>Tổng lao động báo năng suất</th>
         <th>Báo cơm</th>
       </tr>
-      <tr>
-        <td class="font-bold backgroundBlue">văn phòng</td>
-        <td>191</td>
+      <tr v-for="(item, index) in valueTable">
+        <td class="font-bold backgroundBlue">{{ item.department }}</td>
+        <td>{{ item.totalEmp }}</td>
+        <td>{{ item.totalEmp }}</td>
+        <td>{{ item.laborProductivityTeam }}</td>
+        <td>{{ item.restEmp }}</td>
+        <td>{{ item.ratio }}</td>
+        <!-- <td rowspan="2">afds</td> -->
+        <!-- rowspan="6"  -->
+        <!-- <td class="font-bold">1682.0</td> -->
+        <td v-if="index === 0" :rowspan="valueTable.length" class="font-bold">
+          {{ laborProductivity }}
+        </td>
         <td></td>
-        <td>191</td>
-        <td>3</td>
-        <td>11.39</td>
-        <td rowspan="2">afds</td>
+      </tr>
 
-        <td rowspan="6" class="font-bold">1682.0</td>
-        <td>190 2 khách 2 khách VIP</td>
-      </tr>
-      <tr>
-        <td class="font-bold backgroundBlue">Đơn vị lẻ</td>
-        <td></td>
-        <td>293.5</td>
-        <td>293.5</td>
-        <td></td>
-        <td>17.51</td>
-        <td></td>
-      </tr>
-      <tr>
-        <td class="font-bold backgroundBlue">Tổ may</td>
-        <td></td>
-        <td>1197.5</td>
-        <td>1197.5</td>
-        <td>71.10</td>
-        <td colspan="2">71.10</td>
-        <td></td>
-      </tr>
-      <tr>
-        <td class="font-bold backgroundBlue">Học sinh chưa báo năng suất</td>
-        <td></td>
-        <td>1197.5</td>
-        <td>1197.5</td>
-        <td>71.10</td>
-        <td colspan="2"></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td class="font-bold backgroundBlue">Thời vụ tổ may</td>
-        <td></td>
-        <td>1197.5</td>
-        <td>1197.5</td>
-        <td>71.10</td>
-        <td colspan="2">71.10</td>
-        <td></td>
-      </tr>
-      <tr>
-        <td class="font-bold backgroundBlue">Thời vụ đơn vị lẻ</td>
-        <td></td>
-        <td>1197.5</td>
-        <td>1197.5</td>
-        <td>71.10</td>
-        <td colspan="2">71.10</td>
-        <td></td>
-      </tr>
       <tr>
         <td class="font-bold backgroundBlue">Tổng thực tế làm việc</td>
-        <td class="font-bold">191</td>
-        <td class="font-bold">1501.0</td>
-        <td></td>
-        <td></td>
-        <td colspan="2" class="font-bold">100</td>
-        <td></td>
-        <td></td>
+        <td class="font-bold">{{ totalAllVp }}</td>
+        <td class="font-bold">{{ totalAllVp }}</td>
+        <td class="font-bold"></td>
+        <td class="font-bold">{{ totalRest }}</td>
+        <td class="font-bold">{{ totalratio }}</td>
+        <td class="font-bold"></td>
+        <td>
+          <div>Nhân viên:{{ riceCus }}</div>
+          <div>khách:{{ riceEmp }}</div>
+          <div>khách vip:{{ riceVip }}</div>
+        </td>
       </tr>
     </table>
   </div>
 </template>
-<script></script>
+<script>
+import { getView } from "@/api/AuthenConnector.js";
+import dayjs from "dayjs";
+import { message } from "ant-design-vue";
+export default {
+  props: ["valueDay"],
+  data() {
+    return {
+      valueTable: "",
+      actualWork: "",
+      laborProductivity: "",
+      totalratio: "",
+      totalAllVp: "",
+      totalRest: "",
+      riceCus: "",
+      riceEmp: "",
+      riceVip: "",
+    };
+  },
+  created() {
+    this.getDataTable();
+  },
+  watch: {
+    valueDay: {
+      handler: function (value) {
+        this.getDataTable();
+      },
+      deep: true,
+    },
+  },
+  methods: {
+    async getDataTable() {
+      const day = dayjs(this.valueDay).format("YYYY/MM/DD");
+      const res = await getView(day);
+      console.log(res);
+
+      if (res) {
+        this.valueTable = res.responseList;
+        this.actualWork = res.actualWork;
+        this.laborProductivity = res.laborProductivity;
+        this.totalratio = res.totalratio;
+        this.riceCus = res.totalRiceCus;
+        this.riceEmp = res.totalRiceEmp;
+        this.riceVip = res.totalRiceVip;
+        this.totalAllVp = res.responseList
+          .map((item) => [item.totalEmp])
+          .reduce(
+            (accumulator, currentValue) =>
+              Number(accumulator) + Number(currentValue),
+            0
+          );
+        this.totalRest = res.responseList
+          .map((item) => [item.restEmp])
+          .reduce(
+            (accumulator, currentValue) =>
+              Number(accumulator) + Number(currentValue),
+            0
+          );
+      }
+      if (res === undefined) {
+        message.warning("ngày không có dữ liệu");
+        this.valueTable = "";
+        this.actualWork = "";
+        this.laborProductivity = "";
+        this.totalratio = "";
+        this.totalAllVp = "";
+        this.totalRest = "";
+        this.riceCus = "";
+        this.riceEmp = "";
+        this.riceVip = "";
+      }
+    },
+  },
+};
+</script>
 <style scoped>
 table {
   font-family: arial, sans-serif;

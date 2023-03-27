@@ -7,15 +7,13 @@
     <div class="max-w-2xl m-auto m-0">
       <a-collapse v-model:activeKey="activeKey">
         <a-collapse-panel key="1" header="Menu" :disabled="false" class="">
-          <a-button type="primary" @click="pagetoBoad">{{ text1 }}</a-button
+          <a-button type="primary" @click="pagetoAcc">{{ text1 }}</a-button
           ><br />
-          <a-button type="primary" class="my-3">{{ text2 }}</a-button
+          <a-button type="primary" class="my-3" @click="pagetoBoadLeave">{{
+            text2
+          }}</a-button
           ><br />
-          <a-button type="primary" class="mb-3">{{ text3 }}</a-button
-          ><br />
-          <a-button type="primary" @click="pageDemarcation">{{
-            text4
-          }}</a-button>
+          <!-- <a-button type="primary">{{ text3 }}</a-button> -->
         </a-collapse-panel>
       </a-collapse>
     </div>
@@ -26,20 +24,17 @@ import { defineComponent, ref, watch } from "vue";
 export default {
   data() {
     return {
-      text1: `Báo cáo tổng`,
-      text2: `Báo cáo chi tiết`,
-      text3: `Xem lại báo cáo`,
-      text4: `Nhập định biên`,
+      text1: `Tạo tài khoản`,
+      text2: `Danh sach lý do nghỉ`,
       activeKey: 1,
     };
   },
   methods: {
-    pagetoBoad() {
-      this.$router.push("/leaderBoard");
+    pagetoAcc() {
+      this.$router.push("/createMoreAccounts");
     },
-    pageDemarcation() {
-      console.log("object");
-      this.$router.push("/demarcation");
+    pagetoBoadLeave() {
+      this.$router.push("/reasonForLeave");
     },
   },
   // created() {
