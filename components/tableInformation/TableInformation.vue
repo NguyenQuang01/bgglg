@@ -95,7 +95,7 @@
   </div>
 </template>
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapMutations } from "vuex";
 import { saveDetail } from "@/api/AuthenConnector.js";
 import { message } from "ant-design-vue";
 
@@ -168,7 +168,31 @@ export default {
       };
     },
   },
+  created() {
+    this.getDemarcation();
+    this.getProductivity();
+  },
   methods: {
+    ...mapMutations({
+      SET_STATE_DEMARCATION: "SET_STATE_DEMARCATION",
+      SET_STATE_PRODUCTIVITY: "SET_STATE_PRODUCTIVITY",
+    }),
+    getDemarcation() {
+      const demarcation =
+        5 +
+        Number(this.getDataInformationReport.studentNum) +
+        Number(this.getDataInformationReport.partTimeNum);
+      this.SET_STATE_DEMARCATION(demarcation);
+    },
+    getProductivity() {
+      const productivity =
+        Number(this.getDataInformationReport.demarcation) -
+        Number(this.getDataInformationReport.restNum) -
+        Number(this.getDataInformationReport.studentNum) -
+        Number(this.getDataInformationReport.transferRequests[0].transferNum) -
+        Number(this.getDataInformationReport.transferRequests[1].transferNum);
+      this.SET_STATE_PRODUCTIVITY(productivity);
+    },
     getValue() {
       this.user = localStorage.getItem("userLogin");
     },
@@ -181,7 +205,7 @@ export default {
     async submit(event) {
       event.preventDefault();
       this.btn = "quay lại";
-      if (this.hours > 18) {
+      if (this.hours < 18) {
         const res = await saveDetail(this.getDataInformationReport);
 
         if (res && res.status === 201) {

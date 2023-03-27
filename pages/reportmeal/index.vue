@@ -75,32 +75,32 @@ export default {
   methods: {
     ...mapMutations({
       SET_STATE_MEAL: "SET_STATE_MEAL",
-      SET_STATE_DEMARCATION: "SET_STATE_DEMARCATION",
-      SET_STATE_PRODUCTIVITY: "SET_STATE_PRODUCTIVITY",
+      // SET_STATE_DEMARCATION: "SET_STATE_DEMARCATION",
+      // SET_STATE_PRODUCTIVITY: "SET_STATE_PRODUCTIVITY",
     }),
     onSubmit(event) {
       event.preventDefault();
       this.SET_STATE_MEAL(this.numberMeal);
-      this.getDemarcation();
-      this.getProductivity();
+      // this.getDemarcation();
+      // this.getProductivity();
       this.$router.push("/reportInformation");
     },
-    getDemarcation() {
-      const demarcation =
-        5 +
-        Number(this.getDataInformationReport.studentNum) +
-        Number(this.getDataInformationReport.partTimeNum);
-      this.SET_STATE_DEMARCATION(demarcation);
-    },
-    getProductivity() {
-      const productivity =
-        Number(this.getDataInformationReport.demarcation) -
-        Number(this.getDataInformationReport.restNum) -
-        Number(this.getDataInformationReport.studentNum) -
-        Number(this.getDataInformationReport.transferRequests[0].transferNum) -
-        Number(this.getDataInformationReport.transferRequests[1].transferNum);
-      this.SET_STATE_PRODUCTIVITY(productivity);
-    },
+    // getDemarcation() {
+    //   const demarcation =
+    //     5 +
+    //     Number(this.getDataInformationReport.studentNum) +
+    //     Number(this.getDataInformationReport.partTimeNum);
+    //   this.SET_STATE_DEMARCATION(demarcation);
+    // },
+    // getProductivity() {
+    //   const productivity =
+    //     Number(this.getDataInformationReport.demarcation) -
+    //     Number(this.getDataInformationReport.restNum) -
+    //     Number(this.getDataInformationReport.studentNum) -
+    //     Number(this.getDataInformationReport.transferRequests[0].transferNum) -
+    //     Number(this.getDataInformationReport.transferRequests[1].transferNum);
+    //   this.SET_STATE_PRODUCTIVITY(productivity);
+    // },
   },
 };
 </script>

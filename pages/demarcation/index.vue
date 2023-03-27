@@ -108,10 +108,7 @@ export default {
     },
     onSubmit(event) {
       event.preventDefault();
-      this.SET_STATE_TRANSFER({
-        transferNum: this.form.transfer.number,
-        groupId: this.form.transfer.group,
-      });
+      this.form.transfer;
     },
   },
 };

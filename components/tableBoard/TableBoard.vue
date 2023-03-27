@@ -25,53 +25,6 @@
           {{ laborProductivity }}
         </td>
         <td></td>
-
-        <!-- </tr>
-      <tr>
-        <td class="font-bold backgroundBlue">Đơn vị lẻ</td>
-        <td></td>
-        <td>293.5</td>
-        <td>293.5</td>
-        <td></td>
-        <td>17.51</td>
-        <td></td>
-      </tr>
-      <tr>
-        <td class="font-bold backgroundBlue">Tổ may</td>
-        <td></td>
-        <td>1197.5</td>
-        <td>1197.5</td>
-        <td>71.10</td>
-        <td colspan="2">71.10</td>
-        <td></td>
-      </tr>
-      <tr>
-        <td class="font-bold backgroundBlue">Học sinh chưa báo năng suất</td>
-        <td></td>
-        <td>1197.5</td>
-        <td>1197.5</td>
-        <td>71.10</td>
-        <td colspan="2"></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td class="font-bold backgroundBlue">Thời vụ tổ may</td>
-        <td></td>
-        <td>1197.5</td>
-        <td>1197.5</td>
-        <td>71.10</td>
-        <td colspan="2">71.10</td>
-        <td></td>
-      </tr>
-      <tr>
-        <td class="font-bold backgroundBlue">Thời vụ đơn vị lẻ</td>
-        <td></td>
-        <td>1197.5</td>
-        <td>1197.5</td>
-        <td>71.10</td>
-        <td colspan="2">71.10</td>
-        <td></td>
-      </tr> -->
       </tr>
 
       <tr>
@@ -94,6 +47,7 @@
 <script>
 import { getView } from "@/api/AuthenConnector.js";
 import dayjs from "dayjs";
+import { message } from "ant-design-vue";
 export default {
   props: ["valueDay"],
   data() {
@@ -123,7 +77,9 @@ export default {
   methods: {
     async getDataTable() {
       const day = dayjs(this.valueDay).format("YYYY/MM/DD");
-      const res = await getView();
+      const res = await getView(day);
+      console.log(res);
+
       if (res) {
         this.valueTable = res.responseList;
         this.actualWork = res.actualWork;
@@ -146,6 +102,18 @@ export default {
               Number(accumulator) + Number(currentValue),
             0
           );
+      }
+      if (res === undefined) {
+        message.warning("ngày không có dữ liệu");
+        this.valueTable = "";
+        this.actualWork = "";
+        this.laborProductivity = "";
+        this.totalratio = "";
+        this.totalAllVp = "";
+        this.totalRest = "";
+        this.riceCus = "";
+        this.riceEmp = "";
+        this.riceVip = "";
       }
     },
   },

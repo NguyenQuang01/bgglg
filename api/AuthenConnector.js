@@ -105,6 +105,10 @@ export const getleaveId = async (param) => {
   return response.data;
 };
 export const getView = async (param) => {
-  const response = await request.get(`${HOST}/view/all?date=2023-03-25`);
-  return response.data;
+  try {
+    const response = await request.get(`${HOST}/view/all?date=${param}`);
+    return response.data;
+  } catch (error) {
+    return console.log({ status: 500 }, 7777);
+  }
 };
