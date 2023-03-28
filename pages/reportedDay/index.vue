@@ -17,6 +17,7 @@
 <script>
 import Input from "@/components/input/Input.vue";
 export default {
+  middleware: "auth",
   components: {
     Input,
   },

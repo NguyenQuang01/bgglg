@@ -58,6 +58,7 @@ export default {
     ...mapMutations({
       SET_STATE_ISUSER: "SET_STATE_ISUSER",
       SET_STATE_USERNAME: "SET_STATE_USERNAME",
+      SET_STATE_ISAUTHEN: "SET_STATE_ISAUTHEN",
     }),
     async onSubmit(event) {
       event.preventDefault();
@@ -72,6 +73,7 @@ export default {
         localStorage.setItem("userLogin", this.form.user);
         localStorage.setItem("groupId", res.data.groupId);
         localStorage.setItem("JWT", res.data.token);
+        this.SET_STATE_ISAUTHEN(true);
         switch (true) {
           case res.data.isEdit:
             this.$router.push("/sussInformation");

@@ -22,6 +22,7 @@
 <script>
 import { defineComponent, ref, watch } from "vue";
 export default {
+  middleware: "auth",
   data() {
     return {
       text1: `Tạo tài khoản`,

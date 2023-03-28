@@ -1,4 +1,5 @@
 export default () => ({
+  isAuthenticated: false,
   isUser: false,
   UserName: "",
   dataInformationReport: {

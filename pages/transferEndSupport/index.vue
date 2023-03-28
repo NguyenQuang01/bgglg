@@ -155,6 +155,7 @@ import BtnBack from "@/components/BtnBack.vue";
 
 import { groupRoleRoot, groupRoleDetails } from "@/api/AuthenConnector.js";
 export default {
+  middleware: "auth",
   components: { ButtonSkip, BtnBack },
   data() {
     return {

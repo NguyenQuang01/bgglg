@@ -38,4 +38,7 @@ export default {
   SET_STATE_ARRLABOR(state, data) {
     state.dataInformationReport.restRequests = data;
   },
+  SET_STATE_ISAUTHEN(state, data) {
+    state.isAuthenticated = data;
+  },
 };

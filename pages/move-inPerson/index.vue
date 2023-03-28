@@ -33,6 +33,7 @@ import { getTransfer, accuracy } from "@/api/AuthenConnector.js";
 import BtnBack from "@/components/BtnBack.vue";
 
 export default {
+  middleware: "auth",
   components: {
     MoveInPerson,
     BtnBack,

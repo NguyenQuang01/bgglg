@@ -15,6 +15,7 @@ import FormReasonAbsent from "@/components/formReasonAbsent/FormReasonAbsent.vue
 import BtnBack from "@/components/BtnBack.vue";
 
 export default {
+  middleware: "auth",
   components: {
     Input,
     TitleScreen,

@@ -55,6 +55,7 @@ import BtnBack from "@/components/BtnBack.vue";
 
 export default {
   components: { ButtonSkip, BtnBack },
+  middleware: "auth",
   data() {
     return {
       skip: "/reportInformation",

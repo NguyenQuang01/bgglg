@@ -22,6 +22,7 @@ import TableDetail from "../../components/tableDetaileBoard/TableDetail.vue";
 import BtnBack from "@/components/BtnBack.vue";
 
 export default {
+  middleware: "auth",
   components: {
     TableDetail,
     BtnBack,

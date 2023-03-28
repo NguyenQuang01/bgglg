@@ -12,6 +12,7 @@
 <script>
 import TableListFactory from "@/components/tableListFactory/TableListFactory.vue";
 export default {
+  middleware: "auth",
   components: {
     TableListFactory,
   },

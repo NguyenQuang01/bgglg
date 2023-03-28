@@ -70,6 +70,7 @@
 <script>
 import { groupRoleRoot, groupRoleDetails } from "@/api/AuthenConnector.js";
 export default {
+  middleware: "auth",
   data() {
     return {
       parts: [],

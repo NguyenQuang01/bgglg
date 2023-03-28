@@ -17,6 +17,7 @@ import CreateMoreAccounts from "@/components/CreateMoreAccounts.vue";
 import BtnBack from "@/components/BtnBack.vue";
 
 export default {
+  middleware: "auth",
   components: { CreateMoreAccounts, BtnBack },
   data() {
     return {

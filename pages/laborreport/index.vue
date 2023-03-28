@@ -19,6 +19,7 @@ export default {
     Input,
     BtnBack,
   },
+  middleware: "auth",
   data() {
     return {
       label: {

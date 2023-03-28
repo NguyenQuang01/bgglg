@@ -31,6 +31,7 @@
 import { editLeave, getleaveId } from "@/api/AuthenConnector.js";
 import { message } from "ant-design-vue";
 export default {
+  middleware: "auth",
   data() {
     return {
       form: {

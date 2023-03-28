@@ -25,6 +25,7 @@
 import TableInformationSuss from "@/components/TableInformationSuss/TableInformationSuss.vue";
 import BtnBack from "@/components/BtnBack.vue";
 export default {
+  middleware: "auth",
   components: {
     TableInformationSuss,
     BtnBack,

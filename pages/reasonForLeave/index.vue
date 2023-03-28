@@ -69,6 +69,7 @@ import {
 import { message } from "ant-design-vue";
 
 export default defineComponent({
+  middleware: "auth",
   setup() {
     const form = reactive({
       name: "",
