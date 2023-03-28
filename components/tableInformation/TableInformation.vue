@@ -96,9 +96,14 @@
 </template>
 <script>
 import { mapGetters, mapMutations } from "vuex";
-import { saveDetail, getDemarcationDb } from "@/api/AuthenConnector.js";
+import {
+  saveDetail,
+  getDemarcationDb,
+  updateDetail,
+} from "@/api/AuthenConnector.js";
 import { message } from "ant-design-vue";
-
+import { getDetail } from "@/api/AuthenConnector.js";
+import { today } from "@/constants/getToday";
 export default {
   data() {
     return {
@@ -212,20 +217,40 @@ export default {
     async submit(event) {
       event.preventDefault();
       this.btn = "quay lai";
-      if (this.hours < 18) {
-        const res = await saveDetail(this.getDataInformationReport);
-        console.log(res, 111);
-        if (res) {
-          message.success("thành công");
-          setTimeout(() => {
-            this.$router.push("/sussInformation");
-          }, "1000");
-        }
-        if (res && res.status === 400) {
-          message.warning("lỗi điều chuyển vào tổ của mình");
+      const checkReport = localStorage.getItem("checkReport");
+      console.log(checkReport, 78787);
+      if (!checkReport) {
+        if (this.hours < 18) {
+          const res = await saveDetail(this.getDataInformationReport);
+          if (res) {
+            message.success("thành công");
+            setTimeout(() => {
+              this.$router.push("/sussInformation");
+            }, "1000");
+          }
+          if (res && res.status === 400) {
+            message.warning("lỗi điều chuyển vào tổ của mình");
+          }
+        } else {
+          alert("đã qua 18 giờ");
         }
       } else {
-        alert("đã qua 18 giờ");
+        const day = today();
+        const groupId = localStorage.getItem("groupId");
+        const response = await getDetail({ day, groupId });
+        let id = 0;
+        if (response) {
+          id = response.id;
+        }
+        const payload = {
+          ...this.getDataInformationReport,
+          id: id,
+        };
+        const res = updateDetail(payload);
+        if (res) {
+          message.success("sửa thành công");
+          setTimeout(() => this.$router.push("/sussInformation"), 1000);
+        }
       }
     },
   },

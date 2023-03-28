@@ -46,7 +46,8 @@
 import { mapMutations } from "vuex";
 import ButtonSkip from "@/components/buttonSkip";
 import BtnBack from "@/components/BtnBack.vue";
-
+import { getDetail } from "@/api/AuthenConnector.js";
+import { today } from "@/constants/getToday";
 export default {
   middleware: "auth",
   components: { ButtonSkip, BtnBack },
@@ -59,6 +60,12 @@ export default {
       },
     };
   },
+  fetch() {
+    const isReport = localStorage.getItem("checkReport");
+    if (isReport) {
+      this.getValue();
+    }
+  },
   methods: {
     ...mapMutations({
       SET_STATE_SEASONAL: "SET_STATE_SEASONAL",
@@ -69,6 +76,15 @@ export default {
       this.SET_STATE_SEASONAL(this.form.partTime);
       this.SET_STATE_STUDENT(this.form.worker);
       this.$router.push("/transferEndSupport");
+    },
+    async getValue() {
+      const day = today();
+      const groupId = localStorage.getItem("groupId");
+      const res = await getDetail({ day, groupId });
+      if (res) {
+        this.form.partTime = res.partTimeNum;
+        this.form.worker = res.studentNum;
+      }
     },
   },
 };

@@ -48,7 +48,8 @@
 import { mapMutations } from "vuex";
 import ButtonSkip from "../buttonSkip";
 import { reason } from "@/api/AuthenConnector.js";
-
+import { getDetail } from "@/api/AuthenConnector.js";
+import { today } from "@/constants/getToday";
 export default {
   components: { ButtonSkip },
   data() {
@@ -63,28 +64,16 @@ export default {
       arrForms: [],
       valueTextarea: "",
       selected: null,
-      options: [
-        // { value: null, text: "chọn lý do" },
-        // { value: 1, text: "Thai sản" },
-        // { value: 2, text: "Không lương" },
-        // { value: 3, text: "ốm" },
-        // { value: 4, text: "con ốm" },
-        // { value: 5, text: "việc riêng" },
-        // { value: 6, text: "học" },
-        // { value: 7, text: "nghỉ phép" },
-        // { value: 8, text: "việc khác" },
-        // { value: 9, text: "tự do" },
-        // { value: 10, text: "nghỉ t7+CN" },
-        // {
-        //   value: 11,
-        //   text: "nghỉ chấm dứt hợp đồng lao động",
-        // },
-      ],
+      options: [],
       options2: [],
       valueSubmit: {},
     };
   },
   fetch() {
+    const isReport = localStorage.getItem("checkReport");
+    if (isReport) {
+      this.getValue();
+    }
     this.arrForms.push(this.form);
     this.getReason();
   },
@@ -118,6 +107,18 @@ export default {
           id: "",
           reason: "",
         });
+      }
+    },
+    async getValue() {
+      const day = today();
+      const groupId = localStorage.getItem("groupId");
+      const res = await getDetail({ day, groupId });
+      if (res) {
+        this.arrForms = res.rests.map((item) => ({
+          user: item.restName,
+          id: item.restId,
+          reason: item.reasonId,
+        }));
       }
     },
   },

@@ -39,7 +39,6 @@ export default {
       this.$router.push("/leaderBoard");
     },
     pageDemarcation() {
-      console.log("object");
       this.$router.push("/demarcation");
     },
   },

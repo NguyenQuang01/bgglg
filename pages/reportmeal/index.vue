@@ -52,7 +52,8 @@
 import { mapMutations, mapGetters } from "vuex";
 import ButtonSkip from "@/components/buttonSkip";
 import BtnBack from "@/components/BtnBack.vue";
-
+import { getDetail } from "@/api/AuthenConnector.js";
+import { today } from "@/constants/getToday";
 export default {
   components: { ButtonSkip, BtnBack },
   middleware: "auth",
@@ -71,35 +72,34 @@ export default {
       getDataInformationReport: "getDataInformationReport",
     }),
   },
+  fetch() {
+    const isReport = localStorage.getItem("checkReport");
+    if (isReport) {
+      this.getValue();
+    }
+  },
   methods: {
     ...mapMutations({
       SET_STATE_MEAL: "SET_STATE_MEAL",
-      // SET_STATE_DEMARCATION: "SET_STATE_DEMARCATION",
-      // SET_STATE_PRODUCTIVITY: "SET_STATE_PRODUCTIVITY",
     }),
     onSubmit(event) {
       event.preventDefault();
       this.SET_STATE_MEAL(this.numberMeal);
-      // this.getDemarcation();
-      // this.getProductivity();
+
       this.$router.push("/reportInformation");
     },
-    // getDemarcation() {
-    //   const demarcation =
-    //     5 +
-    //     Number(this.getDataInformationReport.studentNum) +
-    //     Number(this.getDataInformationReport.partTimeNum);
-    //   this.SET_STATE_DEMARCATION(demarcation);
-    // },
-    // getProductivity() {
-    //   const productivity =
-    //     Number(this.getDataInformationReport.demarcation) -
-    //     Number(this.getDataInformationReport.restNum) -
-    //     Number(this.getDataInformationReport.studentNum) -
-    //     Number(this.getDataInformationReport.transferRequests[0].transferNum) -
-    //     Number(this.getDataInformationReport.transferRequests[1].transferNum);
-    //   this.SET_STATE_PRODUCTIVITY(productivity);
-    // },
+    async getValue() {
+      const day = today();
+      const groupId = localStorage.getItem("groupId");
+      const res = await getDetail({ day, groupId });
+      if (res) {
+        this.numberMeal = {
+          staff: res.rice.riceCus,
+          guest: res.rice.riceEmp,
+          guestVip: res.rice.riceVip,
+        };
+      }
+    },
   },
 };
 </script>

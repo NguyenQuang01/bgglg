@@ -24,7 +24,8 @@
 <script>
 import { mapMutations } from "vuex";
 import BtnSkip from "@/components/buttonSkip";
-
+import { getDetail } from "@/api/AuthenConnector.js";
+import { today } from "@/constants/getToday";
 export default {
   components: {
     BtnSkip,
@@ -39,9 +40,18 @@ export default {
     return {
       quantityPeople: "",
       skip: "/reasonAbsent",
+      day: new Date().getDate(),
+      month: new Date().getMonth() + 1,
+      year: new Date().getFullYear(),
+      infDay: "",
     };
   },
-
+  fetch() {
+    const isReport = localStorage.getItem("checkReport");
+    if (isReport) {
+      this.getValue();
+    }
+  },
   methods: {
     ...mapMutations({
       SET_STATE_LABOR: "SET_STATE_LABOR",
@@ -50,6 +60,14 @@ export default {
       event.preventDefault();
       this.SET_STATE_LABOR(this.quantityPeople);
       this.$router.push("/reasonAbsent");
+    },
+    async getValue() {
+      const day = today();
+      const groupId = localStorage.getItem("groupId");
+      const res = await getDetail({ day, groupId });
+      if (res) {
+        this.quantityPeople = res.restNum;
+      }
     },
   },
 };

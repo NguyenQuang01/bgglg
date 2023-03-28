@@ -78,7 +78,6 @@ export default {
     async getDataTable() {
       const day = dayjs(this.valueDay).format("YYYY/MM/DD");
       const res = await getView(day);
-      console.log(res);
 
       if (res) {
         this.valueTable = res.responseList;

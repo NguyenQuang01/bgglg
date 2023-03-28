@@ -109,7 +109,7 @@ export const getView = async (param) => {
     const response = await request.get(`${HOST}/view/all?date=${param}`);
     return response.data;
   } catch (error) {
-    return console.log({ status: 500 }, 7777);
+    return console.log({ status: 500 });
   }
 };
 export const updateDemarcation = async (groupId, number) => {
@@ -120,7 +120,7 @@ export const updateDemarcation = async (groupId, number) => {
 };
 export const getDemarcationDb = async (param) => {
   const response = await request.get(
-    `${HOST}/groupRole/demarcation?groupId${param}`
+    `${HOST}/groupRole/demarcation?groupId=${param}`
   );
   return response.data;
 };

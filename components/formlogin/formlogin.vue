@@ -73,6 +73,8 @@ export default {
         localStorage.setItem("userLogin", this.form.user);
         localStorage.setItem("groupId", res.data.groupId);
         localStorage.setItem("JWT", res.data.token);
+        localStorage.setItem("checkReport", res.data.checkReport);
+
         this.SET_STATE_ISAUTHEN(true);
         switch (true) {
           case res.data.isEdit:

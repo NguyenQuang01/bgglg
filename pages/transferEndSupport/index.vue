@@ -49,17 +49,6 @@
               ></b-form-select>
             </b-form-group>
           </div>
-          <!-- <b-form-group
-            id="input-group-2"
-            label="Chọn tổ điều chuyển đến:"
-            label-for="input-2"
-          >
-            <b-form-input
-              v-model="form.transfer.group"
-              placeholder="Nhập "
-              required
-            ></b-form-input>
-          </b-form-group> -->
         </b-form-group>
         <b-form-group
           id="input-group-2"
@@ -103,56 +92,23 @@
             ></b-form-select>
           </b-form-group>
         </div>
-        <!-- <b-form-group
-          id="input-group-2"
-          label="Chọn tổ điều chuyển đến:"
-          label-for="input-2"
-        >
-          <b-form-input
-            v-model="form.support.group"
-            placeholder="Nhập "
-            required
-          ></b-form-input>
-        </b-form-group> -->
+
         <div class="flex">
           <b-button type="submit" variant="primary" class="text-blue-700 mb-24"
             >Xác nhận</b-button
           >
           <button-skip :skip="skip" />
-          <!-- <b-button
-            variant="primary"
-            class="text-blue-700 mb-24 mx-2"
-            @click="showModal"
-            >Người chuyển đến</b-button
-          > -->
         </div>
       </b-form>
     </div>
-    <!-- <a-modal
-      v-model:visible="visible"
-      title="Thông báo"
-      @ok="handleOk"
-      cancelText="Hủy"
-      okText="Xác nhận"
-    >
-      <table>
-        <tr>
-          <th>Bạn được hỗ trợ:</th>
-          <th>Từ đơn vị:</th>
-        </tr>
-        <tr v-for="item in transfer">
-          <td>{{ item.transferNum }}</td>
-          <td>{{ item.groupId }}</td>
-        </tr>
-      </table>
-    </a-modal> -->
   </div>
 </template>
 <script>
 import { mapMutations } from "vuex";
 import ButtonSkip from "@/components/buttonSkip";
 import BtnBack from "@/components/BtnBack.vue";
-
+import { getDetail } from "@/api/AuthenConnector.js";
+import { today } from "@/constants/getToday";
 import { groupRoleRoot, groupRoleDetails } from "@/api/AuthenConnector.js";
 export default {
   middleware: "auth",
@@ -170,23 +126,13 @@ export default {
         transfer: { number: "", group: "" },
         support: { number: "", group: "" },
       },
-      // options: [
-      //   { value: null, text: "chọn lý do" },
-      //   { value: "b", text: "Thai sản" },
-      //   { value: "b", text: "Không lương" },
-      //   { value: "b", text: "ốm" },
-      //   { value: "b", text: "con ốm" },
-      //   { value: "b", text: "việc riêng" },
-      //   { value: "b", text: "học" },
-      //   { value: "b", text: "nghỉ phép" },
-      //   { value: "b", text: "việc khác" },
-      //   { value: "b", text: "tự do" },
-      //   { value: "b", text: "nghỉ t7+CN" },
-      //   { value: "b", text: "nghỉ chấm dứt hợp đồng lao động" },
-      // ],
     };
   },
   fetch() {
+    const isReport = localStorage.getItem("checkReport");
+    if (isReport) {
+      this.getValue();
+    }
     this.groupRoleRoot();
   },
   watch: {
@@ -229,14 +175,7 @@ export default {
         value: item.id,
       }));
     },
-    // accuracy() {},
-    // showModal() {
-    //   this.visible = true;
-    // },
-    // async handleOk() {
-    //   // const res = await accuracy();
-    //   this.visible = false;
-    // },
+
     onSubmit(event) {
       event.preventDefault();
       this.SET_STATE_TRANSFER({
@@ -248,6 +187,16 @@ export default {
         groupId: this.form.support.group,
       });
       this.$router.push("/move-inPerson");
+    },
+    async getValue() {
+      const day = today();
+      const groupId = localStorage.getItem("groupId");
+      const res = await getDetail({ day, groupId });
+      console.log(res);
+      // if (res) {
+      //   this.form = res.transfers.map(item=>({parentId:item.}));
+      //   console.log(this.form, 787);
+      // }
     },
   },
 };

@@ -146,13 +146,13 @@
         <td></td>
       </tr>
     </table>
-    <b-button
+    <!-- <b-button
       variant="primary"
       class="text-blue-700 float-right mb-10"
       @click="submit"
     >
       gửi</b-button
-    >
+    > -->
     <b-button
       variant="primary"
       class="text-blue-700 float-right mx-2 mb-10"
@@ -214,43 +214,44 @@ export default {
         message.warning("đã qua 18giờ không được sửa");
         return;
       }
-      this.isEdit = !this.isEdit;
+      // this.isEdit = !this.isEdit;
+      this.$router.push("/laborreport");
     },
     submit() {
-      const payload = {
-        id: this.id,
-        demarcation: Number(this.demarcation),
-        laborProductivity: Number(this.numberProductivity),
-        restNum: Number(this.numberReasons),
-        partTimeNum: Number(this.numberSeasonal),
-        studentNum: Number(this.numberStudent),
-        riceRequests: {
-          riceId: Number(this.riceId),
-          riceEmp: Number(this.numberEatRice.riceEmp),
-          riceCus: Number(this.numberEatRice.riceCus),
-          riceVip: Number(this.numberEatRice.riceVip),
-        },
-        restRequests: this.arrReasons,
-        transferRequests: [
-          {
-            transferId: Number(this.transferIdTran),
-            transferNum: Number(this.numberTransfer),
-            groupId: Number(this.groupIdTran),
-            type: 1,
-          },
-          {
-            transferId: Number(this.transferIdSupport),
-            transferNum: Number(this.numberSupport),
-            groupId: Number(this.groupIdSp),
-            type: 2,
-          },
-        ],
-      };
-      const res = updateDetail(payload);
-      if (res) {
-        message.success("sửa thành công");
-        setTimeout(() => this.getDetails(), 1000);
-      }
+      // const payload = {
+      //   id: this.id,
+      //   demarcation: Number(this.demarcation),
+      //   laborProductivity: Number(this.numberProductivity),
+      //   restNum: Number(this.numberReasons),
+      //   partTimeNum: Number(this.numberSeasonal),
+      //   studentNum: Number(this.numberStudent),
+      //   riceRequests: {
+      //     riceId: Number(this.riceId),
+      //     riceEmp: Number(this.numberEatRice.riceEmp),
+      //     riceCus: Number(this.numberEatRice.riceCus),
+      //     riceVip: Number(this.numberEatRice.riceVip),
+      //   },
+      //   restRequests: this.arrReasons,
+      //   transferRequests: [
+      //     {
+      //       transferId: Number(this.transferIdTran),
+      //       transferNum: Number(this.numberTransfer),
+      //       groupId: Number(this.groupIdTran),
+      //       type: 1,
+      //     },
+      //     {
+      //       transferId: Number(this.transferIdSupport),
+      //       transferNum: Number(this.numberSupport),
+      //       groupId: Number(this.groupIdSp),
+      //       type: 2,
+      //     },
+      //   ],
+      // };
+      // const res = updateDetail(payload);
+      // if (res) {
+      //   message.success("sửa thành công");
+      //   setTimeout(() => this.getDetails(), 1000);
+      // }
     },
     async getDetails() {
       const day = dayjs(this.valueDay).format("YYYY/MM/DD");
