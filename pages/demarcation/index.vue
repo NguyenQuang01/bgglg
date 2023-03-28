@@ -3,6 +3,7 @@
     <div class="text-center mt-16 text-3xl font-bold title">Đinh Biên</div>
     <div class="text-center mt-2 font-semibold mb-10"></div>
     <div class="max-w-2xl m-auto m-0">
+      <BtnBack />
       <b-form @submit="onSubmit">
         <b-form-group
           id="input-group-2"
@@ -10,7 +11,7 @@
           label-for="input-2"
         >
           <b-form-input
-            v-model="form.transfer.number"
+            v-model="form.demarcation.number"
             placeholder="Nhập "
             required
             type="number"
@@ -38,7 +39,7 @@
             >
               <b-form-select
                 id="input-3"
-                v-model="form.transfer.group"
+                v-model="form.demarcation.group"
                 :options="parts2"
                 placeholder="nhập "
                 required
@@ -51,7 +52,7 @@
             label-for="input-2"
           >
             <b-form-input
-              v-model="form.transfer.group"
+              v-model="form.demarcation.group"
               placeholder="Nhập "
               required
             ></b-form-input>
@@ -68,8 +69,17 @@
   </div>
 </template>
 <script>
-import { groupRoleRoot, groupRoleDetails } from "@/api/AuthenConnector.js";
+import {
+  groupRoleRoot,
+  groupRoleDetails,
+  updateDemarcation,
+  getDemarcation,
+} from "@/api/AuthenConnector.js";
+import { message } from "ant-design-vue";
+import BtnBack from "@/components/BtnBack.vue";
+
 export default {
+  components: ["BtnBack"],
   middleware: "auth",
   data() {
     return {
@@ -77,7 +87,7 @@ export default {
       parts2: [],
       form: {
         parentId: "",
-        transfer: { number: "", group: "" },
+        demarcation: { number: "", group: "" },
       },
     };
   },
@@ -107,9 +117,16 @@ export default {
         value: item.id,
       }));
     },
-    onSubmit(event) {
+    async onSubmit(event) {
       event.preventDefault();
-      this.form.transfer;
+
+      const res = await updateDemarcation(
+        this.form.demarcation.group,
+        this.form.demarcation.number
+      );
+      if (res && res.status === 200) {
+        message.success("cập nhật thành công");
+      }
     },
   },
 };

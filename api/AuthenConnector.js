@@ -112,3 +112,15 @@ export const getView = async (param) => {
     return console.log({ status: 500 }, 7777);
   }
 };
+export const updateDemarcation = async (groupId, number) => {
+  const response = await request.get(
+    `${HOST}/groupRole/update?groupId=${groupId}&demarcation=${number}`
+  );
+  return response.data;
+};
+export const getDemarcationDb = async (param) => {
+  const response = await request.get(
+    `${HOST}/groupRole/demarcation?groupId${param}`
+  );
+  return response.data;
+};

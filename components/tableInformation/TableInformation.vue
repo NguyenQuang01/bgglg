@@ -96,7 +96,7 @@
 </template>
 <script>
 import { mapGetters, mapMutations } from "vuex";
-import { saveDetail } from "@/api/AuthenConnector.js";
+import { saveDetail, getDemarcationDb } from "@/api/AuthenConnector.js";
 import { message } from "ant-design-vue";
 
 export default {
@@ -177,9 +177,16 @@ export default {
       SET_STATE_DEMARCATION: "SET_STATE_DEMARCATION",
       SET_STATE_PRODUCTIVITY: "SET_STATE_PRODUCTIVITY",
     }),
-    getDemarcation() {
+
+    async getDemarcation() {
+      let numberDemarcation = 0;
+      const groupId = localStorage.getItem("groupId");
+      const res = await getDemarcationDb(groupId);
+      if (res && res.status === 200) {
+        numberDemarcation = res.data.demarcationAvailable;
+      }
       const demarcation =
-        5 +
+        numberDemarcation +
         Number(this.getDataInformationReport.studentNum) +
         Number(this.getDataInformationReport.partTimeNum);
       this.SET_STATE_DEMARCATION(demarcation);
@@ -204,8 +211,8 @@ export default {
     },
     async submit(event) {
       event.preventDefault();
-      this.btn = "quay lại";
-      if (this.hours > 18) {
+      this.btn = "quay lai";
+      if (this.hours < 18) {
         const res = await saveDetail(this.getDataInformationReport);
         console.log(res, 111);
         if (res) {
