@@ -154,6 +154,7 @@ export default defineComponent({
       event.preventDefault();
       const res = await addLeave([{ name: form.name }]);
       if (res && res.code === 201) {
+        form.name = "";
         message.success("thêm thành công");
         getvalue();
       }
