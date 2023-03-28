@@ -57,10 +57,10 @@
           </tr>
           <tr v-for="(item, index) in data.value" :key="index">
             <td>{{ index + 1 }}</td>
-            <td>
+            <td class="w-40">
               <b-form-input
                 v-model="item.name"
-                class="w-20 h-8"
+                class="w-full h-8"
                 v-if="isEdit.value"
               />
               <div v-else>{{ item.name }}</div>
