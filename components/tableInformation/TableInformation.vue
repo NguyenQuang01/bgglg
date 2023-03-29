@@ -219,7 +219,7 @@ export default {
       this.btn = "quay lai";
       const checkReport = localStorage.getItem("checkReport");
       if (checkReport === "false") {
-        if (this.hours < 18) {
+        if (this.hours > 18) {
           const res = await saveDetail(this.getDataInformationReport);
           if (res) {
             message.success("thành công");

@@ -11,34 +11,127 @@
         <th>Tổng lao động báo năng suất</th>
         <th>Báo cơm</th>
       </tr>
-      <tr v-for="(item, index) in valueTable">
+      <!-- <tr v-for="(item, index) in valueTable">
         <td class="font-bold backgroundBlue">{{ item.department }}</td>
-        <td>{{ item.totalEmp }}</td>
-        <td>{{ item.totalEmp }}</td>
-        <td>{{ item.laborProductivityTeam }}</td>
-        <td>{{ item.restEmp }}</td>
-        <td>{{ item.ratio }}</td>
-        <!-- <td rowspan="2">afds</td> -->
-        <!-- rowspan="6"  -->
-        <!-- <td class="font-bold">1682.0</td> -->
-        <td v-if="index === 0" :rowspan="valueTable.length" class="font-bold">
+        <td>{{ item.totalEmp ||0 }}</td>
+        <td>{{ item.totalEmp ||0 }}</td>
+        <td>{{ item.laborProductivityTeam||0 }}</td>
+        <td>{{ item.restEmp||0 }}</td>
+        <td>{{ item.ratio||0 }}</td> -->
+      <!-- <td rowspan="2">afds</td> -->
+      <!-- rowspan="6"  -->
+      <!-- <td class="font-bold">1682.0</td> -->
+      <!-- <td v-if="index === 0" :rowspan="valueTable.length" class="font-bold">
           {{ laborProductivity }}
         </td>
         <td></td>
+      </tr> -->
+      <tr>
+        <td class="font-bold backgroundBlue">Văn phòng</td>
+        <td class="font-bold">{{ office.totalEmp || 0 }}</td>
+        <td class="font-bold">{{ office.totalEmp || 0 }}</td>
+        <td class="font-bold">{{ office.laborProductivityTeam || 0 }}</td>
+        <td class="font-bold">{{ office.restEmp || 0 }}</td>
+        <td class="font-bold">{{ radioOffice.toFixed(3) || 0 }}</td>
+        <td class="font-bold" rowspan="6">{{ totalLaborReports }}</td>
+        <td>
+          <div>Nhân viên:{{ riceCus || 0 }}</div>
+          <div>khách:{{ riceEmp || 0 }}</div>
+          <div>khách vip:{{ riceVip || 0 }}</div>
+        </td>
       </tr>
+      <tr>
+        <td class="font-bold backgroundBlue">Đơn vị lẻ</td>
+        <td class="font-bold">{{ oddUnit.totalEmp || 0 }}</td>
+        <td class="font-bold">{{ oddUnit.totalEmp || 0 }}</td>
+        <td class="font-bold">{{ oddUnit.laborProductivityTeam || 0 }}</td>
+        <td class="font-bold">{{ oddUnit.restEmp || 0 }}</td>
+        <td class="font-bold">{{ radioOddUnit.toFixed(3) || 0 }}</td>
 
+        <td>
+          <!-- <div>Nhân viên:{{ riceCus }}</div>
+          <div>khách:{{ riceEmp }}</div>
+          <div>khách vip:{{ riceVip }}</div> -->
+        </td>
+      </tr>
+      <tr>
+        <td class="font-bold backgroundBlue">Tổ may (không tính thời vụ)</td>
+        <td class="font-bold">{{ sewingTeamNo.totalEmp || 0 }}</td>
+        <td class="font-bold">{{ sewingTeamNo.totalEmp || 0 }}</td>
+        <td class="font-bold">{{ sewingTeamNo.laborProductivityTeam || 0 }}</td>
+        <td class="font-bold">{{ sewingTeamNo.restEmp || 0 }}</td>
+        <td class="font-bold">{{ radioSewingTeamNo.toFixed(3) || 0 }}</td>
+
+        <td>
+          <!-- <div>Nhân viên:{{ riceCus }}</div>
+          <div>khách:{{ riceEmp }}</div>
+          <div>khách vip:{{ riceVip }}</div> -->
+        </td>
+      </tr>
+      <tr>
+        <td class="font-bold backgroundBlue">Học sinh chưa báo năng suất</td>
+        <td class="font-bold">{{ studentsNotReported.totalEmp || 0 }}</td>
+        <td class="font-bold">{{ studentsNotReported.totalEmp || 0 }}</td>
+        <td class="font-bold">
+          {{ studentsNotReported.laborProductivityTeam || 0 }}
+        </td>
+        <td class="font-bold">{{ studentsNotReported.restEmp || 0 || 0 }}</td>
+        <td class="font-bold">
+          {{ radioStudentsNotReported.toFixed(3) || 0 }}
+        </td>
+
+        <td>
+          <!-- <div>Nhân viên:{{ riceCus }}</div>
+          <div>khách:{{ riceEmp }}</div>
+          <div>khách vip:{{ riceVip }}</div> -->
+        </td>
+      </tr>
+      <tr>
+        <td class="font-bold backgroundBlue">Thời vụ tổ may</td>
+        <td class="font-bold">{{ sewingTeamTime.totalEmp || 0 }}</td>
+        <td class="font-bold">{{ sewingTeamTime.totalEmp || 0 }}</td>
+        <td class="font-bold">
+          {{ sewingTeamTime.laborProductivityTeam || 0 }}
+        </td>
+        <td class="font-bold">{{ sewingTeamTime.restEmp || 0 }}</td>
+        <td class="font-bold">{{ radioSewingTeamTime.toFixed(3) || 0 }}</td>
+
+        <td>
+          <!-- <div>Nhân viên:{{ riceCus }}</div>
+          <div>khách:{{ riceEmp }}</div>
+          <div>khách vip:{{ riceVip }}</div> -->
+        </td>
+      </tr>
+      <tr>
+        <td class="font-bold backgroundBlue">Thời vụ đơn vị lẻ</td>
+        <td class="font-bold">{{ seasonalUnit.totalEmp || 0 }}</td>
+        <td class="font-bold">{{ seasonalUnit.totalEmp || 0 }}</td>
+        <td class="font-bold">{{ seasonalUnit.laborProductivityTeam || 0 }}</td>
+        <td class="font-bold">{{ seasonalUnit.restEmp || 0 }}</td>
+        <td class="font-bold">{{ radioSeasonalUnit.toFixed(3) || 0 }}</td>
+
+        <td>
+          <!-- <div>Nhân viên:{{ riceCus }}</div>
+          <div>khách:{{ riceEmp }}</div>
+          <div>khách vip:{{ riceVip }}</div> -->
+        </td>
+      </tr>
       <tr>
         <td class="font-bold backgroundBlue">Tổng thực tế làm việc</td>
-        <td class="font-bold">{{ totalAllVp }}</td>
-        <td class="font-bold">{{ totalAllVp }}</td>
+        <td class="font-bold">{{ totalActualWorking.Office || 0 }}</td>
+        <td class="font-bold">{{ totalActualWorking.Enterprise || 0 }}</td>
+        <td class="font-bold">
+          {{ totalActualWorking.Laborreportsproductivity || 0 }}
+        </td>
+        <td class="font-bold">
+          {{ this.totalActualWorking.Numberleave || 0 }}
+        </td>
         <td class="font-bold"></td>
-        <td class="font-bold">{{ totalRest }}</td>
-        <td class="font-bold">{{ totalratio }}</td>
-        <td class="font-bold"></td>
+        <td></td>
         <td>
-          <div>Nhân viên:{{ riceCus }}</div>
+          <!-- <div>Nhân viên:{{ riceCus }}</div>
           <div>khách:{{ riceEmp }}</div>
-          <div>khách vip:{{ riceVip }}</div>
+          <div>khách vip:{{ riceVip }}</div> -->
         </td>
       </tr>
     </table>
@@ -52,15 +145,35 @@ export default {
   props: ["valueDay"],
   data() {
     return {
-      valueTable: "",
-      actualWork: "",
-      laborProductivity: "",
-      totalratio: "",
-      totalAllVp: "",
-      totalRest: "",
-      riceCus: "",
-      riceEmp: "",
-      riceVip: "",
+      // valueTable: "",
+      // actualWork: "",
+      // laborProductivity: "",
+      // : "",
+      // : "",
+      // : "",
+      // riceCus: "",
+      // riceEmp: "",
+      // riceVip: "",
+
+      office: [],
+      oddUnit: [],
+      sewingTeamNo: [],
+      studentsNotReported: [],
+      sewingTeamTime: [],
+      seasonalUnit: [],
+      totalActualWorking: {
+        Office: 0,
+        Enterprise: 0,
+        Laborreportsproductivity: 0,
+        Numberleave: 0,
+      },
+      totalLaborReports: "",
+      radioOffice: 0,
+      radioOddUnit: 0,
+      radioSewingTeamNo: 0,
+      radioStudentsNotReported: 0,
+      radioSewingTeamTime: 0,
+      radioSeasonalUnit: 0,
     };
   },
   created() {
@@ -80,21 +193,76 @@ export default {
       const res = await getView(day);
 
       if (res) {
-        this.valueTable = res.responseList;
-        this.actualWork = res.actualWork;
-        this.laborProductivity = res.laborProductivity;
-        this.totalratio = res.totalratio;
-        this.riceCus = res.totalRiceCus;
-        this.riceEmp = res.totalRiceEmp;
-        this.riceVip = res.totalRiceVip;
-        this.totalAllVp = res.responseList
+        console.log(res, 777);
+        // this.valueTable = res.responseList;
+        // this.actualWork = res.actualWork;
+        // this.laborProductivity = res.laborProductivity;
+        // this. = res.;
+        // this.riceCus = res.totalRiceCus;
+        // this.riceEmp = res.totalRiceEmp;
+        // this.riceVip = res.totalRiceVip;
+        // this. = res.responseList
+        //   .map((item) => [item.totalEmp ||0])
+        //   .reduce(
+        //     (accumulator, currentValue) =>
+        //       Number(accumulator) + Number(currentValue),
+        //     0
+        //   );
+        // this. = res.responseList
+        //   .map((item) => [item.restEmp||0])
+        //   .reduce(
+        //     (accumulator, currentValue) =>
+        //       Number(accumulator) + Number(currentValue),
+        //     0
+        //   );
+        this.office = res[0];
+        this.oddUnit = res[1];
+        this.sewingTeamNo = res[2];
+        this.studentsNotReported = res[3];
+        this.sewingTeamTime = res[4];
+        this.seasonalUnit = res[5];
+        this.totalLaborReports = res
+          .map((item) => [item.laborProductivityTeam])
+          .reduce(
+            (accumulator, currentValue) =>
+              Number(accumulator) + Number(currentValue),
+            0
+          );
+        this.radioOffice =
+          (res[0].laborProductivityTeam / this.totalLaborReports) * 100;
+        this.radioOddUnit =
+          (res[1].laborProductivityTeam / this.totalLaborReports) * 100;
+        this.radioSewingTeamNo =
+          (res[2].laborProductivityTeam / this.totalLaborReports) * 100;
+        this.radioStudentsNotReported =
+          (res[3].laborProductivityTeam / this.totalLaborReports) * 100;
+        this.radioSewingTeamTime =
+          (res[4].laborProductivityTeam / this.totalLaborReports) * 100;
+        this.radioSeasonalUnit =
+          (res[5].laborProductivityTeam / this.totalLaborReports) * 100;
+        this.totalActualWorking.Office = res
           .map((item) => [item.totalEmp])
           .reduce(
             (accumulator, currentValue) =>
               Number(accumulator) + Number(currentValue),
             0
           );
-        this.totalRest = res.responseList
+        this.totalActualWorking.Enterprise = res
+          .map((item) => [item.totalEmp])
+          .reduce(
+            (accumulator, currentValue) =>
+              Number(accumulator) + Number(currentValue),
+            0
+          );
+        this.totalActualWorking.Laborreportsproductivity = res
+          .map((item) => [item.laborProductivityTeam])
+          .reduce(
+            (accumulator, currentValue) =>
+              Number(accumulator) + Number(currentValue),
+            0
+          );
+        0;
+        this.totalActualWorking.Numberleave = res
           .map((item) => [item.restEmp])
           .reduce(
             (accumulator, currentValue) =>
@@ -103,16 +271,16 @@ export default {
           );
       }
       if (res === undefined) {
-        message.warning("ngày không có dữ liệu");
-        this.valueTable = "";
-        this.actualWork = "";
-        this.laborProductivity = "";
-        this.totalratio = "";
-        this.totalAllVp = "";
-        this.totalRest = "";
-        this.riceCus = "";
-        this.riceEmp = "";
-        this.riceVip = "";
+        // message.warning("ngày không có dữ liệu");
+        // this.valueTable = "";
+        // this.actualWork = "";
+        // this.laborProductivity = "";
+        // this. = "";
+        // this. = "";
+        // this. = "";
+        // this.riceCus = "";
+        // this.riceEmp = "";
+        // this.riceVip = "";
       }
     },
   },
