@@ -28,12 +28,16 @@ export const getDetail = async (param) => {
   } catch (error) {}
 };
 export const updateDetail = async (param) => {
-  const groupId = localStorage.getItem("groupId");
-  const response = await request.post(
-    `${HOST}/report/update?groupId=${groupId}`,
-    param
-  );
-  return response.data;
+  try {
+    const groupId = localStorage.getItem("groupId");
+    const response = await request.post(
+      `${HOST}/report/update?groupId=${groupId}`,
+      param
+    );
+    return response.data;
+  } catch (error) {
+    return { statusbar: 500 };
+  }
 };
 export const saveDetail = async (param) => {
   const groupId = localStorage.getItem("groupId");

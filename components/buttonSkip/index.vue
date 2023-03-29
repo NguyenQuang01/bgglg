@@ -1,6 +1,6 @@
 <template lang="">
   <div>
-    <b-button @click="btnSKip" variant="primary" class="text-blue-700 ml-2"
+    <b-button @click="btnSKip" variant="primary" class="text-blue-700 ml-2 mb-2"
       >bỏ qua
     </b-button>
   </div>

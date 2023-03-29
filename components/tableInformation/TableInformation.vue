@@ -247,6 +247,7 @@ export default {
           id: id,
         };
         const res = updateDetail(payload);
+        console.log(res, 34334);
         if (res) {
           message.success("sửa thành công");
           setTimeout(() => this.$router.push("/sussInformation"), 1000);

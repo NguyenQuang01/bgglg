@@ -7,20 +7,20 @@
         ><b-icon icon="arrow-bar-left" aria-hidden="true"></b-icon>trở lại
         ></b-button
       > -->
-      <div
-        class="flex justify-center text-xl border-dotted border-2 border-blue-500 p-3 mb-5"
+      <a-result
+        status="success"
+        sub-title="bạn đã báo cáo lao động cho ngày hôm nay, xin cảm ơn."
       >
-        Xin chào: {{ user }} ✔️<br />- bạn đã báo cáo lao động cho ngày hôm nay,
-        xin cảm ơn
-      </div>
-      <div class="flex">
-        <b-button variant="primary" class="text-blue-700" @click="gotoPage"
-          >Xem lại lịch sử báo cáo
-        </b-button>
-        <!-- <b-button variant="primary" class="text-blue-700 ml-2"
-          >Sửa báo cáo
-        </b-button> -->
-      </div>
+        <template #title>
+          <h1>Xin chào: {{ user }} !</h1>
+          <span class="text-lg">Tổ: {{ groupName }}</span>
+        </template>
+        <template #extra>
+          <a-button key="console" type="primary" @click="gotoPage"
+            >Xem lại lịch sử báo cáo</a-button
+          >
+        </template>
+      </a-result>
     </div>
   </div>
 </template>
@@ -34,7 +34,8 @@ export default {
   },
   data() {
     return {
-      user: localStorage.getItem("userLogin"),
+      groupName: localStorage.getItem("groupName") || "",
+      user: localStorage.getItem("userLogin") || "",
       label: {
         name: "Nhập số lao động nghỉ :",
         placeholder: "số lao động nghỉ",
