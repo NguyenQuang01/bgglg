@@ -7,13 +7,14 @@ export default () => ({
     partTimeNum: 0,
     studentNum: 0,
     transferRequests: [
-      { transferNum: 0, type: 1, groupId: 0 },
-      { transferNum: 0, type: 2, groupId: 0 },
+      { transferNum: 0, type: 1, groupId: 0, transferId: "" },
+      { transferNum: 0, type: 2, groupId: 0, transferId: "" },
     ],
     riceRequests: {
       riceEmp: 0,
       riceCus: 0,
       riceVip: 0,
+      riceId: "",
     },
     restNum: 0,
     laborProductivity: 0,

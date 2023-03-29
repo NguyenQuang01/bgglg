@@ -64,6 +64,7 @@ export default {
         staff: "",
         guest: "",
         guestVip: "",
+        riceId: "",
       },
     };
   },
@@ -74,7 +75,7 @@ export default {
   },
   fetch() {
     const isReport = localStorage.getItem("checkReport");
-    if (isReport) {
+    if (isReport === "true") {
       this.getValue();
     }
   },
@@ -94,9 +95,10 @@ export default {
       const res = await getDetail({ day, groupId });
       if (res) {
         this.numberMeal = {
-          staff: res.rice.riceCus,
-          guest: res.rice.riceEmp,
-          guestVip: res.rice.riceVip,
+          staff: Number(res.rice.riceCus),
+          guest: Number(res.rice.riceEmp),
+          guestVip: Number(res.rice.riceVip),
+          riceId: Number(res.rice.riceId),
         };
       }
     },

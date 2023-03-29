@@ -123,14 +123,14 @@ export default {
       form: {
         parentId: "",
         parentIdSupport: "",
-        transfer: { number: "", group: "" },
-        support: { number: "", group: "" },
+        transfer: { number: "", group: "", transferId: "" },
+        support: { number: "", group: "", transferId: "" },
       },
     };
   },
   fetch() {
     const isReport = localStorage.getItem("checkReport");
-    if (isReport) {
+    if (isReport === "true") {
       this.getValue();
     }
     this.groupRoleRoot();
@@ -179,12 +179,14 @@ export default {
     onSubmit(event) {
       event.preventDefault();
       this.SET_STATE_TRANSFER({
-        transferNum: this.form.transfer.number,
-        groupId: this.form.transfer.group,
+        transferNum: Number(this.form.transfer.number),
+        groupId: Number(this.form.transfer.group),
+        transferId: Number(this.form.transfer.transferId),
       });
       this.SET_STATE_SUPPORT({
-        transferNum: this.form.support.number,
-        groupId: this.form.support.group,
+        transferNum: Number(this.form.support.number),
+        groupId: Number(this.form.support.group),
+        transferId: Number(this.form.support.transferId),
       });
       this.$router.push("/move-inPerson");
     },
@@ -193,10 +195,17 @@ export default {
       const groupId = localStorage.getItem("groupId");
       const res = await getDetail({ day, groupId });
       console.log(res);
-      // if (res) {
-      //   this.form = res.transfers.map(item=>({parentId:item.}));
-      //   console.log(this.form, 787);
-      // }
+      if (res) {
+        this.form.parentId = res.transfers[0].parentId;
+        this.form.parentIdSupport = res.transfers[1].parentId;
+        this.form.transfer.number = res.transfers[0].transferNum;
+        this.form.transfer.group = res.transfers[0].groupId;
+        this.form.transfer.transferId = res.transfers[0].transferId;
+        this.form.support.number = res.transfers[1].transferNum;
+        this.form.support.group = res.transfers[1].groupId;
+        this.form.support.transferId = res.transfers[1].transferId;
+        console.log(this.form, 787);
+      }
     },
   },
 };

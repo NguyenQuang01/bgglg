@@ -21,16 +21,21 @@ export default {
     state.dataInformationReport.transferRequests[0].transferNum =
       data.transferNum;
     state.dataInformationReport.transferRequests[0].groupId = data.groupId;
+    state.dataInformationReport.transferRequests[0].transferId =
+      data.transferId;
   },
   SET_STATE_SUPPORT(state, data) {
     state.dataInformationReport.transferRequests[1].transferNum =
       data.transferNum;
     state.dataInformationReport.transferRequests[1].groupId = data.groupId;
+    state.dataInformationReport.transferRequests[1].transferId =
+      data.transferId;
   },
   SET_STATE_MEAL(state, data) {
     state.dataInformationReport.riceRequests.riceEmp = data.staff;
     state.dataInformationReport.riceRequests.riceCus = data.guest;
     state.dataInformationReport.riceRequests.riceVip = data.guestVip;
+    state.dataInformationReport.riceRequests.riceId = data.riceId;
   },
   SET_STATE_PRODUCTIVITY(state, data) {
     state.dataInformationReport.laborProductivity = data;

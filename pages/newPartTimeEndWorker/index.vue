@@ -62,7 +62,7 @@ export default {
   },
   fetch() {
     const isReport = localStorage.getItem("checkReport");
-    if (isReport) {
+    if (isReport === "true") {
       this.getValue();
     }
   },
@@ -82,8 +82,8 @@ export default {
       const groupId = localStorage.getItem("groupId");
       const res = await getDetail({ day, groupId });
       if (res) {
-        this.form.partTime = res.partTimeNum;
-        this.form.worker = res.studentNum;
+        this.form.partTime = Number(res.partTimeNum);
+        this.form.worker = Number(res.studentNum);
       }
     },
   },

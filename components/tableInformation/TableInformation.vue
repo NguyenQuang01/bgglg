@@ -219,7 +219,7 @@ export default {
       this.btn = "quay lai";
       const checkReport = localStorage.getItem("checkReport");
       console.log(checkReport, 78787);
-      if (!checkReport) {
+      if (checkReport === "false") {
         if (this.hours < 18) {
           const res = await saveDetail(this.getDataInformationReport);
           if (res) {
@@ -234,7 +234,8 @@ export default {
         } else {
           alert("đã qua 18 giờ");
         }
-      } else {
+      }
+      if (checkReport === "true") {
         const day = today();
         const groupId = localStorage.getItem("groupId");
         const response = await getDetail({ day, groupId });

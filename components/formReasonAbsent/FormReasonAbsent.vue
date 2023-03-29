@@ -60,6 +60,7 @@ export default {
         user: "",
         id: "",
         reason: "",
+        restId: "",
       },
       arrForms: [],
       valueTextarea: "",
@@ -71,7 +72,7 @@ export default {
   },
   fetch() {
     const isReport = localStorage.getItem("checkReport");
-    if (isReport) {
+    if (isReport === "true") {
       this.getValue();
     }
     this.arrForms.push(this.form);
@@ -84,6 +85,8 @@ export default {
       const arrLabor = this.arrForms.map((item) => ({
         restName: item.user,
         reasonId: item.reason,
+        restId: item.restId,
+        reasonName: item.reasonName,
       }));
       this.SET_STATE_ARRLABOR(arrLabor);
       this.$router.push("/newPartTimeEndWorker");
@@ -106,6 +109,7 @@ export default {
           user: "",
           id: "",
           reason: "",
+          reasonName: "",
         });
       }
     },
@@ -118,6 +122,8 @@ export default {
           user: item.restName,
           id: item.restId,
           reason: item.reasonId,
+          restId: item.restId,
+          reasonName: item.reasonName,
         }));
       }
     },
