@@ -194,7 +194,6 @@ export default {
       const day = today();
       const groupId = localStorage.getItem("groupId");
       const res = await getDetail({ day, groupId });
-      console.log(res);
       if (res) {
         this.form.parentId = res.transfers[0].parentId;
         this.form.parentIdSupport = res.transfers[1].parentId;
@@ -204,7 +203,6 @@ export default {
         this.form.support.number = res.transfers[1].transferNum;
         this.form.support.group = res.transfers[1].groupId;
         this.form.support.transferId = res.transfers[1].transferId;
-        console.log(this.form, 787);
       }
     },
   },
