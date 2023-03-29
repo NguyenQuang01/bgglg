@@ -218,7 +218,6 @@ export default {
       event.preventDefault();
       this.btn = "quay lai";
       const checkReport = localStorage.getItem("checkReport");
-      console.log(checkReport, 78787);
       if (checkReport === "false") {
         if (this.hours < 18) {
           const res = await saveDetail(this.getDataInformationReport);

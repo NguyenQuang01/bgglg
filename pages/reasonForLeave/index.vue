@@ -129,10 +129,10 @@ export default defineComponent({
     });
 
     const onSelectChange = (selectedRowKeys) => {
-      console.log(
-        "selectedRowKeys changed: ",
-        (idItem.value = selectedRowKeys)
-      );
+      // console.log(
+      //   "selectedRowKeys changed: ",
+      //   (idItem.value = selectedRowKeys)
+      // );
       state.selectedRowKeys = selectedRowKeys;
     };
     const getvalue = async () => {
