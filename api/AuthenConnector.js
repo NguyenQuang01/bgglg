@@ -128,3 +128,9 @@ export const getDemarcationDb = async (param) => {
   );
   return response.data;
 };
+export const getViewDetail = async (param) => {
+  const response = await request.get(
+    `${HOST}/view/groupRoleReport?reportDate=2023-03-30`
+  );
+  return response.data;
+};

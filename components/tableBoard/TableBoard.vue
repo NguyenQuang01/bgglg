@@ -215,60 +215,61 @@ export default {
         //       Number(accumulator) + Number(currentValue),
         //     0
         //   );
-        this.office = res[0];
-        this.oddUnit = res[1];
-        this.sewingTeamNo = res[2];
-        this.studentsNotReported = res[3];
-        this.sewingTeamTime = res[4];
-        this.seasonalUnit = res[5];
-        this.totalLaborReports = res
-          .map((item) => [item.laborProductivityTeam])
-          .reduce(
-            (accumulator, currentValue) =>
-              Number(accumulator) + Number(currentValue),
-            0
-          );
-        this.radioOffice =
-          (res[0].laborProductivityTeam / this.totalLaborReports) * 100;
-        this.radioOddUnit =
-          (res[1].laborProductivityTeam / this.totalLaborReports) * 100;
-        this.radioSewingTeamNo =
-          (res[2].laborProductivityTeam / this.totalLaborReports) * 100;
-        this.radioStudentsNotReported =
-          (res[3].laborProductivityTeam / this.totalLaborReports) * 100;
-        this.radioSewingTeamTime =
-          (res[4].laborProductivityTeam / this.totalLaborReports) * 100;
-        this.radioSeasonalUnit =
-          (res[5].laborProductivityTeam / this.totalLaborReports) * 100;
-        this.totalActualWorking.Office = res
-          .map((item) => [item.totalEmp])
-          .reduce(
-            (accumulator, currentValue) =>
-              Number(accumulator) + Number(currentValue),
-            0
-          );
-        this.totalActualWorking.Enterprise = res
-          .map((item) => [item.totalEmp])
-          .reduce(
-            (accumulator, currentValue) =>
-              Number(accumulator) + Number(currentValue),
-            0
-          );
-        this.totalActualWorking.Laborreportsproductivity = res
-          .map((item) => [item.laborProductivityTeam])
-          .reduce(
-            (accumulator, currentValue) =>
-              Number(accumulator) + Number(currentValue),
-            0
-          );
-        0;
-        this.totalActualWorking.Numberleave = res
-          .map((item) => [item.restEmp])
-          .reduce(
-            (accumulator, currentValue) =>
-              Number(accumulator) + Number(currentValue),
-            0
-          );
+
+        // this.office = res[0];
+        // this.oddUnit = res[1];
+        // this.sewingTeamNo = res[2];
+        // this.studentsNotReported = res[3];
+        // this.sewingTeamTime = res[4];
+        // this.seasonalUnit = res[5];
+        // this.totalLaborReports = res
+        //   .map((item) => [item.laborProductivityTeam])
+        //   .reduce(
+        //     (accumulator, currentValue) =>
+        //       Number(accumulator) + Number(currentValue),
+        //     0
+        //   );
+        // this.radioOffice =
+        //   (res[0].laborProductivityTeam / this.totalLaborReports) * 100;
+        // this.radioOddUnit =
+        //   (res[1].laborProductivityTeam / this.totalLaborReports) * 100;
+        // this.radioSewingTeamNo =
+        //   (res[2].laborProductivityTeam / this.totalLaborReports) * 100;
+        // this.radioStudentsNotReported =
+        //   (res[3].laborProductivityTeam / this.totalLaborReports) * 100;
+        // this.radioSewingTeamTime =
+        //   (res[4].laborProductivityTeam / this.totalLaborReports) * 100;
+        // this.radioSeasonalUnit =
+        //   (res[5].laborProductivityTeam / this.totalLaborReports) * 100;
+        // this.totalActualWorking.Office = res
+        //   .map((item) => [item.totalEmp])
+        //   .reduce(
+        //     (accumulator, currentValue) =>
+        //       Number(accumulator) + Number(currentValue),
+        //     0
+        //   );
+        // this.totalActualWorking.Enterprise = res
+        //   .map((item) => [item.totalEmp])
+        //   .reduce(
+        //     (accumulator, currentValue) =>
+        //       Number(accumulator) + Number(currentValue),
+        //     0
+        //   );
+        // this.totalActualWorking.Laborreportsproductivity = res
+        //   .map((item) => [item.laborProductivityTeam])
+        //   .reduce(
+        //     (accumulator, currentValue) =>
+        //       Number(accumulator) + Number(currentValue),
+        //     0
+        //   );
+        // 0;
+        // this.totalActualWorking.Numberleave = res
+        //   .map((item) => [item.restEmp])
+        //   .reduce(
+        //     (accumulator, currentValue) =>
+        //       Number(accumulator) + Number(currentValue),
+        //     0
+        //   );
       }
       if (res === undefined) {
         // message.warning("ngày không có dữ liệu");

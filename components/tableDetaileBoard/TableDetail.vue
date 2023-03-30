@@ -2,116 +2,118 @@
   <a-table :columns="columns" :data-source="data" bordered />
 </template>
 <script>
+import { getViewDetail } from "@/api/AuthenConnector.js";
 export default {
   data() {
     return {
-      data: [
-        {
-          key: 1,
-          name: "văn phòng",
-          office: 60,
-          enterprise: "88",
-          laborProductivity: 33,
-          NumberLeave: 22,
-          Ratio: 99,
-          totalLaborProductivity: 55,
-          NumberRice: 11,
-          children: [
-            {
-              key: 11,
-              name: "Lãnh đạo",
-              office: 42,
-              enterprise: "99",
-              laborProductivity: 33,
-              NumberLeave: 22,
-              Ratio: 99,
-              totalLaborProductivity: 55,
-              NumberRice: 11,
-            },
-            {
-              key: 12,
-              name: "Phòng TCHC",
-              office: 30,
-              enterprise: "5",
-              laborProductivity: 33,
-              NumberLeave: 22,
-              Ratio: 99,
-              totalLaborProductivity: 55,
-              NumberRice: 11,
-            },
-            {
-              key: 13,
-              name: "Kế Toán",
-              office: 72,
-              enterprise: "8",
-              laborProductivity: 33,
-              NumberLeave: 22,
-              Ratio: 99,
-              totalLaborProductivity: 55,
-              NumberRice: 11,
-            },
-          ],
-        },
-        {
-          key: 2,
-          name: "Đơn vị lẻ",
-          office: 32,
-          enterprise: "77",
-          laborProductivity: 33,
-          NumberLeave: 22,
-          Ratio: 99,
-          totalLaborProductivity: 55,
-          NumberRice: 11,
-          children: [
-            {
-              key: 131,
-              name: "XN1",
-              office: 42,
-              enterprise: "99",
-              laborProductivity: 33,
-              NumberLeave: 22,
-              Ratio: 99,
-              totalLaborProductivity: 55,
-              NumberRice: 11,
-              children: [
-                {
-                  key: 111,
-                  name: "Vệ Sinh 1",
-                  office: 42,
-                  enterprise: "99",
-                  laborProductivity: 33,
-                  NumberLeave: 22,
-                  Ratio: 99,
-                  totalLaborProductivity: 55,
-                  NumberRice: 11,
-                },
-              ],
-            },
-            {
-              key: 1222,
-              name: "XN2",
-              office: 42,
-              enterprise: "99",
-              laborProductivity: 33,
-              NumberLeave: 22,
-              Ratio: 99,
-              totalLaborProductivity: 55,
-              NumberRice: 11,
-            },
-          ],
-        },
-        {
-          key: 2212,
-          name: "Tổ May	",
-          office: 32,
-          enterprise: "77",
-          laborProductivity: 33,
-          NumberLeave: 22,
-          Ratio: 99,
-          totalLaborProductivity: 55,
-          NumberRice: 11,
-        },
-      ],
+      data: [],
+      // data: [
+      //   {
+      //     key: 1,
+      //     name: "văn phòng",
+      //     office: 60,
+      //     enterprise: "88",
+      //     laborProductivity: 33,
+      //     NumberLeave: 22,
+      //     Ratio: 99,
+      //     totalLaborProductivity: 55,
+      //     NumberRice: 11,
+      //     children: [
+      //       {
+      //         key: 11,
+      //         name: "Lãnh đạo",
+      //         office: 42,
+      //         enterprise: "99",
+      //         laborProductivity: 33,
+      //         NumberLeave: 22,
+      //         Ratio: 99,
+      //         totalLaborProductivity: 55,
+      //         NumberRice: 11,
+      //       },
+      //       {
+      //         key: 12,
+      //         name: "Phòng TCHC",
+      //         office: 30,
+      //         enterprise: "5",
+      //         laborProductivity: 33,
+      //         NumberLeave: 22,
+      //         Ratio: 99,
+      //         totalLaborProductivity: 55,
+      //         NumberRice: 11,
+      //       },
+      //       {
+      //         key: 13,
+      //         name: "Kế Toán",
+      //         office: 72,
+      //         enterprise: "8",
+      //         laborProductivity: 33,
+      //         NumberLeave: 22,
+      //         Ratio: 99,
+      //         totalLaborProductivity: 55,
+      //         NumberRice: 11,
+      //       },
+      //     ],
+      //   },
+      //   {
+      //     key: 2,
+      //     name: "Đơn vị lẻ",
+      //     office: 32,
+      //     enterprise: "77",
+      //     laborProductivity: 33,
+      //     NumberLeave: 22,
+      //     Ratio: 99,
+      //     totalLaborProductivity: 55,
+      //     NumberRice: 11,
+      //     children: [
+      //       {
+      //         key: 131,
+      //         name: "XN1",
+      //         office: 42,
+      //         enterprise: "99",
+      //         laborProductivity: 33,
+      //         NumberLeave: 22,
+      //         Ratio: 99,
+      //         totalLaborProductivity: 55,
+      //         NumberRice: 11,
+      //         children: [
+      //           {
+      //             key: 111,
+      //             name: "Vệ Sinh 1",
+      //             office: 42,
+      //             enterprise: "99",
+      //             laborProductivity: 33,
+      //             NumberLeave: 22,
+      //             Ratio: 99,
+      //             totalLaborProductivity: 55,
+      //             NumberRice: 11,
+      //           },
+      //         ],
+      //       },
+      //       {
+      //         key: 1222,
+      //         name: "XN2",
+      //         office: 42,
+      //         enterprise: "99",
+      //         laborProductivity: 33,
+      //         NumberLeave: 22,
+      //         Ratio: 99,
+      //         totalLaborProductivity: 55,
+      //         NumberRice: 11,
+      //       },
+      //     ],
+      //   },
+      //   {
+      //     key: 2212,
+      //     name: "Tổ May	",
+      //     office: 32,
+      //     enterprise: "77",
+      //     laborProductivity: 33,
+      //     NumberLeave: 22,
+      //     Ratio: 99,
+      //     totalLaborProductivity: 55,
+      //     NumberRice: 11,
+      //   },
+      // ],
       columns: [
         {
           title: "Bộ phận",
@@ -134,11 +136,11 @@ export default {
         },
         {
           title: "Số lao động nghỉ",
-          dataIndex: "NumberLeave",
+          dataIndex: "numberLeave",
         },
         {
           title: "Tỉ lệ %",
-          dataIndex: "Ratio",
+          dataIndex: "ratio",
         },
         {
           title: "Tổng lao động báo năng suất",
@@ -146,10 +148,22 @@ export default {
         },
         {
           title: "Báo cơm",
-          dataIndex: "NumberRice",
+          dataIndex: "numberRice",
         },
       ],
     };
+  },
+  created() {
+    this.getData();
+  },
+  methods: {
+    async getData() {
+      const res = await getViewDetail();
+      if (res && res.status === 200) {
+        this.data = res.data;
+      }
+      console.log(res, 3333);
+    },
   },
 };
 </script>
