@@ -7,7 +7,7 @@
         <th>XÍ nghiệp</th>
         <th>Lao động báo năng suất</th>
         <th>Số lao động nghỉ</th>
-        <th>Tỉ lệ %</th>
+        <th colspan="2">Tỉ lệ %</th>
         <th>Tổng lao động báo năng suất</th>
         <th>Báo cơm</th>
       </tr>
@@ -32,12 +32,15 @@
         <td class="font-bold"></td>
         <td class="font-bold">{{ office.laborProductivityTeam || "" }}</td>
         <td class="font-bold">{{ office.restEmp || "" }}</td>
-        <td class="font-bold">{{ radioOffice.toFixed(3) || "" }}</td>
+        <td class="font-bold">{{ radioOffice.toFixed(2) || "" }}</td>
+        <td class="font-bold" rowspan="2">
+          {{ totalRadioVPDVL.toFixed(2) || "" }}
+        </td>
         <td class="font-bold" rowspan="6">{{ totalLaborReports }}</td>
         <td>
-          <div>Nhân viên:{{ this.totalRiceCus || "" }}</div>
-          <div>khách:{{ this.totalRiceEmp || "" }}</div>
-          <div>khách vip:{{ this.totalRiceVip || "" }}</div>
+          <div>Nhân viên:{{ totalRiceCus || "" }}</div>
+          <div>khách:{{ totalRiceEmp || "" }}</div>
+          <div>khách vip:{{ totalRiceVip || "" }}</div>
         </td>
       </tr>
       <tr>
@@ -46,7 +49,7 @@
         <td class="font-bold">{{ oddUnit.totalEmp || "" }}</td>
         <td class="font-bold">{{ oddUnit.laborProductivityTeam || "" }}</td>
         <td class="font-bold">{{ oddUnit.restEmp || "" }}</td>
-        <td class="font-bold">{{ radioOddUnit.toFixed(3) || "" }}</td>
+        <td class="font-bold">{{ radioOddUnit.toFixed(2) || "" }}</td>
 
         <td>
           <!-- <div>Nhân viên:{{ riceCus }}</div>
@@ -62,7 +65,9 @@
           {{ sewingTeamNo.laborProductivityTeam || "" }}
         </td>
         <td class="font-bold">{{ sewingTeamNo.restEmp || "" }}</td>
-        <td class="font-bold">{{ radioSewingTeamNo.toFixed(3) || "" }}</td>
+        <td class="font-bold" colspan="2">
+          {{ radioSewingTeamNo.toFixed(2) || "" }}
+        </td>
 
         <td>
           <!-- <div>Nhân viên:{{ riceCus }}</div>
@@ -78,8 +83,8 @@
           {{ studentsNotReported.laborProductivityTeam || "" }}
         </td>
         <td class="font-bold">{{ studentsNotReported.restEmp || "" || "" }}</td>
-        <td class="font-bold">
-          {{ radioStudentsNotReported.toFixed(3) || "" }}
+        <td class="font-bold" colspan="2">
+          {{ radioStudentsNotReported.toFixed(2) || "" }}
         </td>
 
         <td>
@@ -96,7 +101,9 @@
           {{ sewingTeamTime.laborProductivityTeam || "" }}
         </td>
         <td class="font-bold">{{ sewingTeamTime.restEmp || "" }}</td>
-        <td class="font-bold">{{ radioSewingTeamTime.toFixed(3) || "" }}</td>
+        <td class="font-bold" colspan="2">
+          {{ radioSewingTeamTime.toFixed(2) || "" }}
+        </td>
 
         <td>
           <!-- <div>Nhân viên:{{ riceCus }}</div>
@@ -112,7 +119,9 @@
           {{ seasonalUnit.laborProductivityTeam || "" }}
         </td>
         <td class="font-bold">{{ seasonalUnit.restEmp || "" }}</td>
-        <td class="font-bold">{{ radioSeasonalUnit.toFixed(3) || "" }}</td>
+        <td class="font-bold" colspan="2">
+          {{ radioSeasonalUnit.toFixed(2) || "" }}
+        </td>
 
         <td>
           <!-- <div>Nhân viên:{{ riceCus }}</div>
@@ -130,7 +139,9 @@
         <td class="font-bold">
           {{ this.totalActualWorking.Numberleave || "" }}
         </td>
-        <td class="font-bold">{{ this.totalActualWorking.ratio }}</td>
+        <td class="font-bold" colspan="2">
+          {{ this.totalActualWorking.ratio }}
+        </td>
         <td></td>
         <td>
           <!-- <div>Nhân viên:{{ riceCus }}</div>
@@ -179,6 +190,7 @@ export default {
       radioStudentsNotReported: 0,
       radioSewingTeamTime: 0,
       radioSeasonalUnit: 0,
+      totalRadioVPDVL: 0,
       totalRiceCus: 0,
       totalRiceEmp: 0,
       totalRiceVip: 0,
@@ -277,6 +289,7 @@ export default {
               Number(accumulator) + Number(currentValue),
             0
           );
+        this.totalRadioVPDVL = this.radioOffice + this.radioOddUnit;
         this.totalActualWorking.ratio =
           this.radioOffice +
           this.radioOddUnit +
