@@ -5,15 +5,17 @@
 const renderContent = (value, row, index) => {
   console.log(value, row, index);
   const obj = {
+    children: value,
     attrs: {},
   };
-  if (row.name === "Văn phòng") {
+  if (row.name === "văn phòng") {
     console.log(value, row.key, 999);
     obj.attrs.rowSpan = 10;
   }
   if (index === 1) {
     obj.attrs.rowSpan = 0;
   }
+
   if (index === 2) {
     obj.attrs.rowSpan = 0;
   }
@@ -44,7 +46,13 @@ const renderContent = (value, row, index) => {
   if (index === 11) {
     obj.attrs.rowSpan = 0;
   }
-  if (index === 12) {
+  if (row.name === "Lãnh đạo") {
+    obj.attrs.rowSpan = 0;
+  }
+  if (row.name === "XN1") {
+    obj.attrs.rowSpan = 0;
+  }
+  if (row.name === "Vệ Sinh 1") {
     obj.attrs.rowSpan = 0;
   }
 
@@ -195,7 +203,7 @@ export default {
     };
   },
   created() {
-    this.getData();
+    // this.getData();
   },
   methods: {
     async getData() {
