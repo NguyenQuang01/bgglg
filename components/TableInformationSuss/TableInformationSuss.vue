@@ -210,7 +210,7 @@ export default {
   },
   methods: {
     edit() {
-      if (this.hours >= 18) {
+      if (this.hours < 18) {
         message.warning("đã qua 18giờ không được sửa");
         return;
       }
