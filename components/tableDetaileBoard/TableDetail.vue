@@ -8,7 +8,7 @@ const renderContent = (value, row, index) => {
     children: value,
     attrs: {},
   };
-  if (row.name === "văn phòng") {
+  if (row.name === "Văn phòng") {
     console.log(value, row.key, 999);
     obj.attrs.rowSpan = 10;
   }
@@ -46,7 +46,7 @@ const renderContent = (value, row, index) => {
   if (index === 11) {
     obj.attrs.rowSpan = 0;
   }
-  if (row.name === "Lãnh đạo") {
+  if (row.key === 24) {
     obj.attrs.rowSpan = 0;
   }
   if (row.name === "XN1") {
@@ -203,7 +203,7 @@ export default {
     };
   },
   created() {
-    // this.getData();
+    this.getData();
   },
   methods: {
     async getData() {
