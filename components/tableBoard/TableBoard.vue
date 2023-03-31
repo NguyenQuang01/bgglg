@@ -271,8 +271,7 @@ export default {
               0
             ) - this.totalActualWorking.Office;
 
-        this.totalActualWorking.Enterprise =
-          totalActualWorking - Number(this.totalActualWorking.Office);
+        this.totalActualWorking.Enterprise = totalActualWorking;
 
         this.totalActualWorking.Laborreportsproductivity = res
           .map((item) => [item.laborProductivityTeam])
