@@ -31,16 +31,14 @@
         label-for="input-3"
       >
         <div>
-          <b-form-checkbox-group v-model="selected" @input="selectOnlyOne">
-            <b-form-checkbox value="edit">edit</b-form-checkbox>
-            <b-form-checkbox value="view">view</b-form-checkbox>
-            <b-form-checkbox value="report">report</b-form-checkbox>
-            <b-form-checkbox value="admin">admin</b-form-checkbox>
-          </b-form-checkbox-group>
-          <!-- <b-form-checkbox v-model="form.edit"> edit </b-form-checkbox>
+          <!-- <b-form-checkbox value="edit">edit</b-form-checkbox>
+          <b-form-checkbox value="view">view</b-form-checkbox>
+          <b-form-checkbox value="report">report</b-form-checkbox>
+          <b-form-checkbox value="admin">admin</b-form-checkbox> -->
+          <b-form-checkbox v-model="form.edit"> edit </b-form-checkbox>
           <b-form-checkbox v-model="form.view"> view </b-form-checkbox>
           <b-form-checkbox v-model="form.report"> report </b-form-checkbox>
-          <b-form-checkbox v-model="form.admin"> admin </b-form-checkbox> -->
+          <b-form-checkbox v-model="form.admin"> admin </b-form-checkbox>
         </div>
       </b-form-group>
       <b-form-group
@@ -113,37 +111,37 @@ export default {
     },
   },
   methods: {
-    selectOnlyOne(selected) {
-      switch (selected) {
-        case "edit":
-          this.form.edit = true;
-          this.form.view = false;
-          this.form.report = false;
-          this.form.admin = false;
-          break;
-        case "view":
-          this.form.view = true;
-          this.form.edit = false;
-          this.form.report = false;
-          this.form.admin = false;
-          break;
-        case "report":
-          this.form.report = true;
-          this.form.view = false;
-          this.form.edit = false;
-          this.form.admin = false;
-          break;
-        case "admin":
-          this.form.admin = true;
-          this.form.view = false;
-          this.form.report = false;
-          this.form.edit = false;
-          break;
-        default:
-        // code block
-      }
-      this.selected = selected;
-    },
+    // selectOnlyOne(selected) {
+    //   switch (selected) {
+    //     case "edit":
+    //       this.form.edit = true;
+    //       this.form.view = false;
+    //       this.form.report = false;
+    //       this.form.admin = false;
+    //       break;
+    //     case "view":
+    //       this.form.view = true;
+    //       this.form.edit = false;
+    //       this.form.report = false;
+    //       this.form.admin = false;
+    //       break;
+    //     case "report":
+    //       this.form.report = true;
+    //       this.form.view = false;
+    //       this.form.edit = false;
+    //       this.form.admin = false;
+    //       break;
+    //     case "admin":
+    //       this.form.admin = true;
+    //       this.form.view = false;
+    //       this.form.report = false;
+    //       this.form.edit = false;
+    //       break;
+    //     default:
+    //     // code block
+    //   }
+    //   this.selected = selected;
+    // },
     async onSubmit(event) {
       event.preventDefault();
       const res = await addAccount(this.form);

@@ -59,6 +59,7 @@ export default {
       SET_STATE_ISUSER: "SET_STATE_ISUSER",
       SET_STATE_USERNAME: "SET_STATE_USERNAME",
       SET_STATE_ISAUTHEN: "SET_STATE_ISAUTHEN",
+      SET_STATE_INFUSER: "SET_STATE_INFUSER",
     }),
     async onSubmit(event) {
       event.preventDefault();
@@ -67,6 +68,7 @@ export default {
         message.error("sai tài khoản hoặc mật khẩu");
       }
       if (res && res.status === 200) {
+        this.SET_STATE_INFUSER(res.data);
         this.SET_STATE_ISUSER(true);
         this.SET_STATE_USERNAME(this.form.user);
         localStorage.setItem("isUser", true);
@@ -76,27 +78,28 @@ export default {
         localStorage.setItem("checkReport", res.data.checkReport);
         localStorage.setItem("groupName", res.data.groupName);
         this.SET_STATE_ISAUTHEN(true);
-        switch (true) {
-          case res.data.isEdit:
-            this.$router.push("/sussInformation");
-            break;
-          case res.data.isReport:
-            if (res.data.checkReport) {
-              this.$router.push("/reported");
-            } else {
-              this.$router.push("/laborreport");
-            }
+        this.$router.push("/menuLogin");
+        // switch (true) {
+        //   case res.data.isEdit:
+        //     this.$router.push("/sussInformation");
+        //     break;
+        //   case res.data.isReport:
+        //     if (res.data.checkReport) {
+        //       this.$router.push("/reported");
+        //     } else {
+        //       this.$router.push("/laborreport");
+        //     }
 
-            break;
-          case res.data.isAdmin:
-            this.$router.push("/listMenuAdmin");
+        //     break;
+        //   case res.data.isAdmin:
+        //     this.$router.push("/listMenuAdmin");
 
-            break;
-          case res.data.isView:
-            this.$router.push("/leaderMenu");
-            break;
-          default:
-        }
+        //     break;
+        //   case res.data.isView:
+        //     this.$router.push("/leaderMenu");
+        //     break;
+        //   default:
+        // }
       }
     },
     onReset(event) {

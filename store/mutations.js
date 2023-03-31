@@ -46,4 +46,7 @@ export default {
   SET_STATE_ISAUTHEN(state, data) {
     state.isAuthenticated = data;
   },
+  SET_STATE_INFUSER(state, data) {
+    state.infUser = data;
+  },
 };

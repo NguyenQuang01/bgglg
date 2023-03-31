@@ -3,4 +3,5 @@ export default {
   getUserName: (state) => state.UserName,
   getDataInformationReport: (state) => state.dataInformationReport,
   getIsAuthenticated: (state) => state.isAuthenticated,
+  getInfUsers: (state) => state.infUser,
 };

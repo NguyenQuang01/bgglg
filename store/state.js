@@ -1,4 +1,5 @@
 export default () => ({
+  infUser: {},
   isAuthenticated: false,
   isUser: false,
   UserName: "",
