@@ -7,9 +7,9 @@ const renderContent = (value, row, index) => {
   const obj = {
     attrs: {},
   };
-  if (index === 0) {
+  if (row.name === "Văn phòng") {
     console.log(value, row.key, 999);
-    obj.attrs.rowSpan = 3;
+    obj.attrs.rowSpan = 10;
   }
   if (index === 1) {
     obj.attrs.rowSpan = 0;
