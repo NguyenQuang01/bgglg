@@ -2,7 +2,11 @@
   <div>
     <b-form @submit="onSubmit">
       <div v-for="(item, index) in arrForms" :key="index">
-        <div class="font-extrabold text-lg">người thứ : {{ index + 1 }}</div>
+        <div class="font-extrabold text-lg">
+          người thứ : {{ index + 1 }}
+          <b-button class="delete" @click="deletes(index, item)">x</b-button>
+        </div>
+
         <b-form-group label="Nhập tên :" label-for="input-2">
           <b-form-input
             v-model="item.user"
@@ -101,7 +105,9 @@ export default {
         }));
       }
     },
-
+    deletes(id) {
+      this.arrForms.splice(id, 1);
+    },
     addQuantity() {
       this.amoun = this.amoun + 1;
       for (let i = 0; i < this.amount; i++) {
@@ -130,3 +136,11 @@ export default {
   },
 };
 </script>
+<style>
+.delete {
+  background-color: rgba(136, 136, 136, 0.8);
+  padding: 2px 10px;
+  border: none;
+  border-radius: 50%;
+}
+</style>

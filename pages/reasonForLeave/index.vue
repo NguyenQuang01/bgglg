@@ -192,17 +192,21 @@ export default defineComponent({
   background-color: rgba(0, 201, 0, 0.8);
   margin-right: 5px;
   padding: 2px 7px;
+  border: none;
 }
 .edit {
   background-color: rgba(201, 198, 0, 0.8);
   margin-right: 5px;
   padding: 2px 5px;
+  border: none;
 }
 .delete {
   background-color: rgba(201, 74, 0, 0.8);
   padding: 2px 8px;
+  border: none;
 }
 .add-btn {
   background-color: #1890ff;
+  border: none;
 }
 </style>
