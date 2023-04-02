@@ -31,41 +31,21 @@
         label-for="input-3"
       >
         <div>
-          <!-- <b-form-checkbox value="edit">edit</b-form-checkbox>
-          <b-form-checkbox value="view">view</b-form-checkbox>
-          <b-form-checkbox value="report">report</b-form-checkbox>
-          <b-form-checkbox value="admin">admin</b-form-checkbox> -->
           <b-form-checkbox v-model="form.edit"> edit </b-form-checkbox>
           <b-form-checkbox v-model="form.view"> view </b-form-checkbox>
           <b-form-checkbox v-model="form.report"> report </b-form-checkbox>
           <b-form-checkbox v-model="form.admin"> admin </b-form-checkbox>
         </div>
       </b-form-group>
-      <b-form-group
-        id="input-group-3"
-        label="Chọn bộ phận:"
-        label-for="input-3"
-      >
-        <b-form-select
-          id="input-3"
-          v-model="form.parentId"
-          :options="parts"
-          placeholder="nhập "
-          required
-        ></b-form-select>
-      </b-form-group>
-      <b-form-group
-        id="input-group-3"
-        label="Chọn phân loại:"
-        label-for="input-3"
-      >
-        <b-form-select
-          id="input-3"
-          v-model="form.groupId"
-          :options="parts2"
-          placeholder="nhập "
-          required
-        ></b-form-select>
+
+      <b-form-group id="input-group-3" label="Chọn tổ:" label-for="input-3">
+        <a-cascader
+          :options="options"
+          :display-render="displayRender"
+          expand-trigger="hover"
+          placeholder="chọn"
+          @change="onChange"
+        />
       </b-form-group>
       <b-button type="submit" variant="primary" class="btnSuccess"
         >Submit</b-button
@@ -75,18 +55,19 @@
 </template>
 <script>
 import { addAccount } from "@/api/AuthenConnector.js";
-import { groupRoleRoot, groupRoleDetails } from "@/api/AuthenConnector.js";
+import { groupRoleRoot } from "@/api/AuthenConnector.js";
 import { message } from "ant-design-vue";
 
 export default {
   data() {
     return {
+      options: [],
       selected: "",
       form: {
         userLogin: "",
         password: "",
         parentId: "",
-        groupId: "",
+        groupName: "",
         edit: false,
         view: false,
         report: false,
@@ -102,46 +83,15 @@ export default {
   fetch() {
     this.groupRoleRoot();
   },
-  watch: {
-    "form.parentId": {
-      handler: function (value) {
-        this.groupRoleDetails(value);
-      },
-      deep: true,
-    },
-  },
   methods: {
-    // selectOnlyOne(selected) {
-    //   switch (selected) {
-    //     case "edit":
-    //       this.form.edit = true;
-    //       this.form.view = false;
-    //       this.form.report = false;
-    //       this.form.admin = false;
-    //       break;
-    //     case "view":
-    //       this.form.view = true;
-    //       this.form.edit = false;
-    //       this.form.report = false;
-    //       this.form.admin = false;
-    //       break;
-    //     case "report":
-    //       this.form.report = true;
-    //       this.form.view = false;
-    //       this.form.edit = false;
-    //       this.form.admin = false;
-    //       break;
-    //     case "admin":
-    //       this.form.admin = true;
-    //       this.form.view = false;
-    //       this.form.report = false;
-    //       this.form.edit = false;
-    //       break;
-    //     default:
-    //     // code block
-    //   }
-    //   this.selected = selected;
-    // },
+    onChange(value) {
+      const lastElement = value[value.length - 1];
+      this.form.groupName = lastElement;
+    },
+    displayRender({ labels }) {
+      return labels[labels.length - 1];
+    },
+
     async onSubmit(event) {
       event.preventDefault();
       const res = await addAccount(this.form);
@@ -154,7 +104,7 @@ export default {
           userLogin: "",
           password: "",
           parentId: "",
-          groupId: "",
+          groupName: "",
           edit: false,
           view: false,
           report: false,
@@ -164,17 +114,9 @@ export default {
     },
     async groupRoleRoot() {
       const res = await groupRoleRoot();
-      this.parts = res.map((item) => ({
-        text: item.groupName,
-        value: item.id,
-      }));
-    },
-    async groupRoleDetails(param) {
-      const res = await groupRoleDetails(param);
-      this.parts2 = res.map((item) => ({
-        text: item.groupName,
-        value: item.id,
-      }));
+      if (res) {
+        this.options = res.data;
+      }
     },
   },
 };

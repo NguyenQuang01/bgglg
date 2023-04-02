@@ -8,33 +8,41 @@
       <BtnBack />
 
       <b-form @submit="onSubmit">
-        <b-form-group
-          id="input-group-2"
-          label="SỐ điều chuyển:"
-          label-for="input-2"
-        >
-          <b-form-input
-            v-model="form.transfer.number"
-            placeholder="Nhập "
-            required
-            type="number"
-          ></b-form-input>
-          <div class="flex justify-between">
-            <b-form-group
-              id="input-group-3"
-              label="Chọn bộ phận:"
-              label-for="input-3"
-              class="width48"
-            >
-              <b-form-select
+        <div class="flex justify-between">
+          <b-form-group
+            id="input-group-2"
+            label="SỐ điều chuyển:"
+            label-for="input-2"
+          >
+            <b-form-input
+              v-model="form.transfer.number"
+              placeholder="Nhập "
+              required
+              type="number"
+              class="h-8"
+            ></b-form-input>
+          </b-form-group>
+          <b-form-group
+            id="input-group-3"
+            label="Chọn bộ phận:"
+            label-for="input-3"
+            class="width48"
+          >
+            <!-- <b-form-select
                 id="input-3"
                 v-model="form.parentId"
                 :options="parts"
                 placeholder="nhập "
                 required
-              ></b-form-select>
-            </b-form-group>
-            <b-form-group
+              ></b-form-select> -->
+            <a-cascader
+              :options="parts"
+              expand-trigger="hover"
+              placeholder="chọn"
+              @change="onChange"
+            />
+          </b-form-group>
+          <!-- <b-form-group
               id="input-group-3"
               label="Chọn tổ:"
               label-for="input-3"
@@ -47,10 +55,37 @@
                 placeholder="nhập "
                 required
               ></b-form-select>
-            </b-form-group>
-          </div>
-        </b-form-group>
-        <b-form-group
+            </b-form-group> -->
+        </div>
+        <div class="flex justify-between">
+          <b-form-group
+            id="input-group-2"
+            label="SỐ đi hỗ trợ:"
+            label-for="input-2"
+          >
+            <b-form-input
+              v-model="form.support.number"
+              placeholder="Nhập "
+              required
+              type="number"
+              class="h-8"
+            ></b-form-input>
+          </b-form-group>
+          <b-form-group
+            id="input-group-3"
+            label="Chọn bộ phận:"
+            label-for="input-3"
+            class="width48"
+          >
+            <a-cascader
+              :options="parts"
+              expand-trigger="hover"
+              placeholder="chọn"
+              @change="onChange2"
+            />
+          </b-form-group>
+        </div>
+        <!-- <b-form-group
           id="input-group-2"
           label="SỐ đi hỗ trợ:"
           label-for="input-2"
@@ -91,7 +126,7 @@
               required
             ></b-form-select>
           </b-form-group>
-        </div>
+        </div> -->
 
         <div class="flex">
           <b-button type="submit" variant="primary" class="text-blue-700 mb-24"
@@ -136,12 +171,6 @@ export default {
     this.groupRoleRoot();
   },
   watch: {
-    "form.parentId": {
-      handler: function (value) {
-        this.groupRoleDetails(value);
-      },
-      deep: true,
-    },
     "form.parentIdSupport": {
       handler: function (value) {
         this.groupRoleDetails2(value);
@@ -154,20 +183,22 @@ export default {
       SET_STATE_TRANSFER: "SET_STATE_TRANSFER",
       SET_STATE_SUPPORT: "SET_STATE_SUPPORT",
     }),
+    onChange(value) {
+      const lastElement = value[value.length - 1];
+      this.form.transfer.group = lastElement;
+    },
+    onChange2(value) {
+      const lastElement = value[value.length - 1];
+      this.form.support.group = lastElement;
+    },
     async groupRoleRoot() {
       const res = await groupRoleRoot();
-      this.parts = res.map((item) => ({
-        text: item.groupName,
-        value: item.id,
-      }));
+      console.log(res, 7777);
+      if (res && res.code === 201) {
+        this.parts = res.data;
+      }
     },
-    async groupRoleDetails(param) {
-      const res = await groupRoleDetails(param);
-      this.parts2 = res.map((item) => ({
-        text: item.groupName,
-        value: item.id,
-      }));
-    },
+
     async groupRoleDetails2(param) {
       const res = await groupRoleDetails(param);
       this.parts3 = res.map((item) => ({
@@ -180,13 +211,13 @@ export default {
       event.preventDefault();
       this.SET_STATE_TRANSFER({
         transferNum: Number(this.form.transfer.number),
-        groupId: Number(this.form.transfer.group),
-        transferId: Number(this.form.transfer.transferId),
+        groupName: this.form.transfer.group,
+        transferId: this.form.transfer.transferId,
       });
       this.SET_STATE_SUPPORT({
         transferNum: Number(this.form.support.number),
-        groupId: Number(this.form.support.group),
-        transferId: Number(this.form.support.transferId),
+        groupName: this.form.support.group,
+        transferId: this.form.support.transferId,
       });
       this.$router.push("/move-inPerson");
     },
@@ -198,10 +229,10 @@ export default {
         this.form.parentId = res.transfers[0].parentId;
         this.form.parentIdSupport = res.transfers[1].parentId;
         this.form.transfer.number = res.transfers[0].transferNum;
-        this.form.transfer.group = res.transfers[0].groupId;
+        this.form.transfer.group = res.transfers[0].groupName;
         this.form.transfer.transferId = res.transfers[0].transferId;
         this.form.support.number = res.transfers[1].transferNum;
-        this.form.support.group = res.transfers[1].groupId;
+        this.form.support.group = res.transfers[1].groupName;
         this.form.support.transferId = res.transfers[1].transferId;
       }
     },

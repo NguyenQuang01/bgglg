@@ -77,7 +77,7 @@ export const reason = async () => {
   return response.data;
 };
 export const groupRoleRoot = async () => {
-  const response = await request.get(`${HOST}/groupRoleRoot`);
+  const response = await request.get(`${HOST}/groupRole`);
   return response.data;
 };
 export const groupRoleDetails = async (param) => {

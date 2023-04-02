@@ -32,7 +32,7 @@
         >Đăng nhập</b-button
       >
       <b-button type="reset" variant="danger" class="text-rose-700"
-        >Reset</b-button
+        >Nhập lại</b-button
       >
     </b-form>
   </div>

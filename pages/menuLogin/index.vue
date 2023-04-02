@@ -33,12 +33,10 @@
             @click="manage"
             class="mb-3"
             >{{ text4 }}</a-button
-          ><br /><a-button
-            v-if="getInfUsers.isAdmin"
-            type="primary"
-            @click="admin"
-            >{{ text5 }}</a-button
-          >
+          ><br />
+          <a-button v-if="getInfUsers.isAdmin" type="primary" @click="admin">{{
+            text5
+          }}</a-button>
         </a-collapse-panel>
       </a-collapse>
     </div>

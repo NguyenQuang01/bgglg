@@ -1,9 +1,7 @@
 <template>
   <div class="container mb-20">
     <div class="text-center mt-16 text-3xl font-bold title">Welcome back!</div>
-    <div class="text-center mt-2 font-semibold mb-10">
-      Xin hãy đăng nhập vào tài khoản của bạn.
-    </div>
+    <div class="text-center mt-2 font-semibold mb-10"></div>
     <div class="max-w-2xl m-auto m-0">
       <div>
         <b-form @submit="onSubmit">

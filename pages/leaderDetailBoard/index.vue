@@ -6,8 +6,8 @@
     <BtnBack />
     <div class="mb-2 flex">
       <a-date-picker v-model="valueDay" class="mx-2" placeholder="Chọn ngày" />
-      <a-button class="btnDay">Lọc</a-button>
-      <a-button class="btnDay">Xuất excel</a-button>
+      <!-- <a-button class="btnDay">Lọc</a-button>
+      <a-button class="btnDay">Xuất excel</a-button> -->
     </div>
     <div class="m-auto m-0 overflow-auto">
       <TableDetail />
