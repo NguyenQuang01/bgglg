@@ -19,7 +19,6 @@
           <b-form-group id="input-group-3" label="Chọn tổ:" label-for="input-3">
             <a-cascader
               :options="parts"
-              :display-render="displayRender"
               expand-trigger="hover"
               placeholder="chọn"
               @change="onChange"
