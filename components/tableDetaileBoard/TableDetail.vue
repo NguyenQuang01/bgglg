@@ -202,6 +202,19 @@ export default {
         {
           title: "Tổng lao động báo năng suất",
           dataIndex: "totalLaborProductivity",
+          customRender: (value, row, index) => {
+            const obj = {
+              children: value,
+              attrs: {},
+            };
+            if (row.name === "Văn phòng") {
+              obj.attrs.rowSpan = 1000;
+            }
+            if (row.name !== "Văn phòng") {
+              obj.attrs.rowSpan = 0;
+            }
+            return obj;
+          },
         },
         {
           title: "Báo cơm",

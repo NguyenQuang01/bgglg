@@ -9,14 +9,13 @@
 // In the fifth row, other columns are merged into first column
 // by setting it's colSpan to be 0
 const renderContent = (value, row, index) => {
-  const obj = {
-    children: value,
-    attrs: {},
-  };
-  if (index === 4) {
-    obj.attrs.colSpan = 0;
-  }
-  return obj;
+  // const obj = {
+  //   children: value,
+  //   attrs: {},
+  // };
+  // if (index === 4) {
+  // }
+  // return obj;
 };
 
 const data = [
@@ -55,7 +54,7 @@ const data = [
   {
     key: "5",
     name: "Jake White",
-    age: 18,
+    age: 165,
     tel: "0575-22098909",
     phone: 18900010002,
     address: "Dublin No. 2 Lake Park",
@@ -68,22 +67,22 @@ export default {
       {
         title: "Name",
         dataIndex: "name",
-        customRender: (text, row, index) => {
-          if (index < 4) {
-            return <a href="javascript:;">{text}</a>;
-          }
-          return {
-            children: <a href="javascript:;">{text}</a>,
-            attrs: {
-              colSpan: 5,
-            },
-          };
-        },
+        // customRender: (text, row, index) => {
+        //   if (index < 4) {
+        //     return <a href="javascript:;">{text}</a>;
+        //   }
+        //   return {
+        //     children: <a href="javascript:;">{text}</a>,
+        //     attrs: {
+        //       colSpan: 5,
+        //     },
+        //   };
+        // },
       },
       {
         title: "Age",
         dataIndex: "age",
-        customRender: renderContent,
+        // customRender: renderContent,
       },
       {
         title: "Home phone",
@@ -94,29 +93,43 @@ export default {
             children: value,
             attrs: {},
           };
-          if (index === 2) {
+          console.log(row);
+          if (row.name === "Jim Green") {
             obj.attrs.rowSpan = 2;
           }
-          // These two are merged into above cell
-          if (index === 3) {
+          if (row.name === "Joe Black") {
             obj.attrs.rowSpan = 0;
-          }
-          if (index === 4) {
-            obj.attrs.colSpan = 0;
           }
           return obj;
         },
+        // customRender: (value, row, index) => {
+        //   const obj = {
+        //     children: value,
+        //     attrs: {},
+        //   };
+        //   if (index === 2) {
+        //     obj.attrs.rowSpan = 2;
+        //   }
+        //   // These two are merged into above cell
+        //   if (index === 3) {
+        //     obj.attrs.rowSpan = 0;
+        //   }
+        //   if (index === 4) {
+        //     obj.attrs.colSpan = 0;
+        //   }
+        //   return obj;
+        // },
       },
       {
         title: "Phone",
         colSpan: 0,
         dataIndex: "phone",
-        customRender: renderContent,
+        // customRender: renderContent,
       },
       {
         title: "Address",
         dataIndex: "address",
-        customRender: renderContent,
+        // customRender: renderContent,
       },
     ];
     return {
