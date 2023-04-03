@@ -49,9 +49,9 @@
   </div>
 </template>
 <script>
-import { mapMutations } from "vuex";
+import { mapMutations, mapGetters } from "vuex";
 import ButtonSkip from "../buttonSkip";
-import { reason } from "@/api/AuthenConnector.js";
+import { reason, deleteLisRes } from "@/api/AuthenConnector.js";
 import { getDetail } from "@/api/AuthenConnector.js";
 import { today } from "@/constants/getToday";
 export default {
@@ -72,6 +72,7 @@ export default {
       options: [],
       options2: [],
       valueSubmit: {},
+      id: "",
     };
   },
   fetch() {
@@ -81,6 +82,9 @@ export default {
     }
     this.arrForms.push(this.form);
     this.getReason();
+  },
+  computed: {
+    ...mapGetters({ getDataInformationReport: "getDataInformationReport" }),
   },
   methods: {
     ...mapMutations({ SET_STATE_ARRLABOR: "SET_STATE_ARRLABOR" }),
@@ -105,8 +109,19 @@ export default {
         }));
       }
     },
-    deletes(id) {
+    async deletes(id, item) {
+      const numberRest = this.getDataInformationReport;
+      // if ((numberRest.restNum = this.arrForms.length)) {
+      const payload = {
+        reportId: this.id,
+        restIds: [item.restId],
+      };
+      const res = await deleteLisRes(payload);
+      console.log(res);
       this.arrForms.splice(id, 1);
+      // } else {
+      //   alert("danh sách nhỏ hơn số nhập");
+      // }
     },
     addQuantity() {
       this.amoun = this.amoun + 1;
@@ -131,12 +146,13 @@ export default {
           restId: item.restId,
           reasonName: item.reasonName,
         }));
+        this.id = res.id;
       }
     },
   },
 };
 </script>
-<style>
+<style scoped>
 .delete {
   background-color: rgba(136, 136, 136, 0.8);
   padding: 2px 10px;

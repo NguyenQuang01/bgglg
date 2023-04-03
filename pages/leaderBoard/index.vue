@@ -20,6 +20,7 @@
     <div class="float-right mt-2 mb-10">
       <a-button class="btnDay" @click="btnPageToDetail">Xem chi tiết</a-button>
     </div>
+    <div class="py-10"></div>
   </div>
 </template>
 <script>

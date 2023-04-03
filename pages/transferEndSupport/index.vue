@@ -13,6 +13,7 @@
             id="input-group-2"
             label="SỐ điều chuyển:"
             label-for="input-2"
+            class="mr-2"
           >
             <b-form-input
               v-model="form.transfer.number"
@@ -62,6 +63,7 @@
             id="input-group-2"
             label="SỐ đi hỗ trợ:"
             label-for="input-2"
+            class="mr-2"
           >
             <b-form-input
               v-model="form.support.number"

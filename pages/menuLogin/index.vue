@@ -12,28 +12,28 @@
             v-if="getInfUsers.isReport"
             @click="report"
             >{{ text1 }}</a-button
-          ><br />
+          ><br v-if="getInfUsers.isReport" />
           <a-button
             type="primary"
             v-if="getInfUsers.isEdit"
             @click="editReport"
             class="my-3"
             >{{ text2 }}</a-button
-          ><br />
+          ><br v-if="getInfUsers.isEdit" />
           <a-button
             type="primary"
             v-if="getInfUsers.isView"
             @click="viewReport"
             class="mb-3"
             >{{ text3 }}</a-button
-          ><br />
+          ><br v-if="getInfUsers.isView" />
           <a-button
             type="primary"
             v-if="getInfUsers.isView"
             @click="manage"
             class="mb-3"
             >{{ text4 }}</a-button
-          ><br />
+          ><br v-if="getInfUsers.isView" />
           <a-button v-if="getInfUsers.isAdmin" type="primary" @click="admin">{{
             text5
           }}</a-button>

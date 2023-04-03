@@ -175,7 +175,7 @@ export default {
   },
   created() {
     this.getDemarcation();
-    this.getProductivity();
+    // setTimeout(() => this.getProductivity(), 0);
   },
   methods: {
     ...mapMutations({
@@ -189,22 +189,25 @@ export default {
       const res = await getDemarcationDb(groupId);
       if (res && res.status === 200) {
         numberDemarcation = res.data.demarcationAvailable;
+        const demarcation =
+          numberDemarcation +
+          Number(this.getDataInformationReport.studentNum) +
+          Number(this.getDataInformationReport.partTimeNum);
+        this.SET_STATE_DEMARCATION(demarcation);
+        const productivity =
+          Number(this.getDataInformationReport.demarcation) -
+          Number(this.getDataInformationReport.restNum) -
+          Number(this.getDataInformationReport.studentNum) -
+          Number(
+            this.getDataInformationReport.transferRequests[0].transferNum
+          ) -
+          Number(this.getDataInformationReport.transferRequests[1].transferNum);
+        this.SET_STATE_PRODUCTIVITY(productivity);
       }
-      const demarcation =
-        numberDemarcation +
-        Number(this.getDataInformationReport.studentNum) +
-        Number(this.getDataInformationReport.partTimeNum);
-      this.SET_STATE_DEMARCATION(demarcation);
     },
-    getProductivity() {
-      const productivity =
-        Number(this.getDataInformationReport.demarcation) -
-        Number(this.getDataInformationReport.restNum) -
-        Number(this.getDataInformationReport.studentNum) -
-        Number(this.getDataInformationReport.transferRequests[0].transferNum) -
-        Number(this.getDataInformationReport.transferRequests[1].transferNum);
-      this.SET_STATE_PRODUCTIVITY(productivity);
-    },
+    // getProductivity() {
+    //   console.log(Number(this.getDataInformationReport.demarcation));
+    // },
     getValue() {
       this.user = localStorage.getItem("userLogin");
     },
@@ -223,6 +226,7 @@ export default {
           const res = await saveDetail(this.getDataInformationReport);
           if (res) {
             message.success("thành công");
+            localStorage.setItem("checkReport", true);
             setTimeout(() => {
               this.$router.push("/sussInformation");
             }, "1000");

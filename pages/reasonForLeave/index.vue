@@ -78,7 +78,7 @@
         </table>
       </div>
     </div>
-    <div></div>
+    <div class="py-10"></div>
   </div>
 </template>
 <script>

@@ -9,9 +9,13 @@
         <a-collapse-panel key="1" header="Menu" :disabled="false" class="">
           <a-button type="primary" @click="pagetoBoad">{{ text1 }}</a-button
           ><br />
-          <a-button type="primary" class="my-3">{{ text2 }}</a-button
+          <a-button type="primary" class="my-3" @click="pageToDetail">{{
+            text2
+          }}</a-button
           ><br />
-          <a-button type="primary" class="mb-3">{{ text3 }}</a-button
+          <a-button type="primary" class="mb-3" @click="pageToReported">{{
+            text3
+          }}</a-button
           ><br />
           <a-button type="primary" @click="pageDemarcation">{{
             text4
@@ -23,6 +27,7 @@
 </template>
 <script>
 import { defineComponent, ref, watch } from "vue";
+import { Alert } from "ant-design-vue";
 export default {
   middleware: "auth",
   data() {
@@ -36,10 +41,16 @@ export default {
   },
   methods: {
     pagetoBoad() {
-      this.$router.push("/leaderBoard");
+      this.$router.push("/leaderDetailBoard");
     },
     pageDemarcation() {
+      this.$router.push("/leaderDetailBoard");
+    },
+    pageToDetail() {
       this.$router.push("/demarcation");
+    },
+    pageToReported() {
+      alert("chuc nang nay chua co");
     },
   },
   // created() {
