@@ -141,7 +141,30 @@ export default {
         {
           title: "Tỉ lệ %",
           dataIndex: "ratio",
+          colSpan: 2,
           // customRender: renderContent,
+        },
+        {
+          title: "Tỉ lệ %",
+          dataIndex: "ratio",
+          colSpan: 0,
+          customRender: (value, row, index) => {
+            const obj = {
+              children: "",
+              attrs: {},
+            };
+            if (row.name === "Văn phòng") {
+              obj.attrs.rowSpan = 2;
+              obj.children = 133332;
+            }
+            if (index=== 1) {
+              obj.attrs.rowSpan = 0;
+            }
+            // if (row.name !== "Văn phòng") {
+            //   obj.attrs.colSpan = 2;
+            // }
+            return obj;
+          },
         },
         {
           title: "Tổng lao động báo năng suất",
