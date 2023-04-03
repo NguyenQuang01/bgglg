@@ -11,7 +11,6 @@
           v-model="valueDay"
           class="mx-2"
           placeholder="Chọn ngày"
-          :format="dateFormat"
         />
         <a-button class="btnDay" @click="btnPlus">ngày sau</a-button>
       </div>

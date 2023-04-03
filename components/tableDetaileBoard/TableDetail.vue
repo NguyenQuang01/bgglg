@@ -1,5 +1,5 @@
 <template>
-  <a-table :columns="columns" :data-source="data" bordered>
+  <a-table :columns="columns" :data-source="data" bordered @expand="tet">
     <span slot="numberRice" slot-scope="text, row">
       <div v-if="row.name === 'Văn phòng'">
         <div class="whitespace-nowrap">Nhân viên:{{ cusRice }}</div>
@@ -19,6 +19,7 @@ export default {
 
   data() {
     return {
+      numberRadio: 2,
       data: [],
       // data: [
       // {
@@ -159,10 +160,13 @@ export default {
               attrs: {},
             };
             if (row.name === "Văn phòng") {
-              obj.attrs.rowSpan = 2;
+              obj.attrs.rowSpan = this.numberRadio;
               obj.children = 133332;
             }
-            if (index === 1) {
+            if (row.name === "to1") {
+              obj.attrs.rowSpan = 0;
+            }
+            if (row.name === "Đơn vị lẻ") {
               obj.attrs.rowSpan = 0;
             }
 
@@ -209,6 +213,20 @@ export default {
     },
   },
   methods: {
+    tet(expanded, record) {
+      console.log(expanded, record);
+      if (record.name === "Văn phòng" || record.name === "Đơn vị lẻ") {
+        this.numberRadio += 3;
+      }
+      if (expanded === false) {
+        this.numberRadio = 2;
+      }
+      // if (record.name === "Đơn vị lẻ" && expanded === true) {
+      //   this.numberRadio = 5;
+      // } else {
+      //   this.numberRadio = 2;
+      // }
+    },
     async getData() {
       const day = dayjs(this.valueDay).format("YYYY/MM/DD");
       const res = await getViewDetail(day);
