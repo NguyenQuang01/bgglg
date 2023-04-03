@@ -44,7 +44,7 @@ export default {
       this.$router.push("/leaderDetailBoard");
     },
     pageDemarcation() {
-      this.$router.push("/leaderDetailBoard");
+      this.$router.push("/demarcation");
     },
     pageToDetail() {
       this.$router.push("/demarcation");

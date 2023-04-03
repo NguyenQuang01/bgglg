@@ -16,47 +16,15 @@
             required
             type="number"
           ></b-form-input>
-          <div class="flex justify-between">
-            <b-form-group
-              id="input-group-3"
-              label="Chọn bộ phận:"
-              label-for="input-3"
-              class="width48"
-            >
-              <b-form-select
-                id="input-3"
-                v-model="form.parentId"
-                :options="parts"
-                placeholder="nhập "
-                required
-              ></b-form-select>
-            </b-form-group>
-            <b-form-group
-              id="input-group-3"
-              label="Chọn tổ:"
-              label-for="input-3"
-              class="width48"
-            >
-              <b-form-select
-                id="input-3"
-                v-model="form.demarcation.group"
-                :options="parts2"
-                placeholder="nhập "
-                required
-              ></b-form-select>
-            </b-form-group>
-          </div>
-          <!-- <b-form-group
-            id="input-group-2"
-            label="Chọn tổ điều chuyển đến:"
-            label-for="input-2"
-          >
-            <b-form-input
-              v-model="form.demarcation.group"
-              placeholder="Nhập "
-              required
-            ></b-form-input>
-          </b-form-group> -->
+          <b-form-group id="input-group-3" label="Chọn tổ:" label-for="input-3">
+            <a-cascader
+              :options="parts"
+              :display-render="displayRender"
+              expand-trigger="hover"
+              placeholder="chọn"
+              @change="onChange"
+            />
+          </b-form-group>
         </b-form-group>
 
         <div class="flex">
@@ -103,12 +71,13 @@ export default {
     this.groupRoleRoot();
   },
   methods: {
+    onChange(value) {
+      const lastElement = value[value.length - 1];
+      this.form.demarcation.group = lastElement;
+    },
     async groupRoleRoot() {
       const res = await groupRoleRoot();
-      this.parts = res.map((item) => ({
-        text: item.groupName,
-        value: item.id,
-      }));
+      this.parts = res.data;
     },
     async groupRoleDetails(param) {
       const res = await groupRoleDetails(param);

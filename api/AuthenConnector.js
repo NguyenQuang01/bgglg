@@ -116,9 +116,9 @@ export const getView = async (param) => {
     return { status: 500 };
   }
 };
-export const updateDemarcation = async (groupId, number) => {
+export const updateDemarcation = async (groupName, number) => {
   const response = await request.get(
-    `${HOST}/groupRole/update?groupId=${groupId}&demarcation=${number}`
+    `${HOST}/groupRole/update?groupName=${groupName}&demarcation=${number}`
   );
   return response.data;
 };

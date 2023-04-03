@@ -10,62 +10,6 @@
   </a-table>
 </template>
 <script>
-// const renderContent = (value, row, index) => {
-//   console.log(value, row, index);
-//   const obj = {
-//     children: value,
-//     attrs: {},
-//   };
-// if (row.name === "Văn phòng") {
-//   console.log(value, row.key, 999);
-//   obj.attrs.rowSpan = 10;
-// }
-// if (index === 1) {
-//   obj.attrs.rowSpan = 0;
-// }
-
-// if (index === 2) {
-//   obj.attrs.rowSpan = 0;
-// }
-// if (index === 3) {
-//   obj.attrs.rowSpan = 0;
-// }
-// if (index === 4) {
-//   obj.attrs.rowSpan = 0;
-// }
-// if (index === 5) {
-//   obj.attrs.rowSpan = 0;
-// }
-// if (index === 6) {
-//   obj.attrs.rowSpan = 0;
-// }
-// if (index === 7) {
-//   obj.attrs.rowSpan = 0;
-// }
-// if (index === 8) {
-//   obj.attrs.rowSpan = 0;
-// }
-// if (index === 9) {
-//   obj.attrs.rowSpan = 0;
-// }
-// if (index === 10) {
-//   obj.attrs.rowSpan = 0;
-// }
-// if (index === 11) {
-//   obj.attrs.rowSpan = 0;
-// }
-// if (row.key === 24) {
-//   obj.attrs.rowSpan = 0;
-// }
-// if (row.name === "XN1") {
-//   obj.attrs.rowSpan = 0;
-// }
-// if (row.name === "Vệ Sinh 1") {
-//   obj.attrs.rowSpan = 0;
-// }
-
-//   return obj;
-// };
 import { getViewDetail } from "@/api/AuthenConnector.js";
 export default {
   data() {
