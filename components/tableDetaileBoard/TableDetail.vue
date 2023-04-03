@@ -163,7 +163,14 @@ export default {
               obj.attrs.rowSpan = this.numberRadio;
               obj.children = 133332;
             }
-            if (row.name === "to1") {
+            if (
+              row.name === "to1" ||
+              row.name === "to2" ||
+              row.name === "to3" ||
+              row.name === "admin1" ||
+              row.name === "admin2" ||
+              row.name === "admin3"
+            ) {
               obj.attrs.rowSpan = 0;
             }
             if (row.name === "Đơn vị lẻ") {
@@ -215,11 +222,17 @@ export default {
   methods: {
     tet(expanded, record) {
       console.log(expanded, record);
-      if (record.name === "Văn phòng" || record.name === "Đơn vị lẻ") {
+      if (
+        (record.name === "Văn phòng" || record.name === "Đơn vị lẻ") &&
+        expanded === true
+      ) {
         this.numberRadio += 3;
       }
-      if (expanded === false) {
-        this.numberRadio = 2;
+      if (record.name === "Văn phòng" && expanded === false) {
+        this.numberRadio -= 3;
+      }
+      if (record.name === "Đơn vị lẻ" && expanded === false) {
+        this.numberRadio -= 3;
       }
       // if (record.name === "Đơn vị lẻ" && expanded === true) {
       //   this.numberRadio = 5;
