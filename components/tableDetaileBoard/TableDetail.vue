@@ -19,6 +19,7 @@ export default {
 
   data() {
     return {
+      arrChild: ["to1", "to2", "to3", "admin1", "admin2", "admin3"],
       numberRadio: 2,
       data: [],
       // data: [
@@ -163,14 +164,7 @@ export default {
               obj.attrs.rowSpan = this.numberRadio;
               obj.children = 79.6;
             }
-            if (
-              row.name === "to1" ||
-              row.name === "to2" ||
-              row.name === "to3" ||
-              row.name === "admin1" ||
-              row.name === "admin2" ||
-              row.name === "admin3"
-            ) {
+            if (this.arrChild.includes(row.name)) {
               obj.attrs.rowSpan = 0;
             }
             if (row.name === "Đơn vị lẻ") {
