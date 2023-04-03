@@ -11,7 +11,12 @@
 </template>
 <script>
 import { getViewDetail } from "@/api/AuthenConnector.js";
+import dayjs from "dayjs";
+import { message } from "ant-design-vue";
+
 export default {
+  props: ["valueDay"],
+
   data() {
     return {
       data: [],
@@ -157,12 +162,10 @@ export default {
               obj.attrs.rowSpan = 2;
               obj.children = 133332;
             }
-            if (index=== 1) {
+            if (index === 1) {
               obj.attrs.rowSpan = 0;
             }
-            // if (row.name !== "Văn phòng") {
-            //   obj.attrs.colSpan = 2;
-            // }
+
             return obj;
           },
         },
@@ -197,14 +200,27 @@ export default {
   created() {
     this.getData();
   },
+  watch: {
+    valueDay: {
+      handler: function (value) {
+        this.getData();
+      },
+      deep: true,
+    },
+  },
   methods: {
     async getData() {
-      const res = await getViewDetail();
+      const day = dayjs(this.valueDay).format("YYYY/MM/DD");
+      const res = await getViewDetail(day);
       if (res && res.status === 200) {
         this.data = res.data;
         this.cusRice = res.data[0].totalRiceCus;
         this.empRice = res.data[0].totalRiceEmp;
         this.empVipRice = res.data[0].totalRiceVip;
+      }
+      if (res && res.status === 500) {
+        message.error("không có dữ liệu");
+        this.data = [];
       }
       console.log(res, 3333);
     },

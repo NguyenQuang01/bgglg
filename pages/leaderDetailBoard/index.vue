@@ -5,12 +5,22 @@
     </div>
     <BtnBack />
     <div class="mb-2 flex">
-      <a-date-picker v-model="valueDay" class="mx-2" placeholder="Chọn ngày" />
+      <div class="mb-2 flex">
+        <a-button class="btnDay" @click="btnMinus">Ngày trước</a-button>
+        <a-date-picker
+          v-model="valueDay"
+          class="mx-2"
+          placeholder="Chọn ngày"
+          :format="dateFormat"
+        />
+        <a-button class="btnDay" @click="btnPlus">ngày sau</a-button>
+      </div>
+      <!-- <a-date-picker v-model="valueDay" class="mx-2" placeholder="Chọn ngày" /> -->
       <!-- <a-button class="btnDay">Lọc</a-button>
       <a-button class="btnDay">Xuất excel</a-button> -->
     </div>
     <div class="m-auto m-0 overflow-auto">
-      <TableDetail />
+      <TableDetail :valueDay="valueDay" />
     </div>
     <div class="float-right mt-2 mb-10">
       <div class="mb-16">text</div>
@@ -27,25 +37,47 @@ export default {
     TableDetail,
     BtnBack,
   },
+  // props: ["valueDay"],
   data() {
     return {
       valueDay: "",
       day: new Date().getDate(),
       month: new Date().getMonth() + 1,
       year: new Date().getFullYear(),
+      day30: [4, 6, 9, 11],
+      day31: [1, 3, 5, 7, 8, 10, 12],
+      day28: [2],
     };
   },
   created() {
-    this.valueDay = `${this.day}/${this.month}/${this.year}` || "";
+    this.valueDay = `${this.year}/${this.month}/${this.day}` || "";
   },
-  // methods: {
-  //   btnBack() {},
-  // },
+  methods: {
+    btnPlus() {
+      if (this.day31.includes(this.month) && this.day < 31) {
+        this.day = this.day + 1;
+        this.valueDay = `${this.year}/${this.month}/${this.day}`;
+      } else if (this.day30.includes(this.month) && this.day < 30) {
+        this.day = this.day + 1;
+        this.valueDay = `${this.year}/${this.month}/${this.day}`;
+      } else if (this.day28.includes(this.month) && this.day < 28) {
+        this.day = this.day + 1;
+        this.valueDay = `${this.year}/${this.month}/${this.day}`;
+      }
+    },
+    btnMinus() {
+      if (this.day > 1) {
+        this.day = this.day - 1;
+        this.valueDay = `${this.year}/${this.month}/${this.day}`;
+      }
+    },
+  },
   // watch: {
   //   valueDay: {
-  //     deep: true,
-  //     handler() {
+  //     handler: function (value) {
+  //       this.getDataTable();
   //     },
+  //     deep: true,
   //   },
   // },
 };

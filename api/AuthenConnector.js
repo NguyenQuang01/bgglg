@@ -130,12 +130,11 @@ export const getDemarcationDb = async (param) => {
 };
 export const getViewDetail = async (param) => {
   const response = await request.get(
-    `${HOST}/view/groupRoleReport?reportDate=2023-04-3`
+    `${HOST}/view/groupRoleReport?reportDate=${param}`
   );
   return response.data;
 };
 export const deleteLisRes = async (param) => {
-  console.log(param, 33333);
   const response = await request.post(`${HOST}/report/delete-rest`, param);
   return response.data;
 };
