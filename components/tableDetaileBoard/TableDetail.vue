@@ -161,7 +161,7 @@ export default {
             };
             if (row.name === "Văn phòng") {
               obj.attrs.rowSpan = this.numberRadio;
-              obj.children = 133332;
+              obj.children = 79.6;
             }
             if (
               row.name === "to1" ||
