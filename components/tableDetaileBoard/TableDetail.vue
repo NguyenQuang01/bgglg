@@ -22,6 +22,7 @@ export default {
       arrChild: ["to1", "to2", "to3", "admin1", "admin2", "admin3"],
       numberRadio: 2,
       data: [],
+      totalRatioOfOfficeAndDonvile: "",
       // data: [
       // {
       //   key: 1,
@@ -162,7 +163,7 @@ export default {
             };
             if (row.name === "Văn phòng") {
               obj.attrs.rowSpan = this.numberRadio;
-              obj.children = 79.6;
+              obj.children = this.totalRatioOfOfficeAndDonvile;
             }
             if (this.arrChild.includes(row.name)) {
               obj.attrs.rowSpan = 0;
@@ -220,7 +221,7 @@ export default {
         (record.name === "Văn phòng" || record.name === "Đơn vị lẻ") &&
         expanded === true
       ) {
-        this.numberRadio += 3;
+        this.numberRadio += 2;
       }
       if (record.name === "Văn phòng" && expanded === false) {
         this.numberRadio -= 3;
@@ -242,6 +243,8 @@ export default {
         this.cusRice = res.data[0].totalRiceCus;
         this.empRice = res.data[0].totalRiceEmp;
         this.empVipRice = res.data[0].totalRiceVip;
+        this.totalRatioOfOfficeAndDonvile =
+          res.data[0].totalRatioOfOfficeAndDonvile;
       }
       if (res && res.status === 500) {
         message.error("không có dữ liệu");
