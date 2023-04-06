@@ -2,7 +2,7 @@
   <b-navbar toggleable="lg" type="dark" class="header">
     <div class="container">
       <b-navbar-brand href="#" class="whitespace-normal"
-        >Hệ thống thống báo cáo lao động BGG Lạng Giang</b-navbar-brand
+        >HỆ THỐNG BÁO CÁO LAO ĐỘNG</b-navbar-brand
       >
 
       <div class="textName text-base flex" v-if="this.getIsUser">
@@ -50,7 +50,7 @@ export default {
 </script>
 <style scoped>
 .header {
-  background-color: #0daeff;
+  background-color: #045396;
 }
 .logout {
   padding: 2px 5px;

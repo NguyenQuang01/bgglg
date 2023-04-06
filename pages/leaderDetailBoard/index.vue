@@ -83,10 +83,10 @@ export default {
 </script>
 <style scoped>
 .title {
-  color: #0daeff;
+  color: #045396;
 }
 .btnDay {
-  background-color: #0daeff;
+  background-color: #045396;
   color: #ffffff;
 }
 </style>

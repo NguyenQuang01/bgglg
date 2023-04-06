@@ -6,6 +6,7 @@
           id="input-2"
           v-model="form.user"
           placeholder="Nhập tài khoản"
+          class="inputLogin max-w-sm"
           required
         ></b-form-input>
       </b-form-group>
@@ -14,6 +15,7 @@
           id="input-1"
           v-model="form.pass"
           type="password"
+          class="inputLogin max-w-sm"
           placeholder="Nhập mật khẩu"
           required
         ></b-form-input>
@@ -28,11 +30,8 @@
         </b-form-checkbox-group>
       </b-form-group>
 
-      <b-button type="submit" variant="primary" class="text-blue-700"
+      <b-button type="submit" variant="primary" class="rounded-full btnLogin"
         >Đăng nhập</b-button
-      >
-      <b-button type="reset" variant="danger" class="text-rose-700"
-        >Nhập lại</b-button
       >
     </b-form>
   </div>
@@ -110,3 +109,17 @@ export default {
   },
 };
 </script>
+<style scoped>
+.inputLogin {
+  border-radius: 50px;
+}
+.btnLogin {
+  background-color: #045396;
+  color: #ffff;
+}
+@media only screen and (max-width: 640px) {
+  .btnLogin {
+    width: 100%;
+  }
+}
+</style>

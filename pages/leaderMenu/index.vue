@@ -1,23 +1,18 @@
 <template lang="">
   <div class="container">
-    <div class="text-center mt-16 text-3xl font-bold title mb-16">
-      Welcome back!
-    </div>
+    <Avatar />
 
     <div class="max-w-2xl m-auto m-0">
       <a-collapse v-model:activeKey="activeKey">
         <a-collapse-panel key="1" header="Menu" :disabled="false" class="">
-          <a-button type="primary" @click="pagetoBoad">{{ text1 }}</a-button
+          <a-button class="menuBtn" @click="pagetoBoad">{{ text1 }}</a-button
           ><br />
-          <a-button type="primary" class="my-3" @click="pageToDetail">{{
-            text2
-          }}</a-button
-          ><br />
-          <a-button type="primary" class="mb-3" @click="pageToReported">{{
+
+          <a-button class="my-3 menuBtn" @click="pageToReported">{{
             text3
           }}</a-button
           ><br />
-          <a-button type="primary" @click="pageDemarcation">{{
+          <a-button class="menuBtn" @click="pageDemarcation">{{
             text4
           }}</a-button>
         </a-collapse-panel>
@@ -27,9 +22,10 @@
 </template>
 <script>
 import { defineComponent, ref, watch } from "vue";
-import { Alert } from "ant-design-vue";
+import Avatar from "@/components/Avatar";
 export default {
   middleware: "auth",
+  components: { Avatar },
   data() {
     return {
       text1: `Báo cáo tổng`,
@@ -61,7 +57,8 @@ export default {
 };
 </script>
 <style scoped>
-.title {
-  color: #0daeff;
+.menuBtn {
+  background-color: #045396;
+  color: #ffff;
 }
 </style>

@@ -1,37 +1,31 @@
 <template lang="">
   <div class="container">
-    <div class="text-center mt-16 text-3xl font-bold title mb-16">
-      Welcome back!
-    </div>
-
+    <Avatar />
     <div class="max-w-2xl m-auto m-0">
       <a-collapse v-model:activeKey="activeKey">
         <a-collapse-panel key="1" header="Menu" :disabled="false" class="">
           <a-button
-            type="primary"
             v-if="getInfUsers.isReport"
             @click="report"
+            class="menuBtn"
             >{{ text1 }}</a-button
           ><br v-if="getInfUsers.isReport" />
           <a-button
-            type="primary"
             v-if="getInfUsers.isEdit"
             @click="editReport"
-            class="my-3"
+            class="my-3 menuBtn"
             >{{ text2 }}</a-button
           ><br v-if="getInfUsers.isEdit" />
           <a-button
-            type="primary"
             v-if="getInfUsers.isView"
             @click="viewReport"
-            class="mb-3"
+            class="mb-3 menuBtn"
             >{{ text3 }}</a-button
           ><br v-if="getInfUsers.isView" />
           <a-button
-            type="primary"
             v-if="getInfUsers.isView"
             @click="manage"
-            class="mb-3"
+            class="mb-3 menuBtn"
             >{{ text4 }}</a-button
           ><br v-if="getInfUsers.isView" />
           <a-button v-if="getInfUsers.isAdmin" type="primary" @click="admin">{{
@@ -44,8 +38,10 @@
 </template>
 <script>
 import { mapGetters } from "vuex";
+import Avatar from "@/components/Avatar";
 export default {
   middleware: "auth",
+  components: { Avatar },
   data() {
     return {
       text1: `Báo cáo`,
@@ -87,8 +83,9 @@ export default {
   // },
 };
 </script>
-<style scoped>
-.title {
-  color: #0daeff;
+<style>
+.menuBtn {
+  background-color: #045396;
+  color: #ffff;
 }
 </style>

@@ -257,12 +257,12 @@ export default {
 </script>
 <style>
 .ant-table-thead > tr > th {
-  background-color: #0daeff !important;
+  background-color: #045396 !important;
   color: #ffff !important;
 }
 
 .ant-table-tbody > tr > td:first-child {
-  background-color: #0daeff !important;
+  background-color: #045396 !important;
   color: #ffff !important;
   white-space: nowrap !important;
 }

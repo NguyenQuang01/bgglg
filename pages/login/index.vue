@@ -1,10 +1,14 @@
 <template lang="">
   <div class="container">
-    <div class="text-center mt-16 text-3xl font-bold title">Welcome back!</div>
-    <div class="text-center mt-2 font-semibold mb-10">
-      Xin hãy đăng nhập vào tài khoản của bạn.
+    <div class="text-center mt-16 text-3xl font-bold title flex justify-center">
+      <img src="@/assets/imge/bgglg.jpg" alt="" srcset="" class="w-20 mr-2" />
+
+      <div class="flex items-center">Lạng Giang</div>
     </div>
-    <div class="max-w-2xl m-auto m-0">
+    <div class="text-center mt-8 font-semibold mb-32">
+      HỆ THỐNG BÁO CÁO LAO ĐỘNG
+    </div>
+    <div class="max-w-sm m-auto m-0">
       <formlogin />
     </div>
   </div>
@@ -16,10 +20,11 @@ export default {
   components: {
     formlogin,
   },
+  layout: "empty",
 };
 </script>
-<style scoped>
+<style>
 .title {
-  color: #0daeff;
+  color: rgb(255, 63, 63);
 }
 </style>

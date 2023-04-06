@@ -7,7 +7,7 @@
         <th>Thông tin</th>
       </tr>
       <tr>
-        <td class="bg-sky-400 text-slate-50">ĐỊNH BIÊN</td>
+        <td class="background text-slate-50">ĐỊNH BIÊN</td>
         <td>
           <input type="text" v-model="demarcation" class="w-20" v-if="isEdit" />
           <div v-else>{{ demarcation }}</div>
@@ -15,7 +15,7 @@
         <td></td>
       </tr>
       <tr>
-        <td class="bg-sky-400 text-slate-50">SỐ THỜI VỤ</td>
+        <td class="background text-slate-50">SỐ THỜI VỤ</td>
         <td>
           <input
             type="text"
@@ -29,7 +29,7 @@
         <td></td>
       </tr>
       <tr>
-        <td class="bg-sky-400 text-slate-50">SỐ H.SINH</td>
+        <td class="background text-slate-50">SỐ H.SINH</td>
 
         <td>
           <input
@@ -43,7 +43,7 @@
         <td></td>
       </tr>
       <tr>
-        <td class="bg-sky-400 text-slate-50">ĐIỀU CHUYỂN</td>
+        <td class="background text-slate-50">ĐIỀU CHUYỂN</td>
 
         <td>
           <input
@@ -58,7 +58,7 @@
         <td v-else class="text-rose-800">chưa xác nhận</td>
       </tr>
       <tr>
-        <td class="bg-sky-400 text-slate-50">HỖ TRỢ</td>
+        <td class="background text-slate-50">HỖ TRỢ</td>
 
         <td>
           <input
@@ -72,7 +72,7 @@
         <td></td>
       </tr>
       <tr>
-        <td class="bg-sky-400 text-slate-50">BÁO CƠM</td>
+        <td class="background text-slate-50">BÁO CƠM</td>
         <td>
           <!-- <input type="text" v-model="totalRice" class="w-20" v-if="isEdit" /> -->
           <div>{{ totalRice }}</div>
@@ -115,7 +115,7 @@
       </tr>
 
       <tr>
-        <td class="bg-sky-400 text-slate-50">SỐ NGHỈ</td>
+        <td class="background text-slate-50">SỐ NGHỈ</td>
 
         <td>
           <input
@@ -323,4 +323,7 @@ th {
 /* tr:nth-child(even) {
   background-color: #dddddd;
 } */
+.background {
+  background-color: #045396;
+}
 </style>
