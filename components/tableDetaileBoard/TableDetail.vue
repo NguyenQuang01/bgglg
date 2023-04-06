@@ -1,10 +1,5 @@
 <template>
-  <a-table
-    :columns="columns"
-    :data-source="data"
-    @expand="tet"
-    :scroll="{ y: 240 }"
-  >
+  <a-table :columns="columns" :data-source="data" @expand="tet">
     <span slot="numberRice" slot-scope="text, row">
       <div v-if="row.name === 'Văn phòng'">
         <div class="whitespace-nowrap">Nhân viên:{{ cusRice }}</div>
@@ -89,7 +84,7 @@ export default {
               attrs: {},
             };
             if (row.name === "Văn phòng") {
-              obj.attrs.rowSpan = 1000;
+              obj.attrs.rowSpan = 10000;
             }
             if (row.name !== "Văn phòng") {
               obj.attrs.rowSpan = 0;
@@ -126,13 +121,13 @@ export default {
         (record.name === "Văn phòng" || record.name === "Đơn vị lẻ") &&
         expanded === true
       ) {
-        this.numberRadio += 2;
+        this.numberRadio += this.data[0].children.length;
       }
       if (record.name === "Văn phòng" && expanded === false) {
-        this.numberRadio -= 3;
+        this.numberRadio -= this.data[0].children.length;
       }
       if (record.name === "Đơn vị lẻ" && expanded === false) {
-        this.numberRadio -= 3;
+        this.numberRadio -= this.data[1].children.length;
       }
       // if (record.name === "Đơn vị lẻ" && expanded === true) {
       //   this.numberRadio = 5;
@@ -143,6 +138,7 @@ export default {
     async getData() {
       const day = dayjs(this.valueDay).format("YYYY/MM/DD");
       const res = await getViewDetail(day);
+      console.log(res);
       if (res && res.status === 200) {
         this.data = res.data;
         this.cusRice = res.data[0].totalRiceCus;
