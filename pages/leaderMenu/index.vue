@@ -1,5 +1,5 @@
 <template lang="">
-  <div class="container">
+  <div class="container h-96">
     <Avatar />
 
     <div class="max-w-2xl m-auto m-0">

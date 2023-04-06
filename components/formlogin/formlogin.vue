@@ -33,6 +33,7 @@
       <b-button type="submit" variant="primary" class="rounded-full btnLogin"
         >Đăng nhập</b-button
       >
+      <div class="py-10"></div>
     </b-form>
   </div>
 </template>
@@ -78,27 +79,6 @@ export default {
         localStorage.setItem("groupName", res.data.groupName);
         this.SET_STATE_ISAUTHEN(true);
         this.$router.push("/menuLogin");
-        // switch (true) {
-        //   case res.data.isEdit:
-        //     this.$router.push("/sussInformation");
-        //     break;
-        //   case res.data.isReport:
-        //     if (res.data.checkReport) {
-        //       this.$router.push("/reported");
-        //     } else {
-        //       this.$router.push("/laborreport");
-        //     }
-
-        //     break;
-        //   case res.data.isAdmin:
-        //     this.$router.push("/listMenuAdmin");
-
-        //     break;
-        //   case res.data.isView:
-        //     this.$router.push("/leaderMenu");
-        //     break;
-        //   default:
-        // }
       }
     },
     onReset(event) {
@@ -116,6 +96,7 @@ export default {
 .btnLogin {
   background-color: #045396;
   color: #ffff;
+  margin-bottom: 20px;
 }
 @media only screen and (max-width: 640px) {
   .btnLogin {

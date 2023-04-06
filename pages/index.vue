@@ -20,7 +20,7 @@
       <div class="text-center mt-2 font-semibold mb-10">
         HỆ THỐNG BÁO CÁO LAO ĐỘNG
       </div>
-      <div class="text-center mt-16 font-semibold mb-10">
+      <div class="text-center mt-16 font-semibold mb-10 my-10 h-32">
         <b-button
           variant="primary"
           class="menuBtn rounded-full btnLogin px-5"
@@ -28,8 +28,6 @@
           >Bắt đầu</b-button
         >
       </div>
-
-      <div class="max-w-2xl m-auto m-0"></div>
     </div>
   </div>
 </template>
