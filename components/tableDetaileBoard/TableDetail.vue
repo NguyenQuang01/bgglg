@@ -1,5 +1,5 @@
 <template>
-  <a-table :columns="columns" :data-source="data" bordered @expand="tet">
+  <a-table :columns="columns" :data-source="data" @expand="tet">
     <span slot="numberRice" slot-scope="text, row">
       <div v-if="row.name === 'Văn phòng'">
         <div class="whitespace-nowrap">Nhân viên:{{ cusRice }}</div>
@@ -132,7 +132,6 @@ export default {
         {
           title: "Văn phòng",
           dataIndex: "office",
-          // width: "12%",
         },
         {
           title: "Xí nghiệp",
@@ -149,6 +148,7 @@ export default {
         {
           title: "Tỉ lệ %",
           dataIndex: "ratio",
+
           colSpan: 2,
           // customRender: renderContent,
         },
@@ -269,5 +269,8 @@ export default {
 
 .ant-table-tbody > tr.ant-table-row:hover > td {
   color: rgba(0, 0, 0, 0.65) !important;
+}
+.ant-table-body {
+  font-size: 12px !important;
 }
 </style>

@@ -23,7 +23,7 @@
       <div class="text-center mt-16 font-semibold mb-10">
         <b-button
           variant="primary"
-          class="text-blue-700 rounded-full btnLogin px-5"
+          class="menuBtn rounded-full btnLogin px-5"
           @click="page"
           >Bắt đầu</b-button
         >
@@ -38,8 +38,7 @@
 export default {
   layout: "empty",
   name: "Index",
-
-  computed: {
+  methods: {
     page() {
       this.$router.push("/login");
     },
