@@ -1,5 +1,10 @@
 <template>
-  <a-table :columns="columns" :data-source="data" @expand="tet">
+  <a-table
+    :columns="columns"
+    :data-source="data"
+    @expand="tet"
+    :scroll="{ y: 240 }"
+  >
     <span slot="numberRice" slot-scope="text, row">
       <div v-if="row.name === 'Văn phòng'">
         <div class="whitespace-nowrap">Nhân viên:{{ cusRice }}</div>
@@ -23,138 +28,37 @@ export default {
       numberRadio: 2,
       data: [],
       totalRatioOfOfficeAndDonvile: "",
-      // data: [
-      // {
-      //   key: 1,
-      //   name: "văn phòng",
-      //   office: 60,
-      //   enterprise: "88",
-      //   laborProductivity: 33,
-      //   NumberLeave: 22,
-      //   Ratio: 99,
-      //   totalLaborProductivity: 55,
-      //   NumberRice: 11,
-      //   children: [
-      //     {
-      //       key: 11,
-      //       name: "Lãnh đạo",
-      //       office: 42,
-      //       enterprise: "99",
-      //       laborProductivity: 33,
-      //       NumberLeave: 22,
-      //       Ratio: 99,
-      //       NumberRice: 11,
-      //     },
-      //     {
-      //       key: 12,
-      //       name: "Phòng TCHC",
-      //       office: 30,
-      //       enterprise: "5",
-      //       laborProductivity: 33,
-      //       NumberLeave: 22,
-      //       Ratio: 99,
-      //       NumberRice: 11,
-      //     },
-      //     {
-      //       key: 13,
-      //       name: "Kế Toán",
-      //       office: 72,
-      //       enterprise: "8",
-      //       laborProductivity: 33,
-      //       NumberLeave: 22,
-      //       Ratio: 99,
-      //       NumberRice: 11,
-      //     },
-      //   ],
-      // },
-      // {
-      //   key: 2,
-      //   name: "Đơn vị lẻ",
-      //   office: 32,
-      //   enterprise: "77",
-      //   laborProductivity: 33,
-      //   NumberLeave: 22,
-      //   Ratio: 99,
-      //   NumberRice: 11,
-      //   children: [
-      //     {
-      //       key: 131,
-      //       name: "XN1",
-      //       office: 42,
-      //       enterprise: "99",
-      //       laborProductivity: 33,
-      //       NumberLeave: 22,
-      //       Ratio: 99,
-      //       NumberRice: 11,
-      //       children: [
-      //         {
-      //           key: 111,
-      //           name: "Vệ Sinh 1",
-      //           office: 42,
-      //           enterprise: "99",
-      //           laborProductivity: 33,
-      //           NumberLeave: 22,
-      //           Ratio: 99,
-      //           NumberRice: 11,
-      //         },
-      //       ],
-      //     },
-      //     {
-      //       key: 1222,
-      //       name: "XN2",
-      //       office: 42,
-      //       enterprise: "99",
-      //       laborProductivity: 33,
-      //       NumberLeave: 22,
-      //       Ratio: 99,
-      //       NumberRice: 11,
-      //     },
-      //   ],
-      // },
-      // {
-      //   key: 2212,
-      //   name: "Tổ May	",
-      //   office: 32,
-      //   enterprise: "77",
-      //   laborProductivity: 33,
-      //   NumberLeave: 22,
-      //   Ratio: 99,
-      //   NumberRice: 11,
-      // },
-      // ],
+
       columns: [
         {
-          title: "Bộ phận",
+          title: "BỘ PHẬN",
           dataIndex: "name",
           key: "name",
         },
 
+        { className: "right", title: "VĂN PHÒNG", dataIndex: "office" },
+        { className: "right", title: "XÍ NGHIỆP", dataIndex: "enterprise" },
         {
-          title: "Văn phòng",
-          dataIndex: "office",
-        },
-        {
-          title: "Xí nghiệp",
-          dataIndex: "enterprise",
-        },
-        {
-          title: "Lao động báo năng suất",
+          className: "right",
+          title: "LAO ĐỘNG BÁO NĂNG SUẤT",
           dataIndex: "laborProductivity",
         },
         {
-          title: "Số lao động nghỉ",
+          className: "right",
+          title: "SỐ LAO ĐỘNG NGHỈ",
           dataIndex: "numberLeave",
         },
         {
-          title: "Tỉ lệ %",
+          className: "right",
+          title: "TỈ LỆ %",
           dataIndex: "ratio",
 
           colSpan: 2,
           // customRender: renderContent,
         },
         {
-          title: "Tỉ lệ %",
-          dataIndex: "ratio",
+          className: "right",
+          dataIndex: "ratio2",
           colSpan: 0,
           customRender: (value, row, index) => {
             const obj = {
@@ -176,8 +80,9 @@ export default {
           },
         },
         {
-          title: "Tổng lao động báo năng suất",
+          title: "TỔNG LAO ĐỘNG BÁO NĂNG SUẤT",
           dataIndex: "totalLaborProductivity",
+          className: "totalLaborProductivity right",
           customRender: (value, row, index) => {
             const obj = {
               children: value,
@@ -193,7 +98,7 @@ export default {
           },
         },
         {
-          title: "Báo cơm",
+          title: "BÁO CƠM",
           dataIndex: "numberRice",
           scopedSlots: { customRender: "numberRice" },
         },
@@ -257,20 +162,28 @@ export default {
 </script>
 <style>
 .ant-table-thead > tr > th {
-  background-color: #045396 !important;
-  color: #ffff !important;
+  color: #045396 !important;
+  font-weight: 700;
 }
 
 .ant-table-tbody > tr > td:first-child {
-  background-color: #045396 !important;
-  color: #ffff !important;
-  white-space: nowrap !important;
+  color: #045396 !important;
+  font-weight: 700;
 }
 
 .ant-table-tbody > tr.ant-table-row:hover > td {
-  color: rgba(0, 0, 0, 0.65) !important;
+  color: #045396 !important;
 }
 .ant-table-body {
   font-size: 12px !important;
+}
+td.totalLaborProductivity {
+  font-size: 20px;
+}
+td.right {
+  text-align: right !important;
+}
+th.right {
+  text-align: center !important;
 }
 </style>

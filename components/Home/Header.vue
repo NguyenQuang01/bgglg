@@ -51,6 +51,7 @@ export default {
 <style scoped>
 .header {
   background-color: #045396;
+  background-image: linear-gradient(90deg, #2e8bdd, #1665ab, #074f8e, #045396);
 }
 .logout {
   padding: 2px 5px;
