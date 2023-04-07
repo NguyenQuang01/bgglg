@@ -29,7 +29,6 @@
       <b-form-group id="input-group-3" label="Tổ đơn vị" label-for="input-3">
         <a-cascader
           :options="options"
-          :display-render="displayRender"
           expand-trigger="hover"
           placeholder="chọn"
           @change="onChange"
@@ -92,9 +91,6 @@ export default {
     onChange(value) {
       const lastElement = value[value.length - 1];
       this.form.groupName = lastElement;
-    },
-    displayRender({ labels }) {
-      return labels[labels.length - 1];
     },
 
     async onSubmit(event) {

@@ -138,3 +138,13 @@ export const deleteLisRes = async (param) => {
   const response = await request.post(`${HOST}/report/delete-rest`, param);
   return response.data;
 };
+export const addGroupRole = async (param) => {
+  const response = await request.post(`${HOST}/groupRole/save`, param);
+  return response.data;
+};
+export const deleteGroupRole = async (param) => {
+  const response = await request.get(
+    `${HOST}/groupRole/delete?groupName=${param}`
+  );
+  return response.data;
+};

@@ -1,8 +1,6 @@
 <template lang="">
   <div class="container">
-    <div class="text-center mt-16 text-3xl font-bold title mb-16">
-      Welcome back!
-    </div>
+    <Avatar />
 
     <div class="max-w-2xl m-auto m-0">
       <a-collapse v-model:activeKey="activeKey">
@@ -16,6 +14,11 @@
             class="my-3 menuBtn"
             @click="pagetoBoadLeave"
             >{{ text2 }}</a-button
+          ><br /><a-button
+            type="primary"
+            class="menuBtn"
+            @click="pagetoGroup"
+            >{{ text3 }}</a-button
           ><br />
           <!-- <a-button type="primary">{{ text3 }}</a-button> -->
         </a-collapse-panel>
@@ -31,6 +34,8 @@ export default {
     return {
       text1: `Tạo tài khoản`,
       text2: `Danh sach lý do nghỉ`,
+      text3: `Danh sách các tổ`,
+
       activeKey: 1,
     };
   },
@@ -40,6 +45,9 @@ export default {
     },
     pagetoBoadLeave() {
       this.$router.push("/reasonForLeave");
+    },
+    pagetoGroup() {
+      this.$router.push("/group");
     },
   },
   // created() {
@@ -51,7 +59,7 @@ export default {
 </script>
 <style scoped>
 .title {
-  color: #0daeff;
+  color: #045396;
 }
 .menuBtn {
   background-color: #045396;
