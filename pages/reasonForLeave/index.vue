@@ -38,7 +38,7 @@
           </div>
         </b-form>
       </div>
-      <div>
+      <div class="mt-6">
         <!-- <a-table
           class="mb-10"
           :row-selection="{
@@ -78,10 +78,10 @@
             </td>
           </tr>
         </table>
+        <BtnBack class="float-right mb-10 mt-3 mr-0" />
       </div>
-      <BtnBack class="float-right mt-3 mr-0" />
     </div>
-    <div class="py-10"></div>
+    <div class="mb-10 h-40">*</div>
   </div>
 </template>
 <script>
@@ -103,7 +103,7 @@ import {
 import { message } from "ant-design-vue";
 
 export default defineComponent({
-  // middleware: "auth",
+  middleware: "auth",
   setup() {
     const isEdit = reactive({ value: false });
     const form = reactive({
@@ -200,6 +200,7 @@ export default defineComponent({
 }
 .edit {
   background-color: #f2c34a;
+  margin: 2px 0;
   margin-right: 5px;
   padding: 2px 8px;
   border: none;

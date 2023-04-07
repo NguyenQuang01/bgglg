@@ -49,7 +49,7 @@
         </div>
       </b-form-group>
       <div class="flex float-right mt-5">
-        <BtnBack />
+        <BtnBack class="mr-2" />
         <b-button type="submit" variant="primary" class="btnSuccess"
           >Tạo tài khoản</b-button
         >
