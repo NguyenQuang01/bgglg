@@ -32,7 +32,7 @@
 import TitleScreen from "@/components/titleScreen/TitleScreen.vue";
 
 export default {
-  // middleware: "auth",
+  middleware: "auth",
   components: {
     TitleScreen,
   },
