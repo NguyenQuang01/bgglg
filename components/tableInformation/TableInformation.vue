@@ -283,10 +283,10 @@ th {
   text-align: left;
   padding: 8px;
 }
-
+/* 
 tr:nth-child(even) {
   background-color: #dddddd;
-}
+} */
 .btnLogin {
   background-color: #045396;
   color: #ffff;

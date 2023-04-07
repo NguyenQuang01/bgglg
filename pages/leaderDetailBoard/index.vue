@@ -3,7 +3,7 @@
     <div class="text-center mt-16 text-3xl font-bold title mb-16">
       Bảng báo cáo chi tiết
     </div>
-    <BtnBack />
+
     <div class="mb-2 flex">
       <div class="mb-2 flex">
         <a-button class="btnDay" @click="btnMinus">Ngày trước</a-button>
@@ -18,9 +18,11 @@
       <!-- <a-button class="btnDay">Lọc</a-button>
       <a-button class="btnDay">Xuất excel</a-button> -->
     </div>
-    <div class="m-auto m-0 overflow-auto"><+ :valueDay="valueDay" /></div>
+    <div class="m-auto m-0 overflow-auto">
+      <TableDetail :valueDay="valueDay" />
+    </div>
     <div class="float-right mt-2 mb-10">
-      <div class="mb-16">text</div>
+      <div class="mb-16"><BtnBack class="h-10" /></div>
     </div>
   </div>
 </template>

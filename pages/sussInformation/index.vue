@@ -25,7 +25,7 @@
 import TableInformationSuss from "@/components/TableInformationSuss/TableInformationSuss.vue";
 import BtnBack from "@/components/BtnBack.vue";
 export default {
-  // middleware: "auth",
+  middleware: "auth",
   components: {
     TableInformationSuss,
     BtnBack,
@@ -78,9 +78,9 @@ th {
   padding: 8px;
 }
 
-tr:nth-child(even) {
+/* tr:nth-child(even) {
   background-color: #dddddd;
-}
+} */
 .btnLogin {
   background-color: #045396;
   color: #ffff;
