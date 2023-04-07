@@ -7,49 +7,53 @@
           v-model="form.userLogin"
           type="text"
           placeholder="Nhập"
+          class="inputLogin"
           required
         ></b-form-input>
       </b-form-group>
 
       <b-form-group
         id="input-group-2"
-        label="nhập mật khẩu:"
+        label="Nhập mật khẩu:"
         label-for="input-2"
       >
         <b-form-input
           id="input-2"
           v-model="form.password"
-          placeholder="nhập "
+          placeholder="Nhập "
           type="password"
+          class="inputLogin"
           required
         ></b-form-input>
       </b-form-group>
-
-      <b-form-group
-        id="input-group-3"
-        label="Chọn quyền tài khoản:"
-        label-for="input-3"
-      >
-        <div>
-          <b-form-checkbox v-model="form.edit"> edit </b-form-checkbox>
-          <b-form-checkbox v-model="form.view"> view </b-form-checkbox>
-          <b-form-checkbox v-model="form.report"> report </b-form-checkbox>
-          <b-form-checkbox v-model="form.admin"> admin </b-form-checkbox>
-        </div>
-      </b-form-group>
-
-      <b-form-group id="input-group-3" label="Chọn tổ:" label-for="input-3">
+      <b-form-group id="input-group-3" label="Tổ đơn vị" label-for="input-3">
         <a-cascader
           :options="options"
           :display-render="displayRender"
           expand-trigger="hover"
           placeholder="chọn"
           @change="onChange"
+          class="inputLogin"
         />
       </b-form-group>
-      <b-button type="submit" variant="primary" class="btnSuccess"
-        >Submit</b-button
+      <b-form-group
+        id="input-group-3"
+        label="Chọn quyền tài khoản:"
+        label-for="input-3"
       >
+        <div class="flex justify-between">
+          <b-form-checkbox v-model="form.edit"> Edit </b-form-checkbox>
+          <b-form-checkbox v-model="form.view"> View </b-form-checkbox>
+          <b-form-checkbox v-model="form.report"> Report </b-form-checkbox>
+          <b-form-checkbox v-model="form.admin"> Admin </b-form-checkbox>
+        </div>
+      </b-form-group>
+      <div class="flex float-right mt-5">
+        <BtnBack />
+        <b-button type="submit" variant="primary" class="btnSuccess"
+          >Tạo tài khoản</b-button
+        >
+      </div>
     </b-form>
     <div class="py-10"></div>
   </div>
@@ -123,7 +127,15 @@ export default {
 };
 </script>
 <style>
+.ant-cascader-input {
+  border-radius: 50px;
+}
 .btnSuccess {
-  color: #0069d9;
+  color: #ffff;
+  background-color: #045396;
+  border-radius: 50px;
+}
+.inputLogin {
+  border-radius: 50px;
 }
 </style>

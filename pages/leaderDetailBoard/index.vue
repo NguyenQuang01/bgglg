@@ -18,9 +18,7 @@
       <!-- <a-button class="btnDay">Lọc</a-button>
       <a-button class="btnDay">Xuất excel</a-button> -->
     </div>
-    <div class="m-auto m-0 overflow-auto">
-      <TableDetail :valueDay="valueDay" />
-    </div>
+    <div class="m-auto m-0 overflow-auto"><+ :valueDay="valueDay" /></div>
     <div class="float-right mt-2 mb-10">
       <div class="mb-16">text</div>
     </div>

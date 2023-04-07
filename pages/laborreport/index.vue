@@ -4,8 +4,7 @@
       BÁO CÁO SỐ LAO ĐỘNG NGHỈ
     </div>
 
-    <div class="max-w-2xl m-auto m-0">
-      <BtnBack />
+    <div class="max-w-sm m-auto m-0">
       <Input :label="label" />
     </div>
   </div>
@@ -32,6 +31,6 @@ export default {
 </script>
 <style scoped>
 .title {
-  color: #0daeff;
+  color: #045396;
 }
 </style>

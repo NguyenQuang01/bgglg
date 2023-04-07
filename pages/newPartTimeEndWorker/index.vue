@@ -4,9 +4,7 @@
       BÁO CÁO SỐ THỜI VỤ & CÔNG NHÂN MỚI
     </div>
 
-    <div class="max-w-2xl m-auto m-0">
-      <BtnBack />
-
+    <div class="max-w-sm m-auto m-0">
       <b-form @submit="onSubmit" class="mb-10">
         <b-form-group
           id="input-group-2"
@@ -18,6 +16,7 @@
             v-model="form.partTime"
             placeholder="Nhập "
             required
+            class="inputLogin"
           ></b-form-input>
         </b-form-group>
         <b-form-group
@@ -30,13 +29,15 @@
             v-model="form.worker"
             placeholder="Nhập "
             required
+            class="inputLogin"
           ></b-form-input>
         </b-form-group>
-        <div class="flex">
-          <b-button type="submit" variant="primary" class="text-blue-700 h-10"
+        <div class="flex float-right">
+          <BtnBack class="h-10" />
+          <button-skip :skip="skip" />
+          <b-button type="submit" variant="primary" class="btnLogin h-10"
             >Xác nhận</b-button
           >
-          <button-skip :skip="skip" />
         </div>
       </b-form>
     </div>
@@ -49,7 +50,7 @@ import BtnBack from "@/components/BtnBack.vue";
 import { getDetail } from "@/api/AuthenConnector.js";
 import { today } from "@/constants/getToday";
 export default {
-  middleware: "auth",
+  // middleware: "auth",
   components: { ButtonSkip, BtnBack },
   data() {
     return {
@@ -91,6 +92,15 @@ export default {
 </script>
 <style scoped>
 .title {
-  color: #0daeff;
+  color: #045396;
+}
+.btnLogin {
+  background-color: #045396;
+  color: #ffff;
+  margin-bottom: 20px;
+  border-radius: 50px;
+}
+.inputLogin {
+  border-radius: 50px;
 }
 </style>

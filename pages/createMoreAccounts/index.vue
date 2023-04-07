@@ -1,16 +1,27 @@
 <template lang="">
   <div class="container">
+    <div
+      class="text-center my-16 text-3xl font-bold title flex justify-center title"
+    >
+      Tạo tài khoản
+    </div>
+
+    <div class="max-w-sm m-auto m-0">
+      <CreateMoreAccounts />
+    </div>
+  </div>
+  <!-- <div class="container">
     <div class="text-center mt-10 mb-24 text-3xl font-bold title">
       Tạo Tài Khoản
     </div>
 
     <div class="max-w-2xl m-auto m-0">
-      <BtnBack />
+    
       <div>
         <CreateMoreAccounts />
       </div>
     </div>
-  </div>
+  </div> -->
 </template>
 <script>
 import CreateMoreAccounts from "@/components/CreateMoreAccounts.vue";
@@ -52,6 +63,6 @@ export default {
 </script>
 <style scoped>
 .title {
-  color: #0daeff;
+  color: #045396;
 }
 </style>

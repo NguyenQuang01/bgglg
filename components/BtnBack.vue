@@ -1,10 +1,15 @@
 <template lang="">
-  <b-button @click="$router.back()" class="textBack border-none px-2 mb-2"
+  <b-button @click="$router.back()" variant="primary" class="textBack"
     ><b-icon icon="arrow-bar-left" aria-hidden="true"></b-icon>trở lại</b-button
   >
 </template>
 <style scoped>
 .textBack {
   color: #045396;
+  border-color: #045396;
+  border-radius: 50px;
+}
+.btn:hover {
+  color: #ffff;
 }
 </style>

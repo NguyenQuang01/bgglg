@@ -7,13 +7,15 @@
           type="number"
           v-model="quantityPeople"
           :placeholder="label.placeholder"
+          class="inputLogin"
         ></b-form-input>
       </b-form-group>
-      <div class="flex">
-        <b-button type="submit" variant="primary" class="text-blue-700 h-10"
+      <div class="flex float-right">
+        <BtnBack class="h-10" />
+        <BtnSkip :skip="skip" />
+        <b-button type="submit" variant="primary" class="btnLogin h-10"
           >xác nhận
         </b-button>
-        <BtnSkip :skip="skip" />
       </div>
     </b-form>
     <!-- <b-card class="mt-3" header="Form Data Result">
@@ -72,3 +74,14 @@ export default {
   },
 };
 </script>
+<style scoped>
+.btnLogin {
+  background-color: #045396;
+  color: #ffff;
+  margin-bottom: 20px;
+  border-radius: 50px;
+}
+.inputLogin {
+  border-radius: 50px;
+}
+</style>

@@ -1,7 +1,7 @@
 <template>
   <a-table :columns="columns" :data-source="data" @expand="tet">
     <span slot="numberRice" slot-scope="text, row">
-      <div v-if="row.name === 'Văn phòng'">
+      <div>
         <div class="whitespace-nowrap">Nhân viên:{{ cusRice }}</div>
         <div class="whitespace-nowrap">Khách:{{ empRice }}</div>
         <div class="whitespace-nowrap">Khách Vip:{{ empVipRice }}</div>

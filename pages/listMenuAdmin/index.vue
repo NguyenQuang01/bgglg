@@ -7,11 +7,15 @@
     <div class="max-w-2xl m-auto m-0">
       <a-collapse v-model:activeKey="activeKey">
         <a-collapse-panel key="1" header="Menu" :disabled="false" class="">
-          <a-button type="primary" @click="pagetoAcc">{{ text1 }}</a-button
-          ><br />
-          <a-button type="primary" class="my-3" @click="pagetoBoadLeave">{{
-            text2
+          <a-button type="primary" class="menuBtn" @click="pagetoAcc">{{
+            text1
           }}</a-button
+          ><br />
+          <a-button
+            type="primary"
+            class="my-3 menuBtn"
+            @click="pagetoBoadLeave"
+            >{{ text2 }}</a-button
           ><br />
           <!-- <a-button type="primary">{{ text3 }}</a-button> -->
         </a-collapse-panel>
@@ -48,5 +52,9 @@ export default {
 <style scoped>
 .title {
   color: #0daeff;
+}
+.menuBtn {
+  background-color: #045396;
+  color: #ffff;
 }
 </style>

@@ -2,8 +2,7 @@
   <div class="container">
     <TitleScreen />
 
-    <div class="max-w-2xl m-auto m-0">
-      <BtnBack />
+    <div class="max-w-sm m-auto m-0">
       <FormReasonAbsent />
     </div>
   </div>
@@ -15,7 +14,7 @@ import FormReasonAbsent from "@/components/formReasonAbsent/FormReasonAbsent.vue
 import BtnBack from "@/components/BtnBack.vue";
 
 export default {
-  middleware: "auth",
+  // middleware: "auth",
   components: {
     Input,
     TitleScreen,

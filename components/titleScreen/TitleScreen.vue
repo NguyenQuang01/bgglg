@@ -1,6 +1,6 @@
 <template lang="">
   <div>
-    <div class="text-center mt-10 mb-16 text-3xl font-bold title">
+    <div class="text-center mt-10 mb-16 text-3xl font-bold title2">
       BÁO CÁO TÊN LAO ĐỘNG NGHỈ & LÍ DO
     </div>
   </div>
@@ -8,8 +8,8 @@
 <script>
 export default {};
 </script>
-<style>
-.title {
-  color: #0daeff;
+<style scoped>
+.title2 {
+  color: #045396 !important;
 }
 </style>

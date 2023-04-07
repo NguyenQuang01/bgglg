@@ -1,38 +1,40 @@
 <template>
   <div class="container mb-20">
-    <div class="text-center mt-16 text-3xl font-bold title">Welcome back!</div>
+    <div class="text-center my-16 text-3xl font-bold title flex justify-center">
+      Setup lý do nghỉ
+    </div>
     <div class="text-center mt-2 font-semibold mb-10"></div>
     <div class="max-w-2xl m-auto m-0">
       <div>
         <b-form @submit="onSubmit">
-          <b-form-group
-            id="input-group-1"
-            label="Thêm tài lý do nghỉ:"
-            label-for="input-1"
-          >
-            <b-form-input
-              id="input-1"
-              v-model="form.name"
-              type="text"
-              placeholder="lý do"
-              required
-            ></b-form-input>
-          </b-form-group>
-
-          <div class="mb-2 flex">
-            <b-button type="submit" class="add-btn">thêm</b-button>
-            <!-- <b-button
-              variant="danger"
-              class="text-rose-700 mx-2"
-              @click="deletes"
-              >xóa</b-button
-            >
-            <b-button
-              variant="warning"
-              class="text-yellow-700 mx-2"
-              @click="edit"
-              >sửa</b-button
-            > -->
+          <div class="flex justify-between items-center">
+            <b-row class="w-full">
+              <b-col cols="10"
+                ><b-form-group
+                  id="input-group-1"
+                  label="Thêm tài lý do nghỉ:"
+                  label-for="input-1"
+                >
+                  <b-form-input
+                    id="input-1"
+                    class="borderRadius"
+                    v-model="form.name"
+                    type="text"
+                    placeholder="lý do"
+                    required
+                  ></b-form-input>
+                </b-form-group>
+              </b-col>
+              <b-col class="flex items-center bttAdd">
+                <div>
+                  <b-button
+                    type="submit"
+                    class="add-btn w-full borderRadius px-3"
+                    >thêm</b-button
+                  >
+                </div></b-col
+              >
+            </b-row>
           </div>
         </b-form>
       </div>
@@ -48,14 +50,14 @@
         /> -->
         <!-- <b-table striped :items="data.value"></b-table> -->
         <table id="customers">
-          <tr>
-            <th>Sl</th>
-            <th>Lý do</th>
-            <th></th>
+          <tr class="bg-slate-100">
+            <th class="title">STT</th>
+            <th class="title">LÝ DO</th>
+            <th class="title">HÀNH ĐỘNG</th>
           </tr>
           <tr v-for="(item, index) in data.value" :key="index">
-            <td>{{ index + 1 }}</td>
-            <td class="w-40">
+            <td class="w-5 text-center title">{{ index + 1 }}</td>
+            <td class="w-2/3">
               <b-form-input
                 v-model="item.name"
                 class="w-full h-8"
@@ -63,7 +65,7 @@
               />
               <div v-else>{{ item.name }}</div>
             </td>
-            <td style="text-align: center">
+            <td style="text-align: center" class="w-40">
               <div>
                 <b-button class="save" @click="save(item.name, item.id)"
                   >lưu</b-button
@@ -77,6 +79,7 @@
           </tr>
         </table>
       </div>
+      <BtnBack class="float-right mt-3 mr-0" />
     </div>
     <div class="py-10"></div>
   </div>
@@ -100,7 +103,7 @@ import {
 import { message } from "ant-design-vue";
 
 export default defineComponent({
-  middleware: "auth",
+  // middleware: "auth",
   setup() {
     const isEdit = reactive({ value: false });
     const form = reactive({
@@ -189,24 +192,36 @@ export default defineComponent({
 </script>
 <style scoped>
 .save {
-  background-color: rgba(0, 201, 0, 0.8);
+  background-color: #069d72;
   margin-right: 5px;
-  padding: 2px 7px;
+  padding: 2px 10px;
   border: none;
+  border-radius: 20px;
 }
 .edit {
-  background-color: rgba(201, 198, 0, 0.8);
+  background-color: #f2c34a;
   margin-right: 5px;
-  padding: 2px 5px;
+  padding: 2px 8px;
   border: none;
+  border-radius: 20px;
 }
 .delete {
-  background-color: rgba(201, 74, 0, 0.8);
-  padding: 2px 8px;
+  background-color: #eb6e6e;
+  padding: 2px 10px;
+  border-radius: 20px;
   border: none;
 }
 .add-btn {
-  background-color: #1890ff;
+  background-color: #045396;
   border: none;
+}
+.title {
+  color: #045396;
+}
+.bttAdd {
+  margin-bottom: -13px;
+}
+.borderRadius {
+  border-radius: 50px;
 }
 </style>

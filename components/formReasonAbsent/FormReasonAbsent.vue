@@ -12,6 +12,7 @@
             v-model="item.user"
             placeholder="họ và tên"
             required
+            class="inputLogin"
           ></b-form-input>
         </b-form-group>
         <b-form-group label="Nhập mã số lao động :" label-for="input-2">
@@ -19,6 +20,7 @@
             v-model="item.id"
             placeholder="mã số lao động"
             required
+            class="inputLogin"
           ></b-form-input>
         </b-form-group>
         <b-form-group label="Chọn ly do :" label-for="input-2">
@@ -27,23 +29,22 @@
             v-model="item.reason"
             :options="options"
             required
+            class="inputLogin"
           ></b-form-select>
         </b-form-group>
       </div>
-      <div class="flex mb-24">
+      <div class="flex mb-24 float-right">
+        <BtnBack class="h-10" />
         <b-button
           variant="primary"
-          class="text-blue-700 mb-24"
+          class="mb-24 ml-2 textBack"
           @click="addQuantity"
           >Thêm</b-button
         >
-        <b-button
-          type="submit"
-          variant="primary"
-          class="text-blue-700 mb-24 ml-2"
+        <button-skip :skip="skip" />
+        <b-button type="submit" variant="primary" class="btnLogin h-10 mb-24"
           >xác nhận</b-button
         >
-        <button-skip :skip="skip" />
       </div>
     </b-form>
   </div>
@@ -158,5 +159,23 @@ export default {
   padding: 2px 10px;
   border: none;
   border-radius: 50%;
+}
+.btnLogin {
+  background-color: #045396;
+  color: #ffff;
+  margin-bottom: 20px;
+  border-radius: 50px;
+}
+.inputLogin {
+  border-radius: 50px;
+}
+
+.textBack {
+  color: #045396;
+  border-color: #045396;
+  border-radius: 50px;
+}
+.btn:hover {
+  color: #ffff;
 }
 </style>

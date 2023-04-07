@@ -28,9 +28,13 @@
             class="mb-3 menuBtn"
             >{{ text4 }}</a-button
           ><br v-if="getInfUsers.isView" />
-          <a-button v-if="getInfUsers.isAdmin" type="primary" @click="admin">{{
-            text5
-          }}</a-button>
+          <a-button
+            v-if="getInfUsers.isAdmin"
+            type="primary"
+            class="menuBtn"
+            @click="admin"
+            >{{ text5 }}</a-button
+          >
         </a-collapse-panel>
       </a-collapse>
     </div>

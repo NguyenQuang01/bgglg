@@ -1,7 +1,7 @@
 <template lang="">
   <div>
     <Header />
-    <Nuxt />
+    <Nuxt class="max-h-full" />
     <Foodter class="fixed bottom-0 right-0 mr-2 py-1" />
   </div>
 </template>
