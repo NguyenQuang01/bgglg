@@ -4,8 +4,7 @@
       THÔNG TIN BÁO CÁO
     </div>
 
-    <BtnBack />
-    <div class="font-semibold mb-2 text-lg">
+    <div class="font-semibold mb-2 text-lg title">
       <b-icon icon="house-fill"></b-icon> Nhà máy : Xưởng 1
     </div>
     <div class="max-w-2xl m-auto m-0">
@@ -37,6 +36,6 @@ export default {
 </script>
 <style scoped>
 .title {
-  color: #0daeff;
+  color: #045396;
 }
 </style>

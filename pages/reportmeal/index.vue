@@ -2,8 +2,7 @@
   <div class="container">
     <div class="text-center mt-10 mb-16 text-3xl font-bold title">BÁO CƠM</div>
 
-    <div class="max-w-2xl m-auto m-0">
-      <BtnBack />
+    <div class="max-w-sm m-auto m-0">
       <b-form @submit="onSubmit">
         <b-form-group
           id="input-group-2"
@@ -13,6 +12,7 @@
           <b-form-input
             v-model="numberMeal.staff"
             placeholder="Nhập "
+            class="inputLogin"
             type="number"
           ></b-form-input>
         </b-form-group>
@@ -25,6 +25,7 @@
             v-model="numberMeal.guest"
             placeholder="Nhập "
             type="number"
+            class="inputLogin"
           ></b-form-input>
         </b-form-group>
         <b-form-group
@@ -36,13 +37,15 @@
             v-model="numberMeal.guestVip"
             placeholder="Nhập "
             type="number"
+            class="inputLogin"
           ></b-form-input>
         </b-form-group>
-        <div class="flex">
-          <b-button type="submit" variant="primary" class="text-blue-700 h-10"
+        <div class="flex float-right">
+          <BtnBack class="h-10" />
+          <button-skip :skip="skip" />
+          <b-button type="submit" variant="primary" class="btnLogin h-10"
             >Xác nhận</b-button
           >
-          <button-skip :skip="skip" />
         </div>
       </b-form>
     </div>
@@ -56,7 +59,7 @@ import { getDetail } from "@/api/AuthenConnector.js";
 import { today } from "@/constants/getToday";
 export default {
   components: { ButtonSkip, BtnBack },
-  middleware: "auth",
+  // middleware: "auth",
   data() {
     return {
       skip: "/reportInformation",
@@ -107,6 +110,15 @@ export default {
 </script>
 <style scoped>
 .title {
-  color: #0daeff;
+  color: #045396;
+}
+.btnLogin {
+  background-color: #045396;
+  color: #ffff;
+  margin-bottom: 20px;
+  border-radius: 50px;
+}
+.inputLogin {
+  border-radius: 50px;
 }
 </style>

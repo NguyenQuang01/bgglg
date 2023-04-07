@@ -5,10 +5,8 @@
     </div>
 
     <div class="max-w-2xl m-auto m-0">
-      <BtnBack />
-
       <b-form @submit="onSubmit">
-        <div class="flex justify-between">
+        <div class="flex justify-between items-center">
           <b-form-group
             id="input-group-2"
             label="SỐ điều chuyển:"
@@ -20,22 +18,16 @@
               placeholder="Nhập "
               required
               type="number"
-              class="h-8"
+              class="h-8 inputLogin"
             ></b-form-input>
           </b-form-group>
+          <b-icon icon="arrow-right" aria-hidden="true" class="mr-2"></b-icon>
           <b-form-group
             id="input-group-3"
             label="Chọn bộ phận:"
             label-for="input-3"
             class="width48"
           >
-            <!-- <b-form-select
-                id="input-3"
-                v-model="form.parentId"
-                :options="parts"
-                placeholder="nhập "
-                required
-              ></b-form-select> -->
             <a-cascader
               :options="parts"
               expand-trigger="hover"
@@ -43,22 +35,8 @@
               @change="onChange"
             />
           </b-form-group>
-          <!-- <b-form-group
-              id="input-group-3"
-              label="Chọn tổ:"
-              label-for="input-3"
-              class="width48"
-            >
-              <b-form-select
-                id="input-3"
-                v-model="form.transfer.group"
-                :options="parts2"
-                placeholder="nhập "
-                required
-              ></b-form-select>
-            </b-form-group> -->
         </div>
-        <div class="flex justify-between">
+        <div class="flex justify-between items-center">
           <b-form-group
             id="input-group-2"
             label="SỐ đi hỗ trợ:"
@@ -70,9 +48,10 @@
               placeholder="Nhập "
               required
               type="number"
-              class="h-8"
+              class="h-8 inputLogin"
             ></b-form-input>
           </b-form-group>
+          <b-icon icon="arrow-right" aria-hidden="true" class="mr-2"></b-icon>
           <b-form-group
             id="input-group-3"
             label="Chọn bộ phận:"
@@ -87,54 +66,13 @@
             />
           </b-form-group>
         </div>
-        <!-- <b-form-group
-          id="input-group-2"
-          label="SỐ đi hỗ trợ:"
-          label-for="input-2"
-        >
-          <b-form-input
-            v-model="form.support.number"
-            placeholder="Nhập "
-            required
-            type="number"
-          ></b-form-input>
-        </b-form-group>
-        <div class="flex justify-between">
-          <b-form-group
-            id="input-group-3"
-            label="Chọn bộ phận:"
-            label-for="input-3"
-            class="width48"
-          >
-            <b-form-select
-              id="input-3"
-              v-model="form.parentIdSupport"
-              :options="parts"
-              placeholder="nhập "
-              required
-            ></b-form-select>
-          </b-form-group>
-          <b-form-group
-            id="input-group-3"
-            label="Chọn tổ:"
-            label-for="input-3"
-            class="width48"
-          >
-            <b-form-select
-              id="input-3"
-              v-model="form.support.group"
-              :options="parts3"
-              placeholder="nhập "
-              required
-            ></b-form-select>
-          </b-form-group>
-        </div> -->
 
-        <div class="flex">
-          <b-button type="submit" variant="primary" class="text-blue-700 mb-24"
+        <div class="flex float-right">
+          <BtnBack class="h-10" />
+          <button-skip :skip="skip" />
+          <b-button type="submit" variant="primary" class="btnLogin mb-24"
             >Xác nhận</b-button
           >
-          <button-skip :skip="skip" />
         </div>
       </b-form>
     </div>
@@ -243,9 +181,18 @@ export default {
 </script>
 <style scoped>
 .title {
-  color: #0daeff;
+  color: #045396;
 }
 .width48 {
   width: 48%;
+}
+.btnLogin {
+  background-color: #045396;
+  color: #ffff;
+  margin-bottom: 20px;
+  border-radius: 50px;
+}
+.inputLogin {
+  border-radius: 50px;
 }
 </style>

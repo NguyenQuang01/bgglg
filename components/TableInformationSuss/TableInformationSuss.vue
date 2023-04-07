@@ -1,13 +1,13 @@
 <template>
   <div>
     <table class="mb-2">
-      <tr>
+      <tr class="thText">
         <th>Tên</th>
         <th>SL</th>
         <th>Thông tin</th>
       </tr>
       <tr>
-        <td class="background text-slate-50">ĐỊNH BIÊN</td>
+        <td class="tdText text-slate-50">ĐỊNH BIÊN</td>
         <td>
           <input type="text" v-model="demarcation" class="w-20" v-if="isEdit" />
           <div v-else>{{ demarcation }}</div>
@@ -15,7 +15,7 @@
         <td></td>
       </tr>
       <tr>
-        <td class="background text-slate-50">SỐ THỜI VỤ</td>
+        <td class="tdText text-slate-50">SỐ THỜI VỤ</td>
         <td>
           <input
             type="text"
@@ -29,7 +29,7 @@
         <td></td>
       </tr>
       <tr>
-        <td class="background text-slate-50">SỐ H.SINH</td>
+        <td class="tdText text-slate-50">SỐ H.SINH</td>
 
         <td>
           <input
@@ -43,7 +43,7 @@
         <td></td>
       </tr>
       <tr>
-        <td class="background text-slate-50">ĐIỀU CHUYỂN</td>
+        <td class="tdText text-slate-50">ĐIỀU CHUYỂN</td>
 
         <td>
           <input
@@ -58,7 +58,7 @@
         <td v-else class="text-rose-800">chưa xác nhận</td>
       </tr>
       <tr>
-        <td class="background text-slate-50">HỖ TRỢ</td>
+        <td class="tdText text-slate-50">HỖ TRỢ</td>
 
         <td>
           <input
@@ -72,7 +72,7 @@
         <td></td>
       </tr>
       <tr>
-        <td class="background text-slate-50">BÁO CƠM</td>
+        <td class="tdText text-slate-50">BÁO CƠM</td>
         <td>
           <!-- <input type="text" v-model="totalRice" class="w-20" v-if="isEdit" /> -->
           <div>{{ totalRice }}</div>
@@ -115,7 +115,7 @@
       </tr>
 
       <tr>
-        <td class="background text-slate-50">SỐ NGHỈ</td>
+        <td class="tdText text-slate-50">SỐ NGHỈ</td>
 
         <td>
           <input
@@ -146,19 +146,10 @@
         <td></td>
       </tr>
     </table>
-    <!-- <b-button
-      variant="primary"
-      class="text-blue-700 float-right mb-10"
-      @click="submit"
-    >
-      gửi</b-button
-    > -->
-    <b-button
-      variant="primary"
-      class="text-blue-700 float-right mx-2 mb-10"
-      @click="edit"
-      >sửa</b-button
-    >
+    <div class="float-right flex items-center mt-2">
+      <BtnBack class="h-10" />
+      <b-button variant="primary" class="btnLogin" @click="edit">sửa</b-button>
+    </div>
   </div>
 </template>
 <script>
@@ -217,42 +208,7 @@ export default {
       // this.isEdit = !this.isEdit;
       this.$router.push("/laborreport");
     },
-    submit() {
-      // const payload = {
-      //   id: this.id,
-      //   demarcation: Number(this.demarcation),
-      //   laborProductivity: Number(this.numberProductivity),
-      //   restNum: Number(this.numberReasons),
-      //   partTimeNum: Number(this.numberSeasonal),
-      //   studentNum: Number(this.numberStudent),
-      //   riceRequests: {
-      //     riceId: Number(this.riceId),
-      //     riceEmp: Number(this.numberEatRice.riceEmp),
-      //     riceCus: Number(this.numberEatRice.riceCus),
-      //     riceVip: Number(this.numberEatRice.riceVip),
-      //   },
-      //   restRequests: this.arrReasons,
-      //   transferRequests: [
-      //     {
-      //       transferId: Number(this.transferIdTran),
-      //       transferNum: Number(this.numberTransfer),
-      //       groupId: Number(this.groupIdTran),
-      //       type: 1,
-      //     },
-      //     {
-      //       transferId: Number(this.transferIdSupport),
-      //       transferNum: Number(this.numberSupport),
-      //       groupId: Number(this.groupIdSp),
-      //       type: 2,
-      //     },
-      //   ],
-      // };
-      // const res = updateDetail(payload);
-      // if (res) {
-      //   message.success("sửa thành công");
-      //   setTimeout(() => this.getDetails(), 1000);
-      // }
-    },
+    submit() {},
     async getDetails() {
       const day = dayjs(this.valueDay).format("YYYY/MM/DD");
       const groupId = localStorage.getItem("groupId");
@@ -320,10 +276,10 @@ th {
   padding: 8px;
 }
 
-/* tr:nth-child(even) {
-  background-color: #dddddd;
-} */
-.background {
-  background-color: #045396;
+tr:nth-child(even) {
+  text-color: #646464;
+}
+.tdText {
+  text-color: #045396;
 }
 </style>

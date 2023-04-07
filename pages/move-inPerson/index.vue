@@ -7,22 +7,14 @@
     <div class="text-center mt-2 font-semibold mb-10"></div>
 
     <div class="max-w-2xl m-auto m-0">
-      <BtnBack />
       <MoveInPerson :transfer="transfer" />
-      <div class="flex pt-2">
-        <b-button
-          @click="handleOk"
-          variant="primary"
-          class="text-blue-700 mb-24"
+      <div class="flex pt-2 float-right">
+        <BtnBack class="h-10" />
+
+        <button-skip :skip="skip" />
+        <b-button @click="handleOk" variant="primary" class="btnLogin mb-24"
           >Xác nhận</b-button
         >
-        <button-skip :skip="skip" />
-        <!-- <b-button
-            variant="primary"
-            class="text-blue-700 mb-24 mx-2"
-            @click="showModal"
-            >Người chuyển đến</b-button
-          > -->
       </div>
     </div>
   </div>
@@ -33,7 +25,7 @@ import { getTransfer, accuracy } from "@/api/AuthenConnector.js";
 import BtnBack from "@/components/BtnBack.vue";
 
 export default {
-  middleware: "auth",
+  // middleware: "auth",
   components: {
     MoveInPerson,
     BtnBack,
@@ -61,6 +53,12 @@ export default {
 </script>
 <style scoped>
 .title {
-  color: #0daeff;
+  color: #045396;
+}
+.btnLogin {
+  background-color: #045396;
+  color: #ffff;
+  margin-bottom: 20px;
+  border-radius: 50px;
 }
 </style>

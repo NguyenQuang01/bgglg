@@ -1,6 +1,6 @@
 <template lang="">
   <div class="container">
-    <div class="text-center mt-16 text-3xl font-bold title mb-16">Báo cáo</div>
+    <div class="text-center mt-16 text-3xl font-bold Text mb-16">Báo cáo</div>
 
     <div class="max-w-2xl m-auto m-0">
       <!-- <b-button @click="$router.back()" class="text-blue-500 border-none"
@@ -12,11 +12,15 @@
         sub-title="bạn đã báo cáo lao động cho ngày hôm nay, xin cảm ơn."
       >
         <template #title>
-          <h1>Xin chào: {{ user }} !</h1>
+          <h1 class="Text">Xin chào: {{ user }} !</h1>
           <span class="text-lg">Tổ: {{ groupName }}</span>
         </template>
         <template #extra>
-          <a-button key="console" type="primary" @click="gotoPage"
+          <a-button
+            key="console"
+            type="primary"
+            class="history"
+            @click="gotoPage"
             >Xem lại lịch sử báo cáo</a-button
           >
         </template>
@@ -28,7 +32,7 @@
 import TitleScreen from "@/components/titleScreen/TitleScreen.vue";
 
 export default {
-  middleware: "auth",
+  // middleware: "auth",
   components: {
     TitleScreen,
   },
@@ -50,4 +54,12 @@ export default {
   },
 };
 </script>
-<style scoped></style>
+<style scoped>
+.Text {
+  color: #045396;
+}
+.history {
+  background-color: #045396;
+  color: #ffff;
+}
+</style>

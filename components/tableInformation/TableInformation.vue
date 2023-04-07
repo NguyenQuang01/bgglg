@@ -1,28 +1,28 @@
 <template>
   <div>
     <table class="mb-2">
-      <tr>
+      <tr class="thText">
         <th>Tên</th>
         <th>SL</th>
         <th>Thông tin</th>
       </tr>
       <tr>
-        <td class="bg-sky-400 text-slate-50">ĐỊNH BIÊN</td>
+        <td class="tdText text-slate-50">ĐỊNH BIÊN</td>
         <td>{{ demarcation.quantity }}</td>
         <td>{{ demarcation.information }}</td>
       </tr>
       <tr>
-        <td class="bg-sky-400 text-slate-50">SỐ THỜI VỤ</td>
+        <td class="tdText text-slate-50">SỐ THỜI VỤ</td>
         <td>{{ numberSeasonal.quantity }}</td>
         <td>{{ numberSeasonal.information }}</td>
       </tr>
       <tr>
-        <td class="bg-sky-400 text-slate-50">SỐ H.SINH</td>
+        <td class="tdText text-slate-50">SỐ H.SINH</td>
         <td>{{ numberStudent.quantity }}</td>
         <td>{{ numberStudent.information }}</td>
       </tr>
       <tr>
-        <td class="bg-sky-400 text-slate-50">ĐIỀU CHUYỂN</td>
+        <td class="tdText text-slate-50">ĐIỀU CHUYỂN</td>
         <td>{{ numberTransfer.quantity }}</td>
         <!-- <td v-if="numberTransfer.information" class="text-lime-800">
           xác nhận
@@ -31,14 +31,14 @@
         <td></td>
       </tr>
       <tr>
-        <td class="bg-sky-400 text-slate-50">HỖ TRỢ</td>
+        <td class="tdText text-slate-50">HỖ TRỢ</td>
         <td>{{ numberSupport.quantity }}</td>
         <!-- <td v-if="numberSupport.information" class="text-lime-800">xác nhận</td>
         <td v-else class="text-rose-800">chưa xác nhận</td> -->
         <td></td>
       </tr>
       <tr>
-        <td class="bg-sky-400 text-slate-50">BÁO CƠM</td>
+        <td class="tdText text-slate-50">BÁO CƠM</td>
         <td>
           {{
             Number(numberEatRice.staffQuantity) +
@@ -62,7 +62,7 @@
       </tr>
 
       <tr>
-        <td class="bg-sky-400 text-slate-50">SỐ NGHỈ</td>
+        <td class="tdText text-slate-50">SỐ NGHỈ</td>
         <td>{{ numberReasons.quantity }}</td>
         <td>
           <div
@@ -80,12 +80,13 @@
         <td>{{ numberProductivity.information }}</td>
       </tr>
     </table>
-    <b-button
-      variant="primary"
-      class="text-blue-700 float-right mb-10"
-      @click="submit"
-      >{{ btn }}</b-button
-    >
+    <div class="float-right flex items-center mt-2">
+      <BtnBack class="h-10" />
+      <b-button variant="primary" class="btnLogin" @click="submit">{{
+        btn
+      }}</b-button>
+    </div>
+
     <a-modal v-model="visible" title="thông báo" @ok="handleOk">
       <p>
         Xin chào <span class="font-extrabold">{{ user }}</span> - bạn đã báo cáo
@@ -262,7 +263,15 @@ export default {
 };
 </script>
 <style>
-table {
+.tdText {
+  color: #045396;
+}
+.thText {
+  /* background-color: #045396; */
+  background-color: #045396;
+  color: #ffff;
+}
+.table {
   font-family: arial, sans-serif;
   border-collapse: collapse;
   width: 100%;
@@ -270,12 +279,18 @@ table {
 
 td,
 th {
-  border: 1px solid #dddddd;
+  border: 1px solid #929292;
   text-align: left;
   padding: 8px;
 }
 
-/* tr:nth-child(even) {
+tr:nth-child(even) {
   background-color: #dddddd;
-} */
+}
+.btnLogin {
+  background-color: #045396;
+  color: #ffff;
+  border-radius: 50px;
+  margin-left: 5px;
+}
 </style>

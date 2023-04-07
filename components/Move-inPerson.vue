@@ -1,9 +1,9 @@
 <template lang="">
   <div>
     <table>
-      <tr>
-        <th>Bạn được hỗ trợ:</th>
-        <th>Từ đơn vị:</th>
+      <tr class="textTableTh">
+        <th>BẠN ĐƯỢC HỖ TRỢ:</th>
+        <th>TỪ ĐƠN VỊ :</th>
       </tr>
       <tr v-for="item in transfer">
         <td>{{ item.transferNum }}</td>
@@ -17,4 +17,10 @@ export default {
   props: ["transfer"],
 };
 </script>
-<style lang=""></style>
+<style>
+.textTableTh {
+  color: #045396;
+  margin-bottom: 20px;
+  border-radius: 50px;
+}
+</style>
