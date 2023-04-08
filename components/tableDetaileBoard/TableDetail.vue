@@ -1,6 +1,6 @@
 <template>
   <a-table :columns="columns" :data-source="data" @expand="tet">
-    <span slot="numberRice" slot-scope="text, row">
+    <span slot="numberRice">
       <div>
         <div class="whitespace-nowrap">Nhân viên:{{ cusRice }}</div>
         <div class="whitespace-nowrap">Khách:{{ empRice }}</div>

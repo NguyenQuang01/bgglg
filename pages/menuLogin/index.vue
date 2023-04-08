@@ -41,7 +41,7 @@
   </div>
 </template>
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapMutations } from "vuex";
 import Avatar from "@/components/Avatar";
 export default {
   middleware: "auth",
@@ -56,10 +56,23 @@ export default {
       activeKey: 1,
     };
   },
+  fetch() {
+    this.test();
+  },
   computed: {
     ...mapGetters({ getInfUsers: "getInfUsers" }),
   },
   methods: {
+    ...mapMutations({
+      SET_STATE_INFUSER: "SET_STATE_INFUSER",
+    }),
+    test() {
+      console.log(typeof window);
+      if (typeof window !== "undefined") {
+        const inf = JSON.parse(localStorage.getItem("INFUSER"));
+        this.SET_STATE_INFUSER(inf);
+      }
+    },
     report() {
       if (this.getInfUsers.checkReport) {
         this.$router.push("/reported");
