@@ -59,7 +59,7 @@ import { getDetail } from "@/api/AuthenConnector.js";
 import { today } from "@/constants/getToday";
 export default {
   components: { ButtonSkip, BtnBack },
-  // middleware: "auth",
+  middleware: "auth",
   data() {
     return {
       skip: "/reportInformation",

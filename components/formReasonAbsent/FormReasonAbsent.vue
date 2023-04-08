@@ -55,6 +55,8 @@ import ButtonSkip from "../buttonSkip";
 import { reason, deleteLisRes } from "@/api/AuthenConnector.js";
 import { getDetail } from "@/api/AuthenConnector.js";
 import { today } from "@/constants/getToday";
+import { message } from "ant-design-vue";
+
 export default {
   components: { ButtonSkip },
   data() {
@@ -97,8 +99,13 @@ export default {
         restId: item.restId,
         reasonName: item.reasonName,
       }));
-      this.SET_STATE_ARRLABOR(arrLabor);
-      this.$router.push("/newPartTimeEndWorker");
+      if (this.getDataInformationReport.restNum == this.arrForms.length) {
+        this.SET_STATE_ARRLABOR(arrLabor);
+        this.$router.push("/newPartTimeEndWorker");
+      } else {
+        message.warning("Không hợp lệ");
+      }
+
       // this.$router.push("/");
     },
     async getReason() {

@@ -50,7 +50,7 @@ import BtnBack from "@/components/BtnBack.vue";
 import { getDetail } from "@/api/AuthenConnector.js";
 import { today } from "@/constants/getToday";
 export default {
-  // middleware: "auth",
+  middleware: "auth",
   components: { ButtonSkip, BtnBack },
   data() {
     return {
