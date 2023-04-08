@@ -16,7 +16,7 @@ import Group from "@/components/Group.vue";
 import BtnBack from "@/components/BtnBack.vue";
 
 export default {
-  // middleware: "auth",
+  middleware: "auth",
   components: { Group, BtnBack },
   data() {
     return {

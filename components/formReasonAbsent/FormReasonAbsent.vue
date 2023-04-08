@@ -23,7 +23,7 @@
             class="inputLogin"
           ></b-form-input>
         </b-form-group>
-        <b-form-group label="Chọn ly do :" label-for="input-2">
+        <b-form-group label="Chọn lý do :" label-for="input-2">
           <b-form-select
             label="Nhập mã số ly do :"
             v-model="item.reason"
