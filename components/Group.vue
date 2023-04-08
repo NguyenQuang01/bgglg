@@ -4,24 +4,23 @@
       <b-form-group id="input-group-1" label="Nhập tên:" label-for="input-1">
         <b-form-input
           id="input-1"
-          v-model="form.userLogin"
+          v-model="form.groupName"
           type="text"
           placeholder="Nhập"
           class="inputLogin"
           required
         ></b-form-input>
       </b-form-group>
-
       <b-form-group
-        id="input-group-2"
-        label="Nhập mật khẩu:"
-        label-for="input-2"
+        id="input-group-1"
+        label="Nhập định biên:"
+        label-for="input-1"
       >
         <b-form-input
-          id="input-2"
-          v-model="form.password"
-          placeholder="Nhập "
-          type="password"
+          id="input-1"
+          v-model="form.demarcation"
+          type="text"
+          placeholder="Nhập"
           class="inputLogin"
           required
         ></b-form-input>
@@ -29,30 +28,17 @@
       <b-form-group id="input-group-3" label="Tổ đơn vị" label-for="input-3">
         <a-cascader
           :options="options"
-          expand-trigger="hover"
           placeholder="chọn"
           @change="onChange"
           class="inputLogin"
+          change-on-select
         />
       </b-form-group>
-      <b-form-group
-        id="input-group-3"
-        label="Chọn quyền tài khoản:"
-        label-for="input-3"
-      >
-        <div class="flex justify-between">
-          <b-form-checkbox v-model="form.edit"> Chỉnh sửa </b-form-checkbox>
-          <b-form-checkbox v-model="form.view"> Quản trị </b-form-checkbox>
-          <b-form-checkbox v-model="form.report"> Báo cáo </b-form-checkbox>
-          <b-form-checkbox v-model="form.admin">
-            Quản trị hệ thống
-          </b-form-checkbox>
-        </div>
-      </b-form-group>
+
       <div class="flex float-right mt-5">
         <BtnBack class="mr-2" />
         <b-button type="submit" variant="primary" class="btnSuccess"
-          >Tạo tài khoản</b-button
+          >Thêm</b-button
         >
       </div>
     </b-form>
@@ -60,7 +46,7 @@
   </div>
 </template>
 <script>
-import { addAccount } from "@/api/AuthenConnector.js";
+import { addGroupRole } from "@/api/AuthenConnector.js";
 import { groupRoleRoot } from "@/api/AuthenConnector.js";
 import { message } from "ant-design-vue";
 
@@ -69,16 +55,7 @@ export default {
     return {
       options: [],
       selected: "",
-      form: {
-        userLogin: "",
-        password: "",
-        parentId: "",
-        groupName: "",
-        edit: false,
-        view: false,
-        report: false,
-        admin: false,
-      },
+      form: { groupName: "", demarcation: "", parentId: "" },
       list: [],
       part: "",
       parts: [],
@@ -92,12 +69,13 @@ export default {
   methods: {
     onChange(value) {
       const lastElement = value[value.length - 1];
-      this.form.groupName = lastElement;
+      this.form.parentId = lastElement;
     },
 
     async onSubmit(event) {
       event.preventDefault();
-      const res = await addAccount(this.form);
+      //       console.log(this.form, 777);
+      const res = await addGroupRole(this.form);
       if (!res) {
         message.success("đã có tài khoản");
       }
@@ -108,10 +86,6 @@ export default {
           password: "",
           parentId: "",
           groupName: "",
-          edit: false,
-          view: false,
-          report: false,
-          admin: false,
         };
       }
     },

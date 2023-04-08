@@ -19,6 +19,7 @@
         <TableInformationSuss :valueDay="valueDay" />
       </div>
     </div>
+    <div class="footer"></div>
   </div>
 </template>
 <script>
@@ -86,5 +87,9 @@ th {
   color: #ffff;
   border-radius: 50px;
   margin-left: 5px;
+}
+.footer {
+  height: 1px;
+  margin: 50px 0;
 }
 </style>

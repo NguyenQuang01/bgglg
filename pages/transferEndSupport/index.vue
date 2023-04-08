@@ -36,6 +36,7 @@
             />
           </b-form-group>
         </div>
+        <div class="seperate"></div>
         <div class="flex justify-between items-center">
           <b-form-group
             id="input-group-2"
@@ -194,5 +195,10 @@ export default {
 }
 .inputLogin {
   border-radius: 50px;
+}
+.seperate {
+  border: #e9e9e9 solid 1px;
+  height: 1px;
+  margin: 40px 0;
 }
 </style>

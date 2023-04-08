@@ -42,7 +42,7 @@
         <td>
           {{
             Number(numberEatRice.staffQuantity) +
-            Number(numberEatRice.staffQuantity) +
+            Number(numberEatRice.guestQuantity) +
             Number(numberEatRice.guestVipQuantity)
           }}
         </td>

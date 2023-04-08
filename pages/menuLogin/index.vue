@@ -49,10 +49,10 @@ export default {
   data() {
     return {
       text1: `Báo cáo`,
-      text2: `sửa báo cáo`,
+      text2: `Sửa báo cáo`,
       text3: `Xem lại báo cáo`,
       text4: `Quản lý`,
-      text5: "Admin",
+      text5: "Quản trị hệ thống",
       activeKey: 1,
     };
   },

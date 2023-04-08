@@ -3,21 +3,21 @@
     <div
       class="text-center my-16 text-3xl font-bold title flex justify-center title"
     >
-      Tạo tài khoản
+      Thêm tổ đơn vị
     </div>
 
     <div class="max-w-sm m-auto m-0">
-      <CreateMoreAccounts />
+      <Group />
     </div>
   </div>
 </template>
 <script>
-import CreateMoreAccounts from "@/components/CreateMoreAccounts.vue";
+import Group from "@/components/Group.vue";
 import BtnBack from "@/components/BtnBack.vue";
 
 export default {
-  middleware: "auth",
-  components: { CreateMoreAccounts, BtnBack },
+  // middleware: "auth",
+  components: { Group, BtnBack },
   data() {
     return {
       form: {
