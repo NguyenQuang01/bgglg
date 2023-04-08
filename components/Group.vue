@@ -55,7 +55,7 @@ export default {
     return {
       options: [],
       selected: "",
-      form: { groupName: "", demarcation: "", parentId: "" },
+      form: { groupName: "", demarcation: "", groupNameRoot: "" },
       list: [],
       part: "",
       parts: [],
@@ -69,7 +69,7 @@ export default {
   methods: {
     onChange(value) {
       const lastElement = value[value.length - 1];
-      this.form.parentId = lastElement;
+      this.form.groupNameRoot = lastElement;
     },
 
     async onSubmit(event) {
@@ -84,7 +84,7 @@ export default {
         this.form = {
           userLogin: "",
           password: "",
-          parentId: "",
+          groupNameRoot: "",
           groupName: "",
         };
       }
