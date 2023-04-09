@@ -61,10 +61,9 @@ export default {
   },
   mounted() {
     this.token = localStorage.getItem("JWT");
+    setTimeout(() => this.test(), 100);
   },
-  created() {
-    this.test();
-  },
+
   computed: {
     ...mapGetters({ getInfUsers: "getInfUsers" }),
   },
@@ -77,6 +76,9 @@ export default {
         "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTY4MTY1NzQ3MSwiaWF0IjoxNjgxMDUyNjcxfQ.5nf3kFDXjPvwjcXloo9Y7gCp75eTWScWZPvhIflb-i6LrXAOZ3EfVLE07lePk1jbjEutT4OKMJ5o1lHs5PvWIQ"
       );
       console.log(res);
+      if (res && res.status === 200) {
+        this.SET_STATE_INFUSER(res.data);
+      }
     },
     report() {
       if (this.getInfUsers.checkReport) {
