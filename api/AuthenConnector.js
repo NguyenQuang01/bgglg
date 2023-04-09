@@ -149,6 +149,8 @@ export const deleteGroupRole = async (param) => {
   return response.data;
 };
 export const refreshToken = async (param) => {
-  const response = await request.post(`${HOST}/api/refresh-token`);
+  const response = await request.post(
+    `${HOST}/api/refresh-token?refreshToken=${param}`
+  );
   return response.data;
 };

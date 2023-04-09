@@ -43,6 +43,8 @@
 <script>
 import { mapGetters, mapMutations } from "vuex";
 import Avatar from "@/components/Avatar";
+import { refreshToken } from "@/api/AuthenConnector.js";
+
 export default {
   middleware: "auth",
   components: { Avatar },
@@ -54,9 +56,13 @@ export default {
       text4: `Quản lý`,
       text5: "Quản trị hệ thống",
       activeKey: 1,
+      token: "",
     };
   },
-  fetch() {
+  mounted() {
+    this.token = localStorage.getItem("JWT");
+  },
+  created() {
     this.test();
   },
   computed: {
@@ -66,12 +72,11 @@ export default {
     ...mapMutations({
       SET_STATE_INFUSER: "SET_STATE_INFUSER",
     }),
-    test() {
-      console.log(typeof window);
-      if (typeof window !== "undefined") {
-        const inf = JSON.parse(localStorage.getItem("INFUSER"));
-        this.SET_STATE_INFUSER(inf);
-      }
+    async test() {
+      const res = await refreshToken(
+        "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTY4MTY1NzQ3MSwiaWF0IjoxNjgxMDUyNjcxfQ.5nf3kFDXjPvwjcXloo9Y7gCp75eTWScWZPvhIflb-i6LrXAOZ3EfVLE07lePk1jbjEutT4OKMJ5o1lHs5PvWIQ"
+      );
+      console.log(res);
     },
     report() {
       if (this.getInfUsers.checkReport) {
