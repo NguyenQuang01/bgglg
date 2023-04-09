@@ -2,7 +2,7 @@
   <b-navbar toggleable="lg" type="dark" class="header">
     <div class="container">
       <b-navbar-brand href="#" class="whitespace-normal"
-        >HỆ THỐNG BÁO CÁO LAO ĐỘNG</b-navbar-brand
+        ><div @click="toPage">HỆ THỐNG BÁO CÁO LAO ĐỘNG</div></b-navbar-brand
       >
 
       <div class="textName text-base flex" v-if="this.getIsUser">
@@ -36,7 +36,9 @@ export default {
       SET_STATE_ISUSER: "SET_STATE_ISUSER",
       SET_STATE_USERNAME: "SET_STATE_USERNAME",
     }),
-
+    toPage() {
+      this.$router.push("/menuLogin");
+    },
     logout() {
       this.SET_STATE_ISUSER(false);
       localStorage.removeItem("JWT");
