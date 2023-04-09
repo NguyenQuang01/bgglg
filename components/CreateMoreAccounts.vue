@@ -74,6 +74,7 @@ export default {
         password: "",
         parentId: "",
         groupName: "",
+        groupParent: "",
         edit: false,
         view: false,
         report: false,
@@ -92,7 +93,9 @@ export default {
   methods: {
     onChange(value) {
       const lastElement = value[value.length - 1];
+      const lastElement2 = value[value.length - 2];
       this.form.groupName = lastElement;
+      this.form.groupParent = lastElement2;
     },
 
     async onSubmit(event) {
@@ -108,6 +111,7 @@ export default {
           password: "",
           parentId: "",
           groupName: "",
+          groupParent: "",
           edit: false,
           view: false,
           report: false,

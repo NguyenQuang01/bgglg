@@ -130,7 +130,7 @@ export const getDemarcationDb = async (param) => {
 };
 export const getViewDetail = async (param) => {
   const response = await request.get(
-    `${HOST}/view/groupRoleReport?reportDate=${param}`
+    `${HOST}/view/groupRoleViewDetails?reportDate=${param}`
   );
   return response.data;
 };

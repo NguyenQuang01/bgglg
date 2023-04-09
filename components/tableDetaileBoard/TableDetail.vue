@@ -1,10 +1,10 @@
 <template>
   <a-table :columns="columns" :data-source="data" @expand="tet">
-    <span slot="numberRice">
+    <span slot="rice" slot-scope="rice">
       <div>
-        <div class="whitespace-nowrap">Nhân viên:{{ cusRice }}</div>
-        <div class="whitespace-nowrap">Khách:{{ empRice }}</div>
-        <div class="whitespace-nowrap">Khách Vip:{{ empVipRice }}</div>
+        <div class="whitespace-nowrap">Nhân viên:{{ rice.riceCus }}</div>
+        <div class="whitespace-nowrap">Khách:{{ rice.riceEmp }}</div>
+        <div class="whitespace-nowrap">Khách Vip:{{ rice.riceVip }}</div>
       </div>
     </span>
   </a-table>
@@ -94,8 +94,8 @@ export default {
         },
         {
           title: "BÁO CƠM",
-          dataIndex: "numberRice",
-          scopedSlots: { customRender: "numberRice" },
+          dataIndex: "rice",
+          scopedSlots: { customRender: "rice" },
         },
       ],
       cusRice: "",
@@ -139,7 +139,7 @@ export default {
       const day = dayjs(this.valueDay).format("YYYY/MM/DD");
       const res = await getViewDetail(day);
       console.log(res);
-      if (res && res.status === 200) {
+      if (res && res.code === 201) {
         this.data = res.data;
         this.cusRice = res.data[0].totalRiceCus;
         this.empRice = res.data[0].totalRiceEmp;
