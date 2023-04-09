@@ -45,7 +45,6 @@ export default {
       localStorage.removeItem("userLogin");
       localStorage.removeItem("isUser");
       this.$router.push("/");
-      window.location.reload();
     },
   },
 };

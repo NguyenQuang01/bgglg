@@ -46,7 +46,7 @@ import Avatar from "@/components/Avatar";
 import { refreshToken } from "@/api/AuthenConnector.js";
 
 export default {
-  middleware: "auth",
+  // middleware: "auth",
   components: { Avatar },
   data() {
     return {
@@ -72,9 +72,7 @@ export default {
       SET_STATE_INFUSER: "SET_STATE_INFUSER",
     }),
     async test() {
-      const res = await refreshToken(
-        "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTY4MTY1NzQ3MSwiaWF0IjoxNjgxMDUyNjcxfQ.5nf3kFDXjPvwjcXloo9Y7gCp75eTWScWZPvhIflb-i6LrXAOZ3EfVLE07lePk1jbjEutT4OKMJ5o1lHs5PvWIQ"
-      );
+      const res = await refreshToken(this.token);
       console.log(res);
       if (res && res.status === 200) {
         this.SET_STATE_INFUSER(res.data);
