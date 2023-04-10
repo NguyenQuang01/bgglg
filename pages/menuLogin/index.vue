@@ -63,23 +63,27 @@ export default {
     this.token = localStorage.getItem("JWT");
     setTimeout(() => this.test(), 100);
   },
-
+  // fetch() {
+  //   this.token = localStorage.getItem("JWT");
+  // },
   computed: {
     ...mapGetters({ getInfUsers: "getInfUsers" }),
   },
   methods: {
     ...mapMutations({
       SET_STATE_INFUSER: "SET_STATE_INFUSER",
+      SET_STATE_ISAUTHEN: "SET_STATE_ISAUTHEN",
     }),
     async test() {
       const res = await refreshToken(this.token);
       console.log(res);
       if (res && res.status === 200) {
         this.SET_STATE_INFUSER(res.data);
+        this.SET_STATE_ISAUTHEN(true);
       }
     },
     report() {
-      console.log(this.$router.push("/reported"), "gggggggg");
+      console.log(this.$router, "gggggggg");
       if (this.getInfUsers.checkReport) {
         this.$router.push("/reported");
       } else {
