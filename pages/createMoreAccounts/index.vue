@@ -9,6 +9,7 @@
     <div class="max-w-sm m-auto m-0">
       <CreateMoreAccounts />
     </div>
+    <div class="footer"></div>
   </div>
 </template>
 <script>
@@ -52,5 +53,9 @@ export default {
 <style scoped>
 .title {
   color: #045396;
+}
+.footer {
+  height: 1px;
+  margin: 50px 0;
 }
 </style>

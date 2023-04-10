@@ -33,7 +33,7 @@ export default {
   data() {
     return {
       text1: `Tạo tài khoản`,
-      text2: `Danh sach lý do nghỉ`,
+      text2: `Danh sách lý do nghỉ`,
       text3: `Danh sách các tổ`,
 
       activeKey: 1,

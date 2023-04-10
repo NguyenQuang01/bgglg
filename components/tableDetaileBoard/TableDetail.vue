@@ -10,7 +10,7 @@
   </a-table>
 </template>
 <script>
-import { getViewDetail } from "@/api/AuthenConnector.js";
+import { getViewDetail, getNameAll } from "@/api/AuthenConnector.js";
 import dayjs from "dayjs";
 import { message } from "ant-design-vue";
 
@@ -19,7 +19,7 @@ export default {
 
   data() {
     return {
-      arrChild: ["to1", "to2", "to3", "admin1", "admin2", "admin3"],
+      arrChild: [],
       numberRadio: 2,
       data: [],
       totalRatioOfOfficeAndDonvile: "",
@@ -67,9 +67,10 @@ export default {
             if (this.arrChild.includes(row.name)) {
               obj.attrs.rowSpan = 0;
             }
-            if (row.name === "Đơn vị lẻ") {
-              obj.attrs.rowSpan = 0;
-            }
+
+            // if (row.name === "Đơn vị lẻ") {
+            //   obj.attrs.rowSpan = 0;
+            // }
 
             return obj;
           },
@@ -105,6 +106,7 @@ export default {
   },
   created() {
     this.getData();
+    this.getNameAll();
   },
   watch: {
     valueDay: {
@@ -117,17 +119,18 @@ export default {
   methods: {
     tet(expanded, record) {
       console.log(expanded, record);
-      if (
-        (record.name === "Văn phòng" || record.name === "Đơn vị lẻ") &&
-        expanded === true
-      ) {
+      if (record.name === "Văn phòng" && expanded === true) {
         this.numberRadio += this.data[0].children.length;
       }
+      if (record.name === "Đơn vị lẻ" && expanded === true) {
+        this.numberRadio += this.data[1].children.length;
+      }
+
       if (record.name === "Văn phòng" && expanded === false) {
         this.numberRadio -= this.data[0].children.length;
       }
       if (record.name === "Đơn vị lẻ" && expanded === false) {
-        this.numberRadio -= this.data[1].children.length;
+        this.numberRadio -= Number(this.data[1].children.length);
       }
       // if (record.name === "Đơn vị lẻ" && expanded === true) {
       //   this.numberRadio = 5;
@@ -152,6 +155,39 @@ export default {
         this.data = [];
       }
       console.log(res, 3333);
+    },
+    async getNameAll() {
+      const res = await getNameAll();
+      if (res && res.code === 201) {
+        res.data.shift();
+        // this.arrChild = res.data;
+        this.arrChild = [
+          "Đơn vị lẻ",
+          "Lãnh đạo",
+          // "Tổ may",
+          "Tài chính hành chính",
+          "Kế Toán",
+          "Kế hoạch - xuất nhập khẩu",
+          "Kĩ thuật",
+          "QA",
+          "Tổ Kho NPL",
+          "Tổ Cơ Điện vòng ngoài",
+          "Xí nghiệp 1",
+          "Xí nghiệp 2",
+          "Tổ may 21",
+          "Tổ may 22",
+          "Tổ may 23",
+          "Tổ may 24",
+          "Tổ may 25",
+          "Tổ may 26",
+          "Tổ may 27",
+          "Tổ may 28",
+          "Tổ may 29",
+          "Tổ may 30",
+        ];
+
+        console.log(this.arrChild, 4444);
+      }
     },
   },
 };

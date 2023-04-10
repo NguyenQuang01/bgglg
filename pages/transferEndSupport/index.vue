@@ -32,6 +32,7 @@
               :options="parts"
               expand-trigger="hover"
               placeholder="chọn"
+              required
               @change="onChange"
             />
           </b-form-group>
@@ -63,6 +64,7 @@
               :options="parts"
               expand-trigger="hover"
               placeholder="chọn"
+              required
               @change="onChange2"
             />
           </b-form-group>

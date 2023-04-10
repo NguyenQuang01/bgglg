@@ -154,3 +154,7 @@ export const refreshToken = async (param) => {
   );
   return response.data;
 };
+export const getNameAll = async (param) => {
+  const response = await request.get(`${HOST}/getName`);
+  return response.data;
+};
