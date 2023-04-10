@@ -1,5 +1,5 @@
 <template>
-  <a-table :columns="columns" :data-source="data" @expand="tet">
+  <a-table :columns="columns" :data-source="data" @expand="tet" bordered>
     <span slot="rice" slot-scope="rice">
       <div>
         <div class="whitespace-nowrap">Nhân viên:{{ rice.riceCus }}</div>
