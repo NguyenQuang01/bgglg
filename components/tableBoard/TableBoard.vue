@@ -213,7 +213,6 @@ export default {
       const res = await getView(day);
 
       if (res) {
-        console.log(res, 777);
         // this.valueTable = res.responseList;
         // this.actualWork = res.actualWork;
         // this.laborProductivity = res.laborProductivity;

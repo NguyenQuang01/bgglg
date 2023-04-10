@@ -93,7 +93,6 @@ export default {
             children: value,
             attrs: {},
           };
-          console.log(row);
           if (row.name === "Jim Green") {
             obj.attrs.rowSpan = 2;
           }

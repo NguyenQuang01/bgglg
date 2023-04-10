@@ -118,7 +118,6 @@ export default {
   },
   methods: {
     tet(expanded, record) {
-      console.log(expanded, record);
       if (record.name === "Văn phòng" && expanded === true) {
         this.numberRadio += this.data[0].children.length;
       }
@@ -141,7 +140,6 @@ export default {
     async getData() {
       const day = dayjs(this.valueDay).format("YYYY/MM/DD");
       const res = await getViewDetail(day);
-      console.log(res);
       if (res && res.code === 201) {
         this.data = res.data;
         this.cusRice = res.data[0].totalRiceCus;
@@ -154,7 +152,6 @@ export default {
         message.error("không có dữ liệu");
         this.data = [];
       }
-      console.log(res, 3333);
     },
     async getNameAll() {
       const res = await getNameAll();
@@ -185,8 +182,6 @@ export default {
           "Tổ may 29",
           "Tổ may 30",
         ];
-
-        console.log(this.arrChild, 4444);
       }
     },
   },

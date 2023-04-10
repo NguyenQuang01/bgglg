@@ -140,7 +140,6 @@ export default {
     },
     async groupRoleRoot() {
       const res = await groupRoleRoot();
-      console.log(res, 7777);
       if (res && res.code === 201) {
         this.parts = res.data;
       }

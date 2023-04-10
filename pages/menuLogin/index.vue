@@ -76,18 +76,15 @@ export default {
     }),
     async test() {
       const res = await refreshToken(this.token);
-      console.log(res);
       if (res && res.status === 200) {
         this.SET_STATE_INFUSER(res.data);
         this.SET_STATE_ISAUTHEN(true);
       }
     },
     report() {
-      console.log(this.$router, "gggggggg");
       if (this.getInfUsers.checkReport) {
         this.$router.push("/reported");
       } else {
-        console.log(777888);
         this.$router.push("/laborreport");
       }
     },

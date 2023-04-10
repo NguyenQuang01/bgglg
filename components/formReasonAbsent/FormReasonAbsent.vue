@@ -125,7 +125,6 @@ export default {
         restIds: [item.restId],
       };
       const res = await deleteLisRes(payload);
-      console.log(res);
       this.arrForms.splice(id, 1);
       // } else {
       //   alert("danh sách nhỏ hơn số nhập");
