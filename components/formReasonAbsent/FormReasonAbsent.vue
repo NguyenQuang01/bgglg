@@ -103,7 +103,7 @@ export default {
         this.SET_STATE_ARRLABOR(arrLabor);
         this.$router.push("/newPartTimeEndWorker");
       } else {
-        message.warning("Không hợp lệ");
+        message.warning("số lượng nghỉ không khớp với báo cáo người nghỉ");
       }
 
       // this.$router.push("/");

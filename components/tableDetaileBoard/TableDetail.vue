@@ -10,7 +10,7 @@
   </a-table>
 </template>
 <script>
-import { getViewDetail, getNameAll } from "@/api/AuthenConnector.js";
+import { getViewDetail, getNameAll, viewRoot } from "@/api/AuthenConnector.js";
 import dayjs from "dayjs";
 import { message } from "ant-design-vue";
 
@@ -19,6 +19,7 @@ export default {
 
   data() {
     return {
+      viewRoot: [],
       arrChild: [],
       numberRadio: 2,
       data: [],
@@ -107,6 +108,7 @@ export default {
   created() {
     this.getData();
     this.getNameAll();
+    this.viewRoot2();
   },
   watch: {
     valueDay: {
@@ -118,19 +120,32 @@ export default {
   },
   methods: {
     tet(expanded, record) {
-      if (record.name === "Văn phòng" && expanded === true) {
-        this.numberRadio += this.data[0].children.length;
-      }
-      if (record.name === "Đơn vị lẻ" && expanded === true) {
-        this.numberRadio += this.data[1].children.length;
-      }
+      this.viewRoot.find((element) =>
+        element.id === record.key && expanded === true
+          ? (this.numberRadio += element.numberChild)
+          : ""
+      );
+      this.viewRoot.find((element) =>
+        element.id === record.key && expanded === false
+          ? (this.numberRadio -= element.numberChild)
+          : ""
+      );
+      // console.log(found, 9999);
+      // if (found) {
+      // }
+      // if (record.name === "Văn phòng" && expanded === true) {
+      //   this.numberRadio += this.data[0].children.length;
+      // }
+      // if (record.name === "Đơn vị lẻ" && expanded === true) {
+      //   this.numberRadio += this.data[1].children.length;
+      // }
 
-      if (record.name === "Văn phòng" && expanded === false) {
-        this.numberRadio -= this.data[0].children.length;
-      }
-      if (record.name === "Đơn vị lẻ" && expanded === false) {
-        this.numberRadio -= Number(this.data[1].children.length);
-      }
+      // if (record.name === "Văn phòng" && expanded === false) {
+      //   this.numberRadio -= this.data[0].children.length;
+      // }
+      // if (record.name === "Đơn vị lẻ" && expanded === false) {
+      //   this.numberRadio -= Number(this.data[1].children.length);
+      // }
       // if (record.name === "Đơn vị lẻ" && expanded === true) {
       //   this.numberRadio = 5;
       // } else {
@@ -161,7 +176,7 @@ export default {
         this.arrChild = [
           "Đơn vị lẻ",
           "Lãnh đạo",
-          // "Tổ may",
+          "XN2",
           "Tài chính hành chính",
           "Kế Toán",
           "Kế hoạch - xuất nhập khẩu",
@@ -182,6 +197,12 @@ export default {
           "Tổ may 29",
           "Tổ may 30",
         ];
+      }
+    },
+    async viewRoot2() {
+      const res = await viewRoot();
+      if (res) {
+        this.viewRoot = res;
       }
     },
   },

@@ -158,3 +158,7 @@ export const getNameAll = async (param) => {
   const response = await request.get(`${HOST}/getName`);
   return response.data;
 };
+export const viewRoot = async () => {
+  const response = await request.get(`${HOST}/groupRole/view-root`);
+  return response.data;
+};

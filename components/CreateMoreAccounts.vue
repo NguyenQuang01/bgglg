@@ -103,10 +103,10 @@ export default {
       const res = await addAccount(this.form);
       console.log(res, 9999);
       if (res && res.status === 500) {
-        message.warning("Dã có tài khoản");
+        message.warning("Tài khoản đã tồn tại");
       }
       if (res && res.status === 201) {
-        message.success("Tài khoản đã tồn tại");
+        message.success("đăng kí thành công");
         this.form = {
           userLogin: "",
           password: "",
