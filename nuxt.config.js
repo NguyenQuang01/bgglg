@@ -14,8 +14,8 @@ export default {
     link: [
       {
         rel: "icon",
-        type: "image/x-icon",
-        href: "./assets/bgglg-removebg-preview.png",
+        type: "image/png",
+        href: "/bgglg-removebg-preview.png",
       },
     ],
   },
