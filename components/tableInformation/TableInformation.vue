@@ -70,7 +70,7 @@
             :key="index"
             class=""
           >
-            {{ item.restName }}- {{ item.reasonId }}
+            {{ item.restName }}- {{ nameReason(item.reasonId) }}
           </div>
         </td>
       </tr>
@@ -101,6 +101,7 @@ import {
   saveDetail,
   getDemarcationDb,
   updateDetail,
+  reason,
 } from "@/api/AuthenConnector.js";
 import { message } from "ant-design-vue";
 import { getDetail } from "@/api/AuthenConnector.js";
@@ -112,10 +113,12 @@ export default {
       visible: false,
       user: "",
       hours: new Date().getHours(),
+      options: [],
     };
   },
   fetch() {
     this.getValue();
+    this.getReason();
   },
   computed: {
     ...mapGetters({
@@ -206,6 +209,14 @@ export default {
         this.SET_STATE_PRODUCTIVITY(productivity);
       }
     },
+    nameReason(item) {
+      const array1 = this.options;
+
+      if (array1.length > 0) {
+        const found = array1.find((element) => element.value === item);
+        return found.text;
+      }
+    },
     // getProductivity() {
     //   console.log(Number(this.getDataInformationReport.demarcation));
     // },
@@ -257,6 +268,15 @@ export default {
           message.success("sửa thành công");
           setTimeout(() => this.$router.push("/sussInformation"), 1000);
         }
+      }
+    },
+    async getReason() {
+      const res = await reason();
+      if (res) {
+        this.options = res.data.map((item) => ({
+          value: item.id,
+          text: item.name,
+        }));
       }
     },
   },
