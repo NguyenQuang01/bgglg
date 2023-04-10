@@ -24,7 +24,8 @@ export default {
   border-radius: 50px;
   width: 100%;
 }
-th {
+th,
+td {
   padding: 5px 0px;
   border: #045396 1px solid;
   text-align: center;
