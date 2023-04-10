@@ -39,17 +39,7 @@
         </b-form>
       </div>
       <div class="mt-6">
-        <!-- <a-table
-          class="mb-10"
-          :row-selection="{
-            selectedRowKeys: selectedRowKeys,
-            onChange: onSelectChange,
-          }"
-          :columns="columns"
-          :data-source="data.value"
-        /> -->
-        <!-- <b-table striped :items="data.value"></b-table> -->
-        <table id="customers">
+        <table id="customers " class="w-full">
           <tr class="bg-slate-100">
             <th class="title">STT</th>
             <th class="title">LÝ DO</th>
@@ -187,6 +177,12 @@ export default defineComponent({
 });
 </script>
 <style scoped>
+td,
+th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
 .with100 {
   width: 104%;
 }
@@ -223,5 +219,8 @@ export default defineComponent({
 }
 .borderRadius {
   border-radius: 50px;
+}
+.wFull {
+  width: 100% !important;
 }
 </style>
