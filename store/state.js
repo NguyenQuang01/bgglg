@@ -8,8 +8,20 @@ export default () => ({
     partTimeNum: 0,
     studentNum: 0,
     transferRequests: [
-      { transferNum: 0, type: 1, groupName: 0, transferId: "" },
-      { transferNum: 0, type: 2, groupName: 0, transferId: "" },
+      {
+        transferNum: 0,
+        type: 1,
+        groupName: 0,
+        transferId: "",
+        groupParent: "",
+      },
+      {
+        transferNum: 0,
+        type: 2,
+        groupName: 0,
+        transferId: "",
+        groupParent: "",
+      },
     ],
     riceRequests: {
       riceEmp: 0,

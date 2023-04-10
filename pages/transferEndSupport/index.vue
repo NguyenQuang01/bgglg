@@ -100,7 +100,7 @@ export default {
         parentId: "",
         parentIdSupport: "",
         transfer: { number: "", group: "", transferId: "", groupParent: "" },
-        support: { number: "", group: "", transferId: "" },
+        support: { number: "", group: "", transferId: "", groupParent: "" },
       },
     };
   },
@@ -132,7 +132,9 @@ export default {
     },
     onChange2(value) {
       const lastElement = value[value.length - 1];
+      const lastElement2 = value[value.length - 2];
       this.form.support.group = lastElement;
+      this.form.support.groupParent = lastElement2;
     },
     async groupRoleRoot() {
       const res = await groupRoleRoot();
@@ -156,11 +158,13 @@ export default {
         transferNum: Number(this.form.transfer.number),
         groupName: this.form.transfer.group,
         transferId: this.form.transfer.transferId,
+        groupParent: this.form.transfer.groupParent,
       });
       this.SET_STATE_SUPPORT({
         transferNum: Number(this.form.support.number),
         groupName: this.form.support.group,
         transferId: this.form.support.transferId,
+        groupParent: this.form.support.groupParent,
       });
       this.$router.push("/move-inPerson");
     },

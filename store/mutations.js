@@ -23,6 +23,8 @@ export default {
     state.dataInformationReport.transferRequests[0].groupName = data.groupName;
     state.dataInformationReport.transferRequests[0].transferId =
       data.transferId;
+    state.dataInformationReport.transferRequests[0].groupParent =
+      data.groupParent;
   },
   SET_STATE_SUPPORT(state, data) {
     state.dataInformationReport.transferRequests[1].transferNum =
@@ -30,6 +32,8 @@ export default {
     state.dataInformationReport.transferRequests[1].groupName = data.groupName;
     state.dataInformationReport.transferRequests[1].transferId =
       data.transferId;
+    state.dataInformationReport.transferRequests[1].groupParent =
+      data.groupParent;
   },
   SET_STATE_MEAL(state, data) {
     state.dataInformationReport.riceRequests.riceEmp = data.staff;
