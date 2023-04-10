@@ -1,15 +1,15 @@
 <template>
   <div class="container mb-20">
     <div class="text-center my-16 text-3xl font-bold title flex justify-center">
-      Setup lý do nghỉ
+      Quản lý lý do nghỉ
     </div>
     <div class="text-center mt-2 font-semibold mb-10"></div>
     <div class="max-w-2xl m-auto m-0">
       <div>
         <b-form @submit="onSubmit">
           <div class="flex justify-between items-center">
-            <b-row class="w-full">
-              <b-col cols="10"
+            <b-row class="with100">
+              <b-col cols="12"
                 ><b-form-group
                   id="input-group-1"
                   label="Thêm tài lý do nghỉ:"
@@ -25,12 +25,12 @@
                   ></b-form-input>
                 </b-form-group>
               </b-col>
-              <b-col class="flex items-center bttAdd">
+              <b-col class="flex items-center bttAdd float-right">
                 <div>
                   <b-button
                     type="submit"
                     class="add-btn w-full borderRadius px-3"
-                    >thêm</b-button
+                    >Thêm</b-button
                   >
                 </div></b-col
               >
@@ -57,7 +57,7 @@
           </tr>
           <tr v-for="(item, index) in data.value" :key="index">
             <td class="w-5 text-center title">{{ index + 1 }}</td>
-            <td class="w-2/3">
+            <td class="w-3/5">
               <b-form-input
                 v-model="item.name"
                 class="w-full h-8"
@@ -68,11 +68,11 @@
             <td style="text-align: center" class="w-40">
               <div>
                 <b-button class="save" @click="save(item.name, item.id)"
-                  >lưu</b-button
+                  >Lưu</b-button
                 >
-                <b-button class="edit" @click="edit">sửa</b-button
+                <b-button class="edit" @click="edit">Sửa</b-button
                 ><b-button class="delete" @click="deletes(item.id)"
-                  >xóa</b-button
+                  >Xóa</b-button
                 >
               </div>
             </td>
@@ -187,6 +187,9 @@ export default defineComponent({
 });
 </script>
 <style scoped>
+.with100 {
+  width: 104%;
+}
 .save {
   background-color: #069d72;
   margin-right: 5px;

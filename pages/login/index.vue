@@ -28,7 +28,7 @@ export default {
   },
 };
 </script>
-<style>
+<style scoped>
 .title {
   color: rgb(255, 63, 63);
 }

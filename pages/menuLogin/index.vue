@@ -108,7 +108,7 @@ export default {
   // },
 };
 </script>
-<style>
+<style scoped>
 .menuBtn {
   background-color: #045396;
   color: #ffff;

@@ -1,6 +1,6 @@
 <template lang="">
   <div class="container">
-    <div class="text-center mt-16 text-3xl font-bold title2">Đinh Biên</div>
+    <div class="text-center mt-16 text-3xl font-bold title2">Định Biên</div>
     <div class="text-center mt-2 font-semibold mb-10"></div>
     <div class="max-w-sm m-auto m-0">
       <b-form @submit="onSubmit">

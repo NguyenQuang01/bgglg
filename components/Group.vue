@@ -19,7 +19,7 @@
         <b-form-input
           id="input-1"
           v-model="form.demarcation"
-          type="text"
+          type="number"
           placeholder="Nhập"
           class="inputLogin"
           required
@@ -58,7 +58,7 @@ export default {
       form: {
         groupName: "",
         demarcation: "",
-        groupNameRoot: "",
+
         groupParent: "",
       },
       list: [],
@@ -104,7 +104,7 @@ export default {
   },
 };
 </script>
-<style>
+<style scoped>
 .ant-cascader-input {
   border-radius: 50px;
 }

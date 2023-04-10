@@ -46,7 +46,7 @@ export default {
       this.$router.push("/demarcation");
     },
     pageToReported() {
-      alert("chức năng này chưa có");
+      alert("Chức năng này chưa có");
     },
   },
   // created() {

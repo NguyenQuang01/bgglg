@@ -1,6 +1,6 @@
 <template lang="">
   <div>
-    <table>
+    <table class="w-full">
       <tr class="textTableTh">
         <th>BẠN ĐƯỢC HỖ TRỢ:</th>
         <th>TỪ ĐƠN VỊ :</th>
@@ -22,5 +22,11 @@ export default {
   color: #045396;
   margin-bottom: 20px;
   border-radius: 50px;
+  width: 100%;
+}
+th {
+  padding: 5px 0px;
+  border: #045396 1px solid;
+  text-align: center;
 }
 </style>
