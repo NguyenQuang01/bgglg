@@ -81,10 +81,9 @@ export default {
 
     async onSubmit(event) {
       event.preventDefault();
-      //       console.log(this.form, 777);
       const res = await addGroupRole(this.form);
       if (!res) {
-        message.success("đã có tài khoản");
+        message.warning("Tên đã có ");
       }
       if (res && res.status === 201) {
         message.success("đăng kí thành công");
