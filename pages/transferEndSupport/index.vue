@@ -198,7 +198,7 @@ export default {
   background-color: #045396;
   color: #ffff;
   margin-bottom: 20px;
-  border-radius: 50px;
+  border-radius: 50px !important;
 }
 .inputLogin {
   border-radius: 50px;

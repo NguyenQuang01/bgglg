@@ -1,9 +1,8 @@
 <template lang="">
   <div class="container">
-    <div class="text-center mt-16 text-3xl font-bold title">Đinh Biên</div>
+    <div class="text-center mt-16 text-3xl font-bold title2">Đinh Biên</div>
     <div class="text-center mt-2 font-semibold mb-10"></div>
-    <div class="max-w-2xl m-auto m-0">
-      <BtnBack />
+    <div class="max-w-sm m-auto m-0">
       <b-form @submit="onSubmit">
         <b-form-group
           id="input-group-2"
@@ -11,9 +10,10 @@
           label-for="input-2"
         >
           <b-form-input
-            v-model="form.demarcation.number"
+            v-model="form.demarcation"
             placeholder="Nhập "
             required
+            class="inputLogin"
             type="number"
           ></b-form-input>
           <b-form-group id="input-group-3" label="Chọn tổ:" label-for="input-3">
@@ -26,8 +26,9 @@
           </b-form-group>
         </b-form-group>
 
-        <div class="flex">
-          <b-button type="submit" variant="primary" class="text-blue-700 mb-24"
+        <div class="flex float-right">
+          <BtnBack class="h-10" />
+          <b-button type="submit" variant="primary" class="btnLogin mb-24"
             >Xác nhận</b-button
           >
         </div>
@@ -53,19 +54,14 @@ export default {
       parts: [],
       parts2: [],
       form: {
-        parentId: "",
-        demarcation: { number: "", group: "", groupParent: "" },
+        // parentId: "",
+        demarcation: "",
+        groupName: "",
+        parentName: "",
       },
     };
   },
-  watch: {
-    "form.parentId": {
-      handler: function (value) {
-        this.groupRoleDetails(value);
-      },
-      deep: true,
-    },
-  },
+
   fetch() {
     this.groupRoleRoot();
   },
@@ -73,8 +69,9 @@ export default {
     onChange(value) {
       const lastElement = value[value.length - 1];
       const lastElement2 = value[value.length - 2];
+      console.log(lastElement2, 999);
       this.form.groupName = lastElement;
-      this.form.groupParent = lastElement2;
+      this.form.parentName = lastElement2;
     },
     async groupRoleRoot() {
       const res = await groupRoleRoot();
@@ -91,8 +88,9 @@ export default {
       event.preventDefault();
 
       const res = await updateDemarcation(
-        this.form.demarcation.group,
-        this.form.demarcation.number
+        this.form.demarcation,
+        this.form.groupName,
+        this.form.parentName
       );
       if (res && res.status === 200) {
         message.success("cập nhật thành công");
@@ -101,11 +99,19 @@ export default {
   },
 };
 </script>
-<style>
-.title {
-  color: #0daeff;
+<style scoped>
+.title2 {
+  color: #045396;
 }
 .width48 {
   width: 48%;
+}
+.inputLogin {
+  border-radius: 50px;
+}
+.btnLogin {
+  background-color: #045396;
+  color: #ffff;
+  margin-bottom: 20px;
 }
 </style>

@@ -17,7 +17,7 @@ export default {
   props: ["transfer"],
 };
 </script>
-<style>
+<style scoped>
 .textTableTh {
   color: #045396;
   margin-bottom: 20px;

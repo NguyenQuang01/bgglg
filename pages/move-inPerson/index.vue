@@ -6,7 +6,7 @@
 
     <div class="text-center mt-2 font-semibold mb-10"></div>
 
-    <div class="max-w-2xl m-auto m-0">
+    <div class="max-w-sm m-auto m-0">
       <MoveInPerson :transfer="transfer" />
       <div class="flex pt-2 float-right">
         <BtnBack class="h-10" />
