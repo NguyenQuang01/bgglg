@@ -99,7 +99,7 @@ export default {
       form: {
         parentId: "",
         parentIdSupport: "",
-        transfer: { number: "", group: "", transferId: "" },
+        transfer: { number: "", group: "", transferId: "", groupParent: "" },
         support: { number: "", group: "", transferId: "" },
       },
     };
@@ -126,7 +126,9 @@ export default {
     }),
     onChange(value) {
       const lastElement = value[value.length - 1];
+      const lastElement2 = value[value.length - 2];
       this.form.transfer.group = lastElement;
+      this.form.transfer.groupParent = lastElement2;
     },
     onChange2(value) {
       const lastElement = value[value.length - 1];

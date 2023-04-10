@@ -79,9 +79,11 @@ export default {
       }
     },
     report() {
+      console.log(this.$router.push("/reported"), "gggggggg");
       if (this.getInfUsers.checkReport) {
         this.$router.push("/reported");
       } else {
+        console.log(777888);
         this.$router.push("/laborreport");
       }
     },

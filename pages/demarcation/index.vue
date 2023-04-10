@@ -54,7 +54,7 @@ export default {
       parts2: [],
       form: {
         parentId: "",
-        demarcation: { number: "", group: "" },
+        demarcation: { number: "", group: "", groupParent: "" },
       },
     };
   },
@@ -72,7 +72,9 @@ export default {
   methods: {
     onChange(value) {
       const lastElement = value[value.length - 1];
-      this.form.demarcation.group = lastElement;
+      const lastElement2 = value[value.length - 2];
+      this.form.groupName = lastElement;
+      this.form.groupParent = lastElement2;
     },
     async groupRoleRoot() {
       const res = await groupRoleRoot();
