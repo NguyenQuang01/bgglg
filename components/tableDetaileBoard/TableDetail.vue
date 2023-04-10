@@ -176,6 +176,7 @@ export default {
         this.arrChild = [
           "Đơn vị lẻ",
           "Lãnh đạo",
+          " VPXN1",
           "XN2",
           "Tài chính hành chính",
           "Kế Toán",
