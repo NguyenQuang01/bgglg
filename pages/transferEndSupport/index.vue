@@ -101,8 +101,8 @@ export default {
       form: {
         parentId: "",
         parentIdSupport: "",
-        transfer: { number: "", group: "", transferId: "", groupParent: "" },
-        support: { number: "", group: "", transferId: "", groupParent: "" },
+        transfer: { number: "", group: "", transferId: "" },
+        support: { number: "", group: "", transferId: "" },
       },
     };
   },
@@ -157,15 +157,13 @@ export default {
       event.preventDefault();
       this.SET_STATE_TRANSFER({
         transferNum: Number(this.form.transfer.number),
-        groupName: this.form.transfer.group,
+        groupId: this.form.transfer.group,
         transferId: this.form.transfer.transferId,
-        groupParent: this.form.transfer.groupParent,
       });
       this.SET_STATE_SUPPORT({
         transferNum: Number(this.form.support.number),
-        groupName: this.form.support.group,
+        groupId: this.form.support.group,
         transferId: this.form.support.transferId,
-        groupParent: this.form.support.groupParent,
       });
       this.$router.push("/move-inPerson");
     },

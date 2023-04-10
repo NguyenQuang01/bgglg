@@ -10,7 +10,12 @@
   </a-table>
 </template>
 <script>
-import { getViewDetail, getNameAll, viewRoot } from "@/api/AuthenConnector.js";
+import {
+  getViewDetail,
+  getNameAll,
+  viewRoot,
+  searchAllDeleteTm,
+} from "@/api/AuthenConnector.js";
 import dayjs from "dayjs";
 import { message } from "ant-design-vue";
 
@@ -107,8 +112,9 @@ export default {
   },
   created() {
     this.getData();
-    this.getNameAll();
+    // this.getNameAll();
     this.viewRoot2();
+    this.getChildVpDvl();
   },
   watch: {
     valueDay: {
@@ -168,42 +174,49 @@ export default {
         this.data = [];
       }
     },
-    async getNameAll() {
-      const res = await getNameAll();
-      if (res && res.code === 201) {
-        res.data.shift();
-        // this.arrChild = res.data;
-        this.arrChild = [
-          "Đơn vị lẻ",
-          "Lãnh đạo",
-          "VPXN1",
-          "XN2",
-          "Tài chính hành chính",
-          "Kế Toán",
-          "Kế hoạch - xuất nhập khẩu",
-          "Kĩ thuật",
-          "QA",
-          "Tổ Kho NPL",
-          "Tổ Cơ Điện vòng ngoài",
-          "Xí nghiệp 1",
-          "Xí nghiệp 2",
-          "Tổ may 21",
-          "Tổ may 22",
-          "Tổ may 23",
-          "Tổ may 24",
-          "Tổ may 25",
-          "Tổ may 26",
-          "Tổ may 27",
-          "Tổ may 28",
-          "Tổ may 29",
-          "Tổ may 30",
-        ];
-      }
-    },
+    // async getNameAll() {
+    //   const res = await getNameAll();
+    //   if (res && res.code === 201) {
+    //     res.data.shift();
+    //     // this.arrChild = res.data;
+    //     this.arrChild = [
+    //       "Đơn vị lẻ",
+    //       "Lãnh đạo",
+    //       "VPXN1",
+    //       "XN2",
+    //       "Tài chính hành chính",
+    //       "Kế Toán",
+    //       "Kế hoạch - xuất nhập khẩu",
+    //       "Kĩ thuật",
+    //       "QA",
+    //       "Tổ Kho NPL",
+    //       "Tổ Cơ Điện vòng ngoài",
+    //       "Xí nghiệp 1",
+    //       "Xí nghiệp 2",
+    //       "Tổ may 21",
+    //       "Tổ may 22",
+    //       "Tổ may 23",
+    //       "Tổ may 24",
+    //       "Tổ may 25",
+    //       "Tổ may 26",
+    //       "Tổ may 27",
+    //       "Tổ may 28",
+    //       "Tổ may 29",
+    //       "Tổ may 30",
+    //     ];
+    //   }
+    // },
     async viewRoot2() {
       const res = await viewRoot();
       if (res) {
         this.viewRoot = res;
+      }
+    },
+    async getChildVpDvl() {
+      const res = await searchAllDeleteTm();
+      if (res && res.code === 201) {
+        console.log(res);
+        this.arrChild = res.data.filter((item) => item !== "Văn phòng");
       }
     },
   },

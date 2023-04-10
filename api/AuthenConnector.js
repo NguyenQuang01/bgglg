@@ -116,9 +116,9 @@ export const getView = async (param) => {
     return { status: 500 };
   }
 };
-export const updateDemarcation = async (demarcation, groupName, parentName) => {
+export const updateDemarcation = async (demarcation, id) => {
   const response = await request.get(
-    `${HOST}/groupRole/update?demarcation=${demarcation}&groupName=${groupName}&parentName=${parentName}`
+    `${HOST}/groupRole/update?demarcation=${demarcation}&id=${id}`
   );
   return response.data;
 };
@@ -160,5 +160,9 @@ export const getNameAll = async (param) => {
 };
 export const viewRoot = async () => {
   const response = await request.get(`${HOST}/groupRole/view-root`);
+  return response.data;
+};
+export const searchAllDeleteTm = async () => {
+  const response = await request.get(`${HOST}/groupRoleDeleteTm`);
   return response.data;
 };

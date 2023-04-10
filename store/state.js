@@ -11,16 +11,14 @@ export default () => ({
       {
         transferNum: 0,
         type: 1,
-        groupName: 0,
+        groupId: 0,
         transferId: "",
-        groupParent: "",
       },
       {
         transferNum: 0,
         type: 2,
-        groupName: 0,
+        groupId: 0,
         transferId: "",
-        groupParent: "",
       },
     ],
     riceRequests: {

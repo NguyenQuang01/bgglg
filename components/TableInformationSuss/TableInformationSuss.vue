@@ -263,7 +263,15 @@ export default {
 };
 </script>
 <style scoped>
-table {
+.tdText {
+  color: #045396;
+}
+.thText {
+  /* background-color: #045396; */
+  background-color: #045396;
+  color: #ffff;
+}
+.table {
   font-family: arial, sans-serif;
   border-collapse: collapse;
   width: 100%;
@@ -271,15 +279,14 @@ table {
 
 td,
 th {
-  border: 1px solid #dddddd;
+  border: 1px solid #929292;
   text-align: left;
   padding: 8px;
 }
-
-tr:nth-child(even) {
-  text-color: #646464;
-}
-.tdText {
-  text-color: #045396;
+.btnLogin {
+  background-color: #045396;
+  color: #ffff;
+  border-radius: 50px;
+  margin-left: 5px;
 }
 </style>

@@ -56,8 +56,7 @@ export default {
       form: {
         // parentId: "",
         demarcation: "",
-        groupName: "",
-        parentName: "",
+        id: "",
       },
     };
   },
@@ -68,10 +67,8 @@ export default {
   methods: {
     onChange(value) {
       const lastElement = value[value.length - 1];
-      const lastElement2 = value[value.length - 2];
-      console.log(lastElement2, 999);
-      this.form.groupName = lastElement;
-      this.form.parentName = lastElement2;
+
+      this.form.id = lastElement;
     },
     async groupRoleRoot() {
       const res = await groupRoleRoot();
@@ -80,18 +77,14 @@ export default {
     async groupRoleDetails(param) {
       const res = await groupRoleDetails(param);
       this.parts2 = res.map((item) => ({
-        text: item.groupName,
+        text: item.id,
         value: item.id,
       }));
     },
     async onSubmit(event) {
       event.preventDefault();
 
-      const res = await updateDemarcation(
-        this.form.demarcation,
-        this.form.groupName,
-        this.form.parentName
-      );
+      const res = await updateDemarcation(this.form.demarcation, this.form.id);
       if (res && res.status === 200) {
         message.success("cập nhật thành công");
       }

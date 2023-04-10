@@ -56,10 +56,9 @@ export default {
       options: [],
       selected: "",
       form: {
-        groupName: "",
         demarcation: "",
-
-        groupParent: "",
+        groupName: "",
+        parentId: "",
       },
       list: [],
       part: "",
@@ -74,9 +73,8 @@ export default {
   methods: {
     onChange(value) {
       const lastElement = value[value.length - 1];
-      const lastElement2 = value[value.length - 2];
-      this.form.groupName = lastElement;
-      this.form.groupParent = lastElement2;
+
+      this.form.parentId = lastElement;
     },
 
     async onSubmit(event) {
@@ -85,13 +83,12 @@ export default {
       if (!res) {
         message.warning("Tên đã có ");
       }
-      if (res && res.status === 201) {
+      if (res && res.status === 200) {
         message.success("đăng kí thành công");
         this.form = {
-          userLogin: "",
-          password: "",
-          groupNameRoot: "",
+          demarcation: "",
           groupName: "",
+          parentId: "",
         };
       }
     },
@@ -104,7 +101,7 @@ export default {
   },
 };
 </script>
-<style scoped>
+<style>
 .ant-cascader-input {
   border-radius: 50px;
 }
