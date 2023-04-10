@@ -21,6 +21,11 @@ export default {
     formlogin,
   },
   layout: "empty",
+  mounted() {
+    if (localStorage.getItem("JWT")) {
+      this.$router.push("/menuLogin");
+    }
+  },
 };
 </script>
 <style>

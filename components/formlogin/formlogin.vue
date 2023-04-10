@@ -77,8 +77,8 @@ export default {
         localStorage.setItem("JWT", res.data.token);
         localStorage.setItem("checkReport", res.data.checkReport);
         localStorage.setItem("groupName", res.data.groupName);
-        localStorage.setItem("formName", this.form.user);
-        localStorage.setItem("formPass", this.form.pass);
+        // localStorage.setItem("formName", this.form.user);
+        // localStorage.setItem("formPass", this.form.pass);
         localStorage.setItem("INFUSER", JSON.stringify(res.data));
 
         this.SET_STATE_ISAUTHEN(true);

@@ -41,9 +41,7 @@ export default {
     },
     logout() {
       this.SET_STATE_ISUSER(false);
-      localStorage.removeItem("JWT");
-      localStorage.removeItem("userLogin");
-      localStorage.removeItem("isUser");
+      localStorage.clear();
       this.$router.push("/");
     },
   },
