@@ -101,11 +101,12 @@ export default {
     async onSubmit(event) {
       event.preventDefault();
       const res = await addAccount(this.form);
-      if (!res) {
-        message.success("đã có tài khoản");
+      console.log(res, 9999);
+      if (res && res.status === 500) {
+        message.warning("Dã có tài khoản");
       }
       if (res && res.status === 201) {
-        message.success("đăng kí thành công");
+        message.success("Tài khoản đã tồn tại");
         this.form = {
           userLogin: "",
           password: "",
