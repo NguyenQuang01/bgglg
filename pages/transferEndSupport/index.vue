@@ -88,6 +88,7 @@ import BtnBack from "@/components/BtnBack.vue";
 import { getDetail } from "@/api/AuthenConnector.js";
 import { today } from "@/constants/getToday";
 import { groupRoleRoot, groupRoleDetails } from "@/api/AuthenConnector.js";
+import { message } from "ant-design-vue";
 export default {
   middleware: "auth",
   components: { ButtonSkip, BtnBack },
@@ -155,17 +156,22 @@ export default {
 
     onSubmit(event) {
       event.preventDefault();
-      this.SET_STATE_TRANSFER({
-        transferNum: Number(this.form.transfer.number),
-        groupId: this.form.transfer.group,
-        transferId: this.form.transfer.transferId,
-      });
-      this.SET_STATE_SUPPORT({
-        transferNum: Number(this.form.support.number),
-        groupId: this.form.support.group,
-        transferId: this.form.support.transferId,
-      });
-      this.$router.push("/move-inPerson");
+      console.log(this.form.transfer.group);
+      if (this.form.transfer.group && this.form.support.group) {
+        this.SET_STATE_TRANSFER({
+          transferNum: Number(this.form.transfer.number),
+          groupId: this.form.transfer.group,
+          transferId: this.form.transfer.transferId,
+        });
+        this.SET_STATE_SUPPORT({
+          transferNum: Number(this.form.support.number),
+          groupId: this.form.support.group,
+          transferId: this.form.support.transferId,
+        });
+        this.$router.push("/move-inPerson");
+      } else {
+        message.warning("Chọn tổ đơn vị");
+      }
     },
     async getValue() {
       const day = today();
@@ -175,10 +181,10 @@ export default {
         this.form.parentId = res.transfers[0].parentId;
         this.form.parentIdSupport = res.transfers[1].parentId;
         this.form.transfer.number = res.transfers[0].transferNum;
-        this.form.transfer.group = res.transfers[0].groupName;
+        this.form.transfer.group = res.transfers[0].groupId;
         this.form.transfer.transferId = res.transfers[0].transferId;
         this.form.support.number = res.transfers[1].transferNum;
-        this.form.support.group = res.transfers[1].groupName;
+        this.form.support.group = res.transfers[1].groupId;
         this.form.support.transferId = res.transfers[1].transferId;
       }
     },
