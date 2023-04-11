@@ -232,21 +232,21 @@ export default {
       this.btn = "quay lai";
       const checkReport = localStorage.getItem("checkReport");
       if (checkReport === "false") {
-        if (this.hours < 18) {
-          const res = await saveDetail(this.getDataInformationReport);
-          if (res) {
-            message.success("thành công");
-            localStorage.setItem("checkReport", true);
-            setTimeout(() => {
-              this.$router.push("/sussInformation");
-            }, "1000");
-          }
-          if (res && res.status === 400) {
-            message.warning("lỗi điều chuyển vào tổ của mình");
-          }
-        } else {
-          alert("đã qua 18 giờ");
+        // if (this.hours > 18+7) {
+        const res = await saveDetail(this.getDataInformationReport);
+        if (res) {
+          message.success("thành công");
+          localStorage.setItem("checkReport", true);
+          setTimeout(() => {
+            this.$router.push("/sussInformation");
+          }, "1000");
         }
+        if (res && res.status === 400) {
+          message.warning("lỗi điều chuyển vào tổ của mình");
+        }
+        // } else {
+        //   alert("đã qua 18 giờ");
+        // }
       }
       if (checkReport === "true") {
         const day = today();

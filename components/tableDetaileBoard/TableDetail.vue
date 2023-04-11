@@ -62,6 +62,7 @@ export default {
           dataIndex: "ratio2",
           colSpan: 0,
           customRender: (value, row, index) => {
+            console.log(row);
             const obj = {
               children: "",
               attrs: {},
@@ -70,7 +71,7 @@ export default {
               obj.attrs.rowSpan = this.numberRadio;
               obj.children = this.totalRatioOfOfficeAndDonvile;
             }
-            if (this.arrChild.includes(row.name)) {
+            if (this.arrChild.includes(row.key)) {
               obj.attrs.rowSpan = 0;
             }
 
@@ -161,7 +162,7 @@ export default {
     async getData() {
       const day = dayjs(this.valueDay).format("YYYY/MM/DD");
       const res = await getViewDetail(day);
-      if (res && res.code === 200) {
+      if (res && res.code === 201) {
         this.data = res.data;
         this.cusRice = res.data[0].totalRiceCus;
         this.empRice = res.data[0].totalRiceEmp;
@@ -216,7 +217,7 @@ export default {
       const res = await searchAllDeleteTm();
       if (res && res.code === 201) {
         console.log(res);
-        this.arrChild = res.data.filter((item) => item !== "Văn phòng");
+        this.arrChild = res.data.filter((item) => item !== 3);
       }
     },
   },
