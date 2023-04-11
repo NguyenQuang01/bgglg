@@ -28,9 +28,7 @@
 
         <div class="flex float-right">
           <BtnBack class="h-10" />
-          <b-button type="submit" variant="primary" class="btnLogin mb-24"
-            >Xác nhận</b-button
-          >
+          <b-button type="submit" class="btnLogin mb-24">Xác nhận</b-button>
         </div>
       </b-form>
     </div>
@@ -106,5 +104,7 @@ export default {
   background-color: #045396;
   color: #ffff;
   margin-bottom: 20px;
+  border-radius: 50px;
+  margin-left: 5px;
 }
 </style>

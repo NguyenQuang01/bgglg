@@ -96,22 +96,26 @@ export default {
 
     async onSubmit(event) {
       event.preventDefault();
-      const res = await addAccount(this.form);
-      console.log(res, 9999);
-      if (res && res.status === 500) {
-        message.warning("Tài khoản đã tồn tại");
-      }
-      if (res && res.status === 201) {
-        message.success("đăng kí thành công");
-        this.form = {
-          userLogin: "",
-          password: "",
-          groupId: "",
-          edit: false,
-          view: false,
-          report: false,
-          admin: false,
-        };
+      if (this.form.groupId) {
+        const res = await addAccount(this.form);
+        console.log(res, 9999);
+        if (res && res.status === 500) {
+          message.warning("Tài khoản đã tồn tại");
+        }
+        if (res && res.status === 201) {
+          message.success("đăng kí thành công");
+          this.form = {
+            userLogin: "",
+            password: "",
+            groupId: "",
+            edit: false,
+            view: false,
+            report: false,
+            admin: false,
+          };
+        }
+      } else {
+        message.warning("Chọn tổ đơn vị");
       }
     },
     async groupRoleRoot() {
