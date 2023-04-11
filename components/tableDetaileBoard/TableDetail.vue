@@ -161,7 +161,7 @@ export default {
     async getData() {
       const day = dayjs(this.valueDay).format("YYYY/MM/DD");
       const res = await getViewDetail(day);
-      if (res && res.code === 200) {
+      if (res && res.code === 201) {
         this.data = res.data;
         this.cusRice = res.data[0].totalRiceCus;
         this.empRice = res.data[0].totalRiceEmp;
