@@ -69,7 +69,7 @@ export default {
             };
             if (row.name === "Văn phòng") {
               obj.attrs.rowSpan = this.numberRadio;
-              obj.children = this.totalRatioOfOfficeAndDonvile;
+              obj.children = this.totalRatioOfOfficeAndDonvile || 0;
             }
             if (this.arrChild.includes(row.key)) {
               obj.attrs.rowSpan = 0;
@@ -88,7 +88,7 @@ export default {
           className: "totalLaborProductivity right",
           customRender: (value, row, index) => {
             const obj = {
-              children: value,
+              children: value || 1,
               attrs: {},
             };
             if (row.name === "Văn phòng") {
@@ -208,7 +208,8 @@ export default {
     //   }
     // },
     async viewRoot2() {
-      const res = await viewRoot();
+      const day = dayjs(this.valueDay).format("YYYY/MM/DD");
+      const res = await viewRoot(day);
       if (res) {
         this.viewRoot = res;
       }
