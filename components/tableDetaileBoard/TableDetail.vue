@@ -128,13 +128,13 @@ export default {
   methods: {
     tet(expanded, record) {
       this.viewRoot.find((element) =>
-        element.id === record.key && expanded === true
-          ? (this.numberRadio += element.numberChild)
+        element.key === record.key && expanded === true
+          ? (this.numberRadio += element.totalNum)
           : ""
       );
       this.viewRoot.find((element) =>
-        element.id === record.key && expanded === false
-          ? (this.numberRadio -= element.numberChild)
+        element.key === record.key && expanded === false
+          ? (this.numberRadio -= element.totalNum)
           : ""
       );
       // console.log(found, 9999);
@@ -209,8 +209,9 @@ export default {
     // },
     async viewRoot2() {
       const res = await viewRoot();
-      if (res) {
-        this.viewRoot = res;
+      if (res && res.code === 201) {
+        this.viewRoot = res.data;
+        console.log(this.viewRoot, 99999);
       }
     },
     async getChildVpDvl() {
