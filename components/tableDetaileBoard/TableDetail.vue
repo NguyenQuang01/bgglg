@@ -210,8 +210,8 @@ export default {
     async viewRoot2() {
       const day = dayjs(this.valueDay).format("YYYY/MM/DD");
       const res = await viewRoot(day);
-      if (res) {
-        this.viewRoot = res;
+      if (res && res.code === 201) {
+        this.viewRoot = res.data;
       }
     },
     async getChildVpDvl() {
