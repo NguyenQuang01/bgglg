@@ -2,8 +2,8 @@
   <a-table :columns="columns" :data-source="data" @expand="tet" bordered>
     <span slot="rice" slot-scope="rice">
       <div>
-        <div class="whitespace-nowrap">Nhân viên:{{ rice.riceCus }}</div>
-        <div class="whitespace-nowrap">Khách:{{ rice.riceEmp }}</div>
+        <div class="whitespace-nowrap">Nhân viên:{{ rice.riceEmp }}</div>
+        <div class="whitespace-nowrap">Khách:{{ rice.riceCus }}</div>
         <div class="whitespace-nowrap">Khách Vip:{{ rice.riceVip }}</div>
       </div>
     </span>
@@ -53,9 +53,7 @@ export default {
           className: "right",
           title: "TỈ LỆ %",
           dataIndex: "ratio",
-
           colSpan: 2,
-          // customRender: renderContent,
         },
         {
           className: "right",
