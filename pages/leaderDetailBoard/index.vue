@@ -19,7 +19,11 @@
       <a-button class="btnDay">Xuất excel</a-button> -->
     </div>
     <div class="m-auto m-0 overflow-auto">
-      <TableDetail :valueDay="valueDay" ref="TableDetail" />
+      <TableDetail
+        :valueDay="valueDay"
+        ref="TableDetail"
+        :valueDayEd="valueDayEd"
+      />
     </div>
     <div class="float-right mt-2 mb-10">
       <div class="mb-16"><BtnBack class="h-10" /></div>
@@ -40,6 +44,8 @@ export default {
   data() {
     return {
       valueDay: "",
+      valueDayEd: "",
+
       day: new Date().getDate(),
       month: new Date().getMonth() + 1,
       year: new Date().getFullYear(),
@@ -50,26 +56,29 @@ export default {
   },
   created() {
     this.valueDay = `${this.year}/${this.month}/${this.day}` || "";
+    this.valueDayEd = `${this.year}/${this.month}/${this.day - 1}` || "";
   },
   methods: {
     btnPlus() {
       if (this.day31.includes(this.month) && this.day < 31) {
         this.day = this.day + 1;
         this.valueDay = `${this.year}/${this.month}/${this.day}`;
+        this.valueDayEd = `${this.year}/${this.month}/${this.day - 1}`;
       } else if (this.day30.includes(this.month) && this.day < 30) {
         this.day = this.day + 1;
         this.valueDay = `${this.year}/${this.month}/${this.day}`;
+        this.valueDayEd = `${this.year}/${this.month}/${this.day - 1}`;
       } else if (this.day28.includes(this.month) && this.day < 28) {
         this.day = this.day + 1;
         this.valueDay = `${this.year}/${this.month}/${this.day}`;
+        this.valueDayEd = `${this.year}/${this.month}/${this.day}`;
       }
-      this.$refs.TableDetail.getData2();
     },
     btnMinus() {
       if (this.day > 1) {
         this.day = this.day - 1;
         this.valueDay = `${this.year}/${this.month}/${this.day}`;
-        this.$refs.TableDetail.getData2();
+        this.valueDayEd = `${this.year}/${this.month}/${this.day - 1}`;
       }
     },
   },

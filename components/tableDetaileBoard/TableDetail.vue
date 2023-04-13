@@ -1,7 +1,36 @@
 <template>
   <a-table :columns="columns" :data-source="data" @expand="tet" bordered>
     <template slot="office" slot-scope="text, row">
-      <span :class="compareOffice ? 'green' : 'red'">{{ text }}</span>
+      <span
+        v-if="row.name === 'Tổng thực tế làm việc'"
+        class="font-bold"
+        :class="compareOffice ? 'green' : 'red'"
+        >{{ text }}</span
+      ><span v-if="!(row.name === 'Tổng thực tế làm việc')">{{ text }}</span>
+    </template>
+    <template slot="enterprise" slot-scope="text, row">
+      <span
+        v-if="row.name === 'Tổng thực tế làm việc'"
+        class="font-bold"
+        :class="compareEnterprise ? 'green' : 'red'"
+        >{{ text }}</span
+      ><span v-if="!(row.name === 'Tổng thực tế làm việc')">{{ text }}</span>
+    </template>
+    <template slot="laborProductivity" slot-scope="text, row">
+      <span
+        v-if="row.name === 'Tổng thực tế làm việc'"
+        class="font-bold"
+        :class="compareLaborProductivity ? 'green' : 'red'"
+        >{{ text }}</span
+      ><span v-if="!(row.name === 'Tổng thực tế làm việc')">{{ text }}</span>
+    </template>
+    <template slot="numberLeave" slot-scope="text, row">
+      <span
+        v-if="row.name === 'Tổng thực tế làm việc'"
+        class="font-bold"
+        :class="compareNumberLeave ? 'green' : 'red'"
+        >{{ text }}</span
+      ><span v-if="!(row.name === 'Tổng thực tế làm việc')">{{ text }}</span>
     </template>
     <template slot="rice" slot-scope="text, row">
       <div>
@@ -32,7 +61,7 @@ import dayjs from "dayjs";
 import { message } from "ant-design-vue";
 
 export default {
-  props: ["valueDay", "btnPlus"],
+  props: ["valueDay", "valueDayEd"],
 
   data() {
     return {
@@ -55,16 +84,23 @@ export default {
           dataIndex: "office",
           scopedSlots: { customRender: "office" },
         },
-        { className: "right", title: "XÍ NGHIỆP", dataIndex: "enterprise" },
+        {
+          className: "right",
+          title: "XÍ NGHIỆP",
+          dataIndex: "enterprise",
+          scopedSlots: { customRender: "enterprise" },
+        },
         {
           className: "right",
           title: "LAO ĐỘNG BÁO NĂNG SUẤT",
           dataIndex: "laborProductivity",
+          scopedSlots: { customRender: "laborProductivity" },
         },
         {
           className: "right",
           title: "SỐ LAO ĐỘNG NGHỈ",
           dataIndex: "numberLeave",
+          scopedSlots: { customRender: "numberLeave" },
         },
         {
           className: "right",
@@ -135,20 +171,33 @@ export default {
       empRice: "",
       empVipRice: "",
       totalLaborProductivity: "",
-      nowData: "",
-      compareOffice: "",
+      Dataed: "",
+      compareOffice: false,
+      compareEnterprise: false,
+      compareLaborProductivity: false,
+      compareNumberLeave: false,
     };
   },
   created() {
     this.getData();
-    // this.getNameAll();
+    this.getData2();
     this.viewRoot2();
     this.getChildVpDvl();
+    setTimeout(() => this.more(), 1000);
   },
   watch: {
     valueDay: {
       handler: function (value) {
         this.getData();
+      },
+      deep: true,
+    },
+    valueDayEd: {
+      handler: function (value) {
+        this.getData2();
+        setTimeout(() => {
+          this.more();
+        }, 1000);
       },
       deep: true,
     },
@@ -167,11 +216,8 @@ export default {
       );
     },
     async getData2() {
-      const now = new Date();
-      const year = now.getFullYear();
-      const month = now.getMonth() + 1;
-      const date = now.getDate();
-      const day = `${year}/${month}/${date}`;
+      const day = dayjs(this.valueDayEd).format("YYYY/MM/DD");
+      console.log(day, "-------------2");
       const res = await getViewDetail(day);
       if (res && res.code === 201) {
         const totalAll = {
@@ -212,14 +258,23 @@ export default {
           },
           children: null,
         };
-        this.nowData = res.data;
-        this.nowData.push(totalAll);
-        console.log(this.nowData[6].office);
-        console.log(this.nowData[6].office <= this.data[6].office);
+        this.Dataed = res.data;
+        this.Dataed.push(totalAll);
       }
+    },
+    more() {
+      this.compareOffice = this.Dataed[6]?.office < this.data[6]?.office;
+      this.compareEnterprise =
+        this.Dataed[6]?.enterprise < this.data[6]?.enterprise;
+      this.compareLaborProductivity =
+        this.Dataed[6]?.laborProductivity < this.data[6]?.laborProductivity;
+      this.compareNumberLeave =
+        this.Dataed[6]?.numberLeave < this.data[6]?.numberLeave;
     },
     async getData() {
       const day = dayjs(this.valueDay).format("YYYY/MM/DD");
+      console.log(day, "-------------1");
+
       const res = await getViewDetail(day);
       if (res && res.code === 201) {
         const totalAll = {
