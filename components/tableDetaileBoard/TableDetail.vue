@@ -29,7 +29,7 @@ export default {
       numberRadio: 2,
       data: [],
       totalRatioOfOfficeAndDonvile: "",
-
+      dataName: "",
       columns: [
         {
           title: "BỘ PHẬN",
@@ -73,10 +73,6 @@ export default {
               obj.attrs.rowSpan = 0;
             }
 
-            // if (row.name === "Đơn vị lẻ") {
-            //   obj.attrs.rowSpan = 0;
-            // }
-
             return obj;
           },
         },
@@ -86,7 +82,7 @@ export default {
           className: "totalLaborProductivity right",
           customRender: (value, row, index) => {
             const obj = {
-              children: value || 1,
+              children: value || 0,
               attrs: {},
             };
             if (row.name === "Văn phòng") {
@@ -135,33 +131,48 @@ export default {
           ? (this.numberRadio -= element.totalNum)
           : ""
       );
-      // console.log(found, 9999);
-      // if (found) {
-      // }
-      // if (record.name === "Văn phòng" && expanded === true) {
-      //   this.numberRadio += this.data[0].children.length;
-      // }
-      // if (record.name === "Đơn vị lẻ" && expanded === true) {
-      //   this.numberRadio += this.data[1].children.length;
-      // }
-
-      // if (record.name === "Văn phòng" && expanded === false) {
-      //   this.numberRadio -= this.data[0].children.length;
-      // }
-      // if (record.name === "Đơn vị lẻ" && expanded === false) {
-      //   this.numberRadio -= Number(this.data[1].children.length);
-      // }
-      // if (record.name === "Đơn vị lẻ" && expanded === true) {
-      //   this.numberRadio = 5;
-      // } else {
-      //   this.numberRadio = 2;
-      // }
     },
     async getData() {
       const day = dayjs(this.valueDay).format("YYYY/MM/DD");
       const res = await getViewDetail(day);
       if (res && res.code === 201) {
+        const totalAll = {
+          key: 0,
+          parentId: 0,
+          name: "Tổng thực tế làm việc",
+          office: res.data[0].office,
+          enterprise: res.data
+            .map((item) => item.enterprise)
+            .reduce(
+              (accumulator, currentValue) => accumulator + currentValue,
+              0
+            ),
+          laborProductivity: 0,
+          ratio: res.data
+            .map((item) => item.ratio)
+            .reduce(
+              (accumulator, currentValue) => accumulator + currentValue,
+              0
+            ),
+          totalLaborProductivity: null,
+          numberLeave: res.data
+            .map((item) => item.numberLeave)
+            .reduce(
+              (accumulator, currentValue) => accumulator + currentValue,
+              0
+            ),
+          partTimeEmp: null,
+          totalRatioOfOfficeAndDonvile: null,
+          rice: {
+            riceCus: 0,
+            riceVip: 0,
+            riceEmp: 0,
+          },
+          children: null,
+        };
         this.data = res.data;
+        this.data.push(totalAll);
+        this.dataName = this.data.map((item) => item.name);
         this.cusRice = res.data[0].totalRiceCus;
         this.empRice = res.data[0].totalRiceEmp;
         this.empVipRice = res.data[0].totalRiceVip;
@@ -173,38 +184,7 @@ export default {
         this.data = [];
       }
     },
-    // async getNameAll() {
-    //   const res = await getNameAll();
-    //   if (res && res.code === 201) {
-    //     res.data.shift();
-    //     // this.arrChild = res.data;
-    //     this.arrChild = [
-    //       "Đơn vị lẻ",
-    //       "Lãnh đạo",
-    //       "VPXN1",
-    //       "XN2",
-    //       "Tài chính hành chính",
-    //       "Kế Toán",
-    //       "Kế hoạch - xuất nhập khẩu",
-    //       "Kĩ thuật",
-    //       "QA",
-    //       "Tổ Kho NPL",
-    //       "Tổ Cơ Điện vòng ngoài",
-    //       "Xí nghiệp 1",
-    //       "Xí nghiệp 2",
-    //       "Tổ may 21",
-    //       "Tổ may 22",
-    //       "Tổ may 23",
-    //       "Tổ may 24",
-    //       "Tổ may 25",
-    //       "Tổ may 26",
-    //       "Tổ may 27",
-    //       "Tổ may 28",
-    //       "Tổ may 29",
-    //       "Tổ may 30",
-    //     ];
-    //   }
-    // },
+
     async viewRoot2() {
       const day = dayjs(this.valueDay).format("YYYY/MM/DD");
       const res = await viewRoot(day);
