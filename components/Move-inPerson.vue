@@ -7,7 +7,7 @@
       </tr>
       <tr v-for="item in transfer">
         <td>{{ item.transferNum }}</td>
-        <td>{{ item.groupId }}</td>
+        <td>{{ item.groupName }}</td>
       </tr>
     </table>
   </div>
