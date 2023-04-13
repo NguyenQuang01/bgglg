@@ -19,7 +19,7 @@
       <a-button class="btnDay">Xuất excel</a-button> -->
     </div>
     <div class="m-auto m-0 overflow-auto">
-      <TableDetail :valueDay="valueDay" />
+      <TableDetail :valueDay="valueDay" ref="TableDetail" />
     </div>
     <div class="float-right mt-2 mb-10">
       <div class="mb-16"><BtnBack class="h-10" /></div>
@@ -63,11 +63,13 @@ export default {
         this.day = this.day + 1;
         this.valueDay = `${this.year}/${this.month}/${this.day}`;
       }
+      this.$refs.TableDetail.getData2();
     },
     btnMinus() {
       if (this.day > 1) {
         this.day = this.day - 1;
         this.valueDay = `${this.year}/${this.month}/${this.day}`;
+        this.$refs.TableDetail.getData2();
       }
     },
   },

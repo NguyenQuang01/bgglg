@@ -1,5 +1,8 @@
 <template>
   <a-table :columns="columns" :data-source="data" @expand="tet" bordered>
+    <template slot="office" slot-scope="text, row">
+      <span :class="compareOffice ? 'green' : 'red'">{{ text }}</span>
+    </template>
     <template slot="rice" slot-scope="text, row">
       <div>
         <div
@@ -29,7 +32,7 @@ import dayjs from "dayjs";
 import { message } from "ant-design-vue";
 
 export default {
-  props: ["valueDay"],
+  props: ["valueDay", "btnPlus"],
 
   data() {
     return {
@@ -46,7 +49,12 @@ export default {
           key: "name",
         },
 
-        { className: "right", title: "VĂN PHÒNG", dataIndex: "office" },
+        {
+          className: "right",
+          title: "VĂN PHÒNG",
+          dataIndex: "office",
+          scopedSlots: { customRender: "office" },
+        },
         { className: "right", title: "XÍ NGHIỆP", dataIndex: "enterprise" },
         {
           className: "right",
@@ -127,6 +135,8 @@ export default {
       empRice: "",
       empVipRice: "",
       totalLaborProductivity: "",
+      nowData: "",
+      compareOffice: "",
     };
   },
   created() {
@@ -155,6 +165,58 @@ export default {
           ? (this.numberRadio -= element.totalNum)
           : ""
       );
+    },
+    async getData2() {
+      const now = new Date();
+      const year = now.getFullYear();
+      const month = now.getMonth() + 1;
+      const date = now.getDate();
+      const day = `${year}/${month}/${date}`;
+      const res = await getViewDetail(day);
+      if (res && res.code === 201) {
+        const totalAll = {
+          key: 0,
+          parentId: 0,
+          name: "Tổng thực tế làm việc",
+          office: res.data[0].office,
+          enterprise: res.data
+            .map((item) => item.enterprise)
+            .reduce(
+              (accumulator, currentValue) => accumulator + currentValue,
+              0
+            ),
+          ratio: 100,
+          laborProductivity: res.data
+            .map((item) => item.laborProductivity)
+            .reduce(
+              (accumulator, currentValue) => accumulator + currentValue,
+              0
+            ),
+          numberLeave: res.data
+            .map((item) => item.numberLeave)
+            .reduce(
+              (accumulator, currentValue) => accumulator + currentValue,
+              0
+            ),
+          partTimeEmp: null,
+          totalRatioOfOfficeAndDonvile: res.data
+            .map((item) => item.totalRatioOfOfficeAndDonvile)
+            .reduce(
+              (accumulator, currentValue) => accumulator + currentValue,
+              0
+            ),
+          rice: {
+            riceCus: 0,
+            riceVip: 0,
+            riceEmp: 0,
+          },
+          children: null,
+        };
+        this.nowData = res.data;
+        this.nowData.push(totalAll);
+        console.log(this.nowData[6].office);
+        console.log(this.nowData[6].office <= this.data[6].office);
+      }
     },
     async getData() {
       const day = dayjs(this.valueDay).format("YYYY/MM/DD");
@@ -255,5 +317,11 @@ td.right {
 }
 th.right {
   text-align: center !important;
+}
+.red {
+  color: red;
+}
+.green {
+  color: green;
 }
 </style>
