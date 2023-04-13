@@ -63,6 +63,18 @@ export default {
           title: "TỈ LỆ %",
           dataIndex: "ratio",
           colSpan: 2,
+          customRender: (value, row, index) => {
+            const obj = {
+              children: row.ratio,
+              attrs: {},
+            };
+            const test = [...this.arrChild, 3];
+            if (!test.includes(row.key)) {
+              obj.attrs.colSpan = 2;
+            }
+
+            return obj;
+          },
         },
         {
           className: "right",
@@ -80,7 +92,10 @@ export default {
             if (this.arrChild.includes(row.key)) {
               obj.attrs.rowSpan = 0;
             }
-
+            const test = [...this.arrChild, 3];
+            if (!test.includes(row.key)) {
+              obj.attrs.colSpan = 0;
+            }
             return obj;
           },
         },
@@ -90,7 +105,7 @@ export default {
           className: "totalLaborProductivity right",
           customRender: (value, row, index) => {
             const obj = {
-              children: this.totalRatioOfOfficeAndDonvile || 0,
+              children: this.totalLaborProductivity || 0,
               attrs: {},
             };
             if (row.name === "Văn phòng") {
@@ -111,6 +126,7 @@ export default {
       cusRice: "",
       empRice: "",
       empVipRice: "",
+      totalLaborProductivity: "",
     };
   },
   created() {
@@ -155,7 +171,6 @@ export default {
               (accumulator, currentValue) => accumulator + currentValue,
               0
             ),
-          laborProductivity: 0,
           ratio: 100,
           laborProductivity: res.data
             .map((item) => item.laborProductivity)
@@ -170,7 +185,12 @@ export default {
               0
             ),
           partTimeEmp: null,
-          totalRatioOfOfficeAndDonvile: null,
+          totalRatioOfOfficeAndDonvile: res.data
+            .map((item) => item.totalRatioOfOfficeAndDonvile)
+            .reduce(
+              (accumulator, currentValue) => accumulator + currentValue,
+              0
+            ),
           rice: {
             riceCus: 0,
             riceVip: 0,
@@ -184,7 +204,9 @@ export default {
         this.cusRice = res.data[0].totalRiceCus;
         this.empRice = res.data[0].totalRiceEmp;
         this.empVipRice = res.data[0].totalRiceVip;
-        this.totalRatioOfOfficeAndDonvile = res.data[6].laborProductivity;
+        this.totalRatioOfOfficeAndDonvile =
+          res.data[0].totalRatioOfOfficeAndDonvile;
+        this.totalLaborProductivity = res.data[6].laborProductivity;
       }
       if (res && res.status === 500) {
         message.error("không có dữ liệu");
@@ -202,7 +224,6 @@ export default {
     async getChildVpDvl() {
       const res = await searchAllDeleteTm();
       if (res && res.code === 201) {
-        console.log(res);
         this.arrChild = res.data.filter((item) => item !== 3);
       }
     },
