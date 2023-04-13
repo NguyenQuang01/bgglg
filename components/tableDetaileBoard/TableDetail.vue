@@ -1,12 +1,21 @@
 <template>
   <a-table :columns="columns" :data-source="data" @expand="tet" bordered>
-    <span slot="rice" slot-scope="rice">
+    <template slot="rice" slot-scope="text, row">
       <div>
-        <div class="whitespace-nowrap">Nhân viên:{{ rice.riceEmp }}</div>
-        <div class="whitespace-nowrap">Khách:{{ rice.riceCus }}</div>
-        <div class="whitespace-nowrap">Khách Vip:{{ rice.riceVip }}</div>
+        <div
+          class="whitespace-nowrap"
+          v-if="!(row.name === 'Tổng thực tế làm việc')"
+        >
+          Nhân viên:{{ row.rice.riceEmp }}
+        </div>
+        <div class="whitespace-nowrap" v-if="row.name === 'Phòng QA'">
+          Khách:{{ row.rice.riceCus }}
+        </div>
+        <div class="whitespace-nowrap" v-if="row.name === 'Phòng QA'">
+          Khách Vip:{{ row.rice.riceVip }}
+        </div>
       </div>
-    </span>
+    </template>
   </a-table>
 </template>
 <script>
@@ -60,7 +69,6 @@ export default {
           dataIndex: "ratio2",
           colSpan: 0,
           customRender: (value, row, index) => {
-            console.log(row);
             const obj = {
               children: "",
               attrs: {},
@@ -82,7 +90,7 @@ export default {
           className: "totalLaborProductivity right",
           customRender: (value, row, index) => {
             const obj = {
-              children: value || 0,
+              children: this.totalRatioOfOfficeAndDonvile || 0,
               attrs: {},
             };
             if (row.name === "Văn phòng") {
@@ -148,13 +156,13 @@ export default {
               0
             ),
           laborProductivity: 0,
-          ratio: res.data
-            .map((item) => item.ratio)
+          ratio: 100,
+          laborProductivity: res.data
+            .map((item) => item.laborProductivity)
             .reduce(
               (accumulator, currentValue) => accumulator + currentValue,
               0
             ),
-          totalLaborProductivity: null,
           numberLeave: res.data
             .map((item) => item.numberLeave)
             .reduce(
@@ -176,8 +184,7 @@ export default {
         this.cusRice = res.data[0].totalRiceCus;
         this.empRice = res.data[0].totalRiceEmp;
         this.empVipRice = res.data[0].totalRiceVip;
-        this.totalRatioOfOfficeAndDonvile =
-          res.data[0].totalRatioOfOfficeAndDonvile;
+        this.totalRatioOfOfficeAndDonvile = res.data[6].laborProductivity;
       }
       if (res && res.status === 500) {
         message.error("không có dữ liệu");
