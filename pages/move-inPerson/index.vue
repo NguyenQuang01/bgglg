@@ -38,7 +38,11 @@ export default {
   },
   methods: {
     async getTransferState() {
-      const res = await getTransfer();
+      const day = new Date().getDate();
+      const month = new Date().getMonth() + 1;
+      const year = new Date().getFullYear();
+      const today = `${year}/${month}/${day}`;
+      const res = await getTransfer(today);
       if (res) {
         this.transfer = res;
       }

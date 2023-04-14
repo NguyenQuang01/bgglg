@@ -60,8 +60,7 @@ export const addAccount = async (param) => {
 export const getTransfer = async (param) => {
   const groupId = localStorage.getItem("groupId");
   const response = await request.get(
-    `${HOST}/transfer/now-date?groupId=${groupId}`,
-    param
+    `${HOST}/transfer/now-date?groupId=${groupId}&reportDate=${param}`
   );
   return response.data;
 };
