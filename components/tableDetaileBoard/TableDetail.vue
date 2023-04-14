@@ -147,6 +147,7 @@ export default {
           title: "TỔNG LAO ĐỘNG BÁO NĂNG SUẤT",
           dataIndex: "totalLaborProductivity",
           className: "totalLaborProductivity right",
+
           customRender: (value, row, index) => {
             const obj = {
               children: this.totalLaborProductivity || 0,
@@ -154,6 +155,7 @@ export default {
             };
             if (row.name === "Văn phòng") {
               obj.attrs.rowSpan = 10000;
+              obj.attrs.id = this.compareLaborProductivity ? "green" : "red";
             }
             if (row.name !== "Văn phòng") {
               obj.attrs.rowSpan = 0;
@@ -217,7 +219,6 @@ export default {
     },
     async getData2() {
       const day = dayjs(this.valueDayEd).format("YYYY/MM/DD");
-      console.log(day, "-------------2");
       const res = await getViewDetail(day);
       if (res && res.code === 201) {
         const totalAll = {
@@ -273,7 +274,6 @@ export default {
     },
     async getData() {
       const day = dayjs(this.valueDay).format("YYYY/MM/DD");
-      console.log(day, "-------------1");
 
       const res = await getViewDetail(day);
       if (res && res.code === 201) {
@@ -377,6 +377,12 @@ th.right {
   color: red;
 }
 .green {
+  color: green;
+}
+#red {
+  color: red;
+}
+#green {
   color: green;
 }
 </style>
