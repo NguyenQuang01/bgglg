@@ -98,8 +98,8 @@ export default {
       const res = await getDetail({ day, groupId });
       if (res) {
         this.numberMeal = {
-          staff: Number(res.rice.riceCus),
-          guest: Number(res.rice.riceEmp),
+          staff: Number(res.rice.riceEmp),
+          guest: Number(res.rice.riceCus),
           guestVip: Number(res.rice.riceVip),
           riceId: Number(res.rice.riceId),
         };

@@ -146,14 +146,16 @@ export default {
       const groupId = localStorage.getItem("groupId");
       const res = await getDetail({ day, groupId });
       if (res) {
-        this.arrForms = res.rests.map((item) => ({
-          user: item.restName,
-          id: item.restId,
-          reason: item.reasonId,
-          restId: item.restId,
-          reasonName: item.reasonName,
-        }));
-        this.id = res.id;
+        if (res.rests.length > 0) {
+          this.arrForms = res.rests.map((item) => ({
+            user: item.restName,
+            id: item.restId,
+            reason: item.reasonId,
+            restId: item.restId,
+            reasonName: item.reasonName,
+          }));
+          this.id = res.id;
+        }
       }
     },
   },
