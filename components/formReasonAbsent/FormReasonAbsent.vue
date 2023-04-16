@@ -8,12 +8,19 @@
         </div>
 
         <b-form-group label="Nhập tên :" label-for="input-2">
-          <b-form-input
-            v-model="item.user"
+          <!-- <b-form-input
+            v-model=" item.user"
             placeholder="họ và tên"
             required
             class="inputLogin"
-          ></b-form-input>
+          ></b-form-input> -->
+          <a-cascader
+            :options="optionsName"
+            :show-search="{ filter }"
+            placeholder="Nhập tên"
+            class="inputLogin"
+            @change="onChange"
+          />
         </b-form-group>
         <b-form-group label="Nhập mã số lao động :" label-for="input-2">
           <b-form-input
@@ -52,7 +59,7 @@
 <script>
 import { mapMutations, mapGetters } from "vuex";
 import ButtonSkip from "../buttonSkip";
-import { reason, deleteLisRes } from "@/api/AuthenConnector.js";
+import { reason, deleteLisRes, getAllEmployee } from "@/api/AuthenConnector.js";
 import { getDetail } from "@/api/AuthenConnector.js";
 import { today } from "@/constants/getToday";
 import { message } from "ant-design-vue";
@@ -76,6 +83,16 @@ export default {
       options2: [],
       valueSubmit: {},
       id: "",
+      optionsName: [
+        {
+          value: "zhejiang",
+          label: "Zhejiang",
+        },
+        {
+          value: "jiangsu",
+          label: "Jiangsu",
+        },
+      ],
     };
   },
   fetch() {
@@ -85,12 +102,40 @@ export default {
     }
     this.arrForms.push(this.form);
     this.getReason();
+    this.getvalueName();
   },
   computed: {
     ...mapGetters({ getDataInformationReport: "getDataInformationReport" }),
   },
   methods: {
     ...mapMutations({ SET_STATE_ARRLABOR: "SET_STATE_ARRLABOR" }),
+    async getvalueName() {
+      const groupId = localStorage.getItem("groupId");
+      const res = await getAllEmployee(groupId);
+      console.log(res, 999);
+      if (res && res.code === 201) {
+        this.optionsName = res.data.map((item) => ({
+          label: item.employeeName,
+          value: item.employeeName,
+        }));
+        console.log(this.optionsName, 6666);
+        //   data.value = res.data.map((item, index) => ({
+        //     SL: index + 1,
+        //     name: item.employeeName,
+        //     laborCode: item.laborCode,
+        //     id: item.employeeId,
+        //   }));
+      }
+    },
+    onChange(value, selectedOptions) {
+      console.log(value, selectedOptions);
+    },
+    filter(inputValue, path) {
+      return path.some(
+        (option) =>
+          option.label.toLowerCase().indexOf(inputValue.toLowerCase()) > -1
+      );
+    },
     onSubmit(event) {
       event.preventDefault();
       const arrLabor = this.arrForms.map((item) => ({

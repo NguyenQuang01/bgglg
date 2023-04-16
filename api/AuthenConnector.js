@@ -167,3 +167,25 @@ export const searchAllDeleteTm = async () => {
   const response = await request.get(`${HOST}/groupRoleDeleteTm`);
   return response.data;
 };
+//employees
+export const addEmployee = async (param) => {
+  const response = await request.post(`${HOST}/employee/save`, param);
+  return response.data;
+};
+export const getAllEmployee = async (groupId) => {
+  const response = await request.get(
+    `${HOST}/employee/getEmployee?groupId=${groupId}&name=&laborCode&groupName=`
+  );
+  return response.data;
+};
+export const editEmployee = async (param) => {
+  const response = await request.post(`${HOST}/employee/update`, param);
+  return response.data;
+};
+export const deleteEmployee = async (param) => {
+  const response = await request.deleteWithPayload(
+    `${HOST}/employee/delete`,
+    param
+  );
+  return response.data;
+};

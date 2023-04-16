@@ -16,10 +16,15 @@
             >{{ text2 }}</a-button
           ><br /><a-button
             type="primary"
-            class="menuBtn"
+            class="menuBtn mb-3"
             @click="pagetoGroup"
             >{{ text3 }}</a-button
-          ><br />
+          ><br /><a-button
+            type="primary"
+            class="menuBtn"
+            @click="pagetoEmployee"
+            >{{ text4 }}</a-button
+          >
           <!-- <a-button type="primary">{{ text3 }}</a-button> -->
         </a-collapse-panel>
       </a-collapse>
@@ -35,6 +40,7 @@ export default {
       text1: `Tạo tài khoản`,
       text2: `Danh sách lý do nghỉ`,
       text3: `Danh sách các tổ`,
+      text4: `Danh sách nhân viên`,
 
       activeKey: 1,
     };
@@ -48,6 +54,9 @@ export default {
     },
     pagetoGroup() {
       this.$router.push("/group");
+    },
+    pagetoEmployee() {
+      this.$router.push("/employee");
     },
   },
   // created() {
