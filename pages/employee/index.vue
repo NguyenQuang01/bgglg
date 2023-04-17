@@ -84,9 +84,9 @@
             <td>
               <b-form-input
                 id="input-1"
-                class="h-7"
+                class="inputLogin"
                 type="text"
-                placeholder="Nhập"
+                placeholder="Tìm kiếm"
                 v-model="search.employeeName"
                 @input="searchName"
               ></b-form-input>
@@ -94,22 +94,28 @@
             <td>
               <b-form-input
                 id="input-1"
-                class="h-7"
+                class="inputLogin"
                 type="text"
-                placeholder="Nhập"
+                placeholder="Tìm kiếm"
                 v-model="search.laborCode"
                 @input="searchCode"
               ></b-form-input>
             </td>
             <td>
-              <b-form-input
+              <!-- <b-form-input
                 id="input-1"
                 class="h-7"
                 type="text"
                 placeholder="Nhập"
                 v-model="search.groupId"
                 @input="searchGroup"
-              ></b-form-input>
+              ></b-form-input> -->
+              <a-cascader
+                :options="options.value"
+                expand-trigger="hover"
+                placeholder="Tìm kiếm"
+                @change="onChangeSearch"
+              />
             </td>
             <td></td>
           </tr>
@@ -142,13 +148,28 @@
             <td style="text-align: center">
               <div class="flex justify-center">
                 <div @click="save(item.name, item.id, item.laborCode)">
-                  <b-icon icon="save" aria-hidden="true"></b-icon>
+                  <a-tooltip placement="topLeft">
+                    <template slot="title">
+                      <span>lưu</span>
+                    </template>
+                    <b-icon icon="save" aria-hidden="true"></b-icon>
+                  </a-tooltip>
                 </div>
                 <div @click="edit" class="mx-2">
-                  <b-icon icon="pencil-square" aria-hidden="true"></b-icon>
+                  <a-tooltip placement="topLeft">
+                    <template slot="title">
+                      <span>sửa</span>
+                    </template>
+                    <b-icon icon="pencil-square" aria-hidden="true"></b-icon>
+                  </a-tooltip>
                 </div>
                 <div @click="deletes(item.id)">
-                  <b-icon icon="trash" aria-hidden="true"></b-icon>
+                  <a-tooltip placement="topLeft">
+                    <template slot="title">
+                      <span>xóa</span>
+                    </template>
+                    <b-icon icon="trash" aria-hidden="true"></b-icon>
+                  </a-tooltip>
                 </div>
               </div>
             </td>
@@ -188,7 +209,6 @@ import { message } from "ant-design-vue";
 export default defineComponent({
   //   middleware: "auth",
   setup() {
-    // const pageSizeOptions = reactive(["5", "10"]);
     const isEdit = reactive({ value: false });
     const options = reactive({ value: [] });
     const search = reactive({ employeeName: "", laborCode: "", groupId: "" });
@@ -293,27 +313,24 @@ export default defineComponent({
       const lastElement = value[value.length - 1];
       form.groupId = lastElement;
     };
+    const onChangeSearch = (value) => {
+      const lastElement = value[value.length - 1];
+      search.groupId = lastElement;
+      searchGroup();
+    };
     const searchName = async () => {
-      const payload = search;
-      console.log(payload, 414);
-
       getvalue(page.current, page.pageSize, search);
     };
     const searchCode = async () => {
-      const payload = search;
       getvalue(page.current, page.pageSize, search);
     };
     const searchGroup = async () => {
-      const payload = search;
       getvalue(page.current, page.pageSize, search);
     };
     onMounted(() => {
       getvalue(page.current, page.pageSize);
       groupRoleRoot1();
     });
-    // watch(search.name, () => {
-
-    // });
 
     return {
       page,
@@ -334,6 +351,7 @@ export default defineComponent({
       save,
       onShowSizeChange,
       onChange,
+      onChangeSearch,
       groupRoleRoot1,
       searchName,
       searchCode,
@@ -366,6 +384,10 @@ th {
   padding: 2px 8px;
   border: none;
   border-radius: 20px;
+}
+.inputLogin {
+  border-radius: 50px;
+  height: 32px;
 }
 .delete {
   background-color: #eb6e6e;

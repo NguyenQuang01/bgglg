@@ -56,14 +56,31 @@
               <div v-else>{{ item.name }}</div>
             </td>
             <td style="text-align: center" class="w-40">
-              <div>
-                <b-button class="save" @click="save(item.name, item.id)"
-                  >Lưu</b-button
-                >
-                <b-button class="edit" @click="edit">Sửa</b-button
-                ><b-button class="delete" @click="deletes(item.id)"
-                  >Xóa</b-button
-                >
+              <div class="flex justify-center">
+                <div @click="save(item.name, item.id)">
+                  <a-tooltip placement="topLeft">
+                    <template slot="title">
+                      <span>lưu</span>
+                    </template>
+                    <b-icon icon="save" aria-hidden="true"></b-icon>
+                  </a-tooltip>
+                </div>
+                <div @click="edit" class="mx-2">
+                  <a-tooltip placement="topLeft">
+                    <template slot="title">
+                      <span>sửa</span>
+                    </template>
+                    <b-icon icon="pencil-square" aria-hidden="true"></b-icon>
+                  </a-tooltip>
+                </div>
+                <div @click="deletes(item.id)">
+                  <a-tooltip placement="topLeft">
+                    <template slot="title">
+                      <span>xóa</span>
+                    </template>
+                    <b-icon icon="trash" aria-hidden="true"></b-icon>
+                  </a-tooltip>
+                </div>
               </div>
             </td>
           </tr>
