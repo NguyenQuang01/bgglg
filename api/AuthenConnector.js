@@ -1,5 +1,6 @@
 import { HOST } from "../constants/host/host";
 import request from "./AxiosConnector";
+//acc
 export const signInAPI = async (param) => {
   try {
     const response = await request.postLogin(`${HOST}/api/login`, {
@@ -57,6 +58,14 @@ export const addAccount = async (param) => {
   const response = await request.post(`${HOST}/api/save`, param);
   return response.data;
 };
+export const getAllAcc = async (pageNo, pageSize, param) => {
+  const response = await request.post(
+    `${HOST}/getAllUser?pageNo=${pageNo}&pageSize=${pageSize}`,
+    {}
+  );
+  return response.data;
+};
+//
 export const getTransfer = async (param) => {
   const groupId = localStorage.getItem("groupId");
   const response = await request.get(
@@ -125,6 +134,12 @@ export const updateDemarcation = async (demarcation, id) => {
 export const getDemarcationDb = async (param) => {
   const response = await request.get(
     `${HOST}/groupRole/demarcation?groupId=${param}`
+  );
+  return response.data;
+};
+export const getAllDemarcation = async (groupName, pageNo, pageSize) => {
+  const response = await request.get(
+    `${HOST}/groupRole/getAllDemarcation?groupName=${groupName}&pageNo=${pageNo}&pageSize=${pageSize}`
   );
   return response.data;
 };

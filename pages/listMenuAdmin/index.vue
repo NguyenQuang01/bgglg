@@ -21,10 +21,18 @@
             >{{ text3 }}</a-button
           ><br /><a-button
             type="primary"
-            class="menuBtn"
+            class="menuBtn mb-3"
             @click="pagetoEmployee"
             >{{ text4 }}</a-button
+          ><br /><a-button
+            type="primary"
+            class="menuBtn mb-3"
+            @click="pageToDemarcation"
+            >{{ text5 }}</a-button
           >
+          <br /><a-button type="primary" class="menuBtn" @click="pageToAcc">{{
+            text6
+          }}</a-button>
           <!-- <a-button type="primary">{{ text3 }}</a-button> -->
         </a-collapse-panel>
       </a-collapse>
@@ -41,6 +49,8 @@ export default {
       text2: `Danh sách lý do nghỉ`,
       text3: `Danh sách các tổ`,
       text4: `Danh sách nhân viên`,
+      text5: `Danh sách định biên các tổ`,
+      text6: `Danh sách tài khoản`,
 
       activeKey: 1,
     };
@@ -57,6 +67,12 @@ export default {
     },
     pagetoEmployee() {
       this.$router.push("/employee");
+    },
+    pageToDemarcation() {
+      this.$router.push("/listDemarcation");
+    },
+    pageToAcc() {
+      this.$router.push("/listAcc");
     },
   },
   // created() {
