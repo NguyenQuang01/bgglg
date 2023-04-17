@@ -172,9 +172,10 @@ export const addEmployee = async (param) => {
   const response = await request.post(`${HOST}/employee/save`, param);
   return response.data;
 };
-export const getAllEmployee = async (groupId) => {
-  const response = await request.get(
-    `${HOST}/employee/getEmployee?groupId=${groupId}&name=&laborCode&groupName=`
+export const getAllEmployee = async (pageNo, pageSize, param) => {
+  const response = await request.post(
+    `${HOST}/employee/getEmployee?pageNo=${pageNo}&pageSize=${pageSize}`,
+    param
   );
   return response.data;
 };

@@ -41,6 +41,20 @@
                         required
                       ></b-form-input> </b-form-group
                   ></b-col>
+                  <b-col cols="6"
+                    ><b-form-group
+                      id="input-group-1"
+                      label="Chọn tổ đơn vị:"
+                      label-for="input-1"
+                    >
+                      <a-cascader
+                        :options="options.value"
+                        expand-trigger="hover"
+                        placeholder="chọn"
+                        @change="onChange"
+                        class="inputLogin"
+                      /> </b-form-group
+                  ></b-col>
                 </b-row>
               </b-col>
               <b-col class="flex items-center bttAdd float-right">
@@ -62,7 +76,42 @@
             <th class="title">STT</th>
             <th class="title">Tên Nhân Viên</th>
             <th class="title">Mã nhân viên</th>
-            <th class="title">HÀNH ĐỘNG</th>
+            <th class="title">Tổ</th>
+            <th class="title">Hành Động</th>
+          </tr>
+          <tr>
+            <td></td>
+            <td>
+              <b-form-input
+                id="input-1"
+                class="h-7"
+                type="text"
+                placeholder="Nhập"
+                v-model="search.employeeName"
+                @input="searchName"
+              ></b-form-input>
+            </td>
+            <td>
+              <b-form-input
+                id="input-1"
+                class="h-7"
+                type="text"
+                placeholder="Nhập"
+                v-model="search.laborCode"
+                @input="searchCode"
+              ></b-form-input>
+            </td>
+            <td>
+              <b-form-input
+                id="input-1"
+                class="h-7"
+                type="text"
+                placeholder="Nhập"
+                v-model="search.groupId"
+                @input="searchGroup"
+              ></b-form-input>
+            </td>
+            <td></td>
           </tr>
           <tr v-for="(item, index) in data.value" :key="index">
             <td class="w-5 text-center title">{{ index + 1 }}</td>
@@ -82,22 +131,43 @@
               />
               <div v-else>{{ item.laborCode }}</div>
             </td>
-            <td style="text-align: center" class="w-40">
-              <div>
-                <b-button
-                  class="save"
-                  @click="save(item.name, item.id, item.laborCode)"
-                  >Lưu</b-button
-                >
-                <b-button class="edit" @click="edit">Sửa</b-button
-                ><b-button class="delete" @click="deletes(item.id)"
-                  >Xóa</b-button
-                >
+            <td class="w-1/5">
+              <b-form-input
+                v-model="item.groupName"
+                class="w-full h-8"
+                v-if="isEdit.value"
+              />
+              <div v-else>{{ item.groupName }}</div>
+            </td>
+            <td style="text-align: center">
+              <div class="flex justify-center">
+                <div @click="save(item.name, item.id, item.laborCode)">
+                  <b-icon icon="save" aria-hidden="true"></b-icon>
+                </div>
+                <div @click="edit" class="mx-2">
+                  <b-icon icon="pencil-square" aria-hidden="true"></b-icon>
+                </div>
+                <div @click="deletes(item.id)">
+                  <b-icon icon="trash" aria-hidden="true"></b-icon>
+                </div>
               </div>
             </td>
           </tr>
         </table>
-        <BtnBack class="float-right mb-10 mt-3 mr-0" />
+        <div class="my-2 float-right">
+          <a-pagination
+            show-size-changer
+            :page-size-options="pageSizeOptions"
+            :total="500"
+            @showSizeChange="onShowSizeChange"
+            @change="onPage"
+          >
+            <template slot="buildOptionText" slot-scope="props">
+              <span>{{ props.value }} / trang</span>
+            </template>
+          </a-pagination>
+          <BtnBack class="float-right mb-10 mt-3 mr-0" />
+        </div>
       </div>
     </div>
     <div class="mb-10 h-40">*</div>
@@ -109,20 +179,30 @@ import {
   getAllEmployee,
   deleteEmployee,
   editEmployee,
+  groupRoleRoot,
 } from "@/api/AuthenConnector.js";
-import { defineComponent, onMounted, reactive, toRefs } from "vue";
+import { defineComponent, onMounted, reactive, toRefs, watch } from "vue";
 // const columns = ;
 import { message } from "ant-design-vue";
 
 export default defineComponent({
   //   middleware: "auth",
   setup() {
+    // const pageSizeOptions = reactive(["5", "10"]);
     const isEdit = reactive({ value: false });
+    const options = reactive({ value: [] });
+    const search = reactive({ employeeName: "", laborCode: "", groupId: "" });
     const form = reactive({
       name: "",
       laborCode: "",
+      groupName: "",
+      groupId: "",
     });
-
+    const page = reactive({
+      current: 1,
+      pageSize: 30,
+    });
+    const pageSizeOptions = reactive(["10", "20", "30", "40", "50"]);
     const columns = reactive([
       {
         title: "lý do nghỉ",
@@ -137,20 +217,29 @@ export default defineComponent({
       // Check here to configure the default column
       loading: false,
     });
-
+    const onShowSizeChange = (current, pageSize) => {
+      page.current = current;
+      page.pageSize = pageSize;
+      getvalue(page.current, page.pageSize);
+    };
+    const onPage = (current) => {
+      page.current = current;
+      getvalue(page.current, page.pageSize);
+    };
     const onSelectChange = (selectedRowKeys) => {
       state.selectedRowKeys = selectedRowKeys;
     };
-    const getvalue = async () => {
-      const groupId = localStorage.getItem("groupId");
-      const res = await getAllEmployee(groupId);
+    const getvalue = async (current, pageSize) => {
+      const payload = search;
+      const res = await getAllEmployee(current, pageSize, payload);
       console.log(res, 999);
       if (res && res.code === 201) {
-        data.value = res.data.map((item, index) => ({
+        data.value = res.data.content.map((item, index) => ({
           SL: index + 1,
           name: item.employeeName,
           laborCode: item.laborCode,
           id: item.employeeId,
+          groupName: item.groupName,
         }));
       }
     };
@@ -158,14 +247,14 @@ export default defineComponent({
       const res = await deleteEmployee([id]);
       if (res && res.status === 201) {
         message.success("xóa thành công");
-        getvalue();
+        getvalue(page.current, page.pageSize);
       }
     };
     const onSubmit = async (event) => {
       event.preventDefault();
       const res = await addEmployee([
         {
-          groupId: localStorage.getItem("groupId"),
+          groupId: form.groupId,
           laborCode: form.laborCode,
           name: form.name,
         },
@@ -174,7 +263,7 @@ export default defineComponent({
         form.name = "";
         form.laborCode = "";
         message.success("thêm thành công");
-        getvalue();
+        getvalue(page.current, page.pageSize);
       }
     };
     const edit = () => {
@@ -194,21 +283,61 @@ export default defineComponent({
       }
       isEdit.value = !isEdit.value;
     };
+    const groupRoleRoot1 = async () => {
+      const res = await groupRoleRoot();
+      if (res) {
+        options.value = res.data;
+      }
+    };
+    const onChange = (value) => {
+      const lastElement = value[value.length - 1];
+      form.groupId = lastElement;
+    };
+    const searchName = async () => {
+      const payload = search;
+      console.log(payload, 414);
+
+      getvalue(page.current, page.pageSize, search);
+    };
+    const searchCode = async () => {
+      const payload = search;
+      getvalue(page.current, page.pageSize, search);
+    };
+    const searchGroup = async () => {
+      const payload = search;
+      getvalue(page.current, page.pageSize, search);
+    };
     onMounted(() => {
-      getvalue();
+      getvalue(page.current, page.pageSize);
+      groupRoleRoot1();
     });
+    // watch(search.name, () => {
+
+    // });
+
     return {
+      page,
       isEdit,
       form,
       getvalue,
       data,
       columns,
+      options,
+      search,
+      pageSizeOptions,
       ...toRefs(state),
       onSelectChange,
+      onPage,
       onSubmit,
       deletes,
       edit,
       save,
+      onShowSizeChange,
+      onChange,
+      groupRoleRoot1,
+      searchName,
+      searchCode,
+      searchGroup,
     };
   },
 });
@@ -259,5 +388,18 @@ th {
 }
 .wFull {
   width: 100% !important;
+}
+</style>
+<style>
+@media only screen and (max-width: 576px) {
+  .ant-pagination-options {
+    display: block;
+    float: left;
+    margin: 5px 0;
+    margin-right: -8px;
+  }
+}
+.ant-pagination-options {
+  margin-right: -8px;
 }
 </style>
