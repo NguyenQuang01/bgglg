@@ -179,7 +179,7 @@
           <a-pagination
             show-size-changer
             :page-size-options="pageSizeOptions"
-            :total="500"
+            :total="data.total"
             @showSizeChange="onShowSizeChange"
             @change="onPage"
           >
@@ -220,7 +220,7 @@ export default defineComponent({
     });
     const page = reactive({
       current: 1,
-      pageSize: 30,
+      pageSize: 10,
     });
     const pageSizeOptions = reactive(["10", "20", "30", "40", "50"]);
     const columns = reactive([
@@ -231,6 +231,7 @@ export default defineComponent({
     ]);
     const data = reactive({
       value: [],
+      total: 0,
     });
     const state = reactive({
       selectedRowKeys: [],
@@ -254,6 +255,7 @@ export default defineComponent({
       const res = await getAllEmployee(current, pageSize, payload);
       console.log(res, 999);
       if (res && res.code === 201) {
+        data.total = res.data.totalElements;
         data.value = res.data.content.map((item, index) => ({
           SL: index + 1,
           name: item.employeeName,
@@ -416,7 +418,6 @@ th {
 @media only screen and (max-width: 576px) {
   .ant-pagination-options {
     display: block;
-    float: left;
     margin: 5px 0;
     margin-right: -8px;
   }
