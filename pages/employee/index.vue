@@ -152,7 +152,12 @@
                     <template slot="title">
                       <span>lưu</span>
                     </template>
-                    <b-icon icon="save" aria-hidden="true"></b-icon>
+                    <b-icon
+                      variant="success"
+                      icon="save"
+                      aria-hidden="true"
+                      class="h-4 w-4"
+                    ></b-icon>
                   </a-tooltip>
                 </div>
                 <div @click="edit" class="mx-2">
@@ -160,7 +165,12 @@
                     <template slot="title">
                       <span>sửa</span>
                     </template>
-                    <b-icon icon="pencil-square" aria-hidden="true"></b-icon>
+                    <b-icon
+                      variant="warning"
+                      icon="pencil-square"
+                      aria-hidden="true"
+                      class="h-4 w-4"
+                    ></b-icon>
                   </a-tooltip>
                 </div>
                 <div @click="deletes(item.id)">
@@ -168,7 +178,12 @@
                     <template slot="title">
                       <span>xóa</span>
                     </template>
-                    <b-icon icon="trash" aria-hidden="true"></b-icon>
+                    <b-icon
+                      variant="danger"
+                      icon="trash"
+                      aria-hidden="true"
+                      class="h-4 w-4"
+                    ></b-icon>
                   </a-tooltip>
                 </div>
               </div>
@@ -179,6 +194,7 @@
           <a-pagination
             show-size-changer
             :page-size-options="pageSizeOptions"
+            :defaultPageSize="5"
             :total="data.total"
             @showSizeChange="onShowSizeChange"
             @change="onPage"
@@ -220,9 +236,9 @@ export default defineComponent({
     });
     const page = reactive({
       current: 1,
-      pageSize: 10,
+      pageSize: 5,
     });
-    const pageSizeOptions = reactive(["10", "20", "30", "40", "50"]);
+    const pageSizeOptions = reactive(["5", "10", "20", "30", "40", "50"]);
     const columns = reactive([
       {
         title: "lý do nghỉ",
@@ -418,8 +434,8 @@ th {
 @media only screen and (max-width: 576px) {
   .ant-pagination-options {
     display: block;
-    margin: 5px 0;
     margin-right: -8px;
+    float: right;
   }
 }
 .ant-pagination-options {

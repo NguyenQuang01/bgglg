@@ -62,7 +62,12 @@
                     <template slot="title">
                       <span>lưu</span>
                     </template>
-                    <b-icon icon="save" aria-hidden="true"></b-icon>
+                    <b-icon
+                      variant="success"
+                      icon="save"
+                      aria-hidden="true"
+                      class="h-4 w-4"
+                    ></b-icon>
                   </a-tooltip>
                 </div>
                 <div @click="edit" class="mx-2">
@@ -70,7 +75,12 @@
                     <template slot="title">
                       <span>sửa</span>
                     </template>
-                    <b-icon icon="pencil-square" aria-hidden="true"></b-icon>
+                    <b-icon
+                      variant="warning"
+                      icon="pencil-square"
+                      aria-hidden="true"
+                      class="h-4 w-4"
+                    ></b-icon>
                   </a-tooltip>
                 </div>
                 <div @click="deletes(item.id)">
@@ -78,7 +88,12 @@
                     <template slot="title">
                       <span>xóa</span>
                     </template>
-                    <b-icon icon="trash" aria-hidden="true"></b-icon>
+                    <b-icon
+                      variant="danger"
+                      icon="trash"
+                      aria-hidden="true"
+                      class="h-4 w-4"
+                    ></b-icon>
                   </a-tooltip>
                 </div>
               </div>
