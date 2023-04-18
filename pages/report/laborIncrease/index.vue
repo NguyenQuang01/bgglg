@@ -1,14 +1,14 @@
 <template lang="">
   <div class="container">
     <div class="text-center mt-10 mb-16 text-3xl font-bold title">
-      BÁO CÁO SỐ THỜI VỤ & CÔNG NHÂN MỚI
+      BÁO CÁO SỐ LAO ĐỘNG TĂNG
     </div>
 
     <div class="max-w-sm m-auto m-0">
       <b-form @submit="onSubmit" class="mb-10">
         <b-form-group
           id="input-group-2"
-          label="Số thời vụ:"
+          label="Lao động biết nghề:"
           label-for="input-2"
         >
           <b-form-input
@@ -21,7 +21,7 @@
         </b-form-group>
         <b-form-group
           id="input-group-2"
-          label="Số học sinh:"
+          label="Lao động chưa biết nghề:"
           label-for="input-2"
         >
           <b-form-input
@@ -50,7 +50,7 @@ import BtnBack from "@/components/BtnBack.vue";
 import { getDetail } from "@/api/AuthenConnector.js";
 import { today } from "@/constants/getToday";
 export default {
-  middleware: "auth",
+  //   middleware: "auth",
   components: { ButtonSkip, BtnBack },
   data() {
     return {
