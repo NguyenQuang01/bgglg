@@ -8,22 +8,33 @@
         </div>
 
         <b-form-group label="Nhập tên :" label-for="input-2">
-          <a-cascader
-            :options="optionsName"
-            :show-search="{ filter }"
-            placeholder="Nhập tên"
+          <a-select
+            show-search
+            placeholder="Inserted are removed"
+            style="width: 100%; border-radius: 50px"
+            v-model="item.user"
             class="inputLogin"
-            @change="onChange"
-          />
+          >
+            <a-select-option
+              v-for="item in filteredOptions"
+              :key="item"
+              :value="item"
+            >
+              {{ item }}
+            </a-select-option>
+          </a-select>
         </b-form-group>
-        <!-- <b-form-group label="Nhập mã số lao động :" label-for="input-2">
-          <b-form-input
-            v-model="item.id"
-            placeholder="mã số lao động"
+
+        <b-form-group label="Chọn thời gian nghỉ :" label-for="input-2">
+          <b-form-select
+            label="Nhập mã số ly do :"
+            v-model="item.session"
+            :options="options2"
             required
             class="inputLogin"
-          ></b-form-input>
-        </b-form-group> -->
+          ></b-form-select>
+        </b-form-group>
+
         <b-form-group label="Chọn lý do :" label-for="input-2">
           <b-form-select
             label="Nhập mã số ly do :"
@@ -57,11 +68,12 @@ import { reason, deleteLisRes, getAllEmployee } from "@/api/AuthenConnector.js";
 import { getDetail } from "@/api/AuthenConnector.js";
 import { today } from "@/constants/getToday";
 import { message } from "ant-design-vue";
-
 export default {
   components: { ButtonSkip },
   data() {
     return {
+      OPTIONS: [],
+      selectedItems: "",
       skip: "/newPartTimeEndWorker",
       amount: 1,
       form: {
@@ -69,12 +81,13 @@ export default {
         id: "",
         reason: "",
         restId: "",
+        session: "",
       },
       arrForms: [],
       valueTextarea: "",
       selected: null,
       options: [],
-      options2: [],
+      options2: ["Sáng", "Chiều", "Một ngày"],
       valueSubmit: {},
       id: "",
       optionsName: [],
@@ -95,9 +108,15 @@ export default {
   },
   computed: {
     ...mapGetters({ getDataInformationReport: "getDataInformationReport" }),
+    filteredOptions() {
+      return this.OPTIONS.filter((o) => !this.selectedItems.includes(o));
+    },
   },
   methods: {
     ...mapMutations({ SET_STATE_ARRLABOR: "SET_STATE_ARRLABOR" }),
+    handleChange(selectedItems) {
+      this.selectedItems = selectedItems;
+    },
     async getvalueName() {
       const payload = { groupId: 125 };
       const res = await getAllEmployee(
@@ -107,22 +126,13 @@ export default {
       );
       console.log(res, 999);
       if (res && res.code === 201) {
-        this.optionsName = res.data.content.map((item) => ({
-          label: ` ${item.employeeName} - ${item.laborCode}`,
-          value: item.employeeName,
-        }));
-        console.log(this.optionsName, 6666);
-        //   data.value = res.data.map((item, index) => ({
-        //     SL: index + 1,
-        //     name: item.employeeName,
-        //     laborCode: item.laborCode,
-        //     id: item.employeeId,
-        //   }));
+        this.OPTIONS = res.data.content.map(
+          (item) => ` ${item.employeeName} - ${item.laborCode}`
+          // value: item.employeeName,
+        );
       }
     },
-    onChange(value) {
-      console.log(value, this.arrForms, 777777777777);
-    },
+
     filter(inputValue, path) {
       return path.some(
         (option) =>
@@ -220,5 +230,11 @@ export default {
 }
 .btn:hover {
   color: #ffff;
+}
+</style>
+<style>
+.ant-select-selection--single {
+  border-radius: 50px;
+  height: 38px;
 }
 </style>

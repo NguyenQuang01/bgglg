@@ -85,7 +85,7 @@ export default {
       if (this.getInfUsers.checkReport) {
         this.$router.push("/reported");
       } else {
-        this.$router.push("/laborreport");
+        this.$router.push("/reasonAbsent");
       }
     },
     editReport() {
