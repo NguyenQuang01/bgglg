@@ -8,12 +8,6 @@
         </div>
 
         <b-form-group label="Nhập tên :" label-for="input-2">
-          <!-- <b-form-input
-            v-model=" item.user"
-            placeholder="họ và tên"
-            required
-            class="inputLogin"
-          ></b-form-input> -->
           <a-cascader
             :options="optionsName"
             :show-search="{ filter }"
@@ -22,14 +16,14 @@
             @change="onChange"
           />
         </b-form-group>
-        <b-form-group label="Nhập mã số lao động :" label-for="input-2">
+        <!-- <b-form-group label="Nhập mã số lao động :" label-for="input-2">
           <b-form-input
             v-model="item.id"
             placeholder="mã số lao động"
             required
             class="inputLogin"
           ></b-form-input>
-        </b-form-group>
+        </b-form-group> -->
         <b-form-group label="Chọn lý do :" label-for="input-2">
           <b-form-select
             label="Nhập mã số ly do :"
@@ -83,16 +77,11 @@ export default {
       options2: [],
       valueSubmit: {},
       id: "",
-      optionsName: [
-        {
-          value: "zhejiang",
-          label: "Zhejiang",
-        },
-        {
-          value: "jiangsu",
-          label: "Jiangsu",
-        },
-      ],
+      optionsName: [],
+      page: {
+        current: 1,
+        pageSize: 500,
+      },
     };
   },
   fetch() {
@@ -110,12 +99,16 @@ export default {
   methods: {
     ...mapMutations({ SET_STATE_ARRLABOR: "SET_STATE_ARRLABOR" }),
     async getvalueName() {
-      const groupId = localStorage.getItem("groupId");
-      const res = await getAllEmployee(groupId);
+      const payload = { groupId: 125 };
+      const res = await getAllEmployee(
+        this.page.current,
+        this.page.pageSize,
+        payload
+      );
       console.log(res, 999);
       if (res && res.code === 201) {
-        this.optionsName = res.data.map((item) => ({
-          label: item.employeeName,
+        this.optionsName = res.data.content.map((item) => ({
+          label: ` ${item.employeeName} - ${item.laborCode}`,
           value: item.employeeName,
         }));
         console.log(this.optionsName, 6666);
@@ -127,8 +120,8 @@ export default {
         //   }));
       }
     },
-    onChange(value, selectedOptions) {
-      console.log(value, selectedOptions);
+    onChange(value) {
+      console.log(value, this.arrForms, 777777777777);
     },
     filter(inputValue, path) {
       return path.some(
@@ -144,12 +137,9 @@ export default {
         restId: item.restId,
         reasonName: item.reasonName,
       }));
-      if (this.getDataInformationReport.restNum == this.arrForms.length) {
-        this.SET_STATE_ARRLABOR(arrLabor);
-        this.$router.push("/newPartTimeEndWorker");
-      } else {
-        message.warning("số lượng nghỉ không khớp với báo cáo người nghỉ");
-      }
+
+      this.SET_STATE_ARRLABOR(arrLabor);
+      this.$router.push("/newPartTimeEndWorker");
 
       // this.$router.push("/");
     },
