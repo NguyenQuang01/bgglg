@@ -13,6 +13,21 @@
             <th class="title">MẬT KHẨU</th>
             <th class="title">HÀNH ĐỘNG</th>
           </tr>
+          <tr>
+            <td></td>
+            <td>
+              <b-form-input
+                id="input-1"
+                class="inputLogin"
+                type="text"
+                placeholder="Tìm kiếm"
+                v-model="userName"
+                @input="searchName"
+              ></b-form-input>
+            </td>
+            <td></td>
+            <td></td>
+          </tr>
           <tr v-for="(item, index) in data" :key="index">
             <td class="w-5 text-center title">{{ index + 1 }}</td>
             <td class="w-3/5">
@@ -128,6 +143,7 @@ export default {
       pageSizeOptions: ["5", "10", "20", "30", "40", "50"],
       search: { employeeName: "", laborCode: "", groupId: "" },
       textDelete: "Bạn có chắc chắn xóa ",
+      userName: "",
     };
   },
 
@@ -136,8 +152,9 @@ export default {
   },
   methods: {
     async getvalue() {
-      const res = await getAllAcc(this.page.current, this.page.pageSize, "");
-      console.log(res, 999);
+      const res = await getAllAcc(this.page.current, this.page.pageSize, {
+        groupName: this.userName,
+      });
       if (res) {
         this.total = res.totalElements;
         this.data = res.content.map((item, index) => ({
@@ -147,6 +164,9 @@ export default {
           id: item.userId || "",
         }));
       }
+    },
+    searchName() {
+      this.getvalue();
     },
     confirm(id) {
       this.deletes(id);

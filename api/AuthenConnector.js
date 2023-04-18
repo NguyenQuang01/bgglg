@@ -61,7 +61,7 @@ export const addAccount = async (param) => {
 export const getAllAcc = async (pageNo, pageSize, param) => {
   const response = await request.post(
     `${HOST}/getAllUser?pageNo=${pageNo}&pageSize=${pageSize}`,
-    {}
+    param
   );
   return response.data;
 };

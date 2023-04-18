@@ -13,6 +13,21 @@
             <th class="title">SỐ ĐỊNH BIÊN</th>
             <th class="title">HÀNH ĐỘNG</th>
           </tr>
+          <tr>
+            <td></td>
+            <td>
+              <b-form-input
+                id="input-1"
+                class="inputLogin"
+                type="text"
+                placeholder="Tìm kiếm"
+                v-model="groupName"
+                @input="searchName"
+              ></b-form-input>
+            </td>
+            <td></td>
+            <td></td>
+          </tr>
           <tr v-for="(item, index) in data" :key="index">
             <td class="w-5 text-center title">{{ index + 1 }}</td>
             <td class="w-3/5">
@@ -103,7 +118,7 @@ export default {
         pageSize: 5,
       },
       pageSizeOptions: ["5", "10", "20", "30", "40", "50"],
-      search: { employeeName: "", laborCode: "", groupId: "" },
+      groupName: "",
     };
   },
 
@@ -113,7 +128,7 @@ export default {
   methods: {
     async getvalue() {
       const res = await getAllDemarcation(
-        "",
+        this.groupName,
         this.page.current,
         this.page.pageSize
       );
@@ -127,6 +142,10 @@ export default {
           id: item.id || "",
         }));
       }
+    },
+
+    searchName() {
+      this.getvalue();
     },
     onPage(current) {
       this.page.current = current;

@@ -13,7 +13,7 @@
         >
           <b-form-input
             type="number"
-            v-model="form.partTime"
+            v-model="form.knowJob"
             placeholder="Nhập "
             required
             class="inputLogin"
@@ -26,7 +26,7 @@
         >
           <b-form-input
             type="number"
-            v-model="form.worker"
+            v-model="form.noJob"
             placeholder="Nhập "
             required
             class="inputLogin"
@@ -54,10 +54,10 @@ export default {
   components: { ButtonSkip, BtnBack },
   data() {
     return {
-      skip: "/transferEndSupport",
+      skip: "/report/decreaseInLabor",
       form: {
-        partTime: "",
-        worker: "",
+        knowJob: "",
+        noJob: "",
       },
     };
   },
@@ -74,17 +74,17 @@ export default {
     }),
     onSubmit(event) {
       event.preventDefault();
-      this.SET_STATE_SEASONAL(this.form.partTime);
-      this.SET_STATE_STUDENT(this.form.worker);
-      this.$router.push("/transferEndSupport");
+      this.SET_STATE_SEASONAL(this.form.knowJob);
+      this.SET_STATE_STUDENT(this.form.noJob);
+      this.$router.push("report/decreaseInLabor");
     },
     async getValue() {
       const day = today();
       const groupId = localStorage.getItem("groupId");
       const res = await getDetail({ day, groupId });
       if (res) {
-        this.form.partTime = Number(res.partTimeNum);
-        this.form.worker = Number(res.studentNum);
+        this.form.knowJob = Number(res.partTimeNum);
+        this.form.noJob = Number(res.studentNum);
       }
     },
   },
