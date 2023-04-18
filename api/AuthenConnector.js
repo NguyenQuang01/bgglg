@@ -65,6 +65,17 @@ export const getAllAcc = async (pageNo, pageSize, param) => {
   );
   return response.data;
 };
+export const deleteAcc = async (id) => {
+  const response = await request.post(`${HOST}/api/delete?id=${id}`, {});
+  return response.data;
+};
+export const updateAcc = async (userId, param) => {
+  const response = await request.post(
+    `${HOST}/api/update?userId=${userId}`,
+    param
+  );
+  return response.data;
+};
 //
 export const getTransfer = async (param) => {
   const groupId = localStorage.getItem("groupId");

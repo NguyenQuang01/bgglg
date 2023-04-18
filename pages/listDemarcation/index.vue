@@ -16,12 +16,7 @@
           <tr v-for="(item, index) in data" :key="index">
             <td class="w-5 text-center title">{{ index + 1 }}</td>
             <td class="w-3/5">
-              <b-form-input
-                v-model="item.name"
-                class="w-full h-8"
-                v-if="isEdit"
-              />
-              <div v-else>{{ item.name }}</div>
+              <div>{{ item.name }}</div>
             </td>
             <td class="w-1/5">
               <b-form-input
@@ -33,7 +28,7 @@
             </td>
             <td style="text-align: center" class="w-40">
               <div class="flex justify-center">
-                <div @click="save(item.name, item.id)">
+                <div @click="save(item.demarcationAvailable, item.id)">
                   <a-tooltip placement="topLeft">
                     <template slot="title">
                       <span>lưu</span>
@@ -84,7 +79,7 @@
   </div>
 </template>
 <script>
-import { getAllDemarcation } from "@/api/AuthenConnector.js";
+import { getAllDemarcation, updateDemarcation } from "@/api/AuthenConnector.js";
 import { message } from "ant-design-vue";
 import BtnBack from "@/components/BtnBack.vue";
 
@@ -124,7 +119,7 @@ export default {
       );
       console.log(res, 999);
       if (res) {
-        this.total = res.totalElements;
+        this.total = res?.totalElements;
         this.data = res.content.map((item, index) => ({
           SL: index + 1,
           name: item.groupName || "",
@@ -145,16 +140,9 @@ export default {
     edit() {
       this.isEdit = !this.isEdit;
     },
-    async save(name, id, laborCode) {
-      const res = await editEmployee([
-        {
-          groupId: localStorage.getItem("groupId"),
-          laborCode: laborCode,
-          name: name,
-          id: id,
-        },
-      ]);
-      if (res.code === 200 && res) {
+    async save(demarcationAvailable, id) {
+      const res = await updateDemarcation(demarcationAvailable, id);
+      if (res && res.status === 200) {
         message.success("sửa thành công");
       }
       this.isEdit = !this.isEdit;
@@ -235,5 +223,21 @@ th {
 }
 .wFull {
   width: 100% !important;
+}
+</style>
+<style>
+@media only screen and (max-width: 576px) {
+  .ant-pagination-options {
+    display: block;
+    margin-right: -8px;
+    margin-top: 5px;
+    float: left;
+  }
+  .ant-pagination-options {
+    margin-left: 0;
+  }
+}
+.ant-pagination-options {
+  margin-right: -8px;
 }
 </style>

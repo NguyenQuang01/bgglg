@@ -207,7 +207,7 @@
         </div>
       </div>
     </div>
-    <div class="mb-10 h-40">*</div>
+    <!-- <div class="mb-10 h-40">*</div> -->
   </div>
 </template>
 <script>

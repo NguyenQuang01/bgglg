@@ -29,11 +29,11 @@
                 class="w-full h-8"
                 v-if="isEdit"
               />
-              <div v-else>{{ item.password }}</div>
+              <div v-else>password</div>
             </td>
             <td style="text-align: center" class="w-40">
               <div class="flex justify-center">
-                <div @click="save(item.name, item.id)">
+                <div @click="save(item.id, item.password)">
                   <a-tooltip placement="topLeft">
                     <template slot="title">
                       <span>lưu</span>
@@ -54,6 +54,17 @@
                     <b-icon
                       variant="warning"
                       icon="pencil-square"
+                      aria-hidden="true"
+                      class="h-4 w-4"
+                    ></b-icon>
+                  </a-tooltip>
+                </div>
+                <div @click="deletes(item.id)">
+                  <a-tooltip placement="topLeft">
+                    <template slot="title"> </template>
+                    <b-icon
+                      variant="danger"
+                      icon="trash"
                       aria-hidden="true"
                       class="h-4 w-4"
                     ></b-icon>
@@ -84,7 +95,7 @@
   </div>
 </template>
 <script>
-import { getAllAcc } from "@/api/AuthenConnector.js";
+import { getAllAcc, deleteAcc, updateAcc } from "@/api/AuthenConnector.js";
 import { message } from "ant-design-vue";
 import BtnBack from "@/components/BtnBack.vue";
 
@@ -141,25 +152,18 @@ export default {
     edit() {
       this.isEdit = !this.isEdit;
     },
-    async save(name, id, laborCode) {
-      const res = await editEmployee([
-        {
-          groupId: localStorage.getItem("groupId"),
-          laborCode: laborCode,
-          name: name,
-          id: id,
-        },
-      ]);
+    async save(id, password) {
+      const res = await updateAcc(id, password);
       if (res.code === 200 && res) {
         message.success("sửa thành công");
       }
       this.isEdit = !this.isEdit;
     },
     async deletes(id) {
-      const res = await deleteEmployee([id]);
-      if (res && res.status === 201) {
+      const res = await deleteAcc(id);
+      if (res && res.status === 200) {
         message.success("xóa thành công");
-        getvalue(page.current, page.pageSize);
+        this.getvalue();
       }
     },
   },
@@ -231,5 +235,21 @@ th {
 }
 .wFull {
   width: 100% !important;
+}
+</style>
+<style>
+@media only screen and (max-width: 576px) {
+  .ant-pagination-options {
+    display: block;
+    margin-right: -8px;
+    margin-top: 5px;
+    float: left;
+  }
+  .ant-pagination-options {
+    margin-left: 0;
+  }
+}
+.ant-pagination-options {
+  margin-right: -8px;
 }
 </style>
