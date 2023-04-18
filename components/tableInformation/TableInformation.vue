@@ -70,7 +70,7 @@
             :key="index"
             class=""
           >
-            {{ item.restName }}- {{ nameReason(item.reasonId) }}
+            {{ item.restNameAndLabor }}- {{ nameReason(item.reasonId) }}
           </div>
         </td>
       </tr>

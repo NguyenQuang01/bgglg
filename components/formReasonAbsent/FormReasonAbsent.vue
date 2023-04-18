@@ -82,6 +82,7 @@ export default {
         reason: "",
         restId: "",
         session: "",
+        workTime: 0,
       },
       arrForms: [],
       valueTextarea: "",
@@ -113,7 +114,10 @@ export default {
     },
   },
   methods: {
-    ...mapMutations({ SET_STATE_ARRLABOR: "SET_STATE_ARRLABOR" }),
+    ...mapMutations({
+      SET_STATE_ARRLABOR: "SET_STATE_ARRLABOR",
+      SET_STATE_LABOR: "SET_STATE_LABOR",
+    }),
     handleChange(selectedItems) {
       this.selectedItems = selectedItems;
     },
@@ -142,13 +146,18 @@ export default {
     onSubmit(event) {
       event.preventDefault();
       const arrLabor = this.arrForms.map((item) => ({
-        restName: item.user,
+        restNameAndLabor: item.user,
         reasonId: item.reason,
         restId: item.restId,
         reasonName: item.reasonName,
+        session: item.session,
+        workTime: item.session === "Sáng" || item.session === "Chiều" ? 0.5 : 1,
       }));
-
+      const totalLabor = arrLabor
+        .map((item) => item.workTime)
+        .reduce((accumulator, currentValue) => accumulator + currentValue, 0);
       this.SET_STATE_ARRLABOR(arrLabor);
+      this.SET_STATE_LABOR(totalLabor);
       this.$router.push("/newPartTimeEndWorker");
 
       // this.$router.push("/");
@@ -182,7 +191,9 @@ export default {
           user: "",
           id: "",
           reason: "",
-          reasonName: "",
+          restId: "",
+          session: "",
+          workTime: 0,
         });
       }
     },

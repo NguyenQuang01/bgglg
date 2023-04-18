@@ -39,7 +39,7 @@
                 class="w-full h-8"
                 v-if="isEdit"
               />
-              <div v-else>password</div>
+              <div v-else>*******</div>
             </td>
             <td style="text-align: center" class="w-40">
               <div class="flex justify-center">
