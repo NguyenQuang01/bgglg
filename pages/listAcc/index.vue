@@ -31,12 +31,7 @@
           <tr v-for="(item, index) in data" :key="index">
             <td class="w-5 text-center title">{{ index + 1 }}</td>
             <td class="w-3/5">
-              <b-form-input
-                v-model="item.name"
-                class="w-full h-8"
-                v-if="isEdit"
-              />
-              <div v-else>{{ item.name }}</div>
+              <div>{{ item.name }}</div>
             </td>
             <td class="w-1/5">
               <b-form-input
@@ -182,6 +177,7 @@ export default {
     },
     edit() {
       this.isEdit = !this.isEdit;
+      this.data.map((item) => (item.password = ""));
     },
     async save(id, password) {
       const res = await updateAcc(id, password);
