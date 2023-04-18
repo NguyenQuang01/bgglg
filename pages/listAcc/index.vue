@@ -59,17 +59,24 @@
                     ></b-icon>
                   </a-tooltip>
                 </div>
-                <div @click="deletes(item.id)">
-                  <a-tooltip placement="topLeft">
-                    <template slot="title"> </template>
-                    <b-icon
-                      variant="danger"
-                      icon="trash"
-                      aria-hidden="true"
-                      class="h-4 w-4"
-                    ></b-icon>
-                  </a-tooltip>
-                </div>
+                <a-popconfirm
+                  placement="topRight"
+                  ok-text="Có"
+                  cancel-text="Không"
+                  @confirm="confirm(item.id)"
+                >
+                  <template slot="title">
+                    <p>{{ textDelete }}</p>
+                  </template>
+                  <!-- <div @click="deletes(item.id)"> -->
+                  <b-icon
+                    variant="danger"
+                    icon="trash"
+                    aria-hidden="true"
+                    class="h-4 w-4"
+                  ></b-icon>
+                  <!-- </div> -->
+                </a-popconfirm>
               </div>
             </td>
           </tr>
@@ -120,6 +127,7 @@ export default {
       },
       pageSizeOptions: ["5", "10", "20", "30", "40", "50"],
       search: { employeeName: "", laborCode: "", groupId: "" },
+      textDelete: "Bạn có chắc chắn xóa ",
     };
   },
 
@@ -139,6 +147,9 @@ export default {
           id: item.userId || "",
         }));
       }
+    },
+    confirm(id) {
+      this.deletes(id);
     },
     onPage(current) {
       this.page.current = current;

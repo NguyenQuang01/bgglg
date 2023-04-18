@@ -173,19 +173,29 @@
                     ></b-icon>
                   </a-tooltip>
                 </div>
-                <div @click="deletes(item.id)">
-                  <a-tooltip placement="topLeft">
+                <a-popconfirm
+                  placement="topRight"
+                  ok-text="Có"
+                  cancel-text="Không"
+                  @confirm="confirm(item.id)"
+                >
+                  <template slot="title">
+                    <p>{{ textDelete }}</p>
+                  </template>
+                  <!-- <div @click="deletes(item.id)"> -->
+                  <b-icon
+                    variant="danger"
+                    icon="trash"
+                    aria-hidden="true"
+                    class="h-4 w-4"
+                  ></b-icon>
+                  <!-- </div> -->
+                </a-popconfirm>
+                <!-- <a-tooltip placement="topLeft">
                     <template slot="title">
                       <span>xóa</span>
                     </template>
-                    <b-icon
-                      variant="danger"
-                      icon="trash"
-                      aria-hidden="true"
-                      class="h-4 w-4"
-                    ></b-icon>
-                  </a-tooltip>
-                </div>
+                  </a-tooltip> -->
               </div>
             </td>
           </tr>
@@ -225,6 +235,7 @@ import { message } from "ant-design-vue";
 export default defineComponent({
   middleware: "auth",
   setup() {
+    const textDelete = reactive("Bạn có chắc chắn xóa ");
     const isEdit = reactive({ value: false });
     const options = reactive({ value: [] });
     const search = reactive({ employeeName: "", laborCode: "", groupId: "" });
@@ -254,6 +265,10 @@ export default defineComponent({
       // Check here to configure the default column
       loading: false,
     });
+
+    const confirm = (id) => {
+      deletes(id);
+    };
     const onShowSizeChange = (current, pageSize) => {
       page.current = current;
       page.pageSize = pageSize;
@@ -269,7 +284,6 @@ export default defineComponent({
     const getvalue = async (current, pageSize) => {
       const payload = search;
       const res = await getAllEmployee(current, pageSize, payload);
-      console.log(res, 999);
       if (res && res.code === 201) {
         data.total = res.data.totalElements;
         data.value = res.data.content.map((item, index) => ({
@@ -351,6 +365,7 @@ export default defineComponent({
     });
 
     return {
+      textDelete,
       page,
       isEdit,
       form,
@@ -374,6 +389,7 @@ export default defineComponent({
       searchName,
       searchCode,
       searchGroup,
+      confirm,
     };
   },
 });
