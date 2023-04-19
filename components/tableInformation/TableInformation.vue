@@ -17,6 +17,11 @@
         <td>{{ numberSeasonal.information }}</td>
       </tr>
       <tr>
+        <td class="tdText text-slate-50">SỐ H.SINH</td>
+        <td>{{ numberStudent.quantity }}</td>
+        <td>{{ numberStudent.information }}</td>
+      </tr>
+      <tr>
         <td class="tdText text-slate-50">LAO ĐỘNG BIẾT NGHỀ</td>
         <td>{{ professionLabor.quantity }}</td>
         <td>{{ professionLabor.information }}</td>
@@ -26,11 +31,7 @@
         <td>{{ professionNotLabor.quantity }}</td>
         <td>{{ professionNotLabor.information }}</td>
       </tr>
-      <tr>
-        <td class="tdText text-slate-50">SỐ H.SINH</td>
-        <td>{{ numberStudent.quantity }}</td>
-        <td>{{ numberStudent.information }}</td>
-      </tr>
+
       <tr>
         <td class="tdText text-slate-50">ĐIỀU CHUYỂN</td>
         <td>{{ numberTransfer.quantity }}</td>

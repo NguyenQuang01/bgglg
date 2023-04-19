@@ -28,6 +28,21 @@
 
         <td></td>
       </tr>
+
+      <tr>
+        <td class="tdText text-slate-50">SỐ H.SINH</td>
+
+        <td>
+          <input
+            type="text"
+            v-model="numberStudent"
+            class="w-20"
+            v-if="isEdit"
+          />
+          <div v-else>{{ numberStudent }}</div>
+        </td>
+        <td></td>
+      </tr>
       <tr>
         <td class="tdText text-slate-50">LAO ĐỘNG BIẾT NGHỀ</td>
         <td>
@@ -54,20 +69,6 @@
           <div v-else>{{ professionNotLabor }}</div>
         </td>
 
-        <td></td>
-      </tr>
-      <tr>
-        <td class="tdText text-slate-50">SỐ H.SINH</td>
-
-        <td>
-          <input
-            type="text"
-            v-model="numberStudent"
-            class="w-20"
-            v-if="isEdit"
-          />
-          <div v-else>{{ numberStudent }}</div>
-        </td>
         <td></td>
       </tr>
       <tr>
@@ -231,10 +232,10 @@ export default {
   },
   methods: {
     edit() {
-      if (this.hours >= 18) {
-        message.warning("đã qua 18giờ không được sửa");
-        return;
-      }
+      // if (this.hours >= 18) {
+      // message.warning("đã qua 18giờ không được sửa");
+      //   return;
+      // }
       // this.isEdit = !this.isEdit;
       this.$router.push("/reasonAbsent");
     },
