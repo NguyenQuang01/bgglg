@@ -45,7 +45,7 @@ export default {
   components: { ButtonSkip, BtnBack },
   data() {
     return {
-      skip: "/transferEndSupport",
+      skip: "/newPartTimeEndWorker",
       form: {
         partTime: "",
         worker: "",
@@ -94,7 +94,7 @@ export default {
       event.preventDefault();
       this.SET_STATE_SEASONAL(this.form.partTime);
       this.SET_STATE_STUDENT(this.form.worker);
-      this.$router.push("/transferEndSupport");
+      this.$router.push("/newPartTimeEndWorker");
     },
     async getValue() {
       const day = today();

@@ -158,7 +158,7 @@ export default {
         .reduce((accumulator, currentValue) => accumulator + currentValue, 0);
       this.SET_STATE_ARRLABOR(arrLabor);
       this.SET_STATE_LABOR(totalLabor);
-      // this.$router.push("/report/newPartTimeEndWorker");
+
       this.$router.push("/report/laborIncrease");
 
       // this.$router.push("/");

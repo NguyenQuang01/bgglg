@@ -29,6 +29,34 @@
         <td></td>
       </tr>
       <tr>
+        <td class="tdText text-slate-50">LAO ĐỘNG BIẾT NGHỀ</td>
+        <td>
+          <input
+            type="text"
+            v-model="professionLabor"
+            class="w-20"
+            v-if="isEdit"
+          />
+          <div v-else>{{ professionLabor }}</div>
+        </td>
+
+        <td></td>
+      </tr>
+      <tr>
+        <td class="tdText text-slate-50">LAO ĐỘNG KHÔNG BIẾT NGHỀ</td>
+        <td>
+          <input
+            type="text"
+            v-model="professionNotLabor"
+            class="w-20"
+            v-if="isEdit"
+          />
+          <div v-else>{{ professionNotLabor }}</div>
+        </td>
+
+        <td></td>
+      </tr>
+      <tr>
         <td class="tdText text-slate-50">SỐ H.SINH</td>
 
         <td>
@@ -169,6 +197,8 @@ export default {
       numberReasons: 0,
       demarcation: 0,
       numberSeasonal: 0,
+      professionLabor: 0,
+      professionNotLabor: 0,
       numberTransfer: 0,
       numberSupport: 0,
       totalRice: 0,
@@ -219,6 +249,8 @@ export default {
         this.numberReasons = "";
         this.demarcation = "";
         this.numberSeasonal = "";
+        this.professionLabor = "";
+        this.professionNotLabor = "";
         this.numberTransfer = "";
         this.numberSupport = "";
         this.numberEatRice = "";
@@ -238,6 +270,8 @@ export default {
         this.numberReasons = res.restNum;
         this.demarcation = res.demarcation;
         this.numberSeasonal = res.partTimeNum;
+        this.professionLabor = res.professionLabor;
+        this.professionNotLabor = res.professionNotLabor;
         this.numberTransfer = res.transferNum;
         this.numberSupport = res.supportNum;
         this.numberEatRice = res.rice;

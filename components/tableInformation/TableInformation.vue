@@ -17,6 +17,16 @@
         <td>{{ numberSeasonal.information }}</td>
       </tr>
       <tr>
+        <td class="tdText text-slate-50">LAO ĐỘNG BIẾT NGHỀ</td>
+        <td>{{ professionLabor.quantity }}</td>
+        <td>{{ professionLabor.information }}</td>
+      </tr>
+      <tr>
+        <td class="tdText text-slate-50">LAO ĐỘNG CHƯA BIẾT NGHỀ</td>
+        <td>{{ professionNotLabor.quantity }}</td>
+        <td>{{ professionNotLabor.information }}</td>
+      </tr>
+      <tr>
         <td class="tdText text-slate-50">SỐ H.SINH</td>
         <td>{{ numberStudent.quantity }}</td>
         <td>{{ numberStudent.information }}</td>
@@ -134,6 +144,18 @@ export default {
       return {
         information: " ",
         quantity: this.getDataInformationReport?.demarcation,
+      };
+    },
+    professionNotLabor() {
+      return {
+        information: " ",
+        quantity: this.getDataInformationReport?.professionNotLabor,
+      };
+    },
+    professionLabor() {
+      return {
+        information: " ",
+        quantity: this.getDataInformationReport?.professionLabor,
       };
     },
     numberSeasonal() {
