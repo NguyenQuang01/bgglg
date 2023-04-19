@@ -11,13 +11,13 @@ export default () => ({
       {
         transferNum: 0,
         type: 1,
-        groupId: 0,
+        groupId: null,
         transferId: "",
       },
       {
         transferNum: 0,
         type: 2,
-        groupId: 0,
+        groupId: null,
         transferId: "",
       },
     ],

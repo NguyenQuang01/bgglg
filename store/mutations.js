@@ -32,9 +32,9 @@ export default {
       data.transferId;
   },
   SET_STATE_MEAL(state, data) {
-    state.dataInformationReport.riceRequests.riceEmp = data.staff;
-    state.dataInformationReport.riceRequests.riceCus = data.guest;
-    state.dataInformationReport.riceRequests.riceVip = data.guestVip;
+    state.dataInformationReport.riceRequests.riceEmp = Number(data.staff);
+    state.dataInformationReport.riceRequests.riceCus = Number(data.guest);
+    state.dataInformationReport.riceRequests.riceVip = Number(data.guestVip);
     state.dataInformationReport.riceRequests.riceId = data.riceId;
   },
   SET_STATE_PRODUCTIVITY(state, data) {
