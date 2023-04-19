@@ -11,7 +11,7 @@
             show-search
             placeholder="Inserted are removed"
             style="width: 100%; border-radius: 50px"
-            v-model="form.partTime"
+            v-model="deleteLabor"
             class="inputLogin"
           >
             <a-select-option
@@ -46,10 +46,9 @@ export default {
   data() {
     return {
       skip: "/newPartTimeEndWorker",
-      form: {
-        partTime: "",
-        worker: "",
-      },
+
+      deleteLabor: "",
+
       OPTIONS: [],
       selectedItems: "",
       page: {
@@ -71,10 +70,6 @@ export default {
     },
   },
   methods: {
-    ...mapMutations({
-      SET_STATE_SEASONAL: "SET_STATE_SEASONAL",
-      SET_STATE_STUDENT: "SET_STATE_STUDENT",
-    }),
     async getvalueName() {
       const payload = { groupId: 125 };
       const res = await getAllEmployee(
@@ -92,9 +87,9 @@ export default {
     },
     onSubmit(event) {
       event.preventDefault();
-      this.SET_STATE_SEASONAL(this.form.partTime);
-      this.SET_STATE_STUDENT(this.form.worker);
-      this.$router.push("/newPartTimeEndWorker");
+      this.deleteLabor;
+      console.log(this.deleteLabor.split("-")[1]);
+      // this.$router.push("/newPartTimeEndWorker");
     },
     async getValue() {
       const day = today();

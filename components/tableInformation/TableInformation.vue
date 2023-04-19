@@ -218,8 +218,9 @@ export default {
         numberDemarcation = res.data.demarcationAvailable;
         const demarcation =
           numberDemarcation +
-          Number(this.getDataInformationReport.studentNum) +
-          Number(this.getDataInformationReport.partTimeNum);
+          Number(this.getDataInformationReport.partTimeNum) / 2 +
+          Number(this.getDataInformationReport.professionLabor) +
+          Number(this.getDataInformationReport.professionNotLabor);
         this.SET_STATE_DEMARCATION(demarcation);
         const productivity =
           Number(this.getDataInformationReport.demarcation) -

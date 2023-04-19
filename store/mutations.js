@@ -12,7 +12,7 @@ export default {
     state.dataInformationReport.demarcation = data;
   },
   SET_STATE_SEASONAL(state, data) {
-    state.dataInformationReport.partTimeNum = data;
+    state.dataInformationReport.partTimeNum = Number(data);
   },
   SET_STATE_STUDENT(state, data) {
     state.dataInformationReport.studentNum = data;

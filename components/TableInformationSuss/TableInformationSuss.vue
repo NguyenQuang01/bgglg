@@ -157,12 +157,11 @@
         </td>
         <td>
           <div v-for="(item, index) in arrReasons" :key="index">
-            <div v-if="isEdit">
-              <input type="text" v-model="item.restName" class="w-10" />-
-              <input type="text" v-model="item.reasonName" class="w-10" />
+            <div>
+              <span class="font-semibold">{{ item.restName }}</span> -{{
+                item.reasonName
+              }}
             </div>
-
-            <div v-else>{{ item.restName }}-{{ item.reasonName }}</div>
           </div>
         </td>
       </tr>

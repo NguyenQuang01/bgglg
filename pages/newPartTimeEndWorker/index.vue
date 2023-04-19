@@ -1,7 +1,7 @@
 <template lang="">
   <div class="container">
     <div class="text-center mt-10 mb-16 text-3xl font-bold title">
-      BÁO CÁO SỐ THỜI VỤ & CÔNG NHÂN MỚI
+      BÁO CÁO SỐ THỜI VỤ VÀ LAO ĐỘNG KHÔNG TÍNH NĂNG SUẤT
     </div>
 
     <div class="max-w-sm m-auto m-0">
@@ -21,7 +21,7 @@
         </b-form-group>
         <b-form-group
           id="input-group-2"
-          label="Số học sinh:"
+          label="Số lao động không tính năng suất:"
           label-for="input-2"
         >
           <b-form-input

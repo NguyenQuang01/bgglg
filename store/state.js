@@ -11,13 +11,13 @@ export default () => ({
     professionNotLabor: 0,
     transferRequests: [
       {
-        transferNum: 0,
+        transferNum: null,
         type: 1,
         groupId: null,
         transferId: null,
       },
       {
-        transferNum: 0,
+        transferNum: null,
         type: 2,
         groupId: null,
         transferId: null,
