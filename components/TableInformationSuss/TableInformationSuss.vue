@@ -206,7 +206,7 @@ export default {
         return;
       }
       // this.isEdit = !this.isEdit;
-      this.$router.push("/laborreport");
+      this.$router.push("/reasonAbsent");
     },
     submit() {},
     async getDetails() {

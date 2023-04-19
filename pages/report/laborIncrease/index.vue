@@ -13,7 +13,7 @@
         >
           <b-form-input
             type="number"
-            v-model="form.knowJob"
+            v-model="form.professionLabor"
             placeholder="Nhập "
             required
             class="inputLogin"
@@ -26,7 +26,7 @@
         >
           <b-form-input
             type="number"
-            v-model="form.noJob"
+            v-model="form.professionNotLabor"
             placeholder="Nhập "
             required
             class="inputLogin"
@@ -56,8 +56,8 @@ export default {
     return {
       skip: "/report/decreaseInLabor",
       form: {
-        knowJob: "",
-        noJob: "",
+        professionLabor: "",
+        professionNotLabor: "",
       },
     };
   },
@@ -69,22 +69,22 @@ export default {
   },
   methods: {
     ...mapMutations({
-      SET_STATE_SEASONAL: "SET_STATE_SEASONAL",
-      SET_STATE_STUDENT: "SET_STATE_STUDENT",
+      SET_STATE_PROFESSIONLABOR: "SET_STATE_PROFESSIONLABOR",
+      SET_STATE_PROFESSIONOTLABOR: "SET_STATE_PROFESSIONOTLABOR",
     }),
     onSubmit(event) {
       event.preventDefault();
-      this.SET_STATE_SEASONAL(this.form.knowJob);
-      this.SET_STATE_STUDENT(this.form.noJob);
-      this.$router.push("report/decreaseInLabor");
+      this.SET_STATE_PROFESSIONLABOR(this.form.professionLabor);
+      this.SET_STATE_PROFESSIONOTLABOR(this.form.professionNotLabor);
+      this.$router.push("/report/decreaseInLabor");
     },
     async getValue() {
       const day = today();
       const groupId = localStorage.getItem("groupId");
       const res = await getDetail({ day, groupId });
       if (res) {
-        this.form.knowJob = Number(res.partTimeNum);
-        this.form.noJob = Number(res.studentNum);
+        this.form.professionLabor = Number(res.professionLabor);
+        this.form.professionNotLabor = Number(res.professionNotLabor);
       }
     },
   },

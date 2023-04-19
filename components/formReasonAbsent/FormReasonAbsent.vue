@@ -74,7 +74,7 @@ export default {
     return {
       OPTIONS: [],
       selectedItems: "",
-      skip: "/newPartTimeEndWorker",
+      skip: "/report/laborIncrease",
       amount: 1,
       form: {
         user: "",
@@ -158,7 +158,8 @@ export default {
         .reduce((accumulator, currentValue) => accumulator + currentValue, 0);
       this.SET_STATE_ARRLABOR(arrLabor);
       this.SET_STATE_LABOR(totalLabor);
-      this.$router.push("/newPartTimeEndWorker");
+      // this.$router.push("/report/newPartTimeEndWorker");
+      this.$router.push("/report/laborIncrease");
 
       // this.$router.push("/");
     },
@@ -203,6 +204,7 @@ export default {
       const res = await getDetail({ day, groupId });
       if (res) {
         if (res.rests.length > 0) {
+          console.log(res, 8888);
           this.arrForms = res.rests.map((item) => ({
             user: item.restName,
             id: item.restId,

@@ -17,6 +17,12 @@ export default {
   SET_STATE_STUDENT(state, data) {
     state.dataInformationReport.studentNum = data;
   },
+  SET_STATE_PROFESSIONLABOR(state, data) {
+    state.dataInformationReport.professionLabor = Number(data);
+  },
+  SET_STATE_PROFESSIONOTLABOR(state, data) {
+    state.dataInformationReport.professionNotLabor = Number(data);
+  },
   SET_STATE_TRANSFER(state, data) {
     state.dataInformationReport.transferRequests[0].transferNum =
       data.transferNum;
