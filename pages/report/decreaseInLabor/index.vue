@@ -25,7 +25,7 @@
         </b-form-group>
         <div class="flex float-right">
           <BtnBack class="h-10" />
-          <button-skip :skip="skip" v-if="check" />
+          <button-skip :skip="skip" />
           <b-button type="submit" variant="primary" class="btnLogin h-10"
             >Xác nhận</b-button
           >
@@ -55,14 +55,12 @@ export default {
         current: 1,
         pageSize: 500,
       },
-      check: true,
     };
   },
   fetch() {
     const isReport = localStorage.getItem("checkReport");
     this.getvalueName();
     if (isReport === "true") {
-      this.check = false;
       this.getValue();
     }
   },

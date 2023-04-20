@@ -106,14 +106,18 @@ export default {
     };
   },
   fetch() {
-    const res = refreshToken(this.token);
-    if (res && res.status === 200) {
-      if (res.data.checkReport === true) {
-        localStorage.setItem("JWT", true);
-        this.check = false;
-        this.getValue();
-      }
-    }
+    this.token = localStorage.getItem("JWT");
+
+    this.test(this.token);
+
+    // console.log(res, 77777);
+    // if (res && res.status === 200) {
+    //   if (res.data.checkReport === true) {
+    //     localStorage.setItem("JWT", true);
+    //     this.check = false;
+    //     this.getValue();
+    //   }
+    // }
     this.arrForms.push(this.form);
     this.getReason();
     this.getvalueName();
@@ -129,6 +133,18 @@ export default {
       SET_STATE_ARRLABOR: "SET_STATE_ARRLABOR",
       SET_STATE_LABOR: "SET_STATE_LABOR",
     }),
+
+    async test(token) {
+      const res = await refreshToken(token);
+      if (res && res.status === 200) {
+        if (res.data.checkReport === true) {
+          localStorage.setItem("JWT", true);
+          this.check = false;
+          this.getValue();
+        }
+      }
+    },
+
     handleChange(selectedItems) {
       this.selectedItems = selectedItems;
     },
@@ -215,7 +231,6 @@ export default {
       const res = await getDetail({ day, groupId });
       if (res) {
         if (res.rests.length > 0) {
-          console.log(res, 8888);
           this.arrForms = res.rests.map((item) => ({
             user: item.restName,
             id: item.restId,
