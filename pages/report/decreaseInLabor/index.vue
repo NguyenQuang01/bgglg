@@ -95,7 +95,6 @@ export default {
       event.preventDefault();
 
       if (this.deleteLabor) {
-        console.log("77777777777");
         this.SET_STATE_NumberDeleteLabor(1);
         this.SET_STATE_codeDeleteLabor(this.deleteLabor.split("-")[1]);
         this.$router.push("/newPartTimeEndWorker");
