@@ -16,6 +16,7 @@
             v-model="form.partTime"
             placeholder="Nhập "
             required
+            :min="0"
             class="inputLogin"
           ></b-form-input>
         </b-form-group>
@@ -29,6 +30,7 @@
             v-model="form.worker"
             placeholder="Nhập "
             required
+            :min="0"
             class="inputLogin"
           ></b-form-input>
         </b-form-group>

@@ -17,6 +17,7 @@
               v-model="form.transfer.number"
               placeholder="Nhập "
               required
+              :min="0"
               type="number"
               class="h-8 inputLogin"
             ></b-form-input>
@@ -50,6 +51,7 @@
               v-model="form.support.number"
               placeholder="Nhập "
               required
+              :min="0"
               type="number"
               class="h-8 inputLogin"
             ></b-form-input>

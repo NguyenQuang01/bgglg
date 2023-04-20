@@ -13,6 +13,7 @@
             v-model="numberMeal.staff"
             placeholder="Nhập "
             class="inputLogin"
+            :min="0"
             type="number"
           ></b-form-input>
         </b-form-group>
@@ -25,6 +26,7 @@
             v-model="numberMeal.guest"
             placeholder="Nhập "
             type="number"
+            :min="0"
             class="inputLogin"
           ></b-form-input>
         </b-form-group>
@@ -37,6 +39,7 @@
             v-model="numberMeal.guestVip"
             placeholder="Nhập "
             type="number"
+            :min="0"
             class="inputLogin"
           ></b-form-input>
         </b-form-group>

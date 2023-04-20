@@ -59,6 +59,6 @@ export default {
     state.numberDeleteLabor = data;
   },
   SET_STATE_codeDeleteLabor(state, data) {
-    state.codeDeleteLabor = data;
+    state.codeDeleteLabor = String(data);
   },
 };

@@ -265,13 +265,15 @@ export default {
       event.preventDefault();
       this.btn = "quay lai";
       const res = await refreshToken(this.token);
+      console.log(res);
       if (res && res.status === 200) {
         if (res.data.checkReport === false) {
+          // console.log(this.getCodeDeleteLabor);
           const payload = {
-            groupId: res.data.groupId,
+            groupId: localStorage.getItem("groupId"),
             laborEmp: [this.getCodeDeleteLabor],
           };
-          await deleteEm(payload);
+          const ress = await deleteEm(payload);
           // if (this.hours > 18+7) {
           const res = await saveDetail(this.getDataInformationReport);
           if (res) {
@@ -290,11 +292,12 @@ export default {
           return;
         }
         if (res.data.checkReport === true) {
+          console.log(this.getCodeDeleteLabor);
           const payloads = {
-            groupId: res.data.groupId,
+            groupId: localStorage.getItem("groupId"),
             laborEmp: [this.getCodeDeleteLabor],
           };
-          await deleteEm(payloads);
+          const ress = await deleteEm(payloads);
           const day = today();
           const groupId = localStorage.getItem("groupId");
           const response = await getDetail({ day, groupId });

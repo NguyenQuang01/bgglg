@@ -15,6 +15,7 @@
             type="number"
             v-model="form.professionLabor"
             placeholder="Nhập "
+            :min="0"
             required
             class="inputLogin"
           ></b-form-input>
@@ -28,6 +29,7 @@
             type="number"
             v-model="form.professionNotLabor"
             placeholder="Nhập "
+            :min="0"
             required
             class="inputLogin"
           ></b-form-input>
@@ -50,7 +52,7 @@ import BtnBack from "@/components/BtnBack.vue";
 import { getDetail } from "@/api/AuthenConnector.js";
 import { today } from "@/constants/getToday";
 export default {
-  //   middleware: "auth",
+  middleware: "auth",
   components: { ButtonSkip, BtnBack },
   data() {
     return {

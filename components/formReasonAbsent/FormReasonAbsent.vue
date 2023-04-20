@@ -53,7 +53,7 @@
           @click="addQuantity"
           >Thêm</b-button
         >
-        <button-skip :skip="skip" v-if="check" />
+        <button-skip :skip="skip" />
         <b-button type="submit" variant="primary" class="btnLogin h-10 mb-24"
           >xác nhận</b-button
         >
