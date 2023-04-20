@@ -138,7 +138,7 @@ export default {
       const res = await refreshToken(token);
       if (res && res.status === 200) {
         if (res.data.checkReport === true) {
-          localStorage.setItem("JWT", true);
+          localStorage.setItem("checkReport", true);
           this.check = false;
           this.getValue();
         }
