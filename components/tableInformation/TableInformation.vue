@@ -255,6 +255,17 @@ export default {
     getValue() {
       this.user = localStorage.getItem("userLogin");
     },
+    partTimeNum() {
+      const cat = "cắt";
+      const kcs = "kcs";
+      const ht = "hoàn thiện";
+      const groupName = localStorage.getItem("groupName").toLowerCase();
+      const isCat = groupName.includes(cat);
+      const isKcs = groupName.includes(kcs);
+      const isHt = groupName.includes(ht);
+      console.log(is);
+      return;
+    },
     showModal() {
       this.visible = true;
     },
