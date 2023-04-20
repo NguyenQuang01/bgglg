@@ -149,7 +149,7 @@ export default {
       this.selectedItems = selectedItems;
     },
     async getvalueName() {
-      const payload = { groupId: 125 };
+      const payload = { groupId: localStorage.getItem("groupId") };
       const res = await getAllEmployee(
         this.page.current,
         this.page.pageSize,

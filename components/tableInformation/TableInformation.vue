@@ -114,6 +114,7 @@ import {
   updateDetail,
   reason,
   refreshToken,
+  deleteEm,
 } from "@/api/AuthenConnector.js";
 import { message } from "ant-design-vue";
 import { getDetail } from "@/api/AuthenConnector.js";
@@ -136,6 +137,8 @@ export default {
   computed: {
     ...mapGetters({
       getDataInformationReport: "getDataInformationReport",
+      getNumberDeleteLabor: "getNumberDeleteLabor",
+      getCodeDeleteLabor: "getCodeDeleteLabor",
     }),
     numberReasons() {
       return {
@@ -146,7 +149,9 @@ export default {
     demarcation() {
       return {
         information: " ",
-        quantity: this.getDataInformationReport?.demarcation,
+        quantity:
+          this.getDataInformationReport?.demarcation -
+          this.getNumberDeleteLabor,
       };
     },
     professionNotLabor() {
@@ -262,6 +267,11 @@ export default {
       const res = await refreshToken(this.token);
       if (res && res.status === 200) {
         if (res.data.checkReport === false) {
+          const payload = {
+            groupId: res.data.groupId,
+            laborEmp: [this.getCodeDeleteLabor],
+          };
+          await deleteEm(payload);
           // if (this.hours > 18+7) {
           const res = await saveDetail(this.getDataInformationReport);
           if (res) {
@@ -280,6 +290,11 @@ export default {
           return;
         }
         if (res.data.checkReport === true) {
+          const payloads = {
+            groupId: res.data.groupId,
+            laborEmp: [this.getCodeDeleteLabor],
+          };
+          await deleteEm(payloads);
           const day = today();
           const groupId = localStorage.getItem("groupId");
           const response = await getDetail({ day, groupId });

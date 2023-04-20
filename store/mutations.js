@@ -55,4 +55,10 @@ export default {
   SET_STATE_INFUSER(state, data) {
     state.infUser = data;
   },
+  SET_STATE_NumberDeleteLabor(state, data) {
+    state.numberDeleteLabor = data;
+  },
+  SET_STATE_codeDeleteLabor(state, data) {
+    state.codeDeleteLabor = data;
+  },
 };

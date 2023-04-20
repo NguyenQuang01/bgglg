@@ -3,6 +3,8 @@ export default () => ({
   isAuthenticated: false,
   isUser: false,
   UserName: "",
+  numberDeleteLabor: 0,
+  codeDeleteLabor: "",
   dataInformationReport: {
     demarcation: 0,
     partTimeNum: 0,

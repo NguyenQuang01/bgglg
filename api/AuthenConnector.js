@@ -218,3 +218,9 @@ export const deleteEmployee = async (param) => {
   );
   return response.data;
 };
+export const deleteEm = async (param) => {
+  const response = await request.post(`${HOST}/report/delete-group-emp`, param);
+  return response.data;
+};
+///
+//

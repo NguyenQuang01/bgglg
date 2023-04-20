@@ -9,6 +9,7 @@
         <b-form-group label="Nhập tên :" label-for="input-2">
           <a-select
             show-search
+            required
             placeholder="Inserted are removed"
             style="width: 100%; border-radius: 50px"
             v-model="deleteLabor"
@@ -40,8 +41,9 @@ import ButtonSkip from "@/components/buttonSkip";
 import BtnBack from "@/components/BtnBack.vue";
 import { getDetail, getAllEmployee } from "@/api/AuthenConnector.js";
 import { today } from "@/constants/getToday";
+import { message } from "ant-design-vue";
 export default {
-  //   middleware: "auth",
+  // middleware: "auth",
   components: { ButtonSkip, BtnBack },
   data() {
     return {
@@ -70,8 +72,12 @@ export default {
     },
   },
   methods: {
+    ...mapMutations({
+      SET_STATE_NumberDeleteLabor: "SET_STATE_NumberDeleteLabor",
+      SET_STATE_codeDeleteLabor: "SET_STATE_codeDeleteLabor",
+    }),
     async getvalueName() {
-      const payload = { groupId: 125 };
+      const payload = { groupId: localStorage.getItem("groupId") };
       const res = await getAllEmployee(
         this.page.current,
         this.page.pageSize,
@@ -87,9 +93,15 @@ export default {
     },
     onSubmit(event) {
       event.preventDefault();
-      this.deleteLabor;
-      console.log(this.deleteLabor.split("-")[1]);
-      // this.$router.push("/newPartTimeEndWorker");
+
+      if (this.deleteLabor) {
+        console.log("77777777777");
+        this.SET_STATE_NumberDeleteLabor(1);
+        this.SET_STATE_codeDeleteLabor(this.deleteLabor.split("-")[1]);
+        this.$router.push("/newPartTimeEndWorker");
+      } else {
+        message.warning("vui lòng chọn tên người nghỉ");
+      }
     },
     async getValue() {
       const day = today();
