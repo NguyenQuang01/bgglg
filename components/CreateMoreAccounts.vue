@@ -98,7 +98,6 @@ export default {
       event.preventDefault();
       if (this.form.groupId) {
         const res = await addAccount(this.form);
-        console.log(res, 9999);
         if (res && res.status === 500) {
           message.warning("Tài khoản đã tồn tại");
         }

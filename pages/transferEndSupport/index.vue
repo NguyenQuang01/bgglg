@@ -160,7 +160,6 @@ export default {
 
     onSubmit(event) {
       event.preventDefault();
-      console.log(this.form.transfer.group);
       if (this.form.transfer.group && this.form.support.group) {
         this.SET_STATE_TRANSFER({
           transferNum: Number(this.form.transfer.number),

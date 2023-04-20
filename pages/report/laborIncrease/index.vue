@@ -65,7 +65,6 @@ export default {
   fetch() {
     const isReport = localStorage.getItem("checkReport");
     if (isReport === "true") {
-      console.log("object");
       this.check = false;
       this.getValue();
     }

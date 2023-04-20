@@ -83,7 +83,6 @@ export default {
         this.page.pageSize,
         payload
       );
-      console.log(res, 999);
       if (res && res.code === 201) {
         this.OPTIONS = res.data.content.map(
           (item) => ` ${item.employeeName} - ${item.laborCode}`

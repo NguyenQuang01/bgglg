@@ -110,7 +110,6 @@ export default {
 
     this.test(this.token);
 
-    // console.log(res, 77777);
     // if (res && res.status === 200) {
     //   if (res.data.checkReport === true) {
     //     localStorage.setItem("JWT", true);
@@ -155,7 +154,6 @@ export default {
         this.page.pageSize,
         payload
       );
-      console.log(res, 999);
       if (res && res.code === 201) {
         this.OPTIONS = res.data.content.map(
           (item) => ` ${item.employeeName} - ${item.laborCode}`

@@ -132,7 +132,6 @@ export default {
         this.page.current,
         this.page.pageSize
       );
-      console.log(res, 999);
       if (res) {
         this.total = res?.totalElements;
         this.data = res.content.map((item, index) => ({
