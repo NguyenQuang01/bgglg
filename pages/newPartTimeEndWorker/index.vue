@@ -34,7 +34,7 @@
         </b-form-group>
         <div class="flex float-right">
           <BtnBack class="h-10" />
-          <button-skip :skip="skip" />
+          <button-skip :skip="skip" v-if="check" />
           <b-button type="submit" variant="primary" class="btnLogin h-10"
             >Xác nhận</b-button
           >
@@ -59,11 +59,13 @@ export default {
         partTime: "",
         worker: "",
       },
+      check: true,
     };
   },
   fetch() {
     const isReport = localStorage.getItem("checkReport");
     if (isReport === "true") {
+      this.check = false;
       this.getValue();
     }
   },

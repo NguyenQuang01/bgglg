@@ -113,6 +113,7 @@ import {
   getDemarcationDb,
   updateDetail,
   reason,
+  refreshToken,
 } from "@/api/AuthenConnector.js";
 import { message } from "ant-design-vue";
 import { getDetail } from "@/api/AuthenConnector.js";
@@ -125,6 +126,7 @@ export default {
       user: "",
       hours: new Date().getHours(),
       options: [],
+      token: "",
     };
   },
   fetch() {
@@ -204,6 +206,9 @@ export default {
     this.getDemarcation();
     // setTimeout(() => this.getProductivity(), 0);
   },
+  mounted() {
+    this.token = localStorage.getItem("JWT");
+  },
   methods: {
     ...mapMutations({
       SET_STATE_DEMARCATION: "SET_STATE_DEMARCATION",
@@ -254,40 +259,44 @@ export default {
     async submit(event) {
       event.preventDefault();
       this.btn = "quay lai";
-      const checkReport = localStorage.getItem("checkReport");
-      if (checkReport === "false") {
-        // if (this.hours > 18+7) {
-        const res = await saveDetail(this.getDataInformationReport);
-        if (res) {
-          message.success("thành công");
-          localStorage.setItem("checkReport", true);
-          setTimeout(() => {
-            this.$router.push("/sussInformation");
-          }, "1000");
+      const res = await refreshToken(this.token);
+      if (res && res.status === 200) {
+        if (res.data.checkReport === false) {
+          // if (this.hours > 18+7) {
+          const res = await saveDetail(this.getDataInformationReport);
+          if (res) {
+            message.success("thành công");
+            localStorage.setItem("checkReport", true);
+            setTimeout(() => {
+              this.$router.push("/sussInformation");
+            }, "1000");
+          }
+          if (res && res.status === 400) {
+            message.warning("lỗi điều chuyển vào tổ của mình");
+          }
+          // } else {
+          //   alert("đã qua 18 giờ");
+          // }
+          return;
         }
-        if (res && res.status === 400) {
-          message.warning("lỗi điều chuyển vào tổ của mình");
-        }
-        // } else {
-        //   alert("đã qua 18 giờ");
-        // }
-      }
-      if (checkReport === "true") {
-        const day = today();
-        const groupId = localStorage.getItem("groupId");
-        const response = await getDetail({ day, groupId });
-        let id = 0;
-        if (response) {
-          id = response.id;
-        }
-        const payload = {
-          ...this.getDataInformationReport,
-          id: id,
-        };
-        const res = updateDetail(payload);
-        if (res) {
-          message.success("sửa thành công");
-          setTimeout(() => this.$router.push("/sussInformation"), 1000);
+        if (res.data.checkReport === true) {
+          const day = today();
+          const groupId = localStorage.getItem("groupId");
+          const response = await getDetail({ day, groupId });
+          let id = 0;
+          if (response) {
+            id = response.id;
+          }
+          const payload = {
+            ...this.getDataInformationReport,
+            id: id,
+          };
+          const res = updateDetail(payload);
+          if (res) {
+            message.success("sửa thành công");
+            setTimeout(() => this.$router.push("/sussInformation"), 1000);
+          }
+          return;
         }
       }
     },

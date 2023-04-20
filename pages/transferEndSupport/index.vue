@@ -33,6 +33,7 @@
               expand-trigger="hover"
               placeholder="chọn"
               required
+              class="inputLogin"
               @change="onChange"
             />
           </b-form-group>
@@ -64,6 +65,7 @@
               :options="parts"
               expand-trigger="hover"
               placeholder="chọn"
+              class="inputLogin"
               required
               @change="onChange2"
             />
@@ -72,7 +74,7 @@
 
         <div class="flex float-right">
           <BtnBack class="h-10" />
-          <button-skip :skip="skip" />
+          <button-skip :skip="skip" v-if="check" />
           <b-button type="submit" variant="primary" class="btnLogin mb-24"
             >Xác nhận</b-button
           >
@@ -105,11 +107,13 @@ export default {
         transfer: { number: "", group: "", transferId: "" },
         support: { number: "", group: "", transferId: "" },
       },
+      check: true,
     };
   },
   fetch() {
     const isReport = localStorage.getItem("checkReport");
     if (isReport === "true") {
+      this.check = true;
       this.getValue();
     }
     this.groupRoleRoot();
@@ -211,5 +215,10 @@ export default {
   border: #e9e9e9 solid 1px;
   height: 1px;
   margin: 40px 0;
+}
+</style>
+<style>
+.ant-cascader-input {
+  border-radius: 50px;
 }
 </style>

@@ -1,5 +1,8 @@
 <template lang="">
-  <b-button @click="$router.back()" variant="primary" class="textBack text-sm"
+  <b-button
+    @click="$router.back()"
+    variant="primary"
+    class="textBack text-sm mr-2"
     ><b-icon icon="arrow-bar-left" aria-hidden="true"></b-icon>trở lại</b-button
   >
 </template>

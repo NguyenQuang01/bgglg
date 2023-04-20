@@ -49,11 +49,11 @@
         <BtnBack class="h-10" />
         <b-button
           variant="primary"
-          class="mb-24 ml-2 textBack"
+          class="mb-24 ml-2 mr-2 textBack"
           @click="addQuantity"
           >Thêm</b-button
         >
-        <button-skip :skip="skip" />
+        <button-skip :skip="skip" v-if="check" />
         <b-button type="submit" variant="primary" class="btnLogin h-10 mb-24"
           >xác nhận</b-button
         >
@@ -64,7 +64,12 @@
 <script>
 import { mapMutations, mapGetters } from "vuex";
 import ButtonSkip from "../buttonSkip";
-import { reason, deleteLisRes, getAllEmployee } from "@/api/AuthenConnector.js";
+import {
+  reason,
+  deleteLisRes,
+  getAllEmployee,
+  refreshToken,
+} from "@/api/AuthenConnector.js";
 import { getDetail } from "@/api/AuthenConnector.js";
 import { today } from "@/constants/getToday";
 import { message } from "ant-design-vue";
@@ -84,6 +89,7 @@ export default {
         session: "",
         workTime: 0,
       },
+      token: "",
       arrForms: [],
       valueTextarea: "",
       selected: null,
@@ -96,12 +102,17 @@ export default {
         current: 1,
         pageSize: 500,
       },
+      check: true,
     };
   },
   fetch() {
-    const isReport = localStorage.getItem("checkReport");
-    if (isReport === "true") {
-      this.getValue();
+    const res = refreshToken(this.token);
+    if (res && res.status === 200) {
+      if (res.data.checkReport === true) {
+        localStorage.setItem("JWT", true);
+        this.check = false;
+        this.getValue();
+      }
     }
     this.arrForms.push(this.form);
     this.getReason();
@@ -211,6 +222,7 @@ export default {
             reason: item.reasonId,
             restId: item.restId,
             reasonName: item.reasonName,
+            session: item.session,
           }));
           this.id = res.id;
         }
