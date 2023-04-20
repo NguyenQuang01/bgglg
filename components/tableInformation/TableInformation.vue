@@ -17,7 +17,7 @@
         <td>{{ numberSeasonal.information }}</td>
       </tr>
       <tr>
-        <td class="tdText text-slate-50">SỐ H.SINH</td>
+        <td class="tdText text-slate-50">SỐ LAO ĐỘNG KHÔNG TÍNH NĂNG SUẤT</td>
         <td>{{ numberStudent.quantity }}</td>
         <td>{{ numberStudent.information }}</td>
       </tr>
@@ -288,6 +288,10 @@ export default {
           // if (this.hours > 18+7) {
           const res = await saveDetail(this.getDataInformationReport);
           if (res) {
+            localStorage.setItem(
+              "report",
+              JSON.stringify(this.getDataInformationReport)
+            );
             message.success("thành công");
             localStorage.setItem("checkReport", true);
             setTimeout(() => {
@@ -322,6 +326,7 @@ export default {
           };
           const res = updateDetail(payload);
           if (res) {
+            localStorage.setItem("report", JSON.stringify(payload));
             message.success("sửa thành công");
             setTimeout(() => this.$router.push("/sussInformation"), 1000);
           }

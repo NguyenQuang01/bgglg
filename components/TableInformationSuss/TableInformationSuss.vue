@@ -30,7 +30,7 @@
       </tr>
 
       <tr>
-        <td class="tdText text-slate-50">SỐ H.SINH</td>
+        <td class="tdText text-slate-50">SỐ LAO ĐỘNG KHÔNG TÍNH NĂNG SUẤT</td>
 
         <td>
           <input
