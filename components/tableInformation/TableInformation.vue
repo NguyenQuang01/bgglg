@@ -228,7 +228,7 @@ export default {
         numberDemarcation = res.data.demarcationAvailable;
         const demarcation =
           numberDemarcation +
-          Number(this.getDataInformationReport.partTimeNum) / 2 +
+          this.partTimeNum() +
           Number(this.getDataInformationReport.professionLabor) +
           Number(this.getDataInformationReport.professionNotLabor);
         this.SET_STATE_DEMARCATION(demarcation);
@@ -263,8 +263,8 @@ export default {
       const isCat = groupName.includes(cat);
       const isKcs = groupName.includes(kcs);
       const isHt = groupName.includes(ht);
-      console.log(is);
-      return;
+      const isZero = isCat || isKcs || isHt ? true : false;
+      return isZero ? 0 : Number(this.getDataInformationReport.partTimeNum) / 2;
     },
     showModal() {
       this.visible = true;

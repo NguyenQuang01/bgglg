@@ -22,7 +22,7 @@
         class="font-bold"
         :class="compareLaborProductivity ? 'green' : 'red'"
         >{{ text }}</span
-      ><span v-if="!(row.name === 'Tổng thực tế làm việc')">{{ text }}</span>
+      ><span v-if="!(row.name === 'Tổng thực tế làm việc')"> {{ text }}</span>
     </template>
     <template slot="numberLeave" slot-scope="text, row">
       <span
@@ -30,7 +30,20 @@
         class="font-bold"
         :class="compareNumberLeave ? 'green' : 'red'"
         >{{ text }}</span
-      ><span v-if="!(row.name === 'Tổng thực tế làm việc')">{{ text }}</span>
+      ><span v-if="!(row.name === 'Tổng thực tế làm việc')">
+        <div class="float-left showInf" v-if="InfLeave">
+          <div class="text-left">Nghỉ ốm: 1</div>
+          <div class="text-left">Nghỉ tự do: 1</div>
+          <div class="text-left">Nghỉ việc riêng: 1</div>
+        </div>
+        <b-icon
+          icon="plus-circle"
+          aria-hidden="true"
+          class="mr-2"
+          @click="showInfLeave"
+        ></b-icon
+        >{{ text }}</span
+      >
     </template>
     <template slot="rice" slot-scope="text, row">
       <div>
@@ -65,6 +78,7 @@ export default {
 
   data() {
     return {
+      InfLeave: false,
       viewRoot: [],
       arrChild: [],
       numberRadio: 2,
@@ -205,6 +219,10 @@ export default {
     },
   },
   methods: {
+    showInfLeave() {
+      console.log("object");
+      this.InfLeave = !this.InfLeave;
+    },
     tet(expanded, record) {
       this.viewRoot.find((element) =>
         element.key === record.key && expanded === true

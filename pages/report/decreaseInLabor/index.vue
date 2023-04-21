@@ -48,9 +48,7 @@ export default {
   data() {
     return {
       skip: "/newPartTimeEndWorker",
-
       deleteLabor: "",
-
       OPTIONS: [],
       selectedItems: "",
       page: {
