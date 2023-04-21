@@ -106,8 +106,8 @@ export default {
       form: {
         parentId: "",
         parentIdSupport: "",
-        transfer: { number: "", group: "", transferId: "" },
-        support: { number: "", group: "", transferId: "" },
+        transfer: { number: 0, group: "", transferId: "" },
+        support: { number: 0, group: "", transferId: "" },
       },
       check: true,
     };

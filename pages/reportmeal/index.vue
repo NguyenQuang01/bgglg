@@ -87,6 +87,17 @@ export default {
       this.getValue();
     }
   },
+  mounted() {
+    const autofill = localStorage.getItem("report");
+    const checkReport = localStorage.getItem("checkReport");
+    console.log(JSON.parse(autofill));
+    if (autofill && checkReport === "false") {
+      this.numberMeal.staff = autofill.riceRequests.riceEmp;
+      this.numberMeal.guest = autofill.riceRequests.riceCus;
+      this.numberMeal.guestVip = autofill.riceRequests.riceVip;
+    }
+    // console.log(\);
+  },
   methods: {
     ...mapMutations({
       SET_STATE_MEAL: "SET_STATE_MEAL",

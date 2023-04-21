@@ -71,6 +71,16 @@ export default {
       this.getValue();
     }
   },
+  mounted() {
+    const autofill = localStorage.getItem("report");
+    const checkReport = localStorage.getItem("checkReport");
+    if (autofill && checkReport === "false") {
+      this.form.partTime = autofill.partTimeNum;
+      this.form.worker = autofill.studentNum;
+    }
+
+    // console.log(\);
+  },
   methods: {
     ...mapMutations({
       SET_STATE_SEASONAL: "SET_STATE_SEASONAL",

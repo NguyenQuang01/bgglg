@@ -71,6 +71,16 @@ export default {
       this.getValue();
     }
   },
+  mounted() {
+    const autofill = localStorage.getItem("report");
+    const checkReport = localStorage.getItem("checkReport");
+    if (autofill && checkReport === "false") {
+      this.form.professionLabor = autofill.professionLabor;
+      this.form.professionNotLabor = autofill.professionNotLabor;
+    }
+
+    // console.log(\);
+  },
   methods: {
     ...mapMutations({
       SET_STATE_PROFESSIONLABOR: "SET_STATE_PROFESSIONLABOR",
