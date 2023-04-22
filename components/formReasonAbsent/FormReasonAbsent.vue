@@ -107,7 +107,6 @@ export default {
   },
   fetch() {
     this.token = localStorage.getItem("JWT");
-
     this.test(this.token);
 
     // if (res && res.status === 200) {
@@ -120,6 +119,15 @@ export default {
     this.arrForms.push(this.form);
     this.getReason();
     this.getvalueName();
+  },
+  mounted() {
+    const autofill = localStorage.getItem("report");
+    const checkReport = localStorage.getItem("checkReport");
+    if (autofill && checkReport === "false") {
+      console.log(JSON.parse(autofill));
+      this.arrForms = autofill.restRequests;
+    }
+    // console.log(\);
   },
   computed: {
     ...mapGetters({ getDataInformationReport: "getDataInformationReport" }),
