@@ -16,11 +16,192 @@
       <div v-for="(item, index) in data" :key="index">
         <a-collapse>
           <a-collapse-panel :key="item.key" :header="item.name">
-            <a-collapse default-active-key="4">
-              <a-collapse-panel key="4" header="This is panel nest panel">
-                <p>{{ text }}</p>
-              </a-collapse-panel>
-            </a-collapse>
+            <div class="mb-3">
+              Văn phòng:
+              <div class="float-right">{{ item.office }}</div>
+            </div>
+            <div class="mb-3">
+              Xí nghiệp:
+              <div class="float-right">{{ item.enterprise }}</div>
+            </div>
+            <div class="mb-3">
+              Lao động báo năng suất:
+              <div class="float-right">{{ item.laborProductivity }}</div>
+            </div>
+            <div class="mb-3">
+              Số lao động nghỉ:
+              <div class="float-right">{{ item.numberLeave }}</div>
+            </div>
+            <div class="mb-3">
+              Tỉ lệ %:
+              <div class="float-right">{{ item.ratio }}</div>
+            </div>
+            <div class="mb-3">
+              Tổng lao động năng suất:
+              <div class="float-right">{{ totalLaborProductivity }}</div>
+            </div>
+            <div class="mb-3">
+              Báo cơm:
+              <div class="float-right">{{ item.rice.riceEmp }}</div>
+            </div>
+            <div v-if="item.children">
+              <div v-for="item in item.children">
+                <a-collapse>
+                  <a-collapse-panel :key="item.key" :header="item.name">
+                    <div class="mb-3">
+                      Văn phòng:
+                      <div class="float-right">{{ item.office }}</div>
+                    </div>
+                    <div class="mb-3">
+                      Xí nghiệp:
+                      <div class="float-right">{{ item.enterprise }}</div>
+                    </div>
+                    <div class="mb-3">
+                      Lao động báo năng suất:
+                      <div class="float-right">
+                        {{ item.laborProductivity }}
+                      </div>
+                    </div>
+                    <div class="mb-3">
+                      Số lao động nghỉ:
+                      <div class="float-right">{{ item.numberLeave }}</div>
+                    </div>
+                    <div class="mb-3">
+                      Tỉ lệ %:
+                      <div class="float-right">{{ item.ratio }}</div>
+                    </div>
+                    <div class="mb-3">
+                      Tổng lao động năng suất:
+                      <div class="float-right">
+                        {{ totalLaborProductivity }}
+                      </div>
+                    </div>
+                    <div class="mb-3">
+                      Báo cơm:
+                      <div class="float-right">{{ item.rice.riceEmp }}</div>
+                    </div>
+                    <div v-if="item.children">
+                      <div v-for="item in item.children">
+                        <a-collapse>
+                          <a-collapse-panel :key="item.key" :header="item.name">
+                            <div class="mb-3">
+                              Văn phòng:
+                              <div class="float-right">{{ item.office }}</div>
+                            </div>
+                            <div class="mb-3">
+                              Xí nghiệp:
+                              <div class="float-right">
+                                {{ item.enterprise }}
+                              </div>
+                            </div>
+                            <div class="mb-3">
+                              Lao động báo năng suất:
+                              <div class="float-right">
+                                {{ item.laborProductivity }}
+                              </div>
+                            </div>
+                            <div class="mb-3">
+                              Số lao động nghỉ:
+                              <div class="float-right">
+                                {{ item.numberLeave }}
+                              </div>
+                            </div>
+                            <div class="mb-3">
+                              Tỉ lệ %:
+                              <div class="float-right">{{ item.ratio }}</div>
+                            </div>
+                            <div class="mb-3">
+                              Tổng lao động năng suất:
+                              <div class="float-right">
+                                {{ totalLaborProductivity }}
+                              </div>
+                            </div>
+                            <div class="mb-3">
+                              Báo cơm:
+                              <div class="float-right">
+                                {{ item.rice.riceEmp }}
+                              </div>
+                            </div>
+                            <div v-if="item.children">
+                              <div v-for="item in item.children">
+                                <a-collapse>
+                                  <a-collapse-panel
+                                    :key="item.key"
+                                    :header="item.name"
+                                  >
+                                    <div class="mb-3">
+                                      Văn phòng:
+                                      <div class="float-right">
+                                        {{ item.office }}
+                                      </div>
+                                    </div>
+                                    <div class="mb-3">
+                                      Xí nghiệp:
+                                      <div class="float-right">
+                                        {{ item.enterprise }}
+                                      </div>
+                                    </div>
+                                    <div class="mb-3">
+                                      Lao động báo năng suất:
+                                      <div class="float-right">
+                                        {{ item.laborProductivity }}
+                                      </div>
+                                    </div>
+                                    <div class="mb-3">
+                                      Số lao động nghỉ:
+                                      <div class="float-right">
+                                        {{ item.numberLeave }}
+                                      </div>
+                                    </div>
+                                    <div class="mb-3">
+                                      Tỉ lệ %:
+                                      <div class="float-right">
+                                        {{ item.ratio }}
+                                      </div>
+                                    </div>
+                                    <div class="mb-3">
+                                      Tổng lao động năng suất:
+                                      <div class="float-right">
+                                        {{ totalLaborProductivity }}
+                                      </div>
+                                    </div>
+                                    <div class="mb-3">
+                                      Báo cơm:
+                                      <div class="float-right">
+                                        {{ item.rice.riceEmp }}
+                                      </div>
+                                    </div>
+                                    <div v-if="item.children">
+                                      <div v-for="item in item.children"></div>
+                                      <a-collapse default-active-key="4">
+                                        <a-collapse-panel
+                                          key="4"
+                                          header="This is panel nest panel"
+                                        >
+                                          <p>{{ text }}</p>
+                                        </a-collapse-panel>
+                                      </a-collapse>
+                                    </div>
+                                  </a-collapse-panel>
+                                </a-collapse>
+                              </div>
+                              <a-collapse default-active-key="4">
+                                <a-collapse-panel
+                                  key="4"
+                                  header="This is panel nest panel"
+                                >
+                                  <p>{{ text }}</p>
+                                </a-collapse-panel>
+                              </a-collapse>
+                            </div>
+                          </a-collapse-panel>
+                        </a-collapse>
+                      </div>
+                    </div>
+                  </a-collapse-panel>
+                </a-collapse>
+              </div>
+            </div>
           </a-collapse-panel>
         </a-collapse>
       </div>
@@ -48,6 +229,7 @@ export default {
       day31: [1, 3, 5, 7, 8, 10, 12],
       day28: [2],
       data: [],
+      totalLaborProductivity: "",
     };
   },
   created() {
@@ -138,5 +320,9 @@ export default {
 <style scoped>
 .title {
   color: rgb(255, 63, 63);
+}
+.btnDay {
+  background-color: #045396;
+  color: #ffffff;
 }
 </style>

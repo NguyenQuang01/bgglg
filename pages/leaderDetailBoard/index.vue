@@ -4,7 +4,7 @@
       Bảng báo cáo chi tiết
     </div>
 
-    <div class="mb-2 flex">
+    <div class="mb-2 flex flex-wrap">
       <div class="mb-2 flex">
         <a-button class="btnDay" @click="btnMinus">Ngày trước</a-button>
         <a-date-picker
@@ -12,11 +12,14 @@
           class="mx-2"
           placeholder="Chọn ngày"
         />
-        <a-button class="btnDay" @click="btnPlus">ngày sau</a-button>
+        <a-button class="btnDay mr-2" @click="btnPlus">ngày sau</a-button>
       </div>
       <!-- <a-date-picker v-model="valueDay" class="mx-2" placeholder="Chọn ngày" /> -->
       <!-- <a-button class="btnDay">Lọc</a-button>
-      <a-button class="btnDay">Xuất excel</a-button> -->
+        <a-button class="btnDay">Xuất excel</a-button> -->
+      <a-button class="btnDay" @click="pageMobile"
+        >Giao diện điện thoại</a-button
+      >
     </div>
     <div class="m-auto m-0 overflow-auto">
       <TableDetail
@@ -80,6 +83,9 @@ export default {
         this.valueDay = `${this.year}/${this.month}/${this.day}`;
         this.valueDayEd = `${this.year}/${this.month}/${this.day - 1}`;
       }
+    },
+    pageMobile() {
+      this.$router.push("/boss/viewSimple");
     },
   },
   // watch: {
