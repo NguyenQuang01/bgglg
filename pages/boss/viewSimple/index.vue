@@ -206,6 +206,7 @@
         </a-collapse>
       </div>
     </div>
+    <div class="footer"></div>
   </div>
 </template>
 <script>
@@ -324,5 +325,9 @@ export default {
 .btnDay {
   background-color: #045396;
   color: #ffffff;
+}
+.footer {
+  height: 1px;
+  margin: 50px 0;
 }
 </style>
