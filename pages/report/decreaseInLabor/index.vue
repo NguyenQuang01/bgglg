@@ -43,7 +43,7 @@ import { getDetail, getAllEmployee } from "@/api/AuthenConnector.js";
 import { today } from "@/constants/getToday";
 import { message } from "ant-design-vue";
 export default {
-  // middleware: "auth",
+  middleware: "auth",
   components: { ButtonSkip, BtnBack },
   data() {
     return {

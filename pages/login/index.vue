@@ -22,7 +22,8 @@ export default {
   },
   layout: "empty",
   mounted() {
-    if (localStorage.getItem("JWT")) {
+    // console.log(localStorage.getItem("isUser"));
+    if (localStorage.getItem("isUser")) {
       this.$router.push("/menuLogin");
     }
   },

@@ -118,7 +118,7 @@ import BtnBack from "@/components/BtnBack.vue";
 
 export default {
   components: ["BtnBack"],
-  // middleware: "auth",
+  middleware: "auth",
   data() {
     return {
       total: "",

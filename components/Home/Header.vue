@@ -42,7 +42,8 @@ export default {
     logout() {
       this.SET_STATE_ISUSER(false);
       localStorage.clear();
-      this.$router.push("/");
+      window.location.reload(true);
+      this.$router.push("/login");
     },
   },
 };

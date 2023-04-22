@@ -1,690 +1,142 @@
 <template lang="">
-  <div class="container h-96">
-    <Avatar />
-    <div class="max-w-2xl m-auto m-0">
-      <a-collapse v-model:activeKey="activeKey">
-        <a-collapse-panel key="1" header="Menu" :disabled="false" class="">
-          <div v-for="item in data">name: {{ item.name }}</div>
-          <div v-for="item in data">
-            <div v-if="item.children">name: {{ item.name }}</div>
-          </div>
-        </a-collapse-panel>
-      </a-collapse>
+  <div class="container">
+    <div class="text-center mt-8 font-semibold mb-32">
+      HỆ THỐNG BÁO CÁO LAO ĐỘNG
+    </div>
+    <div class="max-w-sm m-auto m-0">
+      <div class="mb-2 flex">
+        <a-button class="btnDay" @click="btnMinus">Ngày trước</a-button>
+        <a-date-picker
+          v-model="valueDay"
+          class="mx-2"
+          placeholder="Chọn ngày"
+        />
+        <a-button class="btnDay" @click="btnPlus">ngày sau</a-button>
+      </div>
+      <div v-for="(item, index) in data" :key="index">
+        <a-collapse>
+          <a-collapse-panel :key="item.key" :header="item.name">
+            <a-collapse default-active-key="4">
+              <a-collapse-panel key="4" header="This is panel nest panel">
+                <p>{{ text }}</p>
+              </a-collapse-panel>
+            </a-collapse>
+          </a-collapse-panel>
+        </a-collapse>
+      </div>
     </div>
   </div>
 </template>
 <script>
-import { mapGetters, mapMutations } from "vuex";
-import Avatar from "@/components/Avatar";
-import { refreshToken } from "@/api/AuthenConnector.js";
-
+import {
+  getViewDetail,
+  // getNameAll,
+  // viewRoot,
+  // searchAllDeleteTm,
+} from "@/api/AuthenConnector.js";
+import dayjs from "dayjs";
+import { message } from "ant-design-vue";
 export default {
-  // middleware: "auth",
-  components: { Avatar },
   data() {
     return {
-      data: [
-        {
-          key: 3,
-          parentId: 0,
-          name: "Văn phòng",
-          office: 0,
-          enterprise: null,
-          laborProductivity: 0,
-          ratio: 0,
-          totalLaborProductivity: 30,
-          numberLeave: 0,
-          partTimeEmp: null,
-          totalRatioOfOfficeAndDonvile: 100,
-          rice: {
-            riceCus: 0,
-            riceVip: 0,
-            riceEmp: 0,
-          },
-          children: [
-            {
-              key: 123,
-              parentId: 3,
-              name: "Tổ Vệ sinh VP",
-              office: 0,
-              enterprise: null,
-              laborProductivity: 0,
-              ratio: null,
-              totalLaborProductivity: null,
-              numberLeave: 0,
-              partTimeEmp: null,
-              totalRatioOfOfficeAndDonvile: null,
-              rice: {
-                riceCus: 0,
-                riceVip: 0,
-                riceEmp: 0,
-              },
-              children: null,
-            },
-          ],
-        },
-        {
-          key: 2,
-          parentId: 0,
-          name: "Đơn vị lẻ",
-          office: null,
-          enterprise: null,
-          laborProductivity: 30,
-          ratio: 100,
-          totalLaborProductivity: null,
-          numberLeave: 1,
-          partTimeEmp: null,
-          totalRatioOfOfficeAndDonvile: 100,
-          rice: {
-            riceCus: 0,
-            riceVip: 0,
-            riceEmp: 0,
-          },
-          children: [
-            {
-              key: 94,
-              parentId: 2,
-              name: "Xí nghiệp 1",
-              office: null,
-              enterprise: 31,
-              laborProductivity: 30,
-              ratio: 100,
-              totalLaborProductivity: null,
-              numberLeave: 1,
-              partTimeEmp: null,
-              totalRatioOfOfficeAndDonvile: null,
-              rice: {
-                riceCus: 0,
-                riceVip: 0,
-                riceEmp: 0,
-              },
-              children: [
-                {
-                  key: 127,
-                  parentId: 94,
-                  name: "Vệ Sinh 1",
-                  office: null,
-                  enterprise: 0,
-                  laborProductivity: 0,
-                  ratio: null,
-                  totalLaborProductivity: null,
-                  numberLeave: 0,
-                  partTimeEmp: null,
-                  totalRatioOfOfficeAndDonvile: null,
-                  rice: {
-                    riceCus: 0,
-                    riceVip: 0,
-                    riceEmp: 0,
-                  },
-                  children: null,
-                },
-                {
-                  key: 131,
-                  parentId: 94,
-                  name: "Tổ Hoàn thiện 1",
-                  office: null,
-                  enterprise: 0,
-                  laborProductivity: 0,
-                  ratio: null,
-                  totalLaborProductivity: null,
-                  numberLeave: 0,
-                  partTimeEmp: null,
-                  totalRatioOfOfficeAndDonvile: null,
-                  rice: {
-                    riceCus: 0,
-                    riceVip: 0,
-                    riceEmp: 0,
-                  },
-                  children: null,
-                },
-                {
-                  key: 132,
-                  parentId: 94,
-                  name: "Rải Chuyền 1",
-                  office: null,
-                  enterprise: 31,
-                  laborProductivity: 30,
-                  ratio: null,
-                  totalLaborProductivity: null,
-                  numberLeave: 1,
-                  partTimeEmp: null,
-                  totalRatioOfOfficeAndDonvile: null,
-                  rice: {
-                    riceCus: 0,
-                    riceVip: 0,
-                    riceEmp: 0,
-                  },
-                  children: null,
-                },
-              ],
-            },
-            {
-              key: 93,
-              parentId: 2,
-              name: "Xí nghiệp 2",
-              office: null,
-              enterprise: 0,
-              laborProductivity: 0,
-              ratio: 0,
-              totalLaborProductivity: null,
-              numberLeave: 0,
-              partTimeEmp: null,
-              totalRatioOfOfficeAndDonvile: null,
-              rice: {
-                riceCus: 0,
-                riceVip: 0,
-                riceEmp: 0,
-              },
-              children: [
-                {
-                  key: 134,
-                  parentId: 93,
-                  name: "Vệ sinh 2",
-                  office: null,
-                  enterprise: 0,
-                  laborProductivity: 0,
-                  ratio: null,
-                  totalLaborProductivity: null,
-                  numberLeave: 0,
-                  partTimeEmp: null,
-                  totalRatioOfOfficeAndDonvile: null,
-                  rice: {
-                    riceCus: 0,
-                    riceVip: 0,
-                    riceEmp: 0,
-                  },
-                  children: null,
-                },
-              ],
-            },
-          ],
-        },
-        {
-          key: 1,
-          parentId: 0,
-          name: "Tổ May",
-          office: null,
-          enterprise: 0,
-          laborProductivity: 0,
-          ratio: 0,
-          totalLaborProductivity: null,
-          numberLeave: 0,
-          partTimeEmp: null,
-          totalRatioOfOfficeAndDonvile: null,
-          rice: {
-            riceCus: 0,
-            riceVip: 0,
-            riceEmp: 0,
-          },
-          children: [
-            {
-              key: 89,
-              parentId: 1,
-              name: "Xí nghiệp 1",
-              office: null,
-              enterprise: 0,
-              laborProductivity: 0,
-              ratio: 0,
-              totalLaborProductivity: null,
-              numberLeave: 0,
-              partTimeEmp: null,
-              totalRatioOfOfficeAndDonvile: null,
-              rice: {
-                riceCus: 0,
-                riceVip: 0,
-                riceEmp: 0,
-              },
-              children: [
-                {
-                  key: 143,
-                  parentId: 89,
-                  name: "Tổ may 03",
-                  office: null,
-                  enterprise: 0,
-                  laborProductivity: 0,
-                  ratio: null,
-                  totalLaborProductivity: null,
-                  numberLeave: 0,
-                  partTimeEmp: null,
-                  totalRatioOfOfficeAndDonvile: null,
-                  rice: {
-                    riceCus: 0,
-                    riceVip: 0,
-                    riceEmp: 0,
-                  },
-                  children: null,
-                },
-                {
-                  key: 144,
-                  parentId: 89,
-                  name: "Tổ may 04",
-                  office: null,
-                  enterprise: 0,
-                  laborProductivity: 0,
-                  ratio: null,
-                  totalLaborProductivity: null,
-                  numberLeave: 0,
-                  partTimeEmp: null,
-                  totalRatioOfOfficeAndDonvile: null,
-                  rice: {
-                    riceCus: 0,
-                    riceVip: 0,
-                    riceEmp: 0,
-                  },
-                  children: null,
-                },
-                {
-                  key: 145,
-                  parentId: 89,
-                  name: "Tổ may 05",
-                  office: null,
-                  enterprise: 0,
-                  laborProductivity: 0,
-                  ratio: null,
-                  totalLaborProductivity: null,
-                  numberLeave: 0,
-                  partTimeEmp: null,
-                  totalRatioOfOfficeAndDonvile: null,
-                  rice: {
-                    riceCus: 0,
-                    riceVip: 0,
-                    riceEmp: 0,
-                  },
-                  children: null,
-                },
-                {
-                  key: 147,
-                  parentId: 89,
-                  name: "Tổ may 07",
-                  office: null,
-                  enterprise: 0,
-                  laborProductivity: 0,
-                  ratio: null,
-                  totalLaborProductivity: null,
-                  numberLeave: 0,
-                  partTimeEmp: null,
-                  totalRatioOfOfficeAndDonvile: null,
-                  rice: {
-                    riceCus: 0,
-                    riceVip: 0,
-                    riceEmp: 0,
-                  },
-                  children: null,
-                },
-                {
-                  key: 148,
-                  parentId: 89,
-                  name: "Tổ may 08",
-                  office: null,
-                  enterprise: 0,
-                  laborProductivity: 0,
-                  ratio: null,
-                  totalLaborProductivity: null,
-                  numberLeave: 0,
-                  partTimeEmp: null,
-                  totalRatioOfOfficeAndDonvile: null,
-                  rice: {
-                    riceCus: 0,
-                    riceVip: 0,
-                    riceEmp: 0,
-                  },
-                  children: null,
-                },
-                {
-                  key: 149,
-                  parentId: 89,
-                  name: "Tổ may 09",
-                  office: null,
-                  enterprise: 0,
-                  laborProductivity: 0,
-                  ratio: null,
-                  totalLaborProductivity: null,
-                  numberLeave: 0,
-                  partTimeEmp: null,
-                  totalRatioOfOfficeAndDonvile: null,
-                  rice: {
-                    riceCus: 0,
-                    riceVip: 0,
-                    riceEmp: 0,
-                  },
-                  children: null,
-                },
-                {
-                  key: 150,
-                  parentId: 89,
-                  name: "Tổ may 10",
-                  office: null,
-                  enterprise: 0,
-                  laborProductivity: 0,
-                  ratio: null,
-                  totalLaborProductivity: null,
-                  numberLeave: 0,
-                  partTimeEmp: null,
-                  totalRatioOfOfficeAndDonvile: null,
-                  rice: {
-                    riceCus: 0,
-                    riceVip: 0,
-                    riceEmp: 0,
-                  },
-                  children: null,
-                },
-                {
-                  key: 151,
-                  parentId: 89,
-                  name: "Tổ may 11",
-                  office: null,
-                  enterprise: 0,
-                  laborProductivity: 0,
-                  ratio: null,
-                  totalLaborProductivity: null,
-                  numberLeave: 0,
-                  partTimeEmp: null,
-                  totalRatioOfOfficeAndDonvile: null,
-                  rice: {
-                    riceCus: 0,
-                    riceVip: 0,
-                    riceEmp: 0,
-                  },
-                  children: null,
-                },
-                {
-                  key: 153,
-                  parentId: 89,
-                  name: "Tổ may 13",
-                  office: null,
-                  enterprise: 0,
-                  laborProductivity: 0,
-                  ratio: null,
-                  totalLaborProductivity: null,
-                  numberLeave: 0,
-                  partTimeEmp: null,
-                  totalRatioOfOfficeAndDonvile: null,
-                  rice: {
-                    riceCus: 0,
-                    riceVip: 0,
-                    riceEmp: 0,
-                  },
-                  children: null,
-                },
-                {
-                  key: 154,
-                  parentId: 89,
-                  name: "Tổ may 14",
-                  office: null,
-                  enterprise: 0,
-                  laborProductivity: 0,
-                  ratio: null,
-                  totalLaborProductivity: null,
-                  numberLeave: 0,
-                  partTimeEmp: null,
-                  totalRatioOfOfficeAndDonvile: null,
-                  rice: {
-                    riceCus: 0,
-                    riceVip: 0,
-                    riceEmp: 0,
-                  },
-                  children: null,
-                },
-                {
-                  key: 156,
-                  parentId: 89,
-                  name: "Tổ may 16",
-                  office: null,
-                  enterprise: 0,
-                  laborProductivity: 0,
-                  ratio: null,
-                  totalLaborProductivity: null,
-                  numberLeave: 0,
-                  partTimeEmp: null,
-                  totalRatioOfOfficeAndDonvile: null,
-                  rice: {
-                    riceCus: 0,
-                    riceVip: 0,
-                    riceEmp: 0,
-                  },
-                  children: null,
-                },
-                {
-                  key: 159,
-                  parentId: 89,
-                  name: "Tổ may 19",
-                  office: null,
-                  enterprise: 0,
-                  laborProductivity: 0,
-                  ratio: null,
-                  totalLaborProductivity: null,
-                  numberLeave: 0,
-                  partTimeEmp: null,
-                  totalRatioOfOfficeAndDonvile: null,
-                  rice: {
-                    riceCus: 0,
-                    riceVip: 0,
-                    riceEmp: 0,
-                  },
-                  children: null,
-                },
-              ],
-            },
-            {
-              key: 88,
-              parentId: 1,
-              name: "Xí nghiệp 2",
-              office: null,
-              enterprise: 0,
-              laborProductivity: 0,
-              ratio: 0,
-              totalLaborProductivity: null,
-              numberLeave: 0,
-              partTimeEmp: null,
-              totalRatioOfOfficeAndDonvile: null,
-              rice: {
-                riceCus: 0,
-                riceVip: 0,
-                riceEmp: 0,
-              },
-              children: [
-                {
-                  key: 161,
-                  parentId: 88,
-                  name: "Tổ may 21",
-                  office: null,
-                  enterprise: 0,
-                  laborProductivity: 0,
-                  ratio: null,
-                  totalLaborProductivity: null,
-                  numberLeave: 0,
-                  partTimeEmp: null,
-                  totalRatioOfOfficeAndDonvile: null,
-                  rice: {
-                    riceCus: 0,
-                    riceVip: 0,
-                    riceEmp: 0,
-                  },
-                  children: null,
-                },
-                {
-                  key: 166,
-                  parentId: 88,
-                  name: "Tổ may 26",
-                  office: null,
-                  enterprise: 0,
-                  laborProductivity: 0,
-                  ratio: null,
-                  totalLaborProductivity: null,
-                  numberLeave: 0,
-                  partTimeEmp: null,
-                  totalRatioOfOfficeAndDonvile: null,
-                  rice: {
-                    riceCus: 0,
-                    riceVip: 0,
-                    riceEmp: 0,
-                  },
-                  children: null,
-                },
-                {
-                  key: 168,
-                  parentId: 88,
-                  name: "Tổ may 28",
-                  office: null,
-                  enterprise: 0,
-                  laborProductivity: 0,
-                  ratio: null,
-                  totalLaborProductivity: null,
-                  numberLeave: 0,
-                  partTimeEmp: null,
-                  totalRatioOfOfficeAndDonvile: null,
-                  rice: {
-                    riceCus: 0,
-                    riceVip: 0,
-                    riceEmp: 0,
-                  },
-                  children: null,
-                },
-                {
-                  key: 170,
-                  parentId: 88,
-                  name: "Tổ may 30",
-                  office: null,
-                  enterprise: 0,
-                  laborProductivity: 0,
-                  ratio: null,
-                  totalLaborProductivity: null,
-                  numberLeave: 0,
-                  partTimeEmp: null,
-                  totalRatioOfOfficeAndDonvile: null,
-                  rice: {
-                    riceCus: 0,
-                    riceVip: 0,
-                    riceEmp: 0,
-                  },
-                  children: null,
-                },
-                {
-                  key: 173,
-                  parentId: 88,
-                  name: "Tổ may 33",
-                  office: null,
-                  enterprise: 0,
-                  laborProductivity: 0,
-                  ratio: null,
-                  totalLaborProductivity: null,
-                  numberLeave: 0,
-                  partTimeEmp: null,
-                  totalRatioOfOfficeAndDonvile: null,
-                  rice: {
-                    riceCus: 0,
-                    riceVip: 0,
-                    riceEmp: 0,
-                  },
-                  children: null,
-                },
-                {
-                  key: 176,
-                  parentId: 88,
-                  name: "Tổ may 36",
-                  office: null,
-                  enterprise: 0,
-                  laborProductivity: 0,
-                  ratio: null,
-                  totalLaborProductivity: null,
-                  numberLeave: 0,
-                  partTimeEmp: null,
-                  totalRatioOfOfficeAndDonvile: null,
-                  rice: {
-                    riceCus: 0,
-                    riceVip: 0,
-                    riceEmp: 0,
-                  },
-                  children: null,
-                },
-                {
-                  key: 177,
-                  parentId: 88,
-                  name: "Tổ may 37",
-                  office: null,
-                  enterprise: 0,
-                  laborProductivity: 0,
-                  ratio: null,
-                  totalLaborProductivity: null,
-                  numberLeave: 0,
-                  partTimeEmp: null,
-                  totalRatioOfOfficeAndDonvile: null,
-                  rice: {
-                    riceCus: 0,
-                    riceVip: 0,
-                    riceEmp: 0,
-                  },
-                  children: null,
-                },
-              ],
-            },
-          ],
-        },
-        {
-          key: 0,
-          parentId: 0,
-          name: "Học sinh chưa báo năng suất",
-          office: null,
-          enterprise: 0,
-          laborProductivity: 0,
-          ratio: 0,
-          totalLaborProductivity: null,
-          numberLeave: 0,
-          partTimeEmp: null,
-          totalRatioOfOfficeAndDonvile: null,
-          rice: {
-            riceCus: 0,
-            riceVip: 0,
-            riceEmp: 0,
-          },
-          children: null,
-        },
-        {
-          key: 0,
-          parentId: 0,
-          name: "Thời vụ tổ may",
-          office: null,
-          enterprise: 0,
-          laborProductivity: 0,
-          ratio: 0,
-          totalLaborProductivity: null,
-          numberLeave: 0,
-          partTimeEmp: null,
-          totalRatioOfOfficeAndDonvile: null,
-          rice: {
-            riceCus: 0,
-            riceVip: 0,
-            riceEmp: 0,
-          },
-          children: null,
-        },
-        {
-          key: 0,
-          parentId: 0,
-          name: "Thời vụ đơn vị lẻ ",
-          office: null,
-          enterprise: 0,
-          laborProductivity: 0,
-          ratio: 0,
-          totalLaborProductivity: null,
-          numberLeave: 0,
-          partTimeEmp: null,
-          totalRatioOfOfficeAndDonvile: null,
-          rice: {
-            riceCus: 0,
-            riceVip: 0,
-            riceEmp: 0,
-          },
-          children: null,
-        },
-      ],
+      text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+      valueDay: "",
+      day: new Date().getDate(),
+      month: new Date().getMonth() + 1,
+      year: new Date().getFullYear(),
+      day30: [4, 6, 9, 11],
+      day31: [1, 3, 5, 7, 8, 10, 12],
+      day28: [2],
+      data: [],
     };
+  },
+  created() {
+    this.valueDay = `${this.year}/${this.month}/${this.day}` || "";
+    setTimeout(() => this.getData(), 0);
+  },
+  methods: {
+    btnPlus() {
+      if (this.day31.includes(this.month) && this.day < 31) {
+        this.day = this.day + 1;
+        this.valueDay = `${this.year}/${this.month}/${this.day}`;
+      } else if (this.day30.includes(this.month) && this.day < 30) {
+        this.day = this.day + 1;
+        this.valueDay = `${this.year}/${this.month}/${this.day}`;
+      } else if (this.day28.includes(this.month) && this.day < 28) {
+        this.day = this.day + 1;
+        this.valueDay = `${this.year}/${this.month}/${this.day}`;
+      }
+    },
+    btnMinus() {
+      if (this.day > 1) {
+        this.day = this.day - 1;
+        this.valueDay = `${this.year}/${this.month}/${this.day}`;
+        this.valueDayEd = `${this.year}/${this.month}/${this.day - 1}`;
+      }
+    },
+    async getData() {
+      const day = dayjs(this.valueDay).format("YYYY/MM/DD");
+
+      const res = await getViewDetail(day);
+      if (res && res.code === 201) {
+        const totalAll = {
+          key: 0,
+          parentId: 0,
+          name: "Tổng thực tế làm việc",
+          office: res.data[0].office,
+          enterprise: res.data
+            .map((item) => item.enterprise)
+            .reduce(
+              (accumulator, currentValue) => accumulator + currentValue,
+              0
+            ),
+          ratio: 100,
+          laborProductivity: res.data
+            .map((item) => item.laborProductivity)
+            .reduce(
+              (accumulator, currentValue) => accumulator + currentValue,
+              0
+            ),
+          numberLeave: res.data
+            .map((item) => item.numberLeave)
+            .reduce(
+              (accumulator, currentValue) => accumulator + currentValue,
+              0
+            ),
+          partTimeEmp: null,
+          totalRatioOfOfficeAndDonvile: res.data
+            .map((item) => item.totalRatioOfOfficeAndDonvile)
+            .reduce(
+              (accumulator, currentValue) => accumulator + currentValue,
+              0
+            ),
+          rice: {
+            riceCus: 0,
+            riceVip: 0,
+            riceEmp: 0,
+          },
+          children: null,
+        };
+        this.data = res.data;
+        this.data.push(totalAll);
+        this.dataName = this.data.map((item) => item.name);
+        this.cusRice = res.data[0].totalRiceCus;
+        this.empRice = res.data[0].totalRiceEmp;
+        this.empVipRice = res.data[0].totalRiceVip;
+        this.totalRatioOfOfficeAndDonvile =
+          res.data[0].totalRatioOfOfficeAndDonvile;
+        this.totalLaborProductivity = res.data[6].laborProductivity;
+      }
+      if (res && res.status === 500) {
+        message.error("không có dữ liệu");
+        this.data = [];
+      }
+    },
   },
 };
 </script>
 <style scoped>
-.menuBtn {
-  background-color: #045396;
-  color: #ffff;
+.title {
+  color: rgb(255, 63, 63);
 }
 </style>
