@@ -1,7 +1,7 @@
 <template lang="">
   <div class="container">
-    <div class="text-center mt-8 font-semibold mb-32">
-      HỆ THỐNG BÁO CÁO LAO ĐỘNG
+    <div class="text-center mt-16 text-3xl font-bold title mb-16">
+      Bảng báo cáo chi tiết điện thoai
     </div>
     <div class="max-w-sm m-auto m-0">
       <div class="mb-2 flex">
@@ -205,6 +205,7 @@
           </a-collapse-panel>
         </a-collapse>
       </div>
+      <BtnBack class="h-10 mt-2 float-right mb-10" />
     </div>
     <div class="footer"></div>
   </div>
@@ -217,12 +218,14 @@ import {
   // searchAllDeleteTm,
 } from "@/api/AuthenConnector.js";
 import dayjs from "dayjs";
+import BtnBack from "@/components/BtnBack.vue";
+
 import { message } from "ant-design-vue";
 export default {
   data() {
     return {
       text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-      valueDay: "",
+      valueDay: null,
       day: new Date().getDate(),
       month: new Date().getMonth() + 1,
       year: new Date().getFullYear(),
@@ -320,7 +323,7 @@ export default {
 </script>
 <style scoped>
 .title {
-  color: rgb(255, 63, 63);
+  color: #045396;
 }
 .btnDay {
   background-color: #045396;
@@ -328,6 +331,6 @@ export default {
 }
 .footer {
   height: 1px;
-  margin: 50px 0;
+  margin: 100px 0;
 }
 </style>

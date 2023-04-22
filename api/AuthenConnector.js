@@ -222,5 +222,11 @@ export const deleteEm = async (param) => {
   const response = await request.post(`${HOST}/report/delete-group-emp`, param);
   return response.data;
 };
+export const excelEmployee = async (param) => {
+  let formData = new FormData();
+  formData.append("file", param);
+  const response = await request.post(`${HOST}/employee/import`, formData);
+  return response.data;
+};
 ///
 //

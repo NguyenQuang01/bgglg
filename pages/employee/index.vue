@@ -6,7 +6,7 @@
     <div class="text-center mt-2 font-semibold mb-10"></div>
     <div class="max-w-2xl m-auto m-0">
       <div>
-        <b-form @submit="onSubmit">
+        <b-form @submit="onSubmit" class="mb-5">
           <div class="flex justify-between items-center">
             <b-row class="with100">
               <b-col cols="12">
@@ -54,6 +54,29 @@
                         @change="onChange"
                         class="inputLogin"
                       /> </b-form-group
+                  ></b-col>
+                  <b-col cols="6"
+                    ><b-form-group
+                      id="input-group-1"
+                      label="Chọn file excel:"
+                      label-for="input-1"
+                    >
+                      <!-- <a-input placeholder="Basic usage" /> -->
+                      <input
+                        type="file"
+                        @change="handleFileSelected"
+                        text="test"
+                        id="file"
+                        class="inputfile"
+                      />
+                      <label for="file">
+                        <img
+                          src="@/assets/imge/excel.png"
+                          alt=""
+                          srcset=""
+                          class="w-full h-full"
+                        />
+                      </label> </b-form-group
                   ></b-col>
                 </b-row>
               </b-col>
@@ -227,14 +250,18 @@ import {
   deleteEmployee,
   editEmployee,
   groupRoleRoot,
+  excelEmployee,
 } from "@/api/AuthenConnector.js";
 import { defineComponent, onMounted, reactive, toRefs, watch } from "vue";
 // const columns = ;
 import { message } from "ant-design-vue";
 
 export default defineComponent({
-  middleware: "auth",
+  // middleware: "auth",
   setup() {
+    const headers = reactive({
+      authorization: "authorization-text",
+    });
     const textDelete = reactive("Bạn có chắc chắn xóa ");
     const isEdit = reactive({ value: false });
     const options = reactive({ value: [] });
@@ -359,12 +386,35 @@ export default defineComponent({
     const searchGroup = async () => {
       getvalue(page.current, page.pageSize, search);
     };
+    const handleChange = (info) => {
+      if (info.file.status !== "uploading") {
+        console.log(info.file);
+      }
+      if (info.file.status === "done") {
+        const res = excelEmployee(info.file);
+        console.log(res);
+        message.success(`${info.file.name} file uploaded successfully`);
+      } else if (info.file.status === "error") {
+        message.error(`${info.file.name} file upload failed.`);
+      }
+    };
+    const handleFileSelected = async (e) => {
+      const files = e.target.files[0];
+      const res = await excelEmployee(files);
+      if (res && res.status === 200) {
+        message.success(` File tải lên thành công `);
+        getvalue(page.current, page.pageSize);
+      } else {
+        message.success(` File tải lên thất bại `);
+      }
+    };
     onMounted(() => {
       getvalue(page.current, page.pageSize);
       groupRoleRoot1();
     });
 
     return {
+      headers,
       textDelete,
       page,
       isEdit,
@@ -390,6 +440,8 @@ export default defineComponent({
       searchCode,
       searchGroup,
       confirm,
+      handleChange,
+      handleFileSelected,
     };
   },
 });
@@ -444,6 +496,24 @@ th {
 }
 .wFull {
   width: 100% !important;
+}
+.inputfile {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+.inputfile + label {
+  font-size: 1.25em;
+  color: white;
+  border: green 1px solid;
+  display: inline-block;
+  cursor: pointer;
+  height: 32px;
+  padding: 2px 10px;
+  border-radius: 50px;
 }
 </style>
 <style>
