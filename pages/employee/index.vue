@@ -527,4 +527,7 @@ th {
 .ant-pagination-options {
   margin-right: -8px;
 }
+.ant-cascader-input {
+  border-radius: 50px;
+}
 </style>
