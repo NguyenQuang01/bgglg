@@ -236,6 +236,14 @@ export default {
       totalLaborProductivity: "",
     };
   },
+  watch: {
+    valueDay: {
+      handler: function (value) {
+        this.getData();
+      },
+      deep: true,
+    },
+  },
   created() {
     this.valueDay = `${this.year}/${this.month}/${this.day}` || "";
     setTimeout(() => this.getData(), 0);
