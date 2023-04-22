@@ -78,8 +78,6 @@ export default {
       this.form.partTime = autofill.partTimeNum;
       this.form.worker = autofill.studentNum;
     }
-
-    // console.log(\);
   },
   methods: {
     ...mapMutations({

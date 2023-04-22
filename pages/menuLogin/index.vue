@@ -79,7 +79,6 @@ export default {
     }),
     async test() {
       const res = await refreshToken(this.token);
-      console.log(res);
       if (res && res.status === 200) {
         this.SET_STATE_INFUSER(res.data);
         this.SET_STATE_ISAUTHEN(true);

@@ -96,7 +96,6 @@ export default {
       this.numberMeal.guest = autofill.riceRequests.riceCus;
       this.numberMeal.guestVip = autofill.riceRequests.riceVip;
     }
-    // console.log(\);
   },
   methods: {
     ...mapMutations({

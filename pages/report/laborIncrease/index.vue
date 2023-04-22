@@ -78,8 +78,6 @@ export default {
       this.form.professionLabor = autofill.professionLabor;
       this.form.professionNotLabor = autofill.professionNotLabor;
     }
-
-    // console.log(\);
   },
   methods: {
     ...mapMutations({

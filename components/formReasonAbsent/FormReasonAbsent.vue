@@ -124,10 +124,9 @@ export default {
     const autofill = localStorage.getItem("report");
     const checkReport = localStorage.getItem("checkReport");
     if (autofill && checkReport === "false") {
-      console.log(JSON.parse(autofill));
+      JSON.parse(autofill);
       this.arrForms = autofill.restRequests;
     }
-    // console.log(\);
   },
   computed: {
     ...mapGetters({ getDataInformationReport: "getDataInformationReport" }),

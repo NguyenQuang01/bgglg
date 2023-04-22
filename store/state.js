@@ -4,7 +4,7 @@ export default () => ({
   isUser: false,
   UserName: "",
   numberDeleteLabor: 0,
-  codeDeleteLabor: "",
+  codeDeleteLabor: [],
   dataInformationReport: {
     demarcation: 0,
     partTimeNum: 0,

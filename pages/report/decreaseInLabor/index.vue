@@ -7,7 +7,7 @@
     <div class="max-w-sm m-auto m-0">
       <b-form @submit="onSubmit" class="mb-10">
         <b-form-group label="Nhập tên :" label-for="input-2">
-          <a-select
+          <!-- <a-select
             show-search
             required
             placeholder="Inserted are removed"
@@ -21,6 +21,16 @@
               :value="item"
             >
               {{ item }}
+            </a-select-option>
+          </a-select> -->
+          <a-select
+            mode="tags"
+            style="width: 100%"
+            :token-separators="[',']"
+            @change="handleChange"
+          >
+            <a-select-option v-for="i in filteredOptions" :key="i">
+              {{ i }}
             </a-select-option>
           </a-select>
         </b-form-group>
@@ -43,12 +53,12 @@ import { getDetail, getAllEmployee } from "@/api/AuthenConnector.js";
 import { today } from "@/constants/getToday";
 import { message } from "ant-design-vue";
 export default {
-  middleware: "auth",
+  // middleware: "auth",
   components: { ButtonSkip, BtnBack },
   data() {
     return {
       skip: "/newPartTimeEndWorker",
-      deleteLabor: "",
+      deleteLabor: [],
       OPTIONS: [],
       selectedItems: "",
       page: {
@@ -74,6 +84,10 @@ export default {
       SET_STATE_NumberDeleteLabor: "SET_STATE_NumberDeleteLabor",
       SET_STATE_codeDeleteLabor: "SET_STATE_codeDeleteLabor",
     }),
+    handleChange(value) {
+      const getValue = value.map((item) => item.split("- ")[1]);
+      this.deleteLabor = [...getValue];
+    },
     async getvalueName() {
       const payload = { groupId: localStorage.getItem("groupId") };
       const res = await getAllEmployee(
@@ -92,8 +106,8 @@ export default {
       event.preventDefault();
 
       if (this.deleteLabor) {
-        this.SET_STATE_NumberDeleteLabor(1);
-        this.SET_STATE_codeDeleteLabor(this.deleteLabor.split("-")[1]);
+        // this.SET_STATE_NumberDeleteLabor(1);
+        this.SET_STATE_codeDeleteLabor(this.deleteLabor);
         this.$router.push("/newPartTimeEndWorker");
       } else {
         message.warning("vui lòng chọn tên người nghỉ");

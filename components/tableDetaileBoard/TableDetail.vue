@@ -220,7 +220,6 @@ export default {
   },
   methods: {
     showInfLeave() {
-      console.log("object");
       this.InfLeave = !this.InfLeave;
     },
     tet(expanded, record) {
