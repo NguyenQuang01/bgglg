@@ -127,6 +127,7 @@ export const getleaveId = async (param) => {
   const response = await request.get(`${HOST}/reason/details?id=${param}`);
   return response.data;
 };
+//view
 export const getView = async (param) => {
   try {
     const response = await request.get(`${HOST}/view/all?date=${param}`);
@@ -134,6 +135,12 @@ export const getView = async (param) => {
   } catch (error) {
     return { status: 500 };
   }
+};
+export const viewExcel = async (param) => {
+  const response = await request.post(
+    `${HOST}/view/exportExcel?reportDate=${param}`
+  );
+  return response.data;
 };
 //demarcation
 export const updateDemarcation = async (demarcation, id) => {

@@ -257,7 +257,7 @@ import { defineComponent, onMounted, reactive, toRefs, watch } from "vue";
 import { message } from "ant-design-vue";
 
 export default defineComponent({
-  // middleware: "auth",
+  middleware: "auth",
   setup() {
     const headers = reactive({
       authorization: "authorization-text",
@@ -404,6 +404,7 @@ export default defineComponent({
       if (res && res.status === 200) {
         message.success(` File tải lên thành công `);
         getvalue(page.current, page.pageSize);
+        document.getElementById("file").value = "";
       } else {
         message.success(` File tải lên thất bại `);
       }

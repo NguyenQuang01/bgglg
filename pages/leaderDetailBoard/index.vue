@@ -20,6 +20,7 @@
       <a-button class="btnDay" @click="pageMobile"
         >Giao diện điện thoại</a-button
       >
+      <a-button class="btnDay" @click="getExcel">Excel</a-button>
     </div>
     <div class="m-auto m-0 overflow-auto">
       <TableDetail
@@ -36,6 +37,7 @@
 <script>
 import TableDetail from "../../components/tableDetaileBoard/TableDetail.vue";
 import BtnBack from "@/components/BtnBack.vue";
+import { viewExcel } from "@/api/AuthenConnector.js";
 
 export default {
   middleware: "auth",
@@ -86,6 +88,10 @@ export default {
     },
     pageMobile() {
       this.$router.push("/boss/viewSimple");
+    },
+    async getExcel() {
+      const res = await viewExcel(this.valueDay);
+      console.log(res);
     },
   },
   // watch: {
