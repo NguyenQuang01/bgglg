@@ -17,10 +17,16 @@
       <!-- <a-date-picker v-model="valueDay" class="mx-2" placeholder="Chọn ngày" /> -->
       <!-- <a-button class="btnDay">Lọc</a-button>
         <a-button class="btnDay">Xuất excel</a-button> -->
-      <a-button class="btnDay" @click="pageMobile"
+      <a-button class="btnDay mr-2" @click="pageMobile"
         >Giao diện điện thoại</a-button
       >
-      <a-button class="btnDay" @click="getExcel">Excel</a-button>
+      <a-button class="btnExcel" @click="getExcel"
+        ><img
+          src="@/assets/imge/excel.png"
+          alt=""
+          srcset=""
+          class="w-full h-full"
+      /></a-button>
     </div>
     <div class="m-auto m-0 overflow-auto">
       <TableDetail
@@ -111,5 +117,14 @@ export default {
 .btnDay {
   background-color: #045396;
   color: #ffffff;
+}
+.btnExcel {
+  font-size: 1.25em;
+  color: white;
+  border: green 1px solid;
+  display: inline-block;
+  cursor: pointer;
+  height: 32px;
+  padding: 2px 10px;
 }
 </style>

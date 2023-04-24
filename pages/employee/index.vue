@@ -147,7 +147,7 @@
             <td class="w-2/5">
               <b-form-input
                 v-model="item.name"
-                class="w-full h-8"
+                class="w-full h-8 inputLogin"
                 v-if="isEdit.value"
               />
               <div v-else>{{ item.name }}</div>
@@ -155,22 +155,38 @@
             <td class="w-1/5">
               <b-form-input
                 v-model="item.laborCode"
-                class="w-full h-8"
+                class="w-full h-8 inputLogin"
                 v-if="isEdit.value"
               />
               <div v-else>{{ item.laborCode }}</div>
             </td>
             <td class="w-1/5">
-              <b-form-input
+              <!-- <b-form-input
                 v-model="item.groupName"
                 class="w-full h-8"
                 v-if="isEdit.value"
+              /> -->
+              <a-cascader
+                v-if="isEdit.value"
+                :options="options.value"
+                expand-trigger="hover"
+                placeholder="chọn"
+                @change="
+                  (value) => {
+                    item.groupId = value[value.length - 1];
+                  }
+                "
+                class="w-full h-8"
               />
               <div v-else>{{ item.groupName }}</div>
             </td>
             <td style="text-align: center">
               <div class="flex justify-center">
-                <div @click="save(item.name, item.id, item.laborCode)">
+                <div
+                  @click="
+                    save(item.name, item.id, item.laborCode, item.groupId)
+                  "
+                >
                   <a-tooltip placement="topLeft">
                     <template slot="title">
                       <span>lưu</span>
@@ -348,10 +364,10 @@ export default defineComponent({
     const edit = () => {
       isEdit.value = !isEdit.value;
     };
-    const save = async (name, id, laborCode) => {
+    const save = async (name, id, laborCode, groupId) => {
       const res = await editEmployee([
         {
-          groupId: localStorage.getItem("groupId"),
+          groupId: groupId,
           laborCode: laborCode,
           name: name,
           id: id,
@@ -372,6 +388,10 @@ export default defineComponent({
       const lastElement = value[value.length - 1];
       form.groupId = lastElement;
     };
+    // const onChange2 = (value) => {
+    //   const lastElement = value[value.length - 1];
+    //   form.groupId = lastElement;
+    // };
     const onChangeSearch = (value) => {
       const lastElement = value[value.length - 1];
       search.groupId = lastElement;
@@ -392,7 +412,6 @@ export default defineComponent({
       }
       if (info.file.status === "done") {
         const res = excelEmployee(info.file);
-        console.log(res);
         message.success(`${info.file.name} file uploaded successfully`);
       } else if (info.file.status === "error") {
         message.error(`${info.file.name} file upload failed.`);
@@ -443,6 +462,7 @@ export default defineComponent({
       confirm,
       handleChange,
       handleFileSelected,
+      // onChange2,
     };
   },
 });

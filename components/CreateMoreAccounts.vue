@@ -139,3 +139,8 @@ export default {
   border-radius: 50px;
 }
 </style>
+<style>
+.ant-cascader-input {
+  border-radius: 50px;
+}
+</style>

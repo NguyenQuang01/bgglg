@@ -53,7 +53,7 @@ import { getDetail, getAllEmployee } from "@/api/AuthenConnector.js";
 import { today } from "@/constants/getToday";
 import { message } from "ant-design-vue";
 export default {
-  // middleware: "auth",
+  middleware: "auth",
   components: { ButtonSkip, BtnBack },
   data() {
     return {
@@ -136,6 +136,11 @@ export default {
   border-radius: 50px;
 }
 .inputLogin {
+  border-radius: 50px;
+}
+</style>
+<style>
+.ant-select-selection--multiple {
   border-radius: 50px;
 }
 </style>
