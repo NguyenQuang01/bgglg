@@ -31,7 +31,12 @@
           <tr v-for="(item, index) in data" :key="index">
             <td class="w-5 text-center title">{{ index + 1 }}</td>
             <td class="w-3/5">
-              <div>{{ item.name }}</div>
+              <b-form-input
+                v-model="item.name"
+                class="w-full h-8"
+                v-if="isEdit"
+              />
+              <div v-else>{{ item.name }}</div>
             </td>
             <td class="w-1/5">
               <b-form-input
@@ -43,7 +48,9 @@
             </td>
             <td style="text-align: center" class="w-40">
               <div class="flex justify-center">
-                <div @click="save(item.demarcationAvailable, item.id)">
+                <div
+                  @click="save(item.name, item.demarcationAvailable, item.id)"
+                >
                   <a-tooltip placement="topLeft">
                     <template slot="title">
                       <span>lưu</span>
@@ -158,8 +165,8 @@ export default {
     edit() {
       this.isEdit = !this.isEdit;
     },
-    async save(demarcationAvailable, id) {
-      const res = await updateDemarcation(demarcationAvailable, id);
+    async save(name, demarcationAvailable, id) {
+      const res = await updateDemarcation(demarcationAvailable, id, name);
       if (res && res.status === 200) {
         message.success("sửa thành công");
       }

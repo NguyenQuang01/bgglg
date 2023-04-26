@@ -137,15 +137,15 @@ export const getView = async (param) => {
   }
 };
 export const viewExcel = async (param) => {
-  const response = await request.post(
+  const response = await request.get(
     `${HOST}/view/exportExcel?reportDate=${param}`
   );
   return response.data;
 };
 //demarcation
-export const updateDemarcation = async (demarcation, id) => {
+export const updateDemarcation = async (demarcation, id, name) => {
   const response = await request.get(
-    `${HOST}/groupRole/update?demarcation=${demarcation}&id=${id}`
+    `${HOST}/groupRole/update?name=${name}demarcation=${demarcation}&id=${id}`
   );
   return response.data;
 };

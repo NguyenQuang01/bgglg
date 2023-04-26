@@ -533,6 +533,7 @@ th {
   display: inline-block;
   cursor: pointer;
   height: 32px;
+  width: 70px;
   padding: 2px 10px;
   border-radius: 50px;
 }
@@ -542,7 +543,8 @@ th {
   .ant-pagination-options {
     display: block;
     margin-right: -8px;
-    float: right;
+    margin-top: 5px;
+    float: left;
   }
 }
 .ant-pagination-options {

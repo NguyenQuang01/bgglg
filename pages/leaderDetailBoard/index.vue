@@ -44,7 +44,8 @@
 import TableDetail from "../../components/tableDetaileBoard/TableDetail.vue";
 import BtnBack from "@/components/BtnBack.vue";
 import { viewExcel } from "@/api/AuthenConnector.js";
-
+import { downloadFileExcel } from "@/utils/utils";
+import { message } from "ant-design-vue";
 export default {
   middleware: "auth",
   components: {
@@ -97,7 +98,10 @@ export default {
     },
     async getExcel() {
       const res = await viewExcel(this.valueDay);
-      console.log(res);
+      if (res && res.status === 200) {
+        downloadFileExcel(res.data);
+        message.success("xuất file thành công");
+      }
     },
   },
   // watch: {
@@ -125,6 +129,7 @@ export default {
   display: inline-block;
   cursor: pointer;
   height: 32px;
+  width: 70px;
   padding: 2px 10px;
 }
 </style>
