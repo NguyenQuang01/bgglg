@@ -47,10 +47,7 @@
       </div>
       <div class="flex mb-24 float-right">
         <BtnBack class="h-10" />
-        <b-button
-          variant="primary"
-          class="mb-24 ml-2 mr-2 textBack"
-          @click="addQuantity"
+        <b-button variant="primary" class="mb-24 textBack" @click="addQuantity"
           >Thêm</b-button
         >
         <button-skip :skip="skip" />
