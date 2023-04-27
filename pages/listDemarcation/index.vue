@@ -34,7 +34,12 @@
               <b-form-input
                 v-model="item.name"
                 class="w-full h-8"
-                v-if="isEdit"
+                v-if="
+                  isEdit &&
+                  !(item.id === 1) &&
+                  !(item.id === 2) &&
+                  !(item.id === 3)
+                "
               />
               <div v-else>{{ item.name }}</div>
             </td>
