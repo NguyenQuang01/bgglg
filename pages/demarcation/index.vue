@@ -109,7 +109,7 @@ export default {
 }
 </style>
 <style>
-.ant-select-selection--single {
+.ant-cascader-input {
   border-radius: 50px;
   height: 38px;
 }
