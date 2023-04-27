@@ -108,3 +108,9 @@ export default {
   margin-left: 5px;
 }
 </style>
+<style>
+.ant-select-selection--single {
+  border-radius: 50px;
+  height: 38px;
+}
+</style>
