@@ -47,7 +47,7 @@ import { viewExcel } from "@/api/AuthenConnector.js";
 import { downloadFileExcel } from "@/utils/utils";
 import { message } from "ant-design-vue";
 export default {
-  middleware: "auth",
+  // middleware: "auth",
   components: {
     TableDetail,
     BtnBack,

@@ -24,25 +24,37 @@
         >{{ text }}</span
       ><span v-if="!(row.name === 'Tổng thực tế làm việc')"> {{ text }}</span>
     </template>
-    <template slot="numberLeave" slot-scope="text, row">
+    <template slot="restObjectResponse" slot-scope="text, row">
       <span
         v-if="row.name === 'Tổng thực tế làm việc'"
         class="font-bold"
         :class="compareNumberLeave ? 'green' : 'red'"
-        >{{ text }}</span
+        >{{ row.numberLeave }}</span
       ><span v-if="!(row.name === 'Tổng thực tế làm việc')">
         <div class="float-left showInf" v-if="InfLeave">
-          <div class="text-left">Nghỉ ốm: 1</div>
-          <div class="text-left">Nghỉ tự do: 1</div>
-          <div class="text-left">Nghỉ việc riêng: 1</div>
+          <div
+            v-for="(item, index) in row?.restObjectResponse?.reason"
+            :key="index"
+            class="text-left"
+          >
+            {{ item.reasonName }} - {{ item.total }}
+          </div>
+          <div
+            v-for="(item, index) in row?.restObjectResponse?.employeeRest"
+            :key="index"
+            class="text-left"
+          >
+            {{ item.nameEmployee }} ({{ item.labor }}) - {{ item.reasonName }}
+          </div>
         </div>
+
         <b-icon
           icon="plus-circle"
           aria-hidden="true"
           class="mr-2"
           @click="showInfLeave"
         ></b-icon
-        >{{ text }}</span
+        >{{ row?.restObjectResponse?.restNum }}</span
       >
     </template>
     <template slot="rice" slot-scope="text, row">
@@ -113,8 +125,8 @@ export default {
         {
           className: "right",
           title: "SỐ LAO ĐỘNG NGHỈ",
-          dataIndex: "numberLeave",
-          scopedSlots: { customRender: "numberLeave" },
+          dataIndex: "restObjectResponse",
+          scopedSlots: { customRender: "restObjectResponse" },
         },
         {
           className: "right",
