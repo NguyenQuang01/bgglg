@@ -145,7 +145,7 @@ export const viewExcel = async (param) => {
 //demarcation
 export const updateDemarcation = async (demarcation, id, name) => {
   const response = await request.get(
-    `${HOST}/groupRole/update?name=${name}demarcation=${demarcation}&id=${id}`
+    `${HOST}/groupRole/update?name=${name}&demarcation=${demarcation}&id=${id}`
   );
   return response.data;
 };
