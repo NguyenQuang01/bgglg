@@ -66,9 +66,7 @@ export default {
     this.token = localStorage.getItem("JWT");
     setTimeout(() => this.test(), 100);
   },
-  // fetch() {
-  //   this.token = localStorage.getItem("JWT");
-  // },
+
   computed: {
     ...mapGetters({ getInfUsers: "getInfUsers" }),
   },
@@ -83,6 +81,8 @@ export default {
         this.SET_STATE_INFUSER(res.data);
         this.SET_STATE_ISAUTHEN(true);
         localStorage.setItem("checkReport", res.data.checkReport);
+      } else {
+        return this.$router.push("/login");
       }
     },
     report() {

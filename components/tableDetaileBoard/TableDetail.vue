@@ -31,28 +31,30 @@
         :class="compareNumberLeave ? 'green' : 'red'"
         >{{ row.numberLeave }}</span
       ><span v-if="!(row.name === 'Tổng thực tế làm việc')">
-        <div class="float-left showInf" v-if="InfLeave">
+        <div class="float-left showInf">
           <div
             v-for="(item, index) in row?.restObjectResponse?.reason"
             :key="index"
+            :id="row.key"
             class="text-left"
+            style="display: none"
           >
-            {{ item.reasonName }} - {{ item.total }}
+            <div>{{ item.reasonName }} - {{ item.total }}</div>
           </div>
-          <div
+          <!-- <div
             v-for="(item, index) in row?.restObjectResponse?.employeeRest"
             :key="index"
             class="text-left"
           >
             {{ item.nameEmployee }} ({{ item.labor }}) - {{ item.reasonName }}
-          </div>
+          </div> -->
         </div>
 
         <b-icon
           icon="plus-circle"
           aria-hidden="true"
           class="mr-2"
-          @click="showInfLeave"
+          @click="showInfLeave(row.key)"
         ></b-icon
         >{{ row?.restObjectResponse?.restNum }}</span
       >
@@ -231,8 +233,12 @@ export default {
     },
   },
   methods: {
-    showInfLeave() {
-      this.InfLeave = !this.InfLeave;
+    showInfLeave(item) {
+      if (document.getElementById(item).style.display === "none") {
+        document.getElementById(item).style.display = "block";
+      } else {
+        document.getElementById(item).style.display = "none";
+      }
     },
     tet(expanded, record) {
       this.viewRoot.find((element) =>
