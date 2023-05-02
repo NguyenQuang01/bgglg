@@ -82,6 +82,7 @@ export default {
         this.SET_STATE_ISAUTHEN(true);
         localStorage.setItem("checkReport", res.data.checkReport);
       } else {
+        localStorage.clear();
         return this.$router.push("/login");
       }
     },
