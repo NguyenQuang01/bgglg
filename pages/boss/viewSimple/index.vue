@@ -207,7 +207,7 @@
                                               v-for="i in item
                                                 .restObjectResponse?.reason"
                                             >
-                                              {{ i.reason }} - {{ i.restNum }}
+                                              {{ i.reasonName }} - {{ i.total }}
                                             </div>
                                           </template>
                                           <b-icon
