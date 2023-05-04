@@ -6,13 +6,13 @@
 
     <div class="mb-2 flex flex-wrap">
       <div class="mb-2 flex">
-        <a-button class="btnDay" @click="btnMinus">Ngày trước</a-button>
+        <a-button class="btnDay" @click="decrementDate">Ngày trước</a-button>
         <a-date-picker
           v-model="valueDay"
           class="mx-2"
           placeholder="Chọn ngày"
         />
-        <a-button class="btnDay mr-2" @click="btnPlus">ngày sau</a-button>
+        <a-button class="btnDay mr-2" @click="incrementDate">ngày sau</a-button>
       </div>
       <!-- <a-date-picker v-model="valueDay" class="mx-2" placeholder="Chọn ngày" /> -->
       <!-- <a-button class="btnDay">Lọc</a-button>
@@ -47,7 +47,7 @@ import { viewExcel } from "@/api/AuthenConnector.js";
 import { downloadFileExcel } from "@/utils/utils";
 import { message } from "ant-design-vue";
 export default {
-  // middleware: "auth",
+  middleware: "auth",
   components: {
     TableDetail,
     BtnBack,
@@ -67,8 +67,10 @@ export default {
     };
   },
   created() {
-    this.valueDay = `${this.year}/${this.month}/${this.day}` || "";
-    this.valueDayEd = `${this.year}/${this.month}/${this.day - 1}` || "";
+    this.valueDay = new Date().toISOString().substr(0, 10) || "";
+    const newDate = new Date(this.valueDay);
+    newDate.setDate(newDate.getDate() - 1);
+    this.valueDayEd = newDate.toISOString().substr(0, 10);
   },
   methods: {
     btnPlus() {
@@ -92,6 +94,22 @@ export default {
         this.valueDay = `${this.year}/${this.month}/${this.day}`;
         this.valueDayEd = `${this.year}/${this.month}/${this.day - 1}`;
       }
+    },
+    incrementDate() {
+      const newDate = new Date(this.valueDay);
+      newDate.setDate(newDate.getDate() + 1);
+      this.valueDay = newDate.toISOString().substr(0, 10);
+      const newDate2 = new Date(this.valueDayEd);
+      newDate2.setDate(newDate2.getDate() + 1);
+      this.valueDayEd = newDate2.toISOString().substr(0, 10);
+    },
+    decrementDate() {
+      const newDate = new Date(this.valueDay);
+      newDate.setDate(newDate.getDate() - 1);
+      this.valueDay = newDate.toISOString().substr(0, 10);
+      const newDate2 = new Date(this.valueDayEd);
+      newDate2.setDate(newDate2.getDate() - 1);
+      this.valueDayEd = newDate2.toISOString().substr(0, 10);
     },
     pageMobile() {
       this.$router.push("/boss/viewSimple");

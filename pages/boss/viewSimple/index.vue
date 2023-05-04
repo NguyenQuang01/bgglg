@@ -30,7 +30,24 @@
             </div>
             <div class="mb-3">
               Số lao động nghỉ:
-              <div class="float-right">{{ item.numberLeave }}</div>
+
+              <div class="float-right">
+                <a-popover trigger="click">
+                  <template slot="content">
+                    <div
+                      class="whitespace-nowrap"
+                      v-for="i in item.restObjectResponse?.reason"
+                    >
+                      {{ i.reason }} - {{ i.restNum }}
+                    </div>
+                  </template>
+                  <b-icon
+                    icon="plus-circle"
+                    aria-hidden="true"
+                    class="mr-2"
+                  ></b-icon> </a-popover
+                >{{ item.numberLeave }}
+              </div>
             </div>
             <div class="mb-3">
               Tỉ lệ %:
@@ -64,7 +81,24 @@
                     </div>
                     <div class="mb-3">
                       Số lao động nghỉ:
-                      <div class="float-right">{{ item.numberLeave }}</div>
+
+                      <div class="float-right">
+                        <a-popover trigger="click">
+                          <template slot="content">
+                            <div
+                              class="whitespace-nowrap"
+                              v-for="i in item.restObjectResponse?.reason"
+                            >
+                              {{ i.reason }} - {{ i.restNum }}
+                            </div>
+                          </template>
+                          <b-icon
+                            icon="plus-circle"
+                            aria-hidden="true"
+                            class="mr-2"
+                          ></b-icon> </a-popover
+                        >{{ item.numberLeave }}
+                      </div>
                     </div>
                     <div class="mb-3">
                       Tỉ lệ %:
@@ -103,6 +137,22 @@
                             <div class="mb-3">
                               Số lao động nghỉ:
                               <div class="float-right">
+                                <a-popover trigger="click">
+                                  <template slot="content">
+                                    <div
+                                      class="whitespace-nowrap"
+                                      v-for="i in item.restObjectResponse
+                                        ?.reason"
+                                    >
+                                      {{ i.reason }} - {{ i.restNum }}
+                                    </div>
+                                  </template>
+                                  <b-icon
+                                    icon="plus-circle"
+                                    aria-hidden="true"
+                                    class="mr-2"
+                                  ></b-icon>
+                                </a-popover>
                                 {{ item.numberLeave }}
                               </div>
                             </div>
@@ -150,6 +200,22 @@
                                     <div class="mb-3">
                                       Số lao động nghỉ:
                                       <div class="float-right">
+                                        <a-popover trigger="click">
+                                          <template slot="content">
+                                            <div
+                                              class="whitespace-nowrap"
+                                              v-for="i in item
+                                                .restObjectResponse?.reason"
+                                            >
+                                              {{ i.reason }} - {{ i.restNum }}
+                                            </div>
+                                          </template>
+                                          <b-icon
+                                            icon="plus-circle"
+                                            aria-hidden="true"
+                                            class="mr-2"
+                                          ></b-icon>
+                                        </a-popover>
                                         {{ item.numberLeave }}
                                       </div>
                                     </div>
@@ -222,6 +288,7 @@ import BtnBack from "@/components/BtnBack.vue";
 
 import { message } from "ant-design-vue";
 export default {
+  middleware: "auth",
   data() {
     return {
       text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
@@ -245,28 +312,19 @@ export default {
     },
   },
   created() {
-    this.valueDay = `${this.year}/${this.month}/${this.day}` || "";
+    this.valueDay = new Date().toISOString().substr(0, 10) || "";
     setTimeout(() => this.getData(), 0);
   },
   methods: {
     btnPlus() {
-      if (this.day31.includes(this.month) && this.day < 31) {
-        this.day = this.day + 1;
-        this.valueDay = `${this.year}/${this.month}/${this.day}`;
-      } else if (this.day30.includes(this.month) && this.day < 30) {
-        this.day = this.day + 1;
-        this.valueDay = `${this.year}/${this.month}/${this.day}`;
-      } else if (this.day28.includes(this.month) && this.day < 28) {
-        this.day = this.day + 1;
-        this.valueDay = `${this.year}/${this.month}/${this.day}`;
-      }
+      const newDate = new Date(this.valueDay);
+      newDate.setDate(newDate.getDate() + 1);
+      this.valueDay = newDate.toISOString().substr(0, 10);
     },
     btnMinus() {
-      if (this.day > 1) {
-        this.day = this.day - 1;
-        this.valueDay = `${this.year}/${this.month}/${this.day}`;
-        this.valueDayEd = `${this.year}/${this.month}/${this.day - 1}`;
-      }
+      const newDate = new Date(this.valueDay);
+      newDate.setDate(newDate.getDate() - 1);
+      this.valueDay = newDate.toISOString().substr(0, 10);
     },
     async getData() {
       const day = dayjs(this.valueDay).format("YYYY/MM/DD");

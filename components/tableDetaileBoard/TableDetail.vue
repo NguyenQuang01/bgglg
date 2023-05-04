@@ -32,14 +32,13 @@
         >{{ row.numberLeave }}</span
       ><span v-if="!(row.name === 'Tổng thực tế làm việc')">
         <div class="float-left showInf">
-          <div
-            v-for="(item, index) in row?.restObjectResponse?.reason"
-            :key="index"
-            :id="row.key"
-            class="text-left"
-            style="display: none"
-          >
-            <div>{{ item.reasonName }} - {{ item.total }}</div>
+          <div :id="row.key" class="text-left" style="display: none">
+            <div
+              v-for="(item, index) in row?.restObjectResponse?.reason"
+              :key="index"
+            >
+              {{ item.reasonName }} - {{ item.total }}
+            </div>
           </div>
           <!-- <div
             v-for="(item, index) in row?.restObjectResponse?.employeeRest"
