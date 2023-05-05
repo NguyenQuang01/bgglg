@@ -34,7 +34,7 @@
               <div class="float-right">
                 <a-popover trigger="click">
                   <template slot="content">
-                    <div v-if="!dataDvl.includes(item.key)">
+                    <div v-if="!item.restObjectResponse?.employeeRest">
                       <div
                         class="whitespace-nowrap"
                         v-for="i in item.restObjectResponse?.reason"
@@ -42,7 +42,7 @@
                         {{ i.reasonName }} - {{ i.total }}
                       </div>
                     </div>
-                    <div v-if="dataDvl.includes(item.key)">
+                    <div v-if="item.restObjectResponse?.employeeRest">
                       <div
                         class="whitespace-nowrap"
                         v-for="i in item.restObjectResponse?.employeeRest"
@@ -95,7 +95,7 @@
                       <div class="float-right">
                         <a-popover trigger="click">
                           <template slot="content">
-                            <div v-if="!dataDvl.includes(item.key)">
+                            <div v-if="!item.restObjectResponse?.employeeRest">
                               <div
                                 class="whitespace-nowrap"
                                 v-for="i in item.restObjectResponse?.reason"
@@ -103,7 +103,7 @@
                                 {{ i.reasonName }} - {{ i.total }}
                               </div>
                             </div>
-                            <div v-if="dataDvl.includes(item.key)">
+                            <div v-if="item.restObjectResponse?.employeeRest">
                               <div
                                 class="whitespace-nowrap"
                                 v-for="i in item.restObjectResponse
@@ -161,7 +161,11 @@
                               <div class="float-right">
                                 <a-popover trigger="click">
                                   <template slot="content">
-                                    <div v-if="!dataDvl.includes(item.key)">
+                                    <div
+                                      v-if="
+                                        !item.restObjectResponse?.employeeRest
+                                      "
+                                    >
                                       <div
                                         class="whitespace-nowrap"
                                         v-for="i in item.restObjectResponse
@@ -170,7 +174,11 @@
                                         {{ i.reasonName }} - {{ i.total }}
                                       </div>
                                     </div>
-                                    <div v-if="dataDvl.includes(item.key)">
+                                    <div
+                                      v-if="
+                                        item.restObjectResponse?.employeeRest
+                                      "
+                                    >
                                       <div
                                         class="whitespace-nowrap"
                                         v-for="i in item.restObjectResponse
@@ -236,7 +244,10 @@
                                         <a-popover trigger="click">
                                           <template slot="content">
                                             <div
-                                              v-if="!dataDvl.includes(item.key)"
+                                              v-if="
+                                                !item.restObjectResponse
+                                                  ?.employeeRest
+                                              "
                                             >
                                               <div
                                                 class="whitespace-nowrap"
@@ -248,7 +259,10 @@
                                               </div>
                                             </div>
                                             <div
-                                              v-if="dataDvl.includes(item.key)"
+                                              v-if="
+                                                item.restObjectResponse
+                                                  ?.employeeRest
+                                              "
                                             >
                                               <div
                                                 class="whitespace-nowrap"
@@ -367,7 +381,7 @@ export default {
   },
   created() {
     this.valueDay = new Date().toISOString().substr(0, 10) || "";
-    this.getViewDonViLe();
+    // this.getViewDonViLe();
     setTimeout(() => this.getData(), 0);
   },
   methods: {
