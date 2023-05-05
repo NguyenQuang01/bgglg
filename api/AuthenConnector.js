@@ -142,6 +142,12 @@ export const viewExcel = async (param) => {
   );
   return response.data;
 };
+export const viewDonViLe = async (param) => {
+  const response = await request.get(
+    `${HOST}/view/viewDonViLe?reportDate=${param}`
+  );
+  return response.data;
+};
 //demarcation
 export const updateDemarcation = async (demarcation, id, name) => {
   const response = await request.get(

@@ -153,7 +153,7 @@
   </div>
 </template>
 <script>
-import { getView } from "@/api/AuthenConnector.js";
+import { getView, viewDonViLe } from "@/api/AuthenConnector.js";
 import dayjs from "dayjs";
 import { message } from "ant-design-vue";
 export default {

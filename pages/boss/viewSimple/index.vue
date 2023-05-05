@@ -34,11 +34,21 @@
               <div class="float-right">
                 <a-popover trigger="click">
                   <template slot="content">
-                    <div
-                      class="whitespace-nowrap"
-                      v-for="i in item.restObjectResponse?.reason"
-                    >
-                      {{ i.reasonName }} - {{ i.total }}
+                    <div v-if="!item.restObjectResponse?.employeeRest">
+                      <div
+                        class="whitespace-nowrap"
+                        v-for="i in item.restObjectResponse?.reason"
+                      >
+                        {{ i.reasonName }} - {{ i.total }}
+                      </div>
+                    </div>
+                    <div v-if="item.restObjectResponse?.employeeRest">
+                      <div
+                        class="whitespace-nowrap"
+                        v-for="i in item.restObjectResponse?.employeeRest"
+                      >
+                        {{ i.nameEmployee }} - {{ i.labor }}- {{ i.reasonName }}
+                      </div>
                     </div>
                   </template>
                   <b-icon
@@ -85,11 +95,23 @@
                       <div class="float-right">
                         <a-popover trigger="click">
                           <template slot="content">
-                            <div
-                              class="whitespace-nowrap"
-                              v-for="i in item.restObjectResponse?.reason"
-                            >
-                              {{ i.reasonName }} - {{ i.total }}
+                            <div v-if="!item.restObjectResponse?.employeeRest">
+                              <div
+                                class="whitespace-nowrap"
+                                v-for="i in item.restObjectResponse?.reason"
+                              >
+                                {{ i.reasonName }} - {{ i.total }}
+                              </div>
+                            </div>
+                            <div v-if="item.restObjectResponse?.employeeRest">
+                              <div
+                                class="whitespace-nowrap"
+                                v-for="i in item.restObjectResponse
+                                  ?.employeeRest"
+                              >
+                                {{ i.nameEmployee }} - {{ i.labor }}-
+                                {{ i.reasonName }}
+                              </div>
                             </div>
                           </template>
                           <b-icon
@@ -140,11 +162,31 @@
                                 <a-popover trigger="click">
                                   <template slot="content">
                                     <div
-                                      class="whitespace-nowrap"
-                                      v-for="i in item.restObjectResponse
-                                        ?.reason"
+                                      v-if="
+                                        !item.restObjectResponse?.employeeRest
+                                      "
                                     >
-                                      {{ i.reasonName }} - {{ i.total }}
+                                      <div
+                                        class="whitespace-nowrap"
+                                        v-for="i in item.restObjectResponse
+                                          ?.reason"
+                                      >
+                                        {{ i.reasonName }} - {{ i.total }}
+                                      </div>
+                                    </div>
+                                    <div
+                                      v-if="
+                                        item.restObjectResponse?.employeeRest
+                                      "
+                                    >
+                                      <div
+                                        class="whitespace-nowrap"
+                                        v-for="i in item.restObjectResponse
+                                          ?.employeeRest"
+                                      >
+                                        {{ i.nameEmployee }} - {{ i.labor }}-
+                                        {{ i.reasonName }}
+                                      </div>
                                     </div>
                                   </template>
                                   <b-icon
@@ -203,11 +245,36 @@
                                         <a-popover trigger="click">
                                           <template slot="content">
                                             <div
-                                              class="whitespace-nowrap"
-                                              v-for="i in item
-                                                .restObjectResponse?.reason"
+                                              v-if="
+                                                !item.restObjectResponse
+                                                  ?.employeeRest
+                                              "
                                             >
-                                              {{ i.reasonName }} - {{ i.total }}
+                                              <div
+                                                class="whitespace-nowrap"
+                                                v-for="i in item
+                                                  .restObjectResponse?.reason"
+                                              >
+                                                {{ i.reasonName }} -
+                                                {{ i.total }}
+                                              </div>
+                                            </div>
+                                            <div
+                                              v-if="
+                                                item.restObjectResponse
+                                                  ?.employeeRest
+                                              "
+                                            >
+                                              <div
+                                                class="whitespace-nowrap"
+                                                v-for="i in item
+                                                  .restObjectResponse
+                                                  ?.employeeRest"
+                                              >
+                                                {{ i.nameEmployee }} -
+                                                {{ i.labor }}-
+                                                {{ i.reasonName }}
+                                              </div>
                                             </div>
                                           </template>
                                           <b-icon

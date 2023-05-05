@@ -32,7 +32,12 @@
         >{{ row.numberLeave }}</span
       ><span v-if="!(row.name === 'Tổng thực tế làm việc')">
         <div class="float-left showInf">
-          <div :id="row.key" class="text-left" style="display: none">
+          <div
+            :id="row.key"
+            class="text-left"
+            style="display: none"
+            v-if="!row?.restObjectResponse?.employeeRest"
+          >
             <div
               v-for="(item, index) in row?.restObjectResponse?.reason"
               :key="index"
@@ -40,13 +45,17 @@
               {{ item.reasonName }} - {{ item.total }}
             </div>
           </div>
-          <!-- <div
-            v-for="(item, index) in row?.restObjectResponse?.employeeRest"
-            :key="index"
-            class="text-left"
-          >
-            {{ item.nameEmployee }} ({{ item.labor }}) - {{ item.reasonName }}
-          </div> -->
+          <div v-if="row?.restObjectResponse?.employeeRest">
+            <div :id="row.key" class="text-left" style="display: none">
+              <div
+                v-for="(item, index) in row?.restObjectResponse?.employeeRest"
+                :key="index"
+              >
+                {{ item.nameEmployee }} ({{ item.labor }}) -
+                {{ item.reasonName }}
+              </div>
+            </div>
+          </div>
         </div>
 
         <b-icon
@@ -82,6 +91,7 @@ import {
   getNameAll,
   viewRoot,
   searchAllDeleteTm,
+  // viewDonViLe,
 } from "@/api/AuthenConnector.js";
 import dayjs from "dayjs";
 import { message } from "ant-design-vue";
@@ -91,6 +101,7 @@ export default {
 
   data() {
     return {
+      dataDvl: [],
       InfLeave: false,
       viewRoot: [],
       arrChild: [],
@@ -212,6 +223,7 @@ export default {
     this.getData2();
     this.viewRoot2();
     this.getChildVpDvl();
+    // this.getViewDonViLe();
     setTimeout(() => this.more(), 1000);
   },
   watch: {
@@ -232,6 +244,13 @@ export default {
     },
   },
   methods: {
+    async getViewDonViLe() {
+      const getDate = this.valueDay.replaceAll("-", "/");
+      const res = await viewDonViLe(getDate);
+      if (res && res.code === 201) {
+        this.dataDvl = res.data;
+      }
+    },
     showInfLeave(item) {
       if (document.getElementById(item).style.display === "none") {
         document.getElementById(item).style.display = "block";
