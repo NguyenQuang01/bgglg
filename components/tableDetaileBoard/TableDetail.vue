@@ -32,21 +32,17 @@
         >{{ row.numberLeave }}</span
       ><span v-if="!(row.name === 'Tổng thực tế làm việc')">
         <div class="float-left showInf">
-          <div
-            :id="row.key"
-            class="text-left"
-            style="display: none"
-            v-if="!row?.restObjectResponse?.employeeRest"
-          >
-            <div
-              v-for="(item, index) in row?.restObjectResponse?.reason"
-              :key="index"
-            >
-              {{ item.reasonName }} - {{ item.total }}
+          <div :id="row.key" class="text-left" style="display: none">
+            <div v-if="!dataDvl.includes(row.key)">
+              <div
+                v-for="(item, index) in row?.restObjectResponse?.reason"
+                :key="index"
+              >
+                {{ item.reasonName }} - {{ item.total }}
+              </div>
             </div>
-          </div>
-          <div v-if="row?.restObjectResponse?.employeeRest">
-            <div :id="row.key" class="text-left" style="display: none">
+
+            <div v-if="dataDvl.includes(row.key)">
               <div
                 v-for="(item, index) in row?.restObjectResponse?.employeeRest"
                 :key="index"
@@ -91,7 +87,7 @@ import {
   getNameAll,
   viewRoot,
   searchAllDeleteTm,
-  // viewDonViLe,
+  viewDonViLe,
 } from "@/api/AuthenConnector.js";
 import dayjs from "dayjs";
 import { message } from "ant-design-vue";
@@ -223,13 +219,15 @@ export default {
     this.getData2();
     this.viewRoot2();
     this.getChildVpDvl();
-    // this.getViewDonViLe();
+    this.getViewDonViLe();
     setTimeout(() => this.more(), 1000);
   },
   watch: {
     valueDay: {
       handler: function (value) {
         this.getData();
+        this.viewRoot2();
+        this.getViewDonViLe();
       },
       deep: true,
     },

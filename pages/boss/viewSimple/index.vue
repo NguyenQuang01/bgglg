@@ -34,7 +34,7 @@
               <div class="float-right">
                 <a-popover trigger="click">
                   <template slot="content">
-                    <div v-if="!item.restObjectResponse?.employeeRest">
+                    <div v-if="!dataDvl.includes(item.key)">
                       <div
                         class="whitespace-nowrap"
                         v-for="i in item.restObjectResponse?.reason"
@@ -42,7 +42,7 @@
                         {{ i.reasonName }} - {{ i.total }}
                       </div>
                     </div>
-                    <div v-if="item.restObjectResponse?.employeeRest">
+                    <div v-if="dataDvl.includes(item.key)">
                       <div
                         class="whitespace-nowrap"
                         v-for="i in item.restObjectResponse?.employeeRest"
@@ -95,7 +95,7 @@
                       <div class="float-right">
                         <a-popover trigger="click">
                           <template slot="content">
-                            <div v-if="!item.restObjectResponse?.employeeRest">
+                            <div v-if="!dataDvl.includes(item.key)">
                               <div
                                 class="whitespace-nowrap"
                                 v-for="i in item.restObjectResponse?.reason"
@@ -103,7 +103,7 @@
                                 {{ i.reasonName }} - {{ i.total }}
                               </div>
                             </div>
-                            <div v-if="item.restObjectResponse?.employeeRest">
+                            <div v-if="dataDvl.includes(item.key)">
                               <div
                                 class="whitespace-nowrap"
                                 v-for="i in item.restObjectResponse
@@ -161,11 +161,7 @@
                               <div class="float-right">
                                 <a-popover trigger="click">
                                   <template slot="content">
-                                    <div
-                                      v-if="
-                                        !item.restObjectResponse?.employeeRest
-                                      "
-                                    >
+                                    <div v-if="!dataDvl.includes(item.key)">
                                       <div
                                         class="whitespace-nowrap"
                                         v-for="i in item.restObjectResponse
@@ -174,11 +170,7 @@
                                         {{ i.reasonName }} - {{ i.total }}
                                       </div>
                                     </div>
-                                    <div
-                                      v-if="
-                                        item.restObjectResponse?.employeeRest
-                                      "
-                                    >
+                                    <div v-if="dataDvl.includes(item.key)">
                                       <div
                                         class="whitespace-nowrap"
                                         v-for="i in item.restObjectResponse
@@ -193,9 +185,8 @@
                                     icon="plus-circle"
                                     aria-hidden="true"
                                     class="mr-2"
-                                  ></b-icon>
-                                </a-popover>
-                                {{ item.numberLeave }}
+                                  ></b-icon> </a-popover
+                                >{{ item.numberLeave }}
                               </div>
                             </div>
                             <div class="mb-3">
@@ -245,10 +236,7 @@
                                         <a-popover trigger="click">
                                           <template slot="content">
                                             <div
-                                              v-if="
-                                                !item.restObjectResponse
-                                                  ?.employeeRest
-                                              "
+                                              v-if="!dataDvl.includes(item.key)"
                                             >
                                               <div
                                                 class="whitespace-nowrap"
@@ -260,10 +248,7 @@
                                               </div>
                                             </div>
                                             <div
-                                              v-if="
-                                                item.restObjectResponse
-                                                  ?.employeeRest
-                                              "
+                                              v-if="dataDvl.includes(item.key)"
                                             >
                                               <div
                                                 class="whitespace-nowrap"
@@ -281,9 +266,8 @@
                                             icon="plus-circle"
                                             aria-hidden="true"
                                             class="mr-2"
-                                          ></b-icon>
-                                        </a-popover>
-                                        {{ item.numberLeave }}
+                                          ></b-icon> </a-popover
+                                        >{{ item.numberLeave }}
                                       </div>
                                     </div>
                                     <div class="mb-3">
@@ -346,6 +330,7 @@
 <script>
 import {
   getViewDetail,
+  viewDonViLe,
   // getNameAll,
   // viewRoot,
   // searchAllDeleteTm,
@@ -358,6 +343,7 @@ export default {
   middleware: "auth",
   data() {
     return {
+      dataDvl: [],
       text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
       valueDay: null,
       day: new Date().getDate(),
@@ -374,15 +360,24 @@ export default {
     valueDay: {
       handler: function (value) {
         this.getData();
+        this.getViewDonViLe();
       },
       deep: true,
     },
   },
   created() {
     this.valueDay = new Date().toISOString().substr(0, 10) || "";
+    this.getViewDonViLe();
     setTimeout(() => this.getData(), 0);
   },
   methods: {
+    async getViewDonViLe() {
+      const getDate = this.valueDay.replaceAll("-", "/");
+      const res = await viewDonViLe(getDate);
+      if (res && res.code === 201) {
+        this.dataDvl = res.data;
+      }
+    },
     btnPlus() {
       const newDate = new Date(this.valueDay);
       newDate.setDate(newDate.getDate() + 1);
