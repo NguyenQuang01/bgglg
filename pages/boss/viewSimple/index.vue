@@ -375,7 +375,10 @@ export default {
       const getDate = this.valueDay.replaceAll("-", "/");
       const res = await viewDonViLe(getDate);
       if (res && res.code === 201) {
-        this.dataDvl = res.data;
+        const valuesToRemove = [2, 93, 94];
+        this.dataDvl = res.data.filter(
+          (item) => !valuesToRemove.includes(item)
+        );
       }
     },
     btnPlus() {
