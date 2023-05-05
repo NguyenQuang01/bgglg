@@ -374,7 +374,6 @@ export default {
     valueDay: {
       handler: function (value) {
         this.getData();
-        this.getViewDonViLe();
       },
       deep: true,
     },

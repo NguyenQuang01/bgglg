@@ -230,6 +230,7 @@ export default {
     valueDay: {
       handler: function (value) {
         this.getData();
+        this.viewRoot2();
       },
       deep: true,
     },
