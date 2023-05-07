@@ -20,6 +20,7 @@ export const signUpAPI = async (username, email, password) => {
   });
   return response.data;
 };
+//report
 export const getDetail = async (param) => {
   try {
     const response = await request.get(
@@ -53,7 +54,15 @@ export const saveDetail = async (param) => {
     return { status: "500", name: "err" };
   }
 };
-
+export const getReportByYesterday = async (param) => {
+  try {
+    const response = await request.get(
+      `${HOST}/getReportByYesterday?groupId=${param}`
+    );
+    return response.data;
+  } catch (error) {}
+};
+///
 export const addAccount = async (param) => {
   const response = await request.post(`${HOST}/api/save`, param);
   return response.data;

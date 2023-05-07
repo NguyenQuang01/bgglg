@@ -40,7 +40,7 @@
 
 <script>
 import { mapMutations, mapGetters } from "vuex";
-import { signInAPI } from "@/api/AuthenConnector.js";
+import { signInAPI, getReportByYesterday } from "@/api/AuthenConnector.js";
 import { message } from "ant-design-vue";
 import { HOST } from "@/constants/host/host.js";
 export default {
@@ -80,8 +80,11 @@ export default {
         // localStorage.setItem("formName", this.form.user);
         // localStorage.setItem("formPass", this.form.pass);
         localStorage.setItem("INFUSER", JSON.stringify(res.data));
-
         this.SET_STATE_ISAUTHEN(true);
+        const response = await getReportByYesterday(res.data.groupId);
+        if (response) {
+          localStorage.setItem("report", JSON.stringify(response));
+        }
         this.$router.push("/menuLogin");
       }
     },

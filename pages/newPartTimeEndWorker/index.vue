@@ -72,7 +72,7 @@ export default {
     }
   },
   mounted() {
-    const autofill = localStorage.getItem("report");
+    const autofill = JSON.parse(localStorage.getItem("report"));
     const checkReport = localStorage.getItem("checkReport");
     if (autofill && checkReport === "false") {
       this.form.partTime = autofill.partTimeNum;
