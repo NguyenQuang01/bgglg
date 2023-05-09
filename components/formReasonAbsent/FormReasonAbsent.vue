@@ -118,11 +118,17 @@ export default {
     this.getvalueName();
   },
   mounted() {
-    const autofill = localStorage.getItem("report");
+    const autofill = JSON.parse(localStorage.getItem("report"));
     const checkReport = localStorage.getItem("checkReport");
     if (autofill && checkReport === "false") {
-      JSON.parse(autofill);
-      this.arrForms = autofill.restRequests;
+      this.arrForms = autofill.rests.map((item) => ({
+        user: item.restName,
+        // id: item.restId,
+        reason: item.reasonId,
+        // restId: item.restId,
+        reasonName: item.reasonName,
+        session: item.session,
+      }));
     }
   },
   computed: {

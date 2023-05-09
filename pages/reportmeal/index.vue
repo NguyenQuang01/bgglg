@@ -88,13 +88,12 @@ export default {
     }
   },
   mounted() {
-    const autofill = localStorage.getItem("report");
+    const autofill = JSON.parse(localStorage.getItem("report"));
     const checkReport = localStorage.getItem("checkReport");
-    console.log(JSON.parse(autofill));
     if (autofill && checkReport === "false") {
-      this.numberMeal.staff = autofill.riceRequests.riceEmp;
-      this.numberMeal.guest = autofill.riceRequests.riceCus;
-      this.numberMeal.guestVip = autofill.riceRequests.riceVip;
+      this.numberMeal.staff = autofill?.rice?.riceEmp || 0;
+      this.numberMeal.guest = autofill?.rice?.riceCus || 0;
+      this.numberMeal.guestVip = autofill?.rice?.riceVip || 0;
     }
   },
   methods: {
