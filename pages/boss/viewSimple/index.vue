@@ -1,7 +1,8 @@
 <template lang="">
   <div class="container">
     <div class="text-center mt-16 text-3xl font-bold title mb-16">
-      Bảng báo cáo chi tiết điện thoai
+      Bảng báo cáo chi tiết
+      <p class="text-lg">(giao diện điện thoại)</p>
     </div>
     <div class="max-w-sm m-auto m-0">
       <div class="mb-2 flex">

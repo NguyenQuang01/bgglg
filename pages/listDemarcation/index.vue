@@ -1,7 +1,7 @@
 <template lang="">
   <div class="container">
     <div class="text-center mt-16 text-3xl font-bold title2">
-      Danh Sách Định Biên
+      Danh Sách Các Tổ và Định Biên
     </div>
     <div class="text-center mt-2 font-semibold mb-10"></div>
     <div class="max-w-2xl m-auto m-0">

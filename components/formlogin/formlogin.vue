@@ -65,6 +65,8 @@ export default {
       event.preventDefault();
       const res = await signInAPI(this.form);
       if (res.status === 500) {
+        this.form.pass = "";
+        this.form.user = "";
         message.error("sai tài khoản hoặc mật khẩu");
       }
       if (res && res.status === 200) {
