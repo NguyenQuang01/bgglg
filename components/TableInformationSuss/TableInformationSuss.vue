@@ -147,13 +147,7 @@
         <td class="tdText text-slate-50">SỐ NGHỈ</td>
 
         <td>
-          <input
-            type="text"
-            v-model="arrReasons.length"
-            class="w-20"
-            v-if="isEdit"
-          />
-          <div v-else>{{ arrReasons.length }}</div>
+          <div>{{ totalReasons }}</div>
         </td>
         <td>
           <div v-for="(item, index) in arrReasons" :key="index">
@@ -210,6 +204,7 @@ export default {
       transferIdTran: 0,
       transferIdSupport: 0,
       groupIdTran: 0,
+      totalReasons: 0,
       groupIdSp: 0,
       numberProductivity: 0,
       day: new Date().getDate(),
@@ -276,7 +271,7 @@ export default {
         this.numberSupport = res.supportNum;
         this.numberEatRice = res.rice;
         this.totalRice = res.totalRice;
-
+        this.totalReasons = res.restNum;
         this.arrReasons = res.rests;
         this.riceId = res.rice.riceId;
         this.transferIdTran = res.transfers[0].transferId;
