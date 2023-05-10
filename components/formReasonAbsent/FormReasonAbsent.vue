@@ -193,8 +193,13 @@ export default {
         .reduce((accumulator, currentValue) => accumulator + currentValue, 0);
       this.SET_STATE_ARRLABOR(arrLabor);
       this.SET_STATE_LABOR(totalLabor);
-
-      this.$router.push("/report/laborIncrease");
+      const isPage = this.arrForms.map((item) => item.user);
+      const isBelowThreshold = (currentValue) => currentValue !== "";
+      if (isPage.every(isBelowThreshold)) {
+        this.$router.push("/report/laborIncrease");
+      } else {
+        message.warning("Chưa điền tên nguời nghỉ");
+      }
 
       // this.$router.push("/");
     },
