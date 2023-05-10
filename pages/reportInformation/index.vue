@@ -5,7 +5,7 @@
     </div>
 
     <div class="font-semibold mb-2 text-lg title">
-      <b-icon icon="house-fill"></b-icon> Nhà máy : Xưởng 1
+      <b-icon icon="house-fill"></b-icon> Nhà máy : BGG Lạng Giang
     </div>
     <div class="max-w-2xl m-auto m-0">
       <div class="flex justify-center">
