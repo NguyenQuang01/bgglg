@@ -373,7 +373,7 @@ export default defineComponent({
           id: id,
         },
       ]);
-      if (res.code === 200 && res) {
+      if (res.status === 201 && res) {
         message.success("sửa thành công");
         getvalue(page.current, page.pageSize);
       }
