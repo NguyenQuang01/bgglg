@@ -82,7 +82,7 @@ export default {
         user: "",
         id: "",
         reason: "",
-        restId: "",
+        restId: 0,
         session: "",
         workTime: 0,
       },
@@ -232,7 +232,7 @@ export default {
           user: "",
           id: "",
           reason: "",
-          restId: "",
+          restId: 0,
           session: "",
           workTime: 0,
         });
