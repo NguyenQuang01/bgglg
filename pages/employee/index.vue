@@ -375,6 +375,7 @@ export default defineComponent({
       ]);
       if (res.code === 200 && res) {
         message.success("sửa thành công");
+        getvalue(page.current, page.pageSize);
       }
       isEdit.value = !isEdit.value;
     };
