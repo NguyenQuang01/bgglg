@@ -49,7 +49,11 @@
 import { mapMutations } from "vuex";
 import ButtonSkip from "@/components/buttonSkip";
 import BtnBack from "@/components/BtnBack.vue";
-import { getDetail } from "@/api/AuthenConnector.js";
+import {
+  getDetail,
+  updateDemarcation,
+  getDemarcationDb,
+} from "@/api/AuthenConnector.js";
 import { today } from "@/constants/getToday";
 export default {
   middleware: "auth",
@@ -72,6 +76,7 @@ export default {
     }
   },
   mounted() {
+    this.getDemarcation();
     const autofill = JSON.parse(localStorage.getItem("report"));
     const checkReport = localStorage.getItem("checkReport");
     if (autofill && checkReport === "false") {
@@ -84,11 +89,34 @@ export default {
       SET_STATE_PROFESSIONLABOR: "SET_STATE_PROFESSIONLABOR",
       SET_STATE_PROFESSIONOTLABOR: "SET_STATE_PROFESSIONOTLABOR",
     }),
-    onSubmit(event) {
+    async getDemarcation() {
+      const groupId = localStorage.getItem("groupId");
+      const res = await getDemarcationDb(groupId);
+      if (res && res.status === 200) {
+        console.log(res);
+        const demarcation = res.data.demarcationAvailable;
+        localStorage.setItem("demarcation", demarcation);
+      }
+    },
+    async onSubmit(event) {
       event.preventDefault();
       this.SET_STATE_PROFESSIONLABOR(this.form.professionLabor);
       this.SET_STATE_PROFESSIONOTLABOR(this.form.professionNotLabor);
-      this.$router.push("/report/decreaseInLabor");
+      const totalLaborendNotLabor =
+        Number(localStorage.getItem("demarcation")) +
+        Number(this.form.professionLabor) +
+        Number(this.form.professionNotLabor);
+      const groupId = localStorage.getItem("groupId");
+      const groupName = localStorage.getItem("groupName");
+
+      const res = await updateDemarcation(
+        totalLaborendNotLabor,
+        groupId,
+        groupName
+      );
+      if (res) {
+        this.$router.push("/report/decreaseInLabor");
+      }
     },
     async getValue() {
       const day = today();

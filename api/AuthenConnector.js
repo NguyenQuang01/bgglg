@@ -79,10 +79,9 @@ export const deleteAcc = async (id) => {
   return response.data;
 };
 export const updateAcc = async (userId, param) => {
-  const response = await request.post(
-    `${HOST}/api/update?userId=${userId}`,
-    param
-  );
+  const response = await request.post(`${HOST}/api/update?userId=${userId}`, {
+    password: param || 1,
+  });
   return response.data;
 };
 //
