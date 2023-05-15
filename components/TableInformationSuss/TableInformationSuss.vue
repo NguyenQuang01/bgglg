@@ -280,12 +280,12 @@ export default {
         this.groupIdSp = res.transfers[1].groupId;
         this.id = res.id;
         this.isAcctoved = res.transfers[0].access;
-        this.numberProductivity =
-          this.demarcation -
-          Number(this.arrReasons.length) -
-          this.numberStudent -
-          this.numberTransfer -
-          this.numberSupport;
+        this.numberProductivity = res.laborProductivity;
+        // this.demarcation -
+        // Number(this.arrReasons.length) -
+        // this.numberStudent -
+        // this.numberTransfer -
+        // this.numberSupport;
       }
     },
   },

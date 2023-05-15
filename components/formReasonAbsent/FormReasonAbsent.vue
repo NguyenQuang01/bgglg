@@ -153,7 +153,19 @@ export default {
         }
       }
     },
+    hasDuplicates(arr) {
+      const seen = new Set();
 
+      for (let i = 0; i < arr.length; i++) {
+        const element = arr[i];
+        if (seen.has(element)) {
+          return true;
+        }
+        seen.add(element);
+      }
+
+      return false;
+    },
     handleChange(selectedItems) {
       this.selectedItems = selectedItems;
     },
@@ -194,9 +206,16 @@ export default {
       this.SET_STATE_ARRLABOR(arrLabor);
       this.SET_STATE_LABOR(totalLabor);
       const isPage = this.arrForms.map((item) => item.user);
+      const isArrName = this.arrForms.map((item) =>
+        item.user.replace(/\s/g, "")
+      );
       const isBelowThreshold = (currentValue) => currentValue !== "";
+
+      const isNameAlike = this.hasDuplicates(isArrName);
       if (isPage.every(isBelowThreshold)) {
-        this.$router.push("/report/laborIncrease");
+        isNameAlike
+          ? message.warning("Người nghỉ trùng nhau")
+          : this.$router.push("/report/laborIncrease");
       } else {
         message.warning("Chưa điền tên nguời nghỉ");
       }
