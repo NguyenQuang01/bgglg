@@ -106,7 +106,8 @@ export default {
       event.preventDefault();
 
       if (this.deleteLabor) {
-        // this.SET_STATE_NumberDeleteLabor(1);
+        const totalDeleteLabor = this.deleteLabor.length;
+        this.SET_STATE_NumberDeleteLabor(totalDeleteLabor);
         this.SET_STATE_codeDeleteLabor(this.deleteLabor);
         this.$router.push("/newPartTimeEndWorker");
       } else {
