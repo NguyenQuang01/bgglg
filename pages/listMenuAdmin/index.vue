@@ -47,7 +47,7 @@ export default {
     return {
       text1: `Tạo tài khoản`,
       text2: `Danh sách lý do nghỉ`,
-      text3: `Danh sách các tổ`,
+      text3: `Thêm tổ mới`,
       text4: `Danh sách nhân viên`,
       text5: `Danh sách định biên các tổ`,
       text6: `Danh sách tài khoản`,

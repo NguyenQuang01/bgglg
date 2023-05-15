@@ -148,7 +148,7 @@ export default {
   methods: {
     async getvalue() {
       const res = await getAllAcc(this.page.current, this.page.pageSize, {
-        groupName: this.userName,
+        userName: this.userName,
       });
       if (res) {
         this.total = res.totalElements;
