@@ -239,7 +239,10 @@ export default {
           Number(
             this.getDataInformationReport.transferRequests[0].transferNum
           ) -
-          Number(this.getDataInformationReport.transferRequests[1].transferNum);
+          Number(
+            this.getDataInformationReport.transferRequests[1].transferNum
+          ) -
+          Number(this.getNumberDeleteLabor);
         this.SET_STATE_PRODUCTIVITY(productivity);
       }
     },
