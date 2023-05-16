@@ -226,11 +226,7 @@ export default {
       const res = await getDemarcationDb(groupId);
       if (res && res.status === 200) {
         numberDemarcation = res.data.demarcationAvailable;
-        const demarcation =
-          numberDemarcation +
-          this.partTimeNum() +
-          Number(this.getDataInformationReport.professionLabor) +
-          Number(this.getDataInformationReport.professionNotLabor);
+        const demarcation = numberDemarcation;
         this.SET_STATE_DEMARCATION(demarcation);
         const productivity =
           Number(this.getDataInformationReport.demarcation) -
@@ -241,8 +237,8 @@ export default {
           ) -
           Number(
             this.getDataInformationReport.transferRequests[1].transferNum
-          ) -
-          Number(this.getNumberDeleteLabor);
+          ) +
+          this.partTimeNum();
         this.SET_STATE_PRODUCTIVITY(productivity);
       }
     },
