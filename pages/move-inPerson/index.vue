@@ -45,6 +45,14 @@ export default {
       const res = await getTransfer(today);
       if (res) {
         this.transfer = res;
+        const totalTransfer = res
+          .map((item) => item.transferNum)
+          .reduce(
+            (accumulator, currentValue) =>
+              Number(accumulator) + Number(currentValue),
+            0
+          );
+        localStorage.setItem("totalTransfer", totalTransfer);
       }
       //        const res = await accuracy();
     },

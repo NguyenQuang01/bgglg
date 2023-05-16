@@ -225,6 +225,7 @@ export default {
       const groupId = localStorage.getItem("groupId");
       const res = await getDemarcationDb(groupId);
       if (res && res.status === 200) {
+        const totalTransfer = localStorage.getItem("totalTransfer");
         numberDemarcation = res.data.demarcationAvailable;
         const demarcation = numberDemarcation;
         this.SET_STATE_DEMARCATION(demarcation);
@@ -238,6 +239,7 @@ export default {
           Number(
             this.getDataInformationReport.transferRequests[1].transferNum
           ) +
+          Number(totalTransfer) +
           this.partTimeNum();
         this.SET_STATE_PRODUCTIVITY(productivity);
       }
