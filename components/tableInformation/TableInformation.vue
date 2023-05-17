@@ -33,7 +33,17 @@
       </tr>
 
       <tr>
-        <td class="tdText text-slate-50">ĐIỀU CHUYỂN</td>
+        <td class="tdText text-slate-50">ĐIỀU CHUYỂN ĐI</td>
+        <td>{{ numberTransfer.quantity }}</td>
+        <!-- <td v-if="numberTransfer.information" class="text-lime-800">
+          xác nhận
+        </td>
+        <td v-else class="text-rose-800">chưa xác nhận</td> -->
+        <td></td>
+      </tr>
+
+      <tr>
+        <td class="tdText text-slate-50">ĐIỀU CHUYỂN ĐẾN</td>
         <td>{{ numberTransfer.quantity }}</td>
         <!-- <td v-if="numberTransfer.information" class="text-lime-800">
           xác nhận
@@ -42,7 +52,14 @@
         <td></td>
       </tr>
       <tr>
-        <td class="tdText text-slate-50">HỖ TRỢ</td>
+        <td class="tdText text-slate-50">ĐI HỖ TRỢ</td>
+        <td>{{ numberSupport.quantity }}</td>
+        <!-- <td v-if="numberSupport.information" class="text-lime-800">xác nhận</td>
+        <td v-else class="text-rose-800">chưa xác nhận</td> -->
+        <td></td>
+      </tr>
+      <tr>
+        <td class="tdText text-slate-50">ĐẾN HỖ TRỢ</td>
         <td>{{ numberSupport.quantity }}</td>
         <!-- <td v-if="numberSupport.information" class="text-lime-800">xác nhận</td>
         <td v-else class="text-rose-800">chưa xác nhận</td> -->
@@ -73,7 +90,7 @@
       </tr>
 
       <tr>
-        <td class="tdText text-slate-50">SỐ NGHỈ</td>
+        <td class="tdText text-slate-50">NGHỈ HÀNG NGÀY</td>
         <td>{{ numberReasons.quantity }}</td>
         <td>
           <div
