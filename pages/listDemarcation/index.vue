@@ -5,6 +5,39 @@
     </div>
     <div class="text-center mt-2 font-semibold mb-10"></div>
     <div class="max-w-2xl m-auto m-0">
+      <div>
+        <b-form @submit="onSubmit">
+          <div class="flex justify-between items-center">
+            <b-row class="with100">
+              <b-col cols="12"
+                ><b-form-group
+                  class="title"
+                  id="input-group-1"
+                  label="Xóa đơn vị:"
+                  label-for="input-1"
+                >
+                  <a-cascader
+                    :options="options"
+                    expand-trigger="hover"
+                    placeholder="chọn"
+                    @change="onChange"
+                    class="inputLogin"
+                  />
+                </b-form-group>
+              </b-col>
+              <b-col class="flex items-center bttAdd float-right">
+                <div>
+                  <b-button
+                    type="submit"
+                    class="add-btn w-full borderRadius px-3"
+                    >Xóa</b-button
+                  >
+                </div></b-col
+              >
+            </b-row>
+          </div>
+        </b-form>
+      </div>
       <div class="mt-6">
         <table id="customers " class="w-full">
           <tr class="bg-slate-100">
@@ -106,15 +139,22 @@
   </div>
 </template>
 <script>
-import { getAllDemarcation, updateDemarcation } from "@/api/AuthenConnector.js";
+import {
+  getAllDemarcation,
+  updateDemarcation,
+  groupRoleRoot,
+  deleteGroupRole,
+} from "@/api/AuthenConnector.js";
 import { message } from "ant-design-vue";
 import BtnBack from "@/components/BtnBack.vue";
 
 export default {
   components: ["BtnBack"],
-  middleware: "auth",
+  // middleware: "auth",
   data() {
     return {
+      deleteGroup: "",
+      options: [],
       total: "",
       isEdit: false,
       parts: [],
@@ -136,6 +176,7 @@ export default {
 
   fetch() {
     this.getvalue();
+    this.groupRoleRoot();
   },
   methods: {
     async getvalue() {
@@ -154,7 +195,24 @@ export default {
         }));
       }
     },
-
+    onChange(value) {
+      const lastElement = value[value.length - 1];
+      this.deleteGroup = lastElement;
+    },
+    async onSubmit(event) {
+      event.preventDefault();
+      const res = await deleteGroupRole(this.deleteGroup);
+      if (res) {
+        message.success("thêm thành công");
+        this.getvalue();
+      }
+    },
+    async groupRoleRoot() {
+      const res = await groupRoleRoot();
+      if (res) {
+        this.options = res.data;
+      }
+    },
     searchName() {
       this.getvalue();
     },
@@ -239,7 +297,7 @@ th {
   border: none;
 }
 .add-btn {
-  background-color: #045396;
+  background-color: #eb6e6e;
   border: none;
 }
 .title {

@@ -84,7 +84,7 @@ export const updateAcc = async (userId, param) => {
   });
   return response.data;
 };
-//
+//group
 export const getTransfer = async (param) => {
   const groupId = localStorage.getItem("groupId");
   const response = await request.get(
@@ -107,12 +107,17 @@ export const groupRoleRoot = async () => {
   const response = await request.get(`${HOST}/groupRole`);
   return response.data;
 };
+// export const deleteGroupRole = async () => {
+//   const response = await request.get(`${HOST}/groupRole`);
+//   return response.data;
+// };
 export const groupRoleDetails = async (param) => {
   const response = await request.get(
     `${HOST}/groupRoleDetails?parentId=${param}`
   );
   return response.data;
 };
+//
 export const getForLeave = async () => {
   const response = await request.get(`${HOST}/reason/save`);
   return response.data;
@@ -191,8 +196,8 @@ export const addGroupRole = async (param) => {
   return response.data;
 };
 export const deleteGroupRole = async (param) => {
-  const response = await request.get(
-    `${HOST}/groupRole/delete?groupName=${param}`
+  const response = await request.delete(
+    `${HOST}/groupRole/delete?groupId=${param}`
   );
   return response.data;
 };
