@@ -40,11 +40,15 @@
       <tr>
         <td class="tdText text-slate-50">ĐIỀU CHUYỂN ĐI</td>
         <td>{{ numberTransfer.quantity }}</td>
+        <td>
+          <div v-for="(item, index) in numberTransfer.information" :key="index">
+            {{ item }}
+          </div>
+        </td>
         <!-- <td v-if="numberTransfer.information" class="text-lime-800">
           xác nhận
         </td>
         <td v-else class="text-rose-800">chưa xác nhận</td> -->
-        <td></td>
       </tr>
 
       <tr>
@@ -201,10 +205,21 @@ export default {
       };
     },
     numberTransfer() {
+      let obj = this.getDataInformationReport.transferRequests.map(
+        (item) => item.employees
+      );
+      let mergedArray = [];
+
+      for (let key in obj) {
+        if (Array.isArray(obj[key])) {
+          mergedArray = mergedArray.concat(obj[key]);
+        }
+      }
       return {
-        information: true,
-        quantity:
-          this.getDataInformationReport?.transferRequests[0].transferNum,
+        information: mergedArray,
+        quantity: this.getDataInformationReport.transferRequests
+          .map((item) => item.transferNum)
+          .reduce((accumulator, currentValue) => accumulator + currentValue, 0),
       };
     },
     numberSupport() {
@@ -231,6 +246,7 @@ export default {
   },
   created() {
     this.getDemarcation();
+
     // setTimeout(() => this.getProductivity(), 0);
   },
   mounted() {

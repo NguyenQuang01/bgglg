@@ -205,12 +205,17 @@ export default {
       event.preventDefault();
       if (this.form.groupId) {
         let targetField = "groupId";
+        let transferNum = "transferNum";
         for (let i = 0; i < this.arrForms.length; i++) {
           if (this.arrForms[i].hasOwnProperty(targetField)) {
             this.arrForms[i][targetField] =
               this.arrForms[i][targetField][
                 this.arrForms[i][targetField].length - 1
               ];
+          }
+          if (this.arrForms[i].hasOwnProperty(transferNum)) {
+            this.arrForms[i][transferNum] =
+              this.arrForms[i].employees.length || 0;
           }
         }
         this.SET_STATE_TRANSFER(this.arrForms);

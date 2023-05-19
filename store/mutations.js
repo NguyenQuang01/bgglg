@@ -24,7 +24,7 @@ export default {
     state.dataInformationReport.professionNotLabor = Number(data);
   },
   SET_STATE_TRANSFER(state, data) {
-    state.transferRequests = data;
+    state.dataInformationReport.transferRequests = data;
   },
   // SET_STATE_SUPPORT(state, data) {
   //   state.dataInformationReport.transferRequests[1].transferNum =
