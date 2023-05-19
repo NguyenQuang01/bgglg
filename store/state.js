@@ -11,20 +11,7 @@ export default () => ({
     studentNum: 0,
     professionLabor: 0,
     professionNotLabor: 0,
-    transferRequests: [
-      {
-        transferNum: null,
-        type: 1,
-        groupId: null,
-        transferId: null,
-      },
-      {
-        transferNum: null,
-        type: 2,
-        groupId: null,
-        transferId: null,
-      },
-    ],
+    transferRequests: [],
     riceRequests: {
       riceEmp: 0,
       riceCus: 0,

@@ -15,8 +15,19 @@
               class="mr-2 w-4/12"
             >
               <a-select
+                mode="tags"
+                style="width: 100%"
+                :token-separators="[',']"
+                v-model="item.user"
+              >
+                <a-select-option v-for="i in filteredOptions" :key="i">
+                  {{ i }}
+                </a-select-option>
+              </a-select>
+              <a-select
                 show-search
                 placeholder="Chọn"
+                :token-separators="[',']"
                 style="width: 100%; border-radius: 50px"
                 v-model="item.user"
                 class="inputLogin"
@@ -41,6 +52,7 @@
                 :options="parts"
                 expand-trigger="hover"
                 placeholder="chọn"
+                v-model="item.group"
                 class="inputLogin"
                 @change="onChange"
               />
@@ -92,9 +104,10 @@ export default {
       visible: false,
       skip: "/move-inPerson",
       form: {
-        user: "",
+        user: null,
         group: "",
         transferId: "",
+        groupParent: "",
       },
       check: true,
       page: {
@@ -106,10 +119,10 @@ export default {
   fetch() {
     this.arrForms.push(this.form);
     const isReport = localStorage.getItem("checkReport");
-    if (isReport === "true") {
-      this.check = true;
-      this.getValue();
-    }
+    // if (isReport === "true") {
+    //   this.check = true;
+    //   this.getValue();
+    // }
     this.groupRoleRoot();
     this.getvalueName();
   },
@@ -141,12 +154,12 @@ export default {
   methods: {
     ...mapMutations({
       SET_STATE_TRANSFER: "SET_STATE_TRANSFER",
-      SET_STATE_SUPPORT: "SET_STATE_SUPPORT",
     }),
     handleChange(selectedItems) {
       this.selectedItems = selectedItems;
     },
-    onChange(value) {
+    onChange1(value) {
+      console.log(value);
       const lastElement = value[value.length - 1];
       const lastElement2 = value[value.length - 2];
       this.form.group = lastElement;
@@ -166,7 +179,6 @@ export default {
         payload
       );
       if (res && res.code === 201) {
-        console.log(res, 777);
         this.OPTIONS = res.data.content.map(
           (item) => ` ${item.employeeName} - ${item.laborCode}`
           // value: item.employeeName,
@@ -194,38 +206,44 @@ export default {
           user: "",
           group: "",
           transferId: "",
+          groupParent: "",
         });
       }
     },
     onSubmit(event) {
       event.preventDefault();
       if (this.form.group) {
-        this.SET_STATE_TRANSFER({
-          user: Number(this.form.number),
-          groupId: this.form.group,
-          transferId: this.form.transferId,
-        });
+        let targetField = "group";
+        for (let i = 0; i < this.arrForms.length; i++) {
+          if (this.arrForms[i].hasOwnProperty(targetField)) {
+            this.arrForms[i][targetField] =
+              this.arrForms[i][targetField][
+                this.arrForms[i][targetField].length - 1
+              ];
+          }
+        }
+        this.SET_STATE_TRANSFER(this.arrForms);
 
         this.$router.push("/move-inPerson");
       } else {
         message.warning("Chọn tổ đơn vị");
       }
     },
-    async getValue() {
-      const day = today();
-      const groupId = localStorage.getItem("groupId");
-      const res = await getDetail({ day, groupId });
-      if (res) {
-        this.form.parentId = res.transfers[0].parentId;
-        this.form.parentIdSupport = res.transfers[1].parentId;
-        this.form.number = res.transfers[0].transferNum;
-        this.form.group = res.transfers[0].groupId;
-        this.form.transferId = res.transfers[0].transferId;
-        this.form.support.number = res.transfers[1].transferNum;
-        this.form.support.group = res.transfers[1].groupId;
-        this.form.support.transferId = res.transfers[1].transferId;
-      }
-    },
+    // async getValue() {
+    //   const day = today();
+    //   const groupId = localStorage.getItem("groupId");
+    //   const res = await getDetail({ day, groupId });
+    //   if (res) {
+    //     this.form.parentId = res.transfers[0].parentId;
+    //     this.form.parentIdSupport = res.transfers[1].parentId;
+    //     this.form.number = res.transfers[0].transferNum;
+    //     this.form.group = res.transfers[0].groupId;
+    //     this.form.transferId = res.transfers[0].transferId;
+    //     this.form.support.number = res.transfers[1].transferNum;
+    //     this.form.support.group = res.transfers[1].groupId;
+    //     this.form.support.transferId = res.transfers[1].transferId;
+    //   }
+    // },
   },
 };
 </script>

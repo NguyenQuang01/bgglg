@@ -24,19 +24,15 @@ export default {
     state.dataInformationReport.professionNotLabor = Number(data);
   },
   SET_STATE_TRANSFER(state, data) {
-    state.dataInformationReport.transferRequests[0].transferNum =
-      data.transferNum;
-    state.dataInformationReport.transferRequests[0].groupId = data.groupId;
-    state.dataInformationReport.transferRequests[0].transferId =
-      data.transferId;
+    state.transferRequests = data;
   },
-  SET_STATE_SUPPORT(state, data) {
-    state.dataInformationReport.transferRequests[1].transferNum =
-      data.transferNum;
-    state.dataInformationReport.transferRequests[1].groupId = data.groupId;
-    state.dataInformationReport.transferRequests[1].transferId =
-      data.transferId;
-  },
+  // SET_STATE_SUPPORT(state, data) {
+  //   state.dataInformationReport.transferRequests[1].transferNum =
+  //     data.transferNum;
+  //   state.dataInformationReport.transferRequests[1].groupId = data.groupId;
+  //   state.dataInformationReport.transferRequests[1].transferId =
+  //     data.transferId;
+  // },
   SET_STATE_MEAL(state, data) {
     state.dataInformationReport.riceRequests.riceEmp = Number(data.staff);
     state.dataInformationReport.riceRequests.riceCus = Number(data.guest);
