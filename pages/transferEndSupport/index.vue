@@ -24,7 +24,7 @@
                   {{ i }}
                 </a-select-option>
               </a-select>
-              <a-select
+              <!-- <a-select
                 show-search
                 placeholder="Chọn"
                 :token-separators="[',']"
@@ -39,7 +39,7 @@
                 >
                   {{ item }}
                 </a-select-option>
-              </a-select>
+              </a-select> -->
             </b-form-group>
             <b-icon icon="arrow-right" aria-hidden="true" class="mr-2"></b-icon>
             <b-form-group
@@ -275,8 +275,7 @@ export default {
 }
 </style>
 <style>
-.ant-cascader-input {
+.ant-select-selection--multiple {
   border-radius: 50px;
-  height: 40px;
 }
 </style>
