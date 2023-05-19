@@ -18,7 +18,7 @@
           ><br v-if="getInfUsers.isEdit" />
           <a-button
             v-if="getInfUsers.isEdit"
-            @click="editReport"
+            @click="goToPeople"
             class="menuBtn"
             >{{ textTv }}</a-button
           ><br v-if="getInfUsers.isEdit" />
@@ -111,6 +111,9 @@ export default {
     },
     admin() {
       this.$router.push("/listMenuAdmin");
+    },
+    goToPeople() {
+      this.$router.push("/report/listPeople");
     },
   },
   // created() {
