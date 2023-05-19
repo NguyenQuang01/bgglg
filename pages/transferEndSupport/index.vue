@@ -54,7 +54,6 @@
                 placeholder="chọn"
                 v-model="item.group"
                 class="inputLogin"
-                @change="onChange"
               />
             </b-form-group>
           </div>
@@ -104,7 +103,7 @@ export default {
       visible: false,
       skip: "/move-inPerson",
       form: {
-        user: null,
+        // user: null,
         group: "",
         transferId: "",
         groupParent: "",
@@ -203,7 +202,7 @@ export default {
       this.amoun = this.amoun + 1;
       for (let i = 0; i < this.amount; i++) {
         this.arrForms.push({
-          user: "",
+          // user: "",
           group: "",
           transferId: "",
           groupParent: "",
