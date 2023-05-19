@@ -18,7 +18,7 @@
                 mode="tags"
                 style="width: 100%"
                 :token-separators="[',']"
-                v-model="item.user"
+                v-model="item.employees"
               >
                 <a-select-option v-for="i in filteredOptions" :key="i">
                   {{ i }}
@@ -52,7 +52,7 @@
                 :options="parts"
                 expand-trigger="hover"
                 placeholder="chọn"
-                v-model="item.group"
+                v-model="item.groupId"
                 class="inputLogin"
               />
             </b-form-group>
@@ -103,10 +103,12 @@ export default {
       visible: false,
       skip: "/move-inPerson",
       form: {
-        // user: null,
-        group: "",
-        transferId: "",
+        employees: ["quangteo - 2233"],
+        groupId: null,
+        transferId: null,
+        transferNum: null,
       },
+
       check: true,
       page: {
         current: 1,
@@ -192,16 +194,17 @@ export default {
       this.amoun = this.amoun + 1;
       for (let i = 0; i < this.amount; i++) {
         this.arrForms.push({
-          // user: "",
-          group: "",
-          transferId: "",
+          employees: ["quangteo - 2233"],
+          groupId: null,
+          transferId: null,
+          transferNum: null,
         });
       }
     },
     onSubmit(event) {
       event.preventDefault();
-      if (this.form.group) {
-        let targetField = "group";
+      if (this.form.groupId) {
+        let targetField = "groupId";
         for (let i = 0; i < this.arrForms.length; i++) {
           if (this.arrForms[i].hasOwnProperty(targetField)) {
             this.arrForms[i][targetField] =
