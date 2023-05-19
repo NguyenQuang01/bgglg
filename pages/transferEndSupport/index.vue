@@ -106,7 +106,6 @@ export default {
         // user: null,
         group: "",
         transferId: "",
-        groupParent: "",
       },
       check: true,
       page: {
@@ -157,19 +156,10 @@ export default {
     handleChange(selectedItems) {
       this.selectedItems = selectedItems;
     },
-    onChange1(value) {
+    onChange(value) {
       console.log(value);
-      const lastElement = value[value.length - 1];
-      const lastElement2 = value[value.length - 2];
-      this.form.group = lastElement;
-      this.form.groupParent = lastElement2;
     },
-    onChange2(value) {
-      const lastElement = value[value.length - 1];
-      const lastElement2 = value[value.length - 2];
-      this.form.support.group = lastElement;
-      this.form.support.groupParent = lastElement2;
-    },
+
     async getvalueName() {
       const payload = { groupId: localStorage.getItem("groupId") };
       const res = await getAllEmployee(
@@ -205,7 +195,6 @@ export default {
           // user: "",
           group: "",
           transferId: "",
-          groupParent: "",
         });
       }
     },
