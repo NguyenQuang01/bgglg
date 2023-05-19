@@ -1,7 +1,7 @@
 <template lang="">
   <div class="container">
     <div class="text-center mt-16 text-3xl font-bold title">
-      Xác nhận số người đến hỗ trợ!
+      XÁC NHẬN NGƯỜI ĐIỀU CHUYỂN ĐẾN
     </div>
 
     <div class="text-center mt-2 font-semibold mb-10"></div>

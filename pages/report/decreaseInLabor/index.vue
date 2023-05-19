@@ -1,7 +1,7 @@
 <template lang="">
   <div class="container">
     <div class="text-center mt-10 mb-16 text-3xl font-bold title">
-      BÁO CÁO SỐ LAO ĐỘNG GIẢM
+      BÁO CÁO LAO ĐỘNG NGHỈ VIỆC
     </div>
 
     <div class="max-w-sm m-auto m-0">

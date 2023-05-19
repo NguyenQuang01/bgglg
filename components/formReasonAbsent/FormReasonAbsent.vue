@@ -123,9 +123,7 @@ export default {
     if (autofill && checkReport === "false") {
       this.arrForms = autofill.rests.map((item) => ({
         user: item.restName,
-        // id: item.restId,
         reason: item.reasonId,
-        // restId: item.restId,
         reasonName: item.reasonName,
         session: item.session,
       }));
@@ -245,7 +243,7 @@ export default {
       // }
     },
     addQuantity() {
-      this.amoun = this.amoun + 1;
+      // this.amount = this.amount + 1;
       for (let i = 0; i < this.amount; i++) {
         this.arrForms.push({
           user: "",

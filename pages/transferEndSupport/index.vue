@@ -1,83 +1,63 @@
 <template lang="">
   <div class="container">
     <div class="text-center mt-10 mb-16 text-3xl font-bold title">
-      BÁO CÁO SỐ ĐIỀU CHUYỂN & HỖ TRỢ
+      BÁO CÁO SỐ ĐIỀU CHUYỂN
     </div>
 
     <div class="max-w-2xl m-auto m-0">
       <b-form @submit="onSubmit">
-        <div class="flex justify-between items-center">
-          <b-form-group
-            id="input-group-2"
-            label="SỐ điều chuyển:"
-            label-for="input-2"
-            class="mr-2"
-          >
-            <b-form-input
-              v-model="form.transfer.number"
-              placeholder="Nhập "
-              required
-              :min="0"
-              type="number"
-              class="h-8 inputLogin"
-            ></b-form-input>
-          </b-form-group>
-          <b-icon icon="arrow-right" aria-hidden="true" class="mr-2"></b-icon>
-          <b-form-group
-            id="input-group-3"
-            label="Chọn bộ phận:"
-            label-for="input-3"
-            class="width48"
-          >
-            <a-cascader
-              :options="parts"
-              expand-trigger="hover"
-              placeholder="chọn"
-              required
-              class="inputLogin"
-              @change="onChange"
-            />
-          </b-form-group>
-        </div>
-        <div class="seperate"></div>
-        <div class="flex justify-between items-center">
-          <b-form-group
-            id="input-group-2"
-            label="SỐ đi hỗ trợ:"
-            label-for="input-2"
-            class="mr-2"
-          >
-            <b-form-input
-              v-model="form.support.number"
-              placeholder="Nhập "
-              required
-              :min="0"
-              type="number"
-              class="h-8 inputLogin"
-            ></b-form-input>
-          </b-form-group>
-          <b-icon icon="arrow-right" aria-hidden="true" class="mr-2"></b-icon>
-          <b-form-group
-            id="input-group-3"
-            label="Chọn bộ phận:"
-            label-for="input-3"
-            class="width48"
-          >
-            <a-cascader
-              :options="parts"
-              expand-trigger="hover"
-              placeholder="chọn"
-              class="inputLogin"
-              required
-              @change="onChange2"
-            />
-          </b-form-group>
+        <div v-for="(item, index) in arrForms" :key="index">
+          <div class="flex justify-between items-center">
+            <b-form-group
+              id="input-group-2"
+              label="Chọn người điều chuyển:"
+              label-for="input-2"
+              class="mr-2 w-4/12"
+            >
+              <a-select
+                show-search
+                placeholder="Chọn"
+                style="width: 100%; border-radius: 50px"
+                v-model="item.user"
+                class="inputLogin"
+              >
+                <a-select-option
+                  v-for="item in filteredOptions"
+                  :key="item"
+                  :value="item"
+                >
+                  {{ item }}
+                </a-select-option>
+              </a-select>
+            </b-form-group>
+            <b-icon icon="arrow-right" aria-hidden="true" class="mr-2"></b-icon>
+            <b-form-group
+              id="input-group-3"
+              label="Chọn bộ phận:"
+              label-for="input-3"
+              class="width48"
+            >
+              <a-cascader
+                :options="parts"
+                expand-trigger="hover"
+                placeholder="chọn"
+                class="inputLogin"
+                @change="onChange"
+              />
+            </b-form-group>
+          </div>
         </div>
 
         <div class="flex float-right">
           <BtnBack class="h-10" />
-          <button-skip :skip="skip" v-if="check" />
-          <b-button type="submit" variant="primary" class="btnLogin mb-24"
+          <b-button
+            variant="primary"
+            class="mb-24 textBack h-10"
+            @click="addQuantity"
+            >Thêm</b-button
+          >
+          <button-skip :skip="skip" v-if="check" class="h-10" />
+          <b-button type="submit" variant="primary" class="btnLogin mb-24 h-10"
             >Xác nhận</b-button
           >
         </div>
@@ -91,41 +71,71 @@ import ButtonSkip from "@/components/buttonSkip";
 import BtnBack from "@/components/BtnBack.vue";
 import { getDetail } from "@/api/AuthenConnector.js";
 import { today } from "@/constants/getToday";
-import { groupRoleRoot, groupRoleDetails } from "@/api/AuthenConnector.js";
+import {
+  groupRoleRoot,
+  groupRoleDetails,
+  getAllEmployee,
+} from "@/api/AuthenConnector.js";
 import { message } from "ant-design-vue";
 export default {
-  middleware: "auth",
+  // middleware: "auth",
   components: { ButtonSkip, BtnBack },
   data() {
     return {
+      amount: 1,
+      selectedItems: "",
+      OPTIONS: [],
+      arrForms: [],
       parts: [],
       parts2: [],
       parts3: [],
       visible: false,
       skip: "/move-inPerson",
       form: {
-        parentId: "",
-        parentIdSupport: "",
-        transfer: { number: 0, group: "", transferId: "" },
-        support: { number: 0, group: "", transferId: "" },
+        user: "",
+        group: "",
+        transferId: "",
       },
       check: true,
+      page: {
+        current: 1,
+        pageSize: 500,
+      },
     };
   },
   fetch() {
+    this.arrForms.push(this.form);
     const isReport = localStorage.getItem("checkReport");
     if (isReport === "true") {
       this.check = true;
       this.getValue();
     }
     this.groupRoleRoot();
+    this.getvalueName();
   },
-  watch: {
-    "form.parentIdSupport": {
-      handler: function (value) {
-        this.groupRoleDetails2(value);
-      },
-      deep: true,
+  // watch: {
+  //   "form.parentIdSupport": {
+  //     handler: function (value) {
+  //       this.groupRoleDetails2(value);
+  //     },
+  //     deep: true,
+  //   },
+  // },
+  mounted() {
+    const autofill = JSON.parse(localStorage.getItem("report"));
+    const checkReport = localStorage.getItem("checkReport");
+    if (autofill && checkReport === "false") {
+      // this.arrForms = autofill.rests.map((item) => ({
+      //   user: item.restName,
+      //   reason: item.reasonId,
+      //   reasonName: item.reasonName,
+      //   session: item.session,
+      // }));
+    }
+  },
+  computed: {
+    filteredOptions() {
+      return this.OPTIONS.filter((o) => !this.selectedItems.includes(o));
     },
   },
   methods: {
@@ -133,17 +143,35 @@ export default {
       SET_STATE_TRANSFER: "SET_STATE_TRANSFER",
       SET_STATE_SUPPORT: "SET_STATE_SUPPORT",
     }),
+    handleChange(selectedItems) {
+      this.selectedItems = selectedItems;
+    },
     onChange(value) {
       const lastElement = value[value.length - 1];
       const lastElement2 = value[value.length - 2];
-      this.form.transfer.group = lastElement;
-      this.form.transfer.groupParent = lastElement2;
+      this.form.group = lastElement;
+      this.form.groupParent = lastElement2;
     },
     onChange2(value) {
       const lastElement = value[value.length - 1];
       const lastElement2 = value[value.length - 2];
       this.form.support.group = lastElement;
       this.form.support.groupParent = lastElement2;
+    },
+    async getvalueName() {
+      const payload = { groupId: localStorage.getItem("groupId") };
+      const res = await getAllEmployee(
+        this.page.current,
+        this.page.pageSize,
+        payload
+      );
+      if (res && res.code === 201) {
+        console.log(res, 777);
+        this.OPTIONS = res.data.content.map(
+          (item) => ` ${item.employeeName} - ${item.laborCode}`
+          // value: item.employeeName,
+        );
+      }
     },
     async groupRoleRoot() {
       const res = await groupRoleRoot();
@@ -159,20 +187,25 @@ export default {
         value: item.id,
       }));
     },
-
+    addQuantity() {
+      this.amoun = this.amoun + 1;
+      for (let i = 0; i < this.amount; i++) {
+        this.arrForms.push({
+          user: "",
+          group: "",
+          transferId: "",
+        });
+      }
+    },
     onSubmit(event) {
       event.preventDefault();
-      if (this.form.transfer.group || this.form.support.group) {
+      if (this.form.group) {
         this.SET_STATE_TRANSFER({
-          transferNum: Number(this.form.transfer.number),
-          groupId: this.form.transfer.group,
-          transferId: this.form.transfer.transferId,
+          user: Number(this.form.number),
+          groupId: this.form.group,
+          transferId: this.form.transferId,
         });
-        this.SET_STATE_SUPPORT({
-          transferNum: Number(this.form.support.number),
-          groupId: this.form.support.group,
-          transferId: this.form.support.transferId,
-        });
+
         this.$router.push("/move-inPerson");
       } else {
         message.warning("Chọn tổ đơn vị");
@@ -185,9 +218,9 @@ export default {
       if (res) {
         this.form.parentId = res.transfers[0].parentId;
         this.form.parentIdSupport = res.transfers[1].parentId;
-        this.form.transfer.number = res.transfers[0].transferNum;
-        this.form.transfer.group = res.transfers[0].groupId;
-        this.form.transfer.transferId = res.transfers[0].transferId;
+        this.form.number = res.transfers[0].transferNum;
+        this.form.group = res.transfers[0].groupId;
+        this.form.transferId = res.transfers[0].transferId;
         this.form.support.number = res.transfers[1].transferNum;
         this.form.support.group = res.transfers[1].groupId;
         this.form.support.transferId = res.transfers[1].transferId;
@@ -217,9 +250,15 @@ export default {
   height: 1px;
   margin: 40px 0;
 }
+.textBack {
+  color: #045396;
+  border-color: #045396;
+  border-radius: 50px;
+}
 </style>
 <style>
 .ant-cascader-input {
   border-radius: 50px;
+  height: 40px;
 }
 </style>

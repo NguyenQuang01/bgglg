@@ -7,7 +7,12 @@
         <th>Thông tin</th>
       </tr>
       <tr>
-        <td class="tdText text-slate-50">ĐỊNH BIÊN</td>
+        <td class="tdText text-slate-50">ĐỊNH BIÊN BAN ĐẦU</td>
+        <td>{{ demarcation.quantity }}</td>
+        <td>{{ demarcation.information }}</td>
+      </tr>
+      <tr>
+        <td class="tdText text-slate-50">ĐỊNH BIÊN MỚI</td>
         <td>{{ demarcation.quantity }}</td>
         <td>{{ demarcation.information }}</td>
       </tr>
@@ -51,20 +56,20 @@
         <td v-else class="text-rose-800">chưa xác nhận</td> -->
         <td></td>
       </tr>
-      <tr>
+      <!-- <tr>
         <td class="tdText text-slate-50">ĐI HỖ TRỢ</td>
         <td>{{ numberSupport.quantity }}</td>
-        <!-- <td v-if="numberSupport.information" class="text-lime-800">xác nhận</td>
-        <td v-else class="text-rose-800">chưa xác nhận</td> -->
+        <td v-if="numberSupport.information" class="text-lime-800">xác nhận</td>
+        <td v-else class="text-rose-800">chưa xác nhận</td>
         <td></td>
       </tr>
       <tr>
         <td class="tdText text-slate-50">ĐẾN HỖ TRỢ</td>
         <td>{{ numberSupport.quantity }}</td>
-        <!-- <td v-if="numberSupport.information" class="text-lime-800">xác nhận</td>
-        <td v-else class="text-rose-800">chưa xác nhận</td> -->
+        <td v-if="numberSupport.information" class="text-lime-800">xác nhận</td>
+        <td v-else class="text-rose-800">chưa xác nhận</td>
         <td></td>
-      </tr>
+      </tr> -->
       <tr>
         <td class="tdText text-slate-50">BÁO CƠM</td>
         <td>

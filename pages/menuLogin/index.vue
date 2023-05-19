@@ -17,9 +17,15 @@
             >{{ text2 }}</a-button
           ><br v-if="getInfUsers.isEdit" />
           <a-button
+            v-if="getInfUsers.isEdit"
+            @click="editReport"
+            class="menuBtn"
+            >{{ textTv }}</a-button
+          ><br v-if="getInfUsers.isEdit" />
+          <a-button
             v-if="getInfUsers.isView"
             @click="viewReport"
-            class="mb-3 menuBtn"
+            class="my-3 menuBtn"
             >{{ text3 }}</a-button
           ><br v-if="getInfUsers.isView" />
           <a-button
@@ -50,6 +56,7 @@ export default {
   components: { Avatar },
   data() {
     return {
+      textTv: `Thành viên của tổ`,
       text1: `Báo cáo`,
       text2: `Sửa báo cáo`,
       text3: `Xem lại báo cáo`,
