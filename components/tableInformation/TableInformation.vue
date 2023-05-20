@@ -53,7 +53,7 @@
 
       <tr>
         <td class="tdText text-slate-50">ĐIỀU CHUYỂN ĐẾN</td>
-        <td>{{ numberTransfer.quantity }}</td>
+        <td>{{ numberSupport.quantity }}</td>
         <!-- <td v-if="numberTransfer.information" class="text-lime-800">
           xác nhận
         </td>
@@ -225,8 +225,7 @@ export default {
     numberSupport() {
       return {
         information: false,
-        quantity:
-          this.getDataInformationReport?.transferRequests[1].transferNum,
+        quantity: localStorage.getItem("totalTransfer"),
       };
     },
     numberEatRice() {
@@ -270,15 +269,17 @@ export default {
         const productivity =
           Number(this.getDataInformationReport.demarcation) -
           Number(this.getDataInformationReport.restNum) -
-          Number(this.getDataInformationReport.studentNum) -
-          Number(
-            this.getDataInformationReport.transferRequests[0].transferNum
-          ) -
-          Number(
-            this.getDataInformationReport.transferRequests[1].transferNum
-          ) +
-          Number(totalTransfer) +
-          this.partTimeNum();
+          Number(this.getDataInformationReport.studentNum);
+        // Number(
+        //   this.getDataInformationReport.transferRequests
+        //     .map((item) => item.transferNum)
+        //     .reduce(
+        //       (accumulator, currentValue) => accumulator + currentValue,
+        //       0
+        //     )
+        // ) +
+        // Number(totalTransfer) +
+        // this.partTimeNum();
         this.SET_STATE_PRODUCTIVITY(productivity);
       }
     },

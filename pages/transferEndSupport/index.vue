@@ -24,22 +24,6 @@
                   {{ i }}
                 </a-select-option>
               </a-select>
-              <!-- <a-select
-                show-search
-                placeholder="Chọn"
-                :token-separators="[',']"
-                style="width: 100%; border-radius: 50px"
-                v-model="item.user"
-                class="inputLogin"
-              >
-                <a-select-option
-                  v-for="item in filteredOptions"
-                  :key="item"
-                  :value="item"
-                >
-                  {{ item }}
-                </a-select-option>
-              </a-select> -->
             </b-form-group>
             <b-icon icon="arrow-right" aria-hidden="true" class="mr-2"></b-icon>
             <b-form-group
@@ -103,7 +87,7 @@ export default {
       visible: false,
       skip: "/move-inPerson",
       form: {
-        employees: ["quangteo - 2233"],
+        employees: [],
         groupId: null,
         transferId: null,
         transferNum: null,
@@ -194,7 +178,7 @@ export default {
       this.amoun = this.amoun + 1;
       for (let i = 0; i < this.amount; i++) {
         this.arrForms.push({
-          employees: ["quangteo - 2233"],
+          employees: [],
           groupId: null,
           transferId: null,
           transferNum: null,
