@@ -75,6 +75,15 @@
         <td></td>
       </tr> -->
       <tr>
+        <td class="tdText text-slate-50">Thôi việc</td>
+        <td>{{ Quit.quantity }}</td>
+        <!-- <td v-if="numberTransfer.information" class="text-lime-800">
+          xác nhận
+        </td>
+        <td v-else class="text-rose-800">chưa xác nhận</td> -->
+        <td></td>
+      </tr>
+      <tr>
         <td class="tdText text-slate-50">BÁO CƠM</td>
         <td>
           {{
@@ -141,6 +150,7 @@ import {
   reason,
   refreshToken,
   deleteEm,
+  updateDemarcation,
 } from "@/api/AuthenConnector.js";
 import { message } from "ant-design-vue";
 import { getDetail } from "@/api/AuthenConnector.js";
@@ -228,6 +238,12 @@ export default {
         quantity: localStorage.getItem("totalTransfer"),
       };
     },
+    Quit() {
+      return {
+        information: this.getCodeDeleteLabor,
+        quantity: this.getNumberDeleteLabor,
+      };
+    },
     numberEatRice() {
       return {
         information: "",
@@ -269,7 +285,8 @@ export default {
         const productivity =
           Number(this.getDataInformationReport.demarcation) -
           Number(this.getDataInformationReport.restNum) -
-          Number(this.getDataInformationReport.studentNum);
+          Number(this.getDataInformationReport.studentNum) +
+          Number(this.getDataInformationReport.partTimeNum);
         // Number(
         //   this.getDataInformationReport.transferRequests
         //     .map((item) => item.transferNum)
@@ -295,17 +312,17 @@ export default {
     getValue() {
       this.user = localStorage.getItem("userLogin");
     },
-    partTimeNum() {
-      const cat = "cắt";
-      const kcs = "kcs";
-      const ht = "hoàn thiện";
-      const groupName = localStorage.getItem("groupName").toLowerCase();
-      const isCat = groupName.includes(cat);
-      const isKcs = groupName.includes(kcs);
-      const isHt = groupName.includes(ht);
-      const isZero = isCat || isKcs || isHt ? true : false;
-      return isZero ? 0 : Number(this.getDataInformationReport.partTimeNum) / 2;
-    },
+    // partTimeNum() {
+    //   const cat = "cắt";
+    //   const kcs = "kcs";
+    //   const ht = "hoàn thiện";
+    //   const groupName = localStorage.getItem("groupName").toLowerCase();
+    //   const isCat = groupName.includes(cat);
+    //   const isKcs = groupName.includes(kcs);
+    //   const isHt = groupName.includes(ht);
+    //   const isZero = isCat || isKcs || isHt ? true : false;
+    //   return isZero ? 0 : Number(this.getDataInformationReport.partTimeNum) / 2;
+    // },
     showModal() {
       this.visible = true;
     },
@@ -322,6 +339,16 @@ export default {
             groupId: localStorage.getItem("groupId"),
             laborEmp: this.getCodeDeleteLabor,
           };
+          const totalLaborendNotLabor = localStorage.getItem(
+            "totalLaborendNotLabor"
+          );
+          const groupName = localStorage.getItem("groupName");
+          const groupId = localStorage.getItem("groupId");
+          const respon = await updateDemarcation(
+            totalLaborendNotLabor,
+            groupId,
+            groupName
+          );
           const ress = await deleteEm(payload);
           // if (this.hours > 18+7) {
           const res = await saveDetail(this.getDataInformationReport);
@@ -349,9 +376,19 @@ export default {
             groupId: localStorage.getItem("groupId"),
             laborEmp: this.getCodeDeleteLabor,
           };
+          const totalLaborendNotLabor = localStorage.getItem(
+            "totalLaborendNotLabor"
+          );
+          const groupId = localStorage.getItem("groupId");
+          const groupName = localStorage.getItem("groupName");
+
+          const respon = await updateDemarcation(
+            totalLaborendNotLabor,
+            groupId,
+            groupName
+          );
           const ress = await deleteEm(payloads);
           const day = today();
-          const groupId = localStorage.getItem("groupId");
           const response = await getDetail({ day, groupId });
           let id = 0;
           if (response) {

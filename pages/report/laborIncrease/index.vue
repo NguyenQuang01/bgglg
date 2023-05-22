@@ -108,15 +108,15 @@ export default {
         Number(this.form.professionNotLabor);
       const groupId = localStorage.getItem("groupId");
       const groupName = localStorage.getItem("groupName");
-
-      const res = await updateDemarcation(
-        totalLaborendNotLabor,
-        groupId,
-        groupName
-      );
-      if (res) {
-        this.$router.push("/report/decreaseInLabor");
-      }
+      localStorage.setItem("totalLaborendNotLabor", totalLaborendNotLabor);
+      // const res = await updateDemarcation(
+      //   totalLaborendNotLabor,
+      //   groupId,
+      //   groupName
+      // );
+      // if (res) {
+      this.$router.push("/report/decreaseInLabor");
+      // }
     },
     async getValue() {
       const day = today();
