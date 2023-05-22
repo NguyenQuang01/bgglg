@@ -7,7 +7,7 @@
     <div class="max-w-2xl m-auto m-0">
       <div>
         <b-form @submit="onSubmit" class="mb-5">
-          <div class="flex justify-between items-center">
+          <div class="">
             <b-row class="with100">
               <b-col cols="12">
                 <b-row>
@@ -55,41 +55,57 @@
                         class="inputLogin"
                       /> </b-form-group
                   ></b-col>
-                  <b-col cols="6"
-                    ><b-form-group
-                      id="input-group-1"
-                      label="Chọn file excel:"
-                      label-for="input-1"
-                    >
-                      <!-- <a-input placeholder="Basic usage" /> -->
-                      <input
-                        type="file"
-                        @change="handleFileSelected"
-                        text="test"
-                        id="file"
-                        class="inputfile"
-                      />
-                      <label for="file">
-                        <img
-                          src="@/assets/imge/excel.png"
-                          alt=""
-                          srcset=""
-                          class="w-full h-full"
-                        />
-                      </label> </b-form-group
-                  ></b-col>
+                  <b-col cols="6">
+                    <b-row>
+                      <b-col cols="6">
+                        <b-form-group
+                          id="input-group-1"
+                          label="Thêm file excel:"
+                          label-for="input-1"
+                        >
+                          <!-- <a-input placeholder="Basic usage" /> -->
+                          <input
+                            type="file"
+                            @change="handleFileSelected"
+                            text="test"
+                            id="file"
+                            class="inputfile"
+                          />
+                          <label for="file">
+                            <img
+                              src="@/assets/imge/excel.png"
+                              alt=""
+                              srcset=""
+                              class="w-full h-full"
+                            />
+                          </label> </b-form-group
+                      ></b-col>
+                      <b-col cols="6">
+                        <b-form-group
+                          id="input-group-1"
+                          label="Xuất file excel:"
+                          label-for="input-1"
+                        >
+                          <!-- <a-input placeholder="Basic usage" /> -->
+                          <a-button class="btnExcel" @click="getExcel"
+                            ><img
+                              src="@/assets/imge/excel.png"
+                              alt=""
+                              srcset=""
+                              class="w-full h-full"
+                          /></a-button> </b-form-group></b-col
+                    ></b-row>
+                  </b-col>
                 </b-row>
               </b-col>
-              <b-col class="flex items-center bttAdd float-right">
-                <div>
-                  <b-button
-                    type="submit"
-                    class="add-btn w-full borderRadius px-3"
-                    >Thêm</b-button
-                  >
-                </div></b-col
-              >
             </b-row>
+            <div class="flex items-center bttAdd">
+              <div class="mr-2">
+                <b-button type="submit" class="add-btn w-full borderRadius px-3"
+                  >Thêm</b-button
+                >
+              </div>
+            </div>
           </div>
         </b-form>
       </div>
@@ -267,13 +283,14 @@ import {
   editEmployee,
   groupRoleRoot,
   excelEmployee,
+  ExportExcelEmployee,
 } from "@/api/AuthenConnector.js";
 import { defineComponent, onMounted, reactive, toRefs, watch } from "vue";
 // const columns = ;
 import { message } from "ant-design-vue";
 
 export default defineComponent({
-  middleware: "auth",
+  // middleware: "auth",
   setup() {
     const headers = reactive({
       authorization: "authorization-text",
@@ -308,7 +325,11 @@ export default defineComponent({
       // Check here to configure the default column
       loading: false,
     });
-
+    const getExcel = async () => {
+      const res = await ExportExcelEmployee();
+      if (res) {
+      }
+    };
     const confirm = (id) => {
       deletes(id);
     };
@@ -463,6 +484,7 @@ export default defineComponent({
       confirm,
       handleChange,
       handleFileSelected,
+      getExcel,
       // onChange2,
     };
   },
@@ -528,6 +550,17 @@ th {
   z-index: -1;
 }
 .inputfile + label {
+  font-size: 1.25em;
+  color: white;
+  border: green 1px solid;
+  display: inline-block;
+  cursor: pointer;
+  height: 32px;
+  width: 70px;
+  padding: 2px 10px;
+  border-radius: 50px;
+}
+.btnExcel {
   font-size: 1.25em;
   color: white;
   border: green 1px solid;

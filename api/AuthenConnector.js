@@ -258,5 +258,9 @@ export const excelEmployee = async (param) => {
   const response = await request.post(`${HOST}/employee/import`, formData);
   return response.data;
 };
+export const ExportExcelEmployee = async () => {
+  const response = await request.get(`${HOST}/employee/exportExcel`);
+  return response.data;
+};
 ///
 //
