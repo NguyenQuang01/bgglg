@@ -18,7 +18,7 @@ export default () => ({
       riceEmp: 0,
       riceCus: 0,
       riceVip: 0,
-      riceId: null,
+      riceId: 0,
     },
     restNum: 0,
     laborProductivity: 0,

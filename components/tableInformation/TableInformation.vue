@@ -183,11 +183,15 @@ export default {
       };
     },
     demarcation() {
+      const total = this.getDataInformationReport.transferRequests
+        .map((item) => item.transferNum)
+        .reduce((accumulator, currentValue) => accumulator + currentValue, 0);
       return {
         information: " ",
         quantity:
-          this.getDataInformationReport?.demarcation -
-          this.getNumberDeleteLabor,
+          Number(this.getDataInformationReport?.demarcation) -
+          Number(this.getNumberDeleteLabor) -
+          Number(total),
       };
     },
     demarcationOld() {

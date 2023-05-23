@@ -15,6 +15,14 @@
         <td></td>
       </tr>
       <tr>
+        <td class="tdText text-slate-50">ĐỊNH BIÊN MỚI</td>
+        <td>
+          <input type="text" v-model="demarcation" class="w-20" v-if="isEdit" />
+          <div v-else>{{ demarcation }}</div>
+        </td>
+        <td></td>
+      </tr>
+      <tr>
         <td class="tdText text-slate-50">SỐ THỜI VỤ</td>
         <td>
           <input
@@ -72,33 +80,41 @@
         <td></td>
       </tr>
       <tr>
-        <td class="tdText text-slate-50">ĐIỀU CHUYỂN</td>
+        <td class="tdText text-slate-50">ĐIỀU CHUYỂN ĐI</td>
 
         <td>
-          <input
-            type="text"
-            v-model="numberTransfer"
-            class="w-20"
-            v-if="isEdit"
-          />
-          <div v-else>{{ numberTransfer }}</div>
+          <div>{{ numberTransfer.length }}</div>
         </td>
-        <td v-if="isAcctoved" class="text-lime-800">xác nhận</td>
-        <td v-else class="text-rose-800">chưa xác nhận</td>
+
+        <td>
+          <div v-for="(item, index) in numberTransfer" :key="index">
+            {{ item }}
+          </div>
+        </td>
       </tr>
       <tr>
-        <td class="tdText text-slate-50">HỖ TRỢ</td>
+        <td class="tdText text-slate-50">ĐIỀU CHUYỂN ĐẾN</td>
 
         <td>
-          <input
-            type="text"
-            v-model="numberSupport"
-            class="w-20"
-            v-if="isEdit"
-          />
-          <div v-else>{{ numberSupport }}</div>
+          <div>{{ numberSupport.length }}</div>
         </td>
-        <td></td>
+        <td>
+          <div v-for="(item, index) in numberSupport" :key="index">
+            {{ item }}
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="tdText text-slate-50">THÔI VIỆC</td>
+
+        <td>
+          <div>{{ employeeStop.length }}</div>
+        </td>
+        <td>
+          <div v-for="(item, index) in employeeStop" :key="index">
+            {{ item }}
+          </div>
+        </td>
       </tr>
       <tr>
         <td class="tdText text-slate-50">BÁO CƠM</td>
@@ -144,7 +160,7 @@
       </tr>
 
       <tr>
-        <td class="tdText text-slate-50">SỐ NGHỈ</td>
+        <td class="tdText text-slate-50">NGHỈ HÀNG NGÀY</td>
 
         <td>
           <div>{{ totalReasons }}</div>
@@ -195,6 +211,7 @@ export default {
       professionNotLabor: 0,
       numberTransfer: 0,
       numberSupport: 0,
+      employeeStop: 0,
       totalRice: 0,
       numberEatRice: 0,
       arrReasons: [],
@@ -259,6 +276,7 @@ export default {
         this.groupIdSp = "";
         this.id = "";
         this.isAcctoved = "";
+        this.employeeStop = "";
       }
       if (res) {
         this.numberStudent = res.studentNum;
@@ -267,20 +285,21 @@ export default {
         this.numberSeasonal = res.partTimeNum;
         this.professionLabor = res.professionLabor;
         this.professionNotLabor = res.professionNotLabor;
-        this.numberTransfer = res.transferNum;
-        this.numberSupport = res.supportNum;
-        this.numberEatRice = res.rice;
+        this.numberTransfer = res.employeeTransferTo;
+        this.numberSupport = res.employeeReceive;
+        this.employeeStop = res.employeeStop;
+        this.numberProductivity = res.laborProductivity;
+        this.numberEatRice = res.riceResponses;
         this.totalRice = res.totalRice;
         this.totalReasons = res.restNum;
         this.arrReasons = res.rests;
-        this.riceId = res.rice.riceId;
-        this.transferIdTran = res.transfers[0].transferId;
-        this.groupIdTran = res.transfers[0].groupId;
-        this.transferIdSupport = res.transfers[1].transferId;
-        this.groupIdSp = res.transfers[1].groupId;
+        this.riceId = res.riceResponses.riceId;
+        this.transferIdTran = res.transfers[0]?.transferId;
+        this.groupIdTran = res.transfers[0]?.groupId;
+        this.transferIdSupport = res.transfers[1]?.transferId;
+        this.groupIdSp = res.transfers[1]?.groupId;
         this.id = res.id;
         this.isAcctoved = res.transfers[0].access;
-        this.numberProductivity = res.laborProductivity;
         // this.demarcation -
         // Number(this.arrReasons.length) -
         // this.numberStudent -
