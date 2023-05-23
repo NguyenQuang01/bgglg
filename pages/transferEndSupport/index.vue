@@ -89,7 +89,7 @@ export default {
       form: {
         employees: [],
         groupId: null,
-        transferId: null,
+        transferId: 0,
         transferNum: null,
       },
 
@@ -180,7 +180,7 @@ export default {
         this.arrForms.push({
           employees: [],
           groupId: null,
-          transferId: null,
+          transferId: 0,
           transferNum: null,
         });
       }

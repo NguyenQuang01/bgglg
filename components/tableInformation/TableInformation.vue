@@ -8,8 +8,8 @@
       </tr>
       <tr>
         <td class="tdText text-slate-50">ĐỊNH BIÊN BAN ĐẦU</td>
-        <td>{{ demarcation.quantity }}</td>
-        <td>{{ demarcation.information }}</td>
+        <td>{{ demarcationOld.quantity }}</td>
+        <td>{{ demarcationOld.information }}</td>
       </tr>
       <tr>
         <td class="tdText text-slate-50">ĐỊNH BIÊN MỚI</td>
@@ -190,6 +190,12 @@ export default {
           this.getNumberDeleteLabor,
       };
     },
+    demarcationOld() {
+      return {
+        information: " ",
+        quantity: this.getDataInformationReport?.demarcationAvailable,
+      };
+    },
     professionNotLabor() {
       return {
         information: " ",
@@ -271,6 +277,7 @@ export default {
     ...mapMutations({
       SET_STATE_DEMARCATION: "SET_STATE_DEMARCATION",
       SET_STATE_PRODUCTIVITY: "SET_STATE_PRODUCTIVITY",
+      SET_STATE_DEMARCATIONOLD: "SET_STATE_DEMARCATIONOLD",
     }),
 
     async getDemarcation() {
@@ -281,7 +288,11 @@ export default {
         const totalTransfer = localStorage.getItem("totalTransfer");
         numberDemarcation = res.data.demarcationAvailable;
         const demarcation = numberDemarcation;
-        this.SET_STATE_DEMARCATION(demarcation);
+        this.SET_STATE_DEMARCATIONOLD(demarcation);
+        this.SET_STATE_DEMARCATION(
+          Number(demarcation) - Number(this.getNumberDeleteLabor)
+        );
+
         const productivity =
           Number(this.getDataInformationReport.demarcation) -
           Number(this.getDataInformationReport.restNum) -

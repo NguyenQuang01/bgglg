@@ -11,6 +11,9 @@ export default {
   SET_STATE_DEMARCATION(state, data) {
     state.dataInformationReport.demarcation = data;
   },
+  SET_STATE_DEMARCATIONOLD(state, data) {
+    state.dataInformationReport.demarcationAvailable = data;
+  },
   SET_STATE_SEASONAL(state, data) {
     state.dataInformationReport.partTimeNum = Number(data);
   },
@@ -52,9 +55,9 @@ export default {
     state.infUser = data;
   },
   SET_STATE_NumberDeleteLabor(state, data) {
-    state.numberDeleteLabor = data;
+    state.dataInformationReport.numberDeleteLabor = data;
   },
   SET_STATE_codeDeleteLabor(state, data) {
-    state.codeDeleteLabor = data;
+    state.dataInformationReport.codeDeleteLabor = data;
   },
 };
