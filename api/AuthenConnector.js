@@ -263,4 +263,8 @@ export const ExportExcelEmployee = async () => {
   return response.data;
 };
 ///
+export const getIdsTomay = async () => {
+  const response = await request.get(`${HOST}/getIdsTomay`);
+  return response.data;
+};
 //
