@@ -354,9 +354,9 @@ export default {
             groupId: localStorage.getItem("groupId"),
             laborEmp: this.getCodeDeleteLabor,
           };
-          const totalLaborendNotLabor = localStorage.getItem(
-            "totalLaborendNotLabor"
-          );
+          const totalLaborendNotLabor =
+            localStorage.getItem("totalLaborendNotLabor") ||
+            Number(localStorage.getItem("demarcation"));
           const groupName = localStorage.getItem("groupName");
           const groupId = localStorage.getItem("groupId");
           const respon = await updateDemarcation(
