@@ -278,12 +278,12 @@ export default {
       };
     },
   },
-  created() {
-    this.getDemarcation();
+  // created() {
 
-    // setTimeout(() => this.getProductivity(), 0);
-  },
+  //   // setTimeout(() => this.getProductivity(), 0);
+  // },
   mounted() {
+    this.getDemarcation();
     this.token = localStorage.getItem("JWT");
     this.groupId = localStorage.getItem("groupId");
   },
@@ -307,13 +307,15 @@ export default {
           Number(demarcation) - Number(this.getNumberDeleteLabor)
         );
         const total = this.numberSeasonal1.includes(Number(groupId));
+        console.log(total);
+        const totalPartTimeNum = total
+          ? Number(this.getDataInformationReport?.partTimeNum) / 2
+          : Number(this.getDataInformationReport?.partTimeNum);
         const productivity =
           Number(this.getDataInformationReport.demarcation) -
           Number(this.getDataInformationReport.restNum) -
           Number(this.getDataInformationReport.studentNum) +
-          (total
-            ? Number(this.getDataInformationReport?.partTimeNum) / 2
-            : Number(this.getDataInformationReport?.partTimeNum));
+          totalPartTimeNum;
         // Number(
         //   this.getDataInformationReport.transferRequests
         //     .map((item) => item.transferNum)
