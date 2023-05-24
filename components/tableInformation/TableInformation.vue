@@ -306,7 +306,7 @@ export default {
         this.SET_STATE_DEMARCATION(
           Number(demarcation) - Number(this.getNumberDeleteLabor)
         );
-        const total = this.numberSeasonal1.includes(Number(this.groupId));
+        const total = this.numberSeasonal1.includes(Number(groupId));
         const productivity =
           Number(this.getDataInformationReport.demarcation) -
           Number(this.getDataInformationReport.restNum) -
