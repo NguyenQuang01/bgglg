@@ -166,6 +166,7 @@ export default {
       options: [],
       token: "",
       numberSeasonal1: [],
+      groupId: 0,
     };
   },
   fetch() {
@@ -218,10 +219,12 @@ export default {
     numberSeasonal() {
       // const isBelowThreshold = (currentValue) =>
       //   currentValue === localStorage.getItem("groupId");
-      // const total = this.numberSeasonal1.every(isBelowThreshold);
+      const total = this.numberSeasonal1.includes(Number(this.groupId));
       return {
         information: "",
-        quantity: this.getDataInformationReport?.partTimeNum,
+        quantity: total
+          ? Number(this.getDataInformationReport?.partTimeNum) / 2
+          : this.getDataInformationReport?.partTimeNum,
       };
     },
     numberStudent() {
@@ -271,7 +274,7 @@ export default {
     numberProductivity() {
       return {
         information: "",
-        quantity: this.getDataInformationReport?.laborProductivity,
+        quantity: Number(this.getDataInformationReport?.laborProductivity),
       };
     },
   },
@@ -282,6 +285,7 @@ export default {
   },
   mounted() {
     this.token = localStorage.getItem("JWT");
+    this.groupId = localStorage.getItem("groupId");
   },
   methods: {
     ...mapMutations({
@@ -302,12 +306,14 @@ export default {
         this.SET_STATE_DEMARCATION(
           Number(demarcation) - Number(this.getNumberDeleteLabor)
         );
-
+        const total = this.numberSeasonal1.includes(Number(this.groupId));
         const productivity =
           Number(this.getDataInformationReport.demarcation) -
           Number(this.getDataInformationReport.restNum) -
           Number(this.getDataInformationReport.studentNum) +
-          Number(this.getDataInformationReport.partTimeNum);
+          (total
+            ? Number(this.getDataInformationReport?.partTimeNum) / 2
+            : Number(this.getDataInformationReport?.partTimeNum));
         // Number(
         //   this.getDataInformationReport.transferRequests
         //     .map((item) => item.transferNum)

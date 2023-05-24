@@ -117,18 +117,18 @@ export default {
     this.getReason();
     this.getvalueName();
   },
-  mounted() {
-    const autofill = JSON.parse(localStorage.getItem("report"));
-    const checkReport = localStorage.getItem("checkReport");
-    if (autofill && checkReport === "false") {
-      this.arrForms = autofill.rests.map((item) => ({
-        user: item.restName,
-        reason: item.reasonId,
-        reasonName: item.reasonName,
-        session: item.session,
-      }));
-    }
-  },
+  // mounted() {
+  //   const autofill = JSON.parse(localStorage.getItem("report"));
+  //   const checkReport = localStorage.getItem("checkReport");
+  //   if (autofill && checkReport === "false") {
+  //     this.arrForms = autofill.rests.map((item) => ({
+  //       user: item.restName,
+  //       reason: item.reasonId,
+  //       reasonName: item.reasonName,
+  //       session: item.session,
+  //     }));
+  //   }
+  // },
   computed: {
     ...mapGetters({ getDataInformationReport: "getDataInformationReport" }),
     filteredOptions() {
