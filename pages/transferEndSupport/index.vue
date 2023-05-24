@@ -258,4 +258,7 @@ export default {
 .ant-select-selection--multiple {
   border-radius: 50px;
 }
+.ant-select-selection__choice {
+  border-radius: 50px !important;
+}
 </style>
