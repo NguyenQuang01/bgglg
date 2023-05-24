@@ -91,9 +91,9 @@ export default {
     const autofill = JSON.parse(localStorage.getItem("report"));
     const checkReport = localStorage.getItem("checkReport");
     if (autofill && checkReport === "false") {
-      this.numberMeal.staff = autofill?.rice?.riceEmp || 0;
-      this.numberMeal.guest = autofill?.rice?.riceCus || 0;
-      this.numberMeal.guestVip = autofill?.rice?.riceVip || 0;
+      this.numberMeal.staff = autofill?.riceResponses?.riceEmp || 0;
+      this.numberMeal.guest = autofill?.riceResponses?.riceCus || 0;
+      this.numberMeal.guestVip = autofill?.riceResponses?.riceVip || 0;
     }
   },
   methods: {
@@ -112,10 +112,10 @@ export default {
       const res = await getDetail({ day, groupId });
       if (res) {
         this.numberMeal = {
-          staff: Number(res.rice.riceEmp),
-          guest: Number(res.rice.riceCus),
-          guestVip: Number(res.rice.riceVip),
-          riceId: Number(res.rice.riceId),
+          staff: Number(res.riceResponses.riceEmp),
+          guest: Number(res.riceResponses.riceCus),
+          guestVip: Number(res.riceResponses.riceVip),
+          riceId: Number(res.riceResponses.riceId),
         };
       }
     },
