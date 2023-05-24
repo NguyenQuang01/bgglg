@@ -151,6 +151,7 @@ import {
   refreshToken,
   deleteEm,
   updateDemarcation,
+  getIdsTomay,
 } from "@/api/AuthenConnector.js";
 import { message } from "ant-design-vue";
 import { getDetail } from "@/api/AuthenConnector.js";
@@ -164,11 +165,13 @@ export default {
       hours: new Date().getHours(),
       options: [],
       token: "",
+      numberSeasonal1: [],
     };
   },
   fetch() {
     this.getValue();
     this.getReason();
+    this.getNumberSeasonal();
   },
   computed: {
     ...mapGetters({
@@ -213,6 +216,9 @@ export default {
       };
     },
     numberSeasonal() {
+      // const isBelowThreshold = (currentValue) =>
+      //   currentValue === localStorage.getItem("groupId");
+      // const total = this.numberSeasonal1.every(isBelowThreshold);
       return {
         information: "",
         quantity: this.getDataInformationReport?.partTimeNum,
@@ -430,6 +436,13 @@ export default {
           value: item.id,
           text: item.name,
         }));
+      }
+    },
+    async getNumberSeasonal() {
+      const res = await getIdsTomay();
+      if (res) {
+        console.log(res);
+        this.numberSeasonal1 = res;
       }
     },
   },
