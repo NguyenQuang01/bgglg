@@ -122,7 +122,7 @@
           <a-pagination
             show-size-changer
             :page-size-options="pageSizeOptions"
-            :defaultPageSize="5"
+            :defaultPageSize="50"
             :total="total"
             @showSizeChange="onShowSizeChange"
             @change="onPage"
@@ -150,7 +150,7 @@ import BtnBack from "@/components/BtnBack.vue";
 
 export default {
   components: ["BtnBack"],
-  // middleware: "auth",
+  middleware: "auth",
   data() {
     return {
       deleteGroup: "",
@@ -167,7 +167,7 @@ export default {
       data: [],
       page: {
         current: 1,
-        pageSize: 5,
+        pageSize: 50,
       },
       pageSizeOptions: ["5", "10", "20", "30", "40", "50"],
       groupName: "",

@@ -290,7 +290,7 @@ import { defineComponent, onMounted, reactive, toRefs, watch } from "vue";
 import { message } from "ant-design-vue";
 
 export default defineComponent({
-  // middleware: "auth",
+  middleware: "auth",
   setup() {
     const headers = reactive({
       authorization: "authorization-text",
