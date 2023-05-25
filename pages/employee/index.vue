@@ -375,10 +375,13 @@ export default defineComponent({
           name: form.name,
         },
       ]);
+      if (res && res.status === 400) {
+        message.error("Mã nhân viên đã tồn tại");
+      }
       if (res && res.status === 201) {
         form.name = "";
         form.laborCode = "";
-        message.success("thêm thành công");
+        message.success("Thêm thành công");
         getvalue(page.current, page.pageSize);
       }
     };
