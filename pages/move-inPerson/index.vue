@@ -52,7 +52,9 @@ export default {
               Number(accumulator) + Number(currentValue),
             0
           );
+        // const arrTransfer = res
         localStorage.setItem("totalTransfer", totalTransfer);
+        // localStorage.setItem("arrTransfer", totalTransfer);
       }
       //        const res = await accuracy();
     },

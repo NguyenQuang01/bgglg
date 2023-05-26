@@ -308,7 +308,6 @@ export default {
             Number(totalTransferRequests)
         );
         //
-        console.log(res, 888888);
         if (res.data.groupId) {
           const totalNumberSeasonal1 = this.numberSeasonal1.includes(
             res.data.groupId

@@ -9,8 +9,13 @@
       <tr>
         <td class="tdText text-slate-50">ĐỊNH BIÊN</td>
         <td>
-          <input type="text" v-model="demarcation" class="w-20" v-if="isEdit" />
-          <div v-else>{{ demarcation }}</div>
+          <input
+            type="text"
+            v-model="demarcationAvailable"
+            class="w-20"
+            v-if="isEdit"
+          />
+          <div v-else>{{ demarcationAvailable }}</div>
         </td>
         <td></td>
       </tr>
@@ -206,6 +211,7 @@ export default {
       numberStudent: 0,
       numberReasons: 0,
       demarcation: 0,
+      demarcationAvailable: 0,
       numberSeasonal: 0,
       professionLabor: 0,
       professionNotLabor: 0,
@@ -260,6 +266,7 @@ export default {
         this.numberStudent = "";
         this.numberReasons = "";
         this.demarcation = "";
+        this.demarcationAvailable = "";
         this.numberSeasonal = "";
         this.professionLabor = "";
         this.professionNotLabor = "";
@@ -282,6 +289,7 @@ export default {
         this.numberStudent = res.studentNum;
         this.numberReasons = res.restNum;
         this.demarcation = res.demarcation;
+        this.demarcationAvailable = res.demarcationAvailable;
         this.numberSeasonal = res.partTimeNum;
         this.professionLabor = res.professionLabor;
         this.professionNotLabor = res.professionNotLabor;
