@@ -58,7 +58,7 @@
           xác nhận
         </td>
         <td v-else class="text-rose-800">chưa xác nhận</td> -->
-        <td></td>
+        <td>{{ numberSupport.quantity }}</td>
       </tr>
       <!-- <tr>
         <td class="tdText text-slate-50">ĐI HỖ TRỢ</td>
@@ -81,7 +81,7 @@
           xác nhận
         </td>
         <td v-else class="text-rose-800">chưa xác nhận</td> -->
-        <td></td>
+        <td>{{ Quit.information }}</td>
       </tr>
       <tr>
         <td class="tdText text-slate-50">BÁO CƠM</td>
@@ -187,15 +187,9 @@ export default {
       };
     },
     demarcation() {
-      const total = this.getDataInformationReport.transferRequests
-        .map((item) => item.transferNum)
-        .reduce((accumulator, currentValue) => accumulator + currentValue, 0);
       return {
         information: " ",
-        quantity:
-          Number(this.getDataInformationReport?.demarcation) -
-          Number(this.getNumberDeleteLabor) -
-          Number(total),
+        quantity: this.getDataInformationReport?.demarcation,
       };
     },
     demarcationOld() {
@@ -217,14 +211,9 @@ export default {
       };
     },
     numberSeasonal() {
-      // const isBelowThreshold = (currentValue) =>
-      //   currentValue === localStorage.getItem("groupId");
-      const total = this.numberSeasonal1.includes(Number(this.groupId));
       return {
         information: "",
-        quantity: total
-          ? Number(this.getDataInformationReport?.partTimeNum) / 2
-          : this.getDataInformationReport?.partTimeNum,
+        quantity: this.getDataInformationReport?.partTimeNum,
       };
     },
     numberStudent() {
@@ -292,6 +281,7 @@ export default {
       SET_STATE_DEMARCATION: "SET_STATE_DEMARCATION",
       SET_STATE_PRODUCTIVITY: "SET_STATE_PRODUCTIVITY",
       SET_STATE_DEMARCATIONOLD: "SET_STATE_DEMARCATIONOLD",
+      SET_STATE_SEASONAL: "SET_STATE_SEASONAL",
     }),
 
     async getDemarcation() {
@@ -303,29 +293,40 @@ export default {
         numberDemarcation = res.data.demarcationAvailable;
         const demarcation = numberDemarcation;
         this.SET_STATE_DEMARCATIONOLD(demarcation);
+        //
+        const totalTransferRequests =
+          this.getDataInformationReport.transferRequests
+            .map((item) => item.transferNum)
+            .reduce(
+              (accumulator, currentValue) => accumulator + currentValue,
+              0
+            );
         this.SET_STATE_DEMARCATION(
-          Number(demarcation) - Number(this.getNumberDeleteLabor)
+          Number(demarcation) +
+            Number(totalTransfer) -
+            Number(this.getNumberDeleteLabor) -
+            Number(totalTransferRequests)
         );
-        const total = this.numberSeasonal1.includes(Number(groupId));
-        console.log(total);
-        const totalPartTimeNum = total
-          ? Number(this.getDataInformationReport?.partTimeNum) / 2
-          : Number(this.getDataInformationReport?.partTimeNum);
+        //
+        console.log(res, 888888);
+        if (res.data.groupId) {
+          const totalNumberSeasonal1 = this.numberSeasonal1.includes(
+            res.data.groupId
+          );
+
+          const totalPartTimeNum = totalNumberSeasonal1
+            ? Number(this.getDataInformationReport?.partTimeNum) / 2
+            : Number(this.getDataInformationReport?.partTimeNum);
+          this.SET_STATE_SEASONAL(totalPartTimeNum);
+          //
+        }
+
+        //
         const productivity =
           Number(this.getDataInformationReport.demarcation) -
           Number(this.getDataInformationReport.restNum) -
           Number(this.getDataInformationReport.studentNum) +
-          totalPartTimeNum;
-        // Number(
-        //   this.getDataInformationReport.transferRequests
-        //     .map((item) => item.transferNum)
-        //     .reduce(
-        //       (accumulator, currentValue) => accumulator + currentValue,
-        //       0
-        //     )
-        // ) +
-        // Number(totalTransfer) +
-        // this.partTimeNum();
+          Number(this.getDataInformationReport.partTimeNum);
         this.SET_STATE_PRODUCTIVITY(productivity);
       }
     },
