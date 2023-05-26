@@ -8,10 +8,12 @@
       <div class="mt-6">
         <table id="customers " class="w-full">
           <tr class="bg-slate-100">
+            <th class="title">STT</th>
             <th class="title">Tên Nhân Viên</th>
             <th class="title">Mã nhân viên</th>
           </tr>
           <tr>
+            <td></td>
             <td>
               <b-form-input
                 id="input-1"
@@ -34,7 +36,8 @@
             </td>
           </tr>
           <tr v-for="(item, index) in data.value" :key="index">
-            <td class="w-2/5">
+            <td class="w-1/5">{{ index + 1 }}</td>
+            <td class="w-3/5">
               <b-form-input
                 v-model="item.name"
                 class="w-full h-8 inputLogin"
@@ -56,7 +59,7 @@
           <a-pagination
             show-size-changer
             :page-size-options="pageSizeOptions"
-            :defaultPageSize="5"
+            :defaultPageSize="50"
             :total="data.total"
             @showSizeChange="onShowSizeChange"
             @change="onPage"
@@ -102,7 +105,7 @@ export default defineComponent({
     });
     const page = reactive({
       current: 1,
-      pageSize: 5,
+      pageSize: 50,
     });
     const pageSizeOptions = reactive(["5", "10", "20", "30", "40", "50"]);
     const columns = reactive([
