@@ -139,8 +139,9 @@ export default defineComponent({
     const onSelectChange = (selectedRowKeys) => {
       state.selectedRowKeys = selectedRowKeys;
     };
-    const getvalue = async (current, pageSize) => {
-      const payload = { groupId: localStorage.getItem("groupId") };
+    const getvalue = async (current, pageSize, search) => {
+      // const res = await
+      const payload = search;
       const res = await getAllEmployee(current, pageSize, payload);
       if (res && res.code === 201) {
         data.total = res.data.totalElements;
@@ -214,6 +215,7 @@ export default defineComponent({
       searchGroup();
     };
     const searchName = async () => {
+      console.log(search);
       getvalue(page.current, page.pageSize, search);
     };
     const searchCode = async () => {
@@ -247,6 +249,7 @@ export default defineComponent({
     onMounted(() => {
       getvalue(page.current, page.pageSize);
       groupRoleRoot1();
+      search.groupId = localStorage.getItem("groupId");
     });
 
     return {
