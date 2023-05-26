@@ -312,7 +312,7 @@ export default {
           const totalNumberSeasonal1 = this.numberSeasonal1.includes(
             res.data.groupId
           );
-
+          console.log(totalNumberSeasonal1, 88888888);
           const totalPartTimeNum = totalNumberSeasonal1
             ? Number(this.getDataInformationReport?.partTimeNum) / 2
             : Number(this.getDataInformationReport?.partTimeNum);

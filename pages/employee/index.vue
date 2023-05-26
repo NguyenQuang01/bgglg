@@ -288,6 +288,7 @@ import {
 import { defineComponent, onMounted, reactive, toRefs, watch } from "vue";
 // const columns = ;
 import { message } from "ant-design-vue";
+import { downloadFileExcel } from "@/utils/utils";
 
 export default defineComponent({
   middleware: "auth",
@@ -328,6 +329,7 @@ export default defineComponent({
     const getExcel = async () => {
       const res = await ExportExcelEmployee();
       if (res) {
+        downloadFileExcel(res.data);
       }
     };
     const confirm = (id) => {

@@ -130,19 +130,23 @@ export default defineComponent({
     const onShowSizeChange = (current, pageSize) => {
       page.current = current;
       page.pageSize = pageSize;
-      getvalue(page.current, page.pageSize);
+      const search = { employeeName: "", laborCode: "", groupId: "" };
+      search.groupId = localStorage.getItem("groupId");
+      getvalue(page.current, page.pageSize, search);
     };
     const onPage = (current) => {
+      const search = { employeeName: "", laborCode: "", groupId: "" };
+      search.groupId = localStorage.getItem("groupId");
       page.current = current;
-      getvalue(page.current, page.pageSize);
+      getvalue(page.current, page.pageSize, search);
     };
     const onSelectChange = (selectedRowKeys) => {
       state.selectedRowKeys = selectedRowKeys;
     };
     const getvalue = async (current, pageSize, search) => {
       // const res = await
-      const payload = search;
-      const res = await getAllEmployee(current, pageSize, payload);
+
+      const res = await getAllEmployee(current, pageSize, search);
       if (res && res.code === 201) {
         data.total = res.data.totalElements;
         data.value = res.data.content.map((item, index) => ({
@@ -247,9 +251,12 @@ export default defineComponent({
       }
     };
     onMounted(() => {
-      getvalue(page.current, page.pageSize);
       groupRoleRoot1();
+      const search = { employeeName: "", laborCode: "", groupId: "" };
       search.groupId = localStorage.getItem("groupId");
+      setTimeout(() => {
+        getvalue(page.current, page.pageSize, search);
+      }, 0);
     });
 
     return {
