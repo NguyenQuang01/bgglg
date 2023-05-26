@@ -49,7 +49,7 @@
 import { mapMutations } from "vuex";
 import ButtonSkip from "@/components/buttonSkip";
 import BtnBack from "@/components/BtnBack.vue";
-import { getDetail } from "@/api/AuthenConnector.js";
+import { getDetail, getIdsTomay } from "@/api/AuthenConnector.js";
 import { today } from "@/constants/getToday";
 export default {
   middleware: "auth",
@@ -62,6 +62,7 @@ export default {
         worker: "",
       },
       check: true,
+      numberSeasonal1: [],
     };
   },
   fetch() {
@@ -70,6 +71,7 @@ export default {
       this.check = false;
       this.getValue();
     }
+    this.getNumberSeasonal();
   },
   mounted() {
     const autofill = JSON.parse(localStorage.getItem("report"));
@@ -86,9 +88,23 @@ export default {
     }),
     onSubmit(event) {
       event.preventDefault();
-      this.SET_STATE_SEASONAL(this.form.partTime);
+      const groupId = localStorage.getItem("groupId");
+      const totalNumberSeasonal1 = this.numberSeasonal1.includes(
+        Number(groupId)
+      );
+      const totalPartTimeNum = totalNumberSeasonal1
+        ? Number(this.form.partTime) / 2
+        : Number(this.form.partTime);
+      this.SET_STATE_SEASONAL(totalPartTimeNum);
       this.SET_STATE_STUDENT(this.form.worker);
       this.$router.push("/transferEndSupport");
+    },
+    async getNumberSeasonal() {
+      const res = await getIdsTomay();
+      if (res) {
+        console.log(res);
+        this.numberSeasonal1 = res;
+      }
     },
     async getValue() {
       const day = today();

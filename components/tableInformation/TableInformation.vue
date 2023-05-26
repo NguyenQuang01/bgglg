@@ -45,42 +45,19 @@
             {{ item }}
           </div>
         </td>
-        <!-- <td v-if="numberTransfer.information" class="text-lime-800">
-          xác nhận
-        </td>
-        <td v-else class="text-rose-800">chưa xác nhận</td> -->
       </tr>
 
       <tr>
         <td class="tdText text-slate-50">ĐIỀU CHUYỂN ĐẾN</td>
         <td>{{ numberSupport.quantity }}</td>
-        <!-- <td v-if="numberTransfer.information" class="text-lime-800">
-          xác nhận
-        </td>
-        <td v-else class="text-rose-800">chưa xác nhận</td> -->
-        <td>{{ numberSupport.quantity }}</td>
+
+        <td>{{ numberSupport.information }}</td>
       </tr>
-      <!-- <tr>
-        <td class="tdText text-slate-50">ĐI HỖ TRỢ</td>
-        <td>{{ numberSupport.quantity }}</td>
-        <td v-if="numberSupport.information" class="text-lime-800">xác nhận</td>
-        <td v-else class="text-rose-800">chưa xác nhận</td>
-        <td></td>
-      </tr>
-      <tr>
-        <td class="tdText text-slate-50">ĐẾN HỖ TRỢ</td>
-        <td>{{ numberSupport.quantity }}</td>
-        <td v-if="numberSupport.information" class="text-lime-800">xác nhận</td>
-        <td v-else class="text-rose-800">chưa xác nhận</td>
-        <td></td>
-      </tr> -->
+
       <tr>
         <td class="tdText text-slate-50">Thôi việc</td>
         <td>{{ Quit.quantity }}</td>
-        <!-- <td v-if="numberTransfer.information" class="text-lime-800">
-          xác nhận
-        </td>
-        <td v-else class="text-rose-800">chưa xác nhận</td> -->
+
         <td>{{ Quit.information }}</td>
       </tr>
       <tr>
@@ -172,7 +149,6 @@ export default {
   fetch() {
     this.getValue();
     this.getReason();
-    this.getNumberSeasonal();
   },
   computed: {
     ...mapGetters({
@@ -242,7 +218,7 @@ export default {
     },
     numberSupport() {
       return {
-        information: false,
+        information: localStorage.getItem("arrTransfer"),
         quantity: localStorage.getItem("totalTransfer"),
       };
     },
@@ -308,17 +284,16 @@ export default {
             Number(totalTransferRequests)
         );
         //
-        if (res.data.groupId) {
-          const totalNumberSeasonal1 = this.numberSeasonal1.includes(
-            res.data.groupId
-          );
-          console.log(totalNumberSeasonal1, 88888888);
-          const totalPartTimeNum = totalNumberSeasonal1
-            ? Number(this.getDataInformationReport?.partTimeNum) / 2
-            : Number(this.getDataInformationReport?.partTimeNum);
-          this.SET_STATE_SEASONAL(totalPartTimeNum);
-          //
-        }
+        // if (res.data.groupId) {
+        //   const totalNumberSeasonal1 = this.numberSeasonal1.includes(
+        //     res.data.groupId
+        //   );
+        //   const totalPartTimeNum = totalNumberSeasonal1
+        //     ? Number(this.getDataInformationReport?.partTimeNum) / 2
+        //     : Number(this.getDataInformationReport?.partTimeNum);
+        //   this.SET_STATE_SEASONAL(totalPartTimeNum);
+        //   //
+        // }
 
         //
         const productivity =
@@ -446,13 +421,13 @@ export default {
         }));
       }
     },
-    async getNumberSeasonal() {
-      const res = await getIdsTomay();
-      if (res) {
-        console.log(res);
-        this.numberSeasonal1 = res;
-      }
-    },
+    // async getNumberSeasonal() {
+    //   const res = await getIdsTomay();
+    //   if (res) {
+    //     console.log(res);
+    //     this.numberSeasonal1 = res;
+    //   }
+    // },
   },
 };
 </script>

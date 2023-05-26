@@ -52,9 +52,9 @@ export default {
               Number(accumulator) + Number(currentValue),
             0
           );
-        // const arrTransfer = res
+        const arrTransfer = res.map((item) => item.groupName);
         localStorage.setItem("totalTransfer", totalTransfer);
-        // localStorage.setItem("arrTransfer", totalTransfer);
+        localStorage.setItem("arrTransfer", arrTransfer);
       }
       //        const res = await accuracy();
     },

@@ -261,4 +261,7 @@ export default {
 .ant-select-selection__choice {
   border-radius: 50px !important;
 }
+.ant-cascader-input {
+  border-radius: 50px !important;
+}
 </style>
