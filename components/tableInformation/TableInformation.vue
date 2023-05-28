@@ -11,11 +11,11 @@
         <td>{{ demarcationOld.quantity }}</td>
         <td>{{ demarcationOld.information }}</td>
       </tr>
-      <tr>
+      <!-- <tr>
         <td class="tdText text-slate-50">ĐỊNH BIÊN MỚI</td>
         <td>{{ demarcation.quantity }}</td>
         <td>{{ demarcation.information }}</td>
-      </tr>
+      </tr> -->
       <tr>
         <td class="tdText text-slate-50">SỐ THỜI VỤ</td>
         <td>{{ numberSeasonal.quantity }}</td>

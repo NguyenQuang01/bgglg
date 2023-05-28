@@ -235,7 +235,7 @@
                   @confirm="confirm(item.id)"
                 >
                   <template slot="title">
-                    <p>{{ textDelete }}</p>
+                    <p>{{ textDelete.value }}</p>
                   </template>
                   <!-- <div @click="deletes(item.id)"> -->
                   <b-icon
@@ -296,7 +296,7 @@ export default defineComponent({
     const headers = reactive({
       authorization: "authorization-text",
     });
-    const textDelete = reactive("Bạn có chắc chắn xóa ");
+    const textDelete = reactive({ value: "Bạn có chắc chắn xóa " });
     const isEdit = reactive({ value: false });
     const options = reactive({ value: [] });
     const search = reactive({ employeeName: "", laborCode: "", groupId: "" });
@@ -329,7 +329,8 @@ export default defineComponent({
     const getExcel = async () => {
       const res = await ExportExcelEmployee();
       if (res) {
-        downloadFileExcel(res.data);
+        downloadFileExcel(res.data, "danh sách nhân sự");
+        message.success("xuất file thành công");
       }
     };
     const confirm = (id) => {
@@ -351,12 +352,14 @@ export default defineComponent({
       const payload = search;
       const res = await getAllEmployee(current, pageSize, payload);
       if (res && res.code === 201) {
+        console.log(res);
         data.total = res.data.totalElements;
         data.value = res.data.content.map((item, index) => ({
           SL: index + 1,
           name: item.employeeName,
           laborCode: item.laborCode,
           id: item.employeeId,
+          groupId: item.groupId,
           groupName: item.groupName,
         }));
       }
@@ -391,6 +394,7 @@ export default defineComponent({
       isEdit.value = !isEdit.value;
     };
     const save = async (name, id, laborCode, groupId) => {
+      console.log(groupId, "groupId");
       const res = await editEmployee([
         {
           groupId: groupId,

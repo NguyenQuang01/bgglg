@@ -117,7 +117,7 @@ export default {
     async getExcel() {
       const res = await viewExcel(this.valueDay);
       if (res && res.status === 200) {
-        downloadFileExcel(res.data);
+        downloadFileExcel(res.data, "Báo cáo chi tiết");
         message.success("xuất file thành công");
       }
     },
