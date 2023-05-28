@@ -93,7 +93,6 @@ export default {
       const groupId = localStorage.getItem("groupId");
       const res = await getDemarcationDb(groupId);
       if (res && res.status === 200) {
-        console.log(res);
         const demarcation = res.data.demarcationAvailable;
         localStorage.setItem("demarcation", demarcation);
       }

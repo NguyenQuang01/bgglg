@@ -120,6 +120,9 @@ export default {
         downloadFileExcel(res.data, "Báo cáo chi tiết");
         message.success("xuất file thành công");
       }
+      if (res && res.status === 500) {
+        message.error("ngày nay không có dữ liệu");
+      }
     },
   },
   // watch: {

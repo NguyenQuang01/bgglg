@@ -150,10 +150,14 @@ export const getView = async (param) => {
   }
 };
 export const viewExcel = async (param) => {
-  const response = await request.get(
-    `${HOST}/view/exportExcel?reportDate=${param}`
-  );
-  return response.data;
+  try {
+    const response = await request.get(
+      `${HOST}/view/exportExcel?reportDate=${param}`
+    );
+    return response.data;
+  } catch (error) {
+    return { status: 500 };
+  }
 };
 export const viewDonViLe = async (param) => {
   const response = await request.get(

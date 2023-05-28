@@ -219,7 +219,6 @@ export default defineComponent({
       searchGroup();
     };
     const searchName = async () => {
-      console.log(search);
       getvalue(page.current, page.pageSize, search);
     };
     const searchCode = async () => {

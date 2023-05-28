@@ -102,7 +102,6 @@ export default {
     async getNumberSeasonal() {
       const res = await getIdsTomay();
       if (res) {
-        console.log(res);
         this.numberSeasonal1 = res;
       }
     },

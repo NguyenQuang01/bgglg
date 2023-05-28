@@ -352,7 +352,6 @@ export default defineComponent({
       const payload = search;
       const res = await getAllEmployee(current, pageSize, payload);
       if (res && res.code === 201) {
-        console.log(res);
         data.total = res.data.totalElements;
         data.value = res.data.content.map((item, index) => ({
           SL: index + 1,
@@ -394,7 +393,6 @@ export default defineComponent({
       isEdit.value = !isEdit.value;
     };
     const save = async (name, id, laborCode, groupId) => {
-      console.log(groupId, "groupId");
       const res = await editEmployee([
         {
           groupId: groupId,

@@ -180,7 +180,6 @@ export default {
       this.data.map((item) => (item.password = ""));
     },
     async save(id, password) {
-      console.log(id, password);
       const res = await updateAcc(id, password);
       if (res.code === 200 && res) {
         message.success("sửa thành công");
