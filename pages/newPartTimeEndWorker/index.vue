@@ -76,8 +76,14 @@ export default {
   mounted() {
     const autofill = JSON.parse(localStorage.getItem("report"));
     const checkReport = localStorage.getItem("checkReport");
+    const groupId = localStorage.getItem("groupId");
+    const totalNumberSeasonal1 = this.numberSeasonal1.includes(Number(groupId));
+    const totalPartTimeNum = totalNumberSeasonal1
+      ? Number(autofill.partTimeNum) * 2
+      : Number(autofill.partTimeNum);
+
     if (autofill && checkReport === "false") {
-      this.form.partTime = autofill.partTimeNum;
+      this.form.partTime = totalPartTimeNum;
       this.form.worker = autofill.studentNum;
     }
   },

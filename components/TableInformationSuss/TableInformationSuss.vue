@@ -19,14 +19,14 @@
         </td>
         <td></td>
       </tr>
-      <tr>
+      <!-- <tr>
         <td class="tdText text-slate-50">ĐỊNH BIÊN MỚI</td>
         <td>
           <input type="text" v-model="demarcation" class="w-20" v-if="isEdit" />
           <div v-else>{{ demarcation }}</div>
         </td>
         <td></td>
-      </tr>
+      </tr> -->
       <tr>
         <td class="tdText text-slate-50">SỐ THỜI VỤ</td>
         <td>
