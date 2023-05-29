@@ -64,7 +64,7 @@
           class="mr-2"
           @click="showInfLeave(row.key)"
         ></b-icon
-        >{{ row?.restObjectResponse?.restNum }}</span
+        >{{ row?.numberLeave }}</span
       >
     </template>
     <template slot="rice" slot-scope="text, row">
@@ -331,6 +331,7 @@ export default {
 
       const res = await getViewDetail(day);
       if (res && res.code === 201) {
+        console.log(res.data.map((item) => item.numberLeave));
         const totalAll = {
           key: 0,
           parentId: 0,
@@ -355,6 +356,7 @@ export default {
               (accumulator, currentValue) => accumulator + currentValue,
               0
             ),
+
           partTimeEmp: null,
           totalRatioOfOfficeAndDonvile: res.data
             .map((item) => item.totalRatioOfOfficeAndDonvile)
