@@ -203,7 +203,8 @@ export default {
       event.preventDefault();
       const res = await deleteGroupRole(this.deleteGroup);
       if (res) {
-        message.success("thêm thành công");
+        message.success("xóa thành công");
+        this.groupRoleRoot();
         this.getvalue();
       }
     },
@@ -327,5 +328,8 @@ th {
 }
 .ant-pagination-options {
   margin-right: -8px;
+}
+.ant-cascader-input {
+  border-radius: 50px;
 }
 </style>
