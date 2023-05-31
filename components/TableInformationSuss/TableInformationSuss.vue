@@ -190,7 +190,6 @@
       </tr>
     </table>
     <div class="float-right flex items-center mt-2">
-      <BtnBack class="h-10" />
       <b-button variant="primary" class="btnLogin" @click="edit">sửa</b-button>
     </div>
   </div>
