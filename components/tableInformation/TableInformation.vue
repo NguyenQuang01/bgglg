@@ -243,10 +243,7 @@ export default {
       };
     },
   },
-  // created() {
 
-  //   // setTimeout(() => this.getProductivity(), 0);
-  // },
   mounted() {
     this.getDemarcation();
     this.token = localStorage.getItem("JWT");
@@ -283,19 +280,7 @@ export default {
             Number(this.getNumberDeleteLabor) -
             Number(totalTransferRequests)
         );
-        //
-        // if (res.data.groupId) {
-        //   const totalNumberSeasonal1 = this.numberSeasonal1.includes(
-        //     res.data.groupId
-        //   );
-        //   const totalPartTimeNum = totalNumberSeasonal1
-        //     ? Number(this.getDataInformationReport?.partTimeNum) / 2
-        //     : Number(this.getDataInformationReport?.partTimeNum);
-        //   this.SET_STATE_SEASONAL(totalPartTimeNum);
-        //   //
-        // }
 
-        //
         const productivity =
           Number(this.getDataInformationReport.demarcation) -
           Number(this.getDataInformationReport.restNum) -
