@@ -335,7 +335,6 @@ export default {
     },
     async submit(event) {
       event.preventDefault();
-      this.btn = "quay lai";
       const res = await refreshToken(this.token);
       if (res && res.status === 200) {
         if (res.data.checkReport === false) {
