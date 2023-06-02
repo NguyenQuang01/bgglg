@@ -275,7 +275,7 @@ export default {
               0
             );
         this.SET_STATE_DEMARCATION(
-          Number(demarcation) +
+          Number(demarcation) -
             Number(this.getNumberDeleteLabor) -
             Number(totalTransferRequests)
         );
