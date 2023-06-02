@@ -264,7 +264,7 @@ export default {
       if (res && res.status === 200) {
         const totalTransfer = localStorage.getItem("totalTransfer");
         numberDemarcation = res.data.demarcationAvailable;
-        const demarcation = numberDemarcation;
+        const demarcation = numberDemarcation - totalTransfer;
         this.SET_STATE_DEMARCATIONOLD(demarcation);
         //
         const totalTransferRequests =
@@ -275,7 +275,8 @@ export default {
               0
             );
         this.SET_STATE_DEMARCATION(
-          Number(demarcation) -
+          Number(demarcation) +
+            Number(totalTransfer) -
             Number(this.getNumberDeleteLabor) -
             Number(totalTransferRequests)
         );
@@ -393,7 +394,6 @@ export default {
           }
           return;
         }
-        return;
       }
     },
     async getReason() {

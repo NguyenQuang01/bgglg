@@ -79,8 +79,8 @@ export default {
     const groupId = localStorage.getItem("groupId");
     const totalNumberSeasonal1 = this.numberSeasonal1.includes(Number(groupId));
     const totalPartTimeNum = totalNumberSeasonal1
-      ? Number(autofill.partTimeNum) * 2
-      : Number(autofill.partTimeNum);
+      ? Number(autofill?.partTimeNum) * 2
+      : Number(autofill?.partTimeNum);
 
     if (autofill && checkReport === "false") {
       this.form.partTime = totalPartTimeNum;
