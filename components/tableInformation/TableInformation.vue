@@ -394,6 +394,7 @@ export default {
           }
           return;
         }
+        return;
       }
     },
     async getReason() {
