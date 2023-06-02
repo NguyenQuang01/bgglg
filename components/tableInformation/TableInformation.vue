@@ -282,7 +282,7 @@ export default {
         );
 
         const productivity =
-          Number(this.getDataInformationReport.demarcation) -
+          Number(this.getDataInformationReport.demarcationAvailable) -
           Number(this.getDataInformationReport.restNum) -
           Number(this.getDataInformationReport.studentNum) +
           Number(this.getDataInformationReport.partTimeNum);
