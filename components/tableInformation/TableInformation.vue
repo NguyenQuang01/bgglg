@@ -276,13 +276,12 @@ export default {
             );
         this.SET_STATE_DEMARCATION(
           Number(demarcation) +
-            Number(totalTransfer) -
             Number(this.getNumberDeleteLabor) -
             Number(totalTransferRequests)
         );
 
         const productivity =
-          Number(this.getDataInformationReport.demarcationAvailable) -
+          Number(this.getDataInformationReport.demarcation) -
           Number(this.getDataInformationReport.restNum) -
           Number(this.getDataInformationReport.studentNum) +
           Number(this.getDataInformationReport.partTimeNum);
