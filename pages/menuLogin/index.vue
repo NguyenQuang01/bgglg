@@ -49,7 +49,7 @@
 <script>
 import { mapGetters, mapMutations } from "vuex";
 import Avatar from "@/components/Avatar";
-import { refreshToken } from "@/api/AuthenConnector.js";
+import { refreshToken, getReportByYesterday } from "@/api/AuthenConnector.js";
 
 export default {
   // middleware: "auth",
@@ -71,7 +71,7 @@ export default {
       return this.$router.push("/login");
     }
     this.token = localStorage.getItem("JWT");
-    setTimeout(() => this.test(), 100);
+    setTimeout(() => this.test(), 0);
   },
 
   computed: {
@@ -88,6 +88,11 @@ export default {
         this.SET_STATE_INFUSER(res.data);
         this.SET_STATE_ISAUTHEN(true);
         localStorage.setItem("checkReport", res.data.checkReport);
+        const response = await getReportByYesterday(res.data.groupId);
+        console.log(response);
+        if (response) {
+          localStorage.setItem("report", JSON.stringify(response));
+        }
       } else {
         localStorage.clear();
         return this.$router.push("/login");
