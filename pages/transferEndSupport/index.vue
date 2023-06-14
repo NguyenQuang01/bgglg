@@ -7,12 +7,12 @@
     <div class="max-w-2xl m-auto m-0">
       <b-form @submit="onSubmit">
         <div v-for="(item, index) in arrForms" :key="index">
-          <div class="flex justify-between items-center">
+          <div class="flex justify-between items-center mobile">
             <b-form-group
               id="input-group-2"
-              label="Chọn người điều chuyển:"
+              label="Người điều chuyển:"
               label-for="input-2"
-              class="mr-2 w-4/12"
+              class="mr-2 w-4/12 mobileWidth"
             >
               <a-select
                 mode="tags"
@@ -25,12 +25,21 @@
                 </a-select-option>
               </a-select>
             </b-form-group>
-            <b-icon icon="arrow-right" aria-hidden="true" class="mr-2"></b-icon>
+            <b-icon
+              icon="arrow-right"
+              aria-hidden="true"
+              class="mr-2 upIcon"
+            ></b-icon>
+            <b-icon
+              icon="arrow-down"
+              aria-hidden="true"
+              class="mr-2 mobileWidth downIcon"
+            ></b-icon>
             <b-form-group
               id="input-group-3"
               label="Chọn bộ phận:"
               label-for="input-3"
-              class="width48"
+              class="width48 mobileWidth"
             >
               <a-cascader
                 :options="parts"
@@ -73,7 +82,7 @@ import {
 } from "@/api/AuthenConnector.js";
 import { message } from "ant-design-vue";
 export default {
-  middleware: "auth",
+  // middleware: "auth",
   components: { ButtonSkip, BtnBack },
   data() {
     return {
@@ -252,6 +261,30 @@ export default {
   color: #045396;
   border-color: #045396;
   border-radius: 50px;
+}
+.downIcon {
+  display: none;
+}
+.mobile {
+  border: 1px solid #ccc !important;
+  margin: 20px 0;
+  padding: 10px;
+  border-radius: 10px;
+}
+@media only screen and (max-width: 600px) {
+  .mobile {
+    display: block !important;
+    border-bottom: 1px solid #cccccc11;
+  }
+  .mobileWidth {
+    width: 100% !important;
+  }
+  .upIcon {
+    display: none;
+  }
+  .downIcon {
+    display: block;
+  }
 }
 </style>
 <style>
