@@ -82,7 +82,7 @@ import {
 } from "@/api/AuthenConnector.js";
 import { message } from "ant-design-vue";
 export default {
-  // middleware: "auth",
+  middleware: "auth",
   components: { ButtonSkip, BtnBack },
   data() {
     return {
