@@ -51,6 +51,7 @@ import ButtonSkip from "@/components/buttonSkip";
 import BtnBack from "@/components/BtnBack.vue";
 import { getDetail, getIdsTomay } from "@/api/AuthenConnector.js";
 import { today } from "@/constants/getToday";
+import { set } from "vue";
 export default {
   middleware: "auth",
   components: { ButtonSkip, BtnBack },
@@ -65,27 +66,35 @@ export default {
       numberSeasonal1: [],
     };
   },
-  fetch() {
+  created() {
+    setTimeout(() => {
+      this.getNumberSeasonal();
+    }, 100);
     const isReport = localStorage.getItem("checkReport");
     if (isReport === "true") {
       this.check = false;
-      this.getValue();
+      setTimeout(() => {
+        this.getValue();
+      }, 150);
     }
-    this.getNumberSeasonal();
   },
   mounted() {
-    const autofill = JSON.parse(localStorage.getItem("report"));
-    const checkReport = localStorage.getItem("checkReport");
-    const groupId = localStorage.getItem("groupId");
-    const totalNumberSeasonal1 = this.numberSeasonal1.includes(Number(groupId));
-    const totalPartTimeNum = totalNumberSeasonal1
-      ? Number(autofill?.partTimeNum) * 2
-      : Number(autofill?.partTimeNum);
+    setTimeout(() => {
+      const autofill = JSON.parse(localStorage.getItem("report"));
+      const checkReport = localStorage.getItem("checkReport");
+      const groupId = localStorage.getItem("groupId");
 
-    if (autofill && checkReport === "false") {
-      this.form.partTime = totalPartTimeNum;
-      this.form.worker = autofill.studentNum;
-    }
+      const totalNumberSeasonal1 = this.numberSeasonal1.includes(
+        Number(groupId)
+      );
+      const totalPartTimeNum = totalNumberSeasonal1
+        ? Number(autofill?.partTimeNum) * 2
+        : Number(autofill?.partTimeNum);
+      if (autofill && checkReport === "false") {
+        this.form.partTime = totalPartTimeNum;
+        this.form.worker = autofill.studentNum;
+      }
+    }, 200);
   },
   methods: {
     ...mapMutations({
@@ -116,7 +125,15 @@ export default {
       const groupId = localStorage.getItem("groupId");
       const res = await getDetail({ day, groupId });
       if (res) {
-        this.form.partTime = Number(res.partTimeNum);
+        const autofill = JSON.parse(localStorage.getItem("report"));
+        const totalNumberSeasonal1 = this.numberSeasonal1.includes(
+          Number(groupId)
+        );
+        const totalPartTimeNum = totalNumberSeasonal1
+          ? Number(autofill?.partTimeNum) * 2
+          : Number(autofill?.partTimeNum);
+        console.log(totalPartTimeNum, totalNumberSeasonal1, 22222);
+        this.form.partTime = Number(totalPartTimeNum);
         this.form.worker = Number(res.studentNum);
       }
     },
