@@ -104,15 +104,19 @@ export default {
     onSubmit(event) {
       event.preventDefault();
       const groupId = localStorage.getItem("groupId");
-      const totalNumberSeasonal1 = this.numberSeasonal1.includes(
-        Number(groupId)
-      );
-      const totalPartTimeNum = totalNumberSeasonal1
-        ? Number(this.form.partTime) / 2
-        : Number(this.form.partTime);
-      this.SET_STATE_SEASONAL(totalPartTimeNum);
-      this.SET_STATE_STUDENT(this.form.worker);
-      this.$router.push("/transferEndSupport");
+      if (this.numberSeasonal1.length > 0) {
+        const totalNumberSeasonal1 = this.numberSeasonal1.includes(
+          Number(groupId)
+        );
+        const totalPartTimeNum = totalNumberSeasonal1
+          ? Number(this.form.partTime) / 2
+          : Number(this.form.partTime);
+        this.SET_STATE_SEASONAL(totalPartTimeNum);
+        this.SET_STATE_STUDENT(this.form.worker);
+        this.$router.push("/transferEndSupport");
+      } else {
+        alert("Hệ thống bị lỗi, xin vui lòng liên hệ bộ phần phần mềm");
+      }
     },
     async getNumberSeasonal() {
       const res = await getIdsTomay();
