@@ -12,3 +12,41 @@ export function downloadFileExcel(response, title, type) {
   downloadLink.click();
   // Báo cáo chi tiết
 }
+
+export function sumFields(array) {
+  const sums = {};
+
+  // Lặp qua từng mảng trong mảng array
+  for (let i = 0; i < array.length; i++) {
+    const subArray = array[i];
+
+    // Kiểm tra nếu subArray không phải null và không phải undefined
+    if (subArray !== null && typeof subArray !== "undefined") {
+      // Lặp qua từng đối tượng trong subArray
+      for (let j = 0; j < subArray.length; j++) {
+        const obj = subArray[j];
+        const reasonName = obj.reasonName;
+        const total = obj.total;
+
+        // Kiểm tra nếu reasonName đã tồn tại trong sums
+        if (sums[reasonName]) {
+          sums[reasonName] += total;
+        } else {
+          sums[reasonName] = total;
+        }
+      }
+    }
+  }
+
+  const result = [];
+
+  // Chuyển sums thành mảng các đối tượng với field và total
+  for (let key in sums) {
+    result.push({
+      reasonName: key,
+      total: sums[key],
+    });
+  }
+
+  return result;
+}

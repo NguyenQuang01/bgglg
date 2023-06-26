@@ -31,7 +31,6 @@
             </div>
             <div class="mb-3">
               Số lao động nghỉ:
-
               <div class="float-right">
                 <a-popover trigger="click">
                   <template slot="content">
@@ -352,7 +351,7 @@ import {
 } from "@/api/AuthenConnector.js";
 import dayjs from "dayjs";
 import BtnBack from "@/components/BtnBack.vue";
-
+import { sumFields } from "@/utils/utils";
 import { message } from "ant-design-vue";
 export default {
   middleware: "auth",
@@ -410,11 +409,15 @@ export default {
 
       const res = await getViewDetail(day);
       if (res && res.code === 201) {
+        const arrTotal = res.data.map((item) => item?.restObjectResponse);
+        const arrNewTotal = arrTotal.map((item) => item?.reason);
+        const totals = sumFields(arrNewTotal);
         const totalAll = {
           key: 0,
           parentId: 0,
           name: "Tổng thực tế làm việc",
           office: res.data[0].office,
+          restObjectResponse: { reason: totals },
           enterprise: res.data
             .map((item) => item.enterprise)
             .reduce(

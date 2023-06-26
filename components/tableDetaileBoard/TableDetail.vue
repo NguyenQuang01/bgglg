@@ -29,6 +29,28 @@
         v-if="row.name === 'Tổng thực tế làm việc'"
         class="font-bold"
         :class="compareNumberLeave ? 'green' : 'red'"
+      >
+        <div class="float-left showInf">
+          <div
+            :id="row.key"
+            class="text-left TotalActualWorkingArr"
+            style="display: none"
+            v-if="!row?.restObjectResponse?.employeeRest"
+          >
+            <div
+              v-for="(item, index) in row?.restObjectResponse?.reason"
+              :key="index"
+            >
+              {{ item.reasonName }} - {{ item.total }}
+            </div>
+          </div>
+        </div>
+        <b-icon
+          icon="plus-circle"
+          aria-hidden="true"
+          class="mr-2"
+          @click="showInfLeave(row.key)"
+        ></b-icon
         >{{ row.numberLeave }}</span
       ><span v-if="!(row.name === 'Tổng thực tế làm việc')">
         <div class="float-left showInf">
@@ -95,6 +117,7 @@ import {
 } from "@/api/AuthenConnector.js";
 import dayjs from "dayjs";
 import { message } from "ant-design-vue";
+import { sumFields } from "@/utils/utils";
 
 export default {
   props: ["valueDay", "valueDayEd"],
@@ -253,6 +276,7 @@ export default {
       }
     },
     showInfLeave(item) {
+      console.log(item, 777);
       if (document.getElementById(item).style.display === "none") {
         document.getElementById(item).style.display = "block";
       } else {
@@ -331,12 +355,15 @@ export default {
 
       const res = await getViewDetail(day);
       if (res && res.code === 201) {
-        console.log(res.data.map((item) => item.numberLeave));
+        const arrTotal = res.data.map((item) => item?.restObjectResponse);
+        const arrNewTotal = arrTotal.map((item) => item?.reason);
+        const totals = sumFields(arrNewTotal);
         const totalAll = {
           key: 0,
           parentId: 0,
           name: "Tổng thực tế làm việc",
           office: res.data[0].office,
+          restObjectResponse: { reason: totals },
           enterprise: res.data
             .map((item) => item.enterprise)
             .reduce(
@@ -404,6 +431,10 @@ export default {
 };
 </script>
 <style>
+.TotalActualWorkingArr {
+  color: rgb(77, 77, 77);
+  font-weight: 400;
+}
 .ant-table-thead > tr > th {
   color: #045396 !important;
   font-weight: 700;
